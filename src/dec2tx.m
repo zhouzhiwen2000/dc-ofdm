@@ -17,16 +17,5 @@ arguments(Output)
     b (:,1) logical
 end
     b = dec2binl(d, l);
-    if (length(b) < 8)
-        b = flip(b);
-    else
-        for i=1:1:floor(length(b)/8)
-            b(8*(i-1)+1:1:8*i, 1) = flip(b(8*(i-1)+1:1:8*i, 1));
-        end
-
-        if (mod(length(b), 8) ~= 0)
-            b(length(b) - mod(length(b),8) + 1:1:end, 1) = ...
-                flip(b(length(b) - mod(length(b),8) + 1:1:end, 1));
-        end
-    end
+    b = binl2tx(b);
 end
