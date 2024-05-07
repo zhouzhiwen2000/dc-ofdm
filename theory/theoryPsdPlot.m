@@ -1,4 +1,4 @@
-%% PSD Plot
+%% Theory PSD Plot
 % This file has different ways to calculate the PSD and the discrete power
 % spectrum of a signal.
 clc; clear; close all;
