@@ -81,7 +81,7 @@ assert(~isreal(ofdmSignal), "OFDM Signal should not be real");
 ofdmSignalUp = resample(ofdmSignal, L, 1);
 
 % Apply frequency upshift
-n = (1:1:length(ofdmSignalUp))';
+n = (0:1:length(ofdmSignalUp)-1)';
 ofdmSignalMov = real(ofdmSignalUp).*cos(pi*n/L) - imag(ofdmSignalUp).*sin(pi*n/L);
 
 [psd, fVector] = pwelch(ofdmSignal, rectwin(length(ofdmSignal)), [], nfft, fs, "centered");
