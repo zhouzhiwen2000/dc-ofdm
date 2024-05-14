@@ -1,4 +1,4 @@
-function [dataOut] = constellationScrambler(dataIn, isPreamble)
+function [dataOut] = constellationScrambler(dataIn, init)
 %CONSTELLATIONSCRAMBLER  LFSR Fibonacci with the polinomial 
 % X^13 + X^12 + X^11 + X^8 + 1. The phase of the input data is shifted
 % acorting to the two LSB results of this LFSR.
@@ -11,17 +11,11 @@ function [dataOut] = constellationScrambler(dataIn, isPreamble)
 %   - dataOut = dataIn*i^(x), with "x" the two LSB of the LFSR.
 arguments(Input)
     dataIn (:,1) double
-    isPreamble logical
+    init (1,13) uint8
 end
 arguments(Output)
     dataOut (:,1) double
 end
-    if(isPreamble)
-        % 0x16E6 = 0b1011011100110, but LSB first
-        init = uint8([0 1 1 0 0 1 1 1 0 1 1 0 1]);
-    else
-        init = ones(1, 13);
-    end
 
     % Matlab implementation is mirrored, so the polinomial is:
     % x^13 + x^12 + x^11 + x^8 + 1 --> X^13 + x^5 + x^2 + x^1 + 1
