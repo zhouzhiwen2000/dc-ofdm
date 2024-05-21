@@ -31,7 +31,7 @@ SI = [SI1; false(2,4); SI2; false(2,4); SI3];
 
 %% Simulation time
 fs = 1;             % Output sample frequency
-latency = 1;        % Algorithm latency. Delay between input and output
+latency = 5;        % Algorithm latency. Delay between input and output
 stopTime = (length(dataBits)-1)/fs + latency;
 
 %% Run the simulation
@@ -42,26 +42,27 @@ simOut = sim(model_name);
 
 dataOut = get(simOut, "dataOut");
 validOut = get(simOut, "validOut");
+startOut = get(simOut, "startOut");
+endOut = get(simOut, "endOut");
 
-dataOut1 = dataOut(1+latency:length(input1)+latency);
-dataOut2 = dataOut(latency+length(input1)+3 : latency+length(input1)+2+length(input2));
-dataOut3 = dataOut(latency+length(input1)+length(input2)+5:end);
+
 
 %% Compare with MATLAB reference algorithm
-expectedOut1 = payloadScrambler(SI1(1,:), input1);
-expectedOut2 = expectedOut1;
-expectedOut3 = payloadScrambler(SI3(1,:), input3);
+expectedOut{1} = payloadScrambler(SI1(1,:), input1);
+expectedOut{2} = expectedOut{1};
+expectedOut{3} = payloadScrambler(SI3(1,:), input3);
 
-% Check delay between input and output
-assert(isequal(validOut(1+latency:end), validIn));
+startIdx = find(startOut == true);
+endIdx = find(endOut == true);
 
-% First output must be the same
-assert(isequal(dataOut1, expectedOut1));
+% make sure that start and end have the same size
+assert(isequal(length(startIdx), length(endIdx)));
 
-% After a reset, second output should be the same
-assert(isequal(dataOut2, expectedOut2));
-
-% Data should match the scrambler
-assert(isequal(dataOut3, expectedOut3));
+for i=1:length(startIdx)
+    out = dataOut(startIdx(i):endIdx(i));
+    
+    % Data should match the scrambler
+    assert(isequal(out, expectedOut{i}));
+end
 
 disp("Simulation successful!");
