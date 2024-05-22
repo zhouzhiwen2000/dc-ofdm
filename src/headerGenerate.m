@@ -23,8 +23,9 @@ arguments(Input)
     explicitMimoPilotSymbolNumber (3, 1) logical
 end
 arguments(Output)
-    header (1, 168) logical
+    header (168, 1) logical
 end
+    constants;
 
     %%% Operations to transform input arguments
     messageDuration = floor(messageDuration / 0.25e-6);
@@ -32,8 +33,11 @@ end
     %%% Prepare header fields in transmit order.
     frameType = binl2tx(logical([1 1 0 0]));
     frameSubType = binl2tx(logical([0 0 0 0]));
-    psduSize = dec2tx(psduSize, 24);
-    messageDuration = dec2tx(messageDuration, 16);
+
+    % Header variables are LSB first to MSB last, the octets are not inverted
+    psduSize = flip(dec2binl(psduSize, 24));    
+    messageDuration = flip(dec2binl(messageDuration, 16));
+
     blockSize = binl2tx(blockSize);
     fecRate = binl2tx(fecRate);
     repetitionNumber = binl2tx(repetitionNumber);
@@ -55,6 +59,6 @@ end
         reserved78; explicitMimoPilotSymbolNumber; reserved109];
     
     % Apply CRC
-    header = crcGenerate(logical([1 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 1]), header);
+    header = crcGenerate(headerCRCPoly, header);
     
 end

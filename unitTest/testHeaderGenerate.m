@@ -1,21 +1,67 @@
 %% Test Header Generate
 % Ensure that the header is properly formed
-% TODO proper test (with a known header and expected value
 clc; clear; close all;
 addpath("../src");
+addpath("../inc");
+constants;
 
-psduSize = 25;
-messageDuration = 0.25e-6 * 99;
-blockSize = logical([0 0])';
+%% Input
+psduSize = binl2dec(logical([ ...
+    0 1 0 1 0 1 0 1 ...
+    0 0 1 1 1 0 0 0 ...
+    1 0 1 0 1 0 1 0]));
+
+messageDuration = 0.25e-6 * double(binl2dec(logical([ ...
+    0 0 1 1 0 0 1 1 ...
+    1 1 0 1 1 0 0 0])));
+
+blockSize = logical([0 1])';
 fecRate = logical([0 0 1])';
-repetitionNumber = logical([0 0 1])';
-fecConcatenationFactor = logical([0 0 0])';
-scramblerInitialization = logical([0 0 0 0])';
-batId = logical([0 0 0 0 0])';
-cyclicPrefixId = logical([0 0 0])';
-explicitMimoPilotSymbolCombSpacing = logical([0 0 0]);
-explicitMimoPilotSymbolNumber = logical([0 0 0]);
+repetitionNumber = logical([0 1 1])';
+fecConcatenationFactor = logical([1 0 0])';
+scramblerInitialization = logical([0 1 0 0])';
+batId = logical([0 0 0 1 0])';
+cyclicPrefixId = logical([1 0 0])';
+explicitMimoPilotSymbolCombSpacing = logical([0 0 1])';
+explicitMimoPilotSymbolNumber = logical([1 0 0])';
 
-headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
+%% Output
+out = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
     fecConcatenationFactor, scramblerInitialization, batId, cyclicPrefixId, ...
     explicitMimoPilotSymbolCombSpacing, explicitMimoPilotSymbolNumber);
+
+expectedOut = logical([ ...
+    0 0 1 1 ...         % Frame Type
+    0 0 0 0 ...         % Frame subtype
+    0 1 0 1 0 1 0 1 ... % PSDU size 0-7
+    0 0 0 1 1 1 0 0 ... % PSDU size 8-15
+    1 0 1 0 1 0 1 0 ... % PSDU size 16-23
+    0 0 0 1 1 0 1 1 ... % Message duration 0-7
+    1 1 0 0 1 1 0 0 ... % Message duration 8-15
+    1 0 ...             % Block Size
+    1 0 0 ...           % fecRate
+    1 1 0 ...           % Repetition number
+    0 0 1 ...           % fecConcatenationFactor
+    0 0 1 0 ...         % Scramber Init
+    0 ...               % Reserved 63
+    0 1 0 0 0 ...       % BAT ID
+    0 0 0 ...           % Reserved 69-71
+    0 0 1 ...           % Cyclic Prefix ID
+    1 0 0 ...           % Explicit MIMO Comb Spacing
+    0 0 0 0 0 0 0 0 ... % Reserved 78-85
+    0 0 0 0 0 0 0 0 ... % Reserved 86-93
+    0 0 0 0 0 0 0 0 ... % Reserved 94-101
+    0 0 0 0 ...         % Reserved 102-105
+    0 0 1 ...           % Explicit MIMO Symbol Number
+    0 0 0 0 0 0 0 0 ... % Reserved 109-116
+    0 0 0 0 0 0 0 0 ... % Reserved 117-124
+    0 0 0 0 0 0 0 0 ... % Reserved 125-132
+    0 0 0 0 0 0 0 0 ... % Reserved 133-140
+    0 0 0 0 0 0 0 0 ... % Reserved 141-148
+    0 0 0])';           % Reserved 149-151
+
+expectedOut = crcGenerate(headerCRCPoly, expectedOut);
+
+%% Test
+assert(isequal(out, expectedOut));
+disp("Test successful!");
