@@ -1,4 +1,4 @@
-function s = ofdmModulate(dataIn, M, cpLen, nullIdx, constellationScramblerInit)
+function s = ofdmModulate(dataIn, bitsPerSubcarrier, cpLen, nullIdx, constellationScramblerInit)
 %OFDMMODULATE Modulate the input data. This functions makes the following
 % things:
 %   - Takes the binary symbols, and does constellation mapping of order M.
@@ -7,7 +7,7 @@ function s = ofdmModulate(dataIn, M, cpLen, nullIdx, constellationScramblerInit)
 %   - Makes the frequency upshift of the signal.
 arguments(Input)
     dataIn (:,:) uint8
-    M double
+    bitsPerSubcarrier double
     cpLen double
     nullIdx (:,1) double
     constellationScramblerInit (1,13) uint8
@@ -25,7 +25,7 @@ end
 
     %% Transmit each OFDM Symbol
     for i=1:1:nSym
-        qamSignal = qammod(dataIn(:,i), M, UnitAveragePower=true, PlotConstellation=false, InputType='bit');
+        qamSignal = qammod(dataIn(:,i), 2^bitsPerSubcarrier, UnitAveragePower=true, PlotConstellation=false, InputType='bit');
         qamSignalScrambled = constellationScrambler(qamSignal, constellationScramblerInit);
         y = ofdmmod(qamSignalScrambled, N, cpLen, nullIdx, OversamplingFactor=p);
         n = (-cpLen*p:1:N*p-1)';
