@@ -14,6 +14,7 @@ preambleScramblerInit = uint8([0 1 1 0 0 1 1 1 0 1 1 0 1]);     % 0x16E6 = 0b101
 preambleBitsPerSubcarrier = 1;
 preambleCyclicPrefixLen = 0;
 preambleOFDMSymbols = preambleGenerate(nullIdx);
+preambleLUT = preambleOFDMSymbols(:);
 preambleDuration = OFDMSymbolDuration*width(preambleOFDMSymbols);
 
 %% Channel Estimation
