@@ -11,7 +11,7 @@ psduSize = 0;
 
 % TODO: add the size of the payload, which should be inferred from the rest
 % of the header values.
-messageDuration = (preambleDuration + channelEstimationDuration + headerDuration); 
+messageDuration = (preambleDuration + channelDuration + headerDuration); 
 
 % The size of the FEC encoded keyword
 % 0b00 = 960 bits or 0b01 = 4320 bits

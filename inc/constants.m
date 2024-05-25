@@ -21,8 +21,9 @@ preambleDuration = OFDMSymbolDuration*width(preambleOFDMSymbols);
 channelScramblerInit = uint8([1 0 1 0 0 0 0 0 1 0 0 0 1]);      % 0x1105 = 0b1000100000101, but LSB first
 channelBitsPerSubcarrier = 1;
 channelCyclicPrefixLen = N/4; % 2.5 OFDM symbols for channel estimation means a quarter of cyclic prefix
-channelEstimationOFDMSymbols = channelEstimationGenerate(nullIdx);
-channelEstimationDuration = OFDMSymbolDuration*2.5;
+channelOFDMSymbols = channelEstimationGenerate(nullIdx);
+channelLUT = channelOFDMSymbols(:);
+channelDuration = OFDMSymbolDuration*2.5;
 
 %% Header
 headerCRCPoly = logical([1 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 1]);
