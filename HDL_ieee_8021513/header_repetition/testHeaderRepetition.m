@@ -2,15 +2,13 @@
 clc; clear; close all;
 addpath("../../src");
 addpath("../../inc");
+constants;
 
 %% Inputs
-nHeaderFec = 336;
-bitsInHeader = 490;
-
 delay = false(500,1);
 
-input{1} = logical(randi([0 1], nHeaderFec, 1));
-input{2} = logical(randi([0 1], nHeaderFec, 1));
+input{1} = logical(randi([0 1], headerBitsPerFec, 1));
+input{2} = logical(randi([0 1], headerBitsPerFec, 1));
 
 dataBits = [
     input{1};
@@ -18,9 +16,9 @@ dataBits = [
     input{2};];
 
 validIn = [
-    true(nHeaderFec, 1);
+    true(headerBitsPerFec, 1);
     delay;
-    true(nHeaderFec, 1);];
+    true(headerBitsPerFec, 1);];
 
 %% Simulation Time
 fs = 1;                 % Output sample frequency
@@ -48,7 +46,7 @@ assert(isequal(length(startIdx), length(endIdx)), ...
 
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
-    expectedOut = headerRepetitionEncoder(input{i}, bitsInHeader);
+    expectedOut = headerRepetitionEncoder(input{i});
     assert(isequal(expectedOut, out));
 end
 

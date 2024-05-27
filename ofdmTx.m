@@ -12,7 +12,7 @@ header = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitio
     explicitMimoPilotSymbolCombSpacing, explicitMimoPilotSymbolNumber);
 ha = headerScrambler(header);
 hb = LDPCEncoder(ha, 0, 0, true);
-headerOFDMSymbols = headerRepetitionEncoder(hb, headerBitsPerOFDMSymbol);
+headerOFDMSymbols = headerRepetitionEncoder(hb);
 
 %% Payload
 payload = true(960, 1);

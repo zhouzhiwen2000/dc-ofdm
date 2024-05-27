@@ -30,5 +30,6 @@ headerCRCPoly = logical([1 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 1]);
 headerScramblerInit = uint8([1 1 1 1 1 1 1 1 1 1 1 1 1]); % 0x1FFF
 headerBitsPerSubcarrier = 2;  % BAT 1, 2 bits per subcarrier
 headerCyclicPrefixLen = N/4;  % Fixed by standard
+headerBitsPerFec = 336;
 headerBitsPerOFDMSymbol = headerBitsPerSubcarrier*numDataCarriers;
 headerDuration = OFDMSymbolDuration*1.25;
