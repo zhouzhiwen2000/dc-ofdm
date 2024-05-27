@@ -12,6 +12,7 @@ codeRate = [];
 blockSize = [];
 delay = false(10000,1);
 
+% MSB first
 R = logical([ ...
     0 0 1;
     0 0 1;
@@ -21,6 +22,7 @@ R = logical([ ...
     0 1 1;
     ]);
 
+% MSB first
 K = logical([ ...
     0 0;
     0 1;
@@ -30,14 +32,18 @@ K = logical([ ...
     0 1;
     ]);
 
+% LSB first
+Rf = flip(R, 2);
+Kf = flip(K, 2);
+
 for i=1:length(K)
     if (K(i,2) == false)
         sizeBits = 960;
     else
         sizeBits = 4320;
     end
-    RMat = repmat(R(i,:), sizeBits+length(delay), 1);
-    KMat = repmat(K(i,:), sizeBits+length(delay), 1);
+    RMat = repmat(Rf(i,:), sizeBits+length(delay), 1);
+    KMat = repmat(Kf(i,:), sizeBits+length(delay), 1);
 
     input{i} = logical(randi([0 1], sizeBits, 1));
     dataBits = [dataBits; input{i}; delay;];
