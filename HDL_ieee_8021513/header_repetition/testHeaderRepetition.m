@@ -21,9 +21,9 @@ validIn = [
     true(headerBitsPerFec, 1);];
 
 %% Simulation Time
-fs = 1;                 % Output sample frequency
+fs = 1/8;                 % Output sample frequency
 latency = 300;         % Algorithm latency. Delay between input and output
-stopTime = (length(dataBits)-1)/fs + latency;
+stopTime = (length(dataBits)-1)/(8*fs) + latency;
 
 %% Run the simulation
 model_name = "HDLHeaderRepetition";
@@ -48,6 +48,7 @@ for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
     expectedOut = headerRepetitionEncoder(input{i});
     assert(isequal(expectedOut, out));
+    assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
 
 disp("Test successfull!");
