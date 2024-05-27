@@ -5,13 +5,11 @@ function header = headerGenerate(psduSize, messageDuration, blockSize, ...
 %HEADERGENERATE Generate a header for the IEEE 802.15.13-2023 HB-PHY.
 % The header returned is in transmit order, with big-endianess for 
 % multi-byte elements and LSB first bit ordering.
-% Args:
-%   - psduSize = Size of the coded and modulated payload in octets (24 bits).
 % Outputs:
 %   - header = Header in transmit order.
 arguments(Input)
-    psduSize uint32 {mustBeLessThan(psduSize, 16777215)}
-    messageDuration double {mustBeLessThan(messageDuration, 16.38375e-3)}
+    psduSize (24, 1) logical
+    messageDuration (16, 1) logical
     blockSize (2, 1) logical
     fecRate (3, 1) logical
     repetitionNumber (3, 1) logical
@@ -26,17 +24,14 @@ arguments(Output)
     header (168, 1) logical
 end
     constants;
-
-    %%% Operations to transform input arguments
-    messageDuration = floor(messageDuration / 0.25e-6);
     
     %%% Prepare header fields in transmit order.
     frameType = binl2tx(logical([1 1 0 0]));
     frameSubType = binl2tx(logical([0 0 0 0]));
 
     % Header variables are LSB first to MSB last, the octets are not inverted
-    psduSize = flip(dec2binl(psduSize, 24));    
-    messageDuration = flip(dec2binl(messageDuration, 16));
+    psduSize = flip(psduSize);    
+    messageDuration = flip(messageDuration);
 
     blockSize = binl2tx(blockSize);
     fecRate = binl2tx(fecRate);

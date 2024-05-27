@@ -31,10 +31,8 @@ endOut = get(simOut, "endOut");
 validOut = get(simOut, "validOut");
 
 %% Compare with MATLAB reference algorithm
-psduSizeDouble = binl2dec(psduSize);
-messageDurationDouble = 0.25e-6 * double(binl2dec(messageDuration));
 
-expectedOut = headerGenerate(psduSizeDouble, messageDurationDouble, blockSize, fecRate, repetitionNumber, ...
+expectedOut = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
     fecConcatenationFactor, scramblerInitialization, batId, cyclicPrefixId, ...
     explicitMimoPilotSymbolCombSpacing, explicitMimoPilotSymbolNumber);
 expectedOut = expectedOut(1:end-16); % Remove CRC
