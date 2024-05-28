@@ -1,6 +1,7 @@
 %% Constants
 % This file contains all constants that never change for the transmitter or
 % receiver. Most of these values are fixated by the standard.
+ldpc;
 
 %% General
 N = 256;                                % Number of subcarriers.
