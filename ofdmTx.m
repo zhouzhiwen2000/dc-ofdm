@@ -7,33 +7,28 @@ constants;
 parameters;
 
 %% Header
-header = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
+h = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
     fecConcatenationFactor, scramblerInitialization, batId, cyclicPrefixId, ...
     explicitMimoPilotSymbolCombSpacing, explicitMimoPilotSymbolNumber);
-ha = headerScrambler(header);
-hb = LDPCEncoder(ha, 0, 0, true);
-headerOFDMSymbols = headerRepetitionEncoder(hb);
+h = headerScrambler(h);
+h = LDPCEncoder(h, 0, 0, true);
+headerOFDMSymbols = headerRepetitionEncoder(h);
 
 %% Payload
-payload = true(960, 1);
-pa = payloadScrambler(scramblerInitialization, payload);
-pb = LDPCEncoder(pa, binl2dec(fecRate), binl2dec(blockSize), false);
-pc = puncturing(pb, binl2dec(fecRate), binl2dec(blockSize));
-pd = payloadRepetitionEncoder(pc, 1);
-
-% TODO tone mapping
-% TODO ofdmModulate
+p = logical(randi([0,1], payloadBitsPerBlock0, 1));
+p = payloadScrambler(scramblerInitialization, p);
+p = LDPCEncoder(p, binl2dec(fecRate), binl2dec(blockSize), false);
+p = puncturing(p, binl2dec(fecRate), binl2dec(blockSize));
+p = payloadRepetitionEncoder(p, binl2dec(repetitionNumber));
+payloadOFDMSymbols = toneMapping(p, binl2dec(batId));
 
 %% Transmiter
-% Quiero tener todos los datos almacenados en una RAM, e ir sacando de a un
-% símbolo OFDM a la vez. El preámbulo, el header y el payload tienen
-% distintos valores de CP, modulación QAM, etc.
+preambleTx = ofdmModulate(preambleOFDMSymbols, preambleBitsPerSubcarrier, preambleCyclicPrefixLen, nullIdx, preambleScramblerInit);
+channelTx = ofdmModulate(channelOFDMSymbols, channelBitsPerSubcarrier, channelCyclicPrefixLen, nullIdx, channelScramblerInit);
+headerTx = ofdmModulate(headerOFDMSymbols, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit);
+payloadTx = ofdmModulate(payloadOFDMSymbols, payloadBitsPerSubcarrier, payloadCyclicPrefixLen, nullIdx, payloadScramblerInit);
 
-ofdmModulate(preambleOFDMSymbols, preambleBitsPerSubcarrier, preambleCyclicPrefixLen, nullIdx, preambleScramblerInit);
-ofdmModulate(channelOFDMSymbols, channelBitsPerSubcarrier, channelCyclicPrefixLen, nullIdx, channelScramblerInit);
-ofdmModulate(headerOFDMSymbols, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit);
-
-
-
-
-
+%% Plotting
+tx = [preambleTx(:); channelTx(:); headerTx(:); payloadTx(:);];
+t = (0:1:length(tx) - 1).';
+plot(t, tx);

@@ -1,0 +1,7 @@
+*.asv
+slprj
+/test*.m
+*.slxc
+wireless_hdl_examples
+WHDL*
+*.wdb

@@ -46,3 +46,6 @@ cyclicPrefixId = logical([0 0 0]);
 explicitMimoPilotSymbolCombSpacing = logical([0 0 0]);
 explicitMimoPilotSymbolNumber = logical([0 0 0]);
 
+%% Calculated parameters for the payload
+payloadBitsPerSubcarrier = binl2dec(batId);
+payloadCyclicPrefixLen = binl2dec(cyclicPrefixId) * N / 32;

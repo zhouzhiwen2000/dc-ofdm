@@ -42,3 +42,6 @@ axiWidth = 8;
 payloadWordsPerBlock0 = payloadBitsPerBlock0/axiWidth;
 payloadWordsPerBlock1 = payloadBitsPerBlock1/axiWidth;
 payloadBitsPerFec = 1920;
+payloadScramblerInit = uint8([1 1 1 1 1 1 1 1 1 1 1 1 1]); % 0x1FFF
+% The rest of parameters of the payload are defined in the file
+% "parameters"
