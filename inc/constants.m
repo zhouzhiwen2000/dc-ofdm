@@ -34,3 +34,11 @@ headerCyclicPrefixLen = N/4;  % Fixed by standard
 headerBitsPerFec = 336;
 headerBitsPerOFDMSymbol = headerBitsPerSubcarrier*numDataCarriers;
 headerDuration = OFDMSymbolDuration*1.25;
+
+%% Payload
+payloadBitsPerBlock0 = 960;
+payloadBitsPerBlock1 = 4320;
+axiWidth = 8;
+payloadWordsPerBlock0 = payloadBitsPerBlock0/axiWidth;
+payloadWordsPerBlock1 = payloadBitsPerBlock1/axiWidth;
+payloadBitsPerFec = 1920;
