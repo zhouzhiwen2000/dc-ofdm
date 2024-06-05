@@ -24,9 +24,9 @@ end
     poly = [13 5 2 1 0];
 
     pnSeq = comm.PNSequence(Polynomial=poly, InitialConditions=init, Mask=13, ...
-        SamplesPerFrame=length(dataIn)*2, OutputDataType="logical");
+        SamplesPerFrame=(length(dataIn)-1)*2, OutputDataType="logical");
 
-    LSB = pnSeq();
+    LSB = double([init(2); init(1); pnSeq()]);
 
     % The values returned from the LFSR are like this:
     % [1 2 3 4 5 6 7 8]
