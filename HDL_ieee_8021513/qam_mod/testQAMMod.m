@@ -1,0 +1,60 @@
+clc; clear; close all;
+
+%% Test Header FEC
+clc; clear; close all;
+addpath("../../src");
+addpath("../../inc");
+constants;
+
+%% Inputs
+delay = zeros(100,1);
+
+M = [1 2 4 6];
+
+bitsPerSubcarrier = [
+    ones(200, 1)*M(1);
+    delay;
+    ones(200,1)*M(2);
+    delay;
+    ones(200,1)*M(3);
+    delay;
+    ones(200,1)*M(4);];
+
+dataSymbols = randi([0 255], length(bitsPerSubcarrier), 1);
+
+validIn = logical(bitsPerSubcarrier);
+
+%% Simulation Time
+fs = 1;                 % Output sample frequency
+latency = 300;         % Algorithm latency. Delay between input and output
+stopTime = (length(validIn)-1)/fs + latency;
+
+%% Run the simulation
+model_name = "HDLQAMMod";
+
+load_system(model_name);
+simOut = sim(model_name);
+
+dataOut = get(simOut, "dataOut");
+startOut = get(simOut, "startOut");
+endOut = get(simOut, "endOut");
+validOut = get(simOut, "validOut");
+
+%% Compare with MATLAB reference algorithm
+
+startIdx = find(startOut == true);
+endIdx = find(endOut == true);
+
+assert(isequal(length(startIdx), length(endIdx)), ...
+    "Length of start and end should be the same.");
+
+for i=1:length(startIdx)
+    out = dataOut(startIdx(i):endIdx(i));
+    data = dataSymbols(1+(i-1)*200:i*200);
+    data = bitand(data, 2^M(i)-1);
+    expectedOut = qammod(data, 2^M(i), UnitAveragePower=true, PlotConstellation=false, InputType='integer');
+    assert(isequal(expectedOut, out));
+    assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
+end
+
+disp("Test successfull!");
