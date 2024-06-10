@@ -7,7 +7,6 @@ ldpc;
 N = 256;                                % Number of subcarriers.
 nullIdx = (1:11)';                      % Carriers that are unused [1;nfft] == [-nfft/2*fsc; (nfft/2-1)*fsc] 
 numDataCarriers = N - length(nullIdx);  % Amount of subcarriers with actual data.
-oversamplingFactor = 2;
 
 OFDMSymbolDuration = 5120e-9;           % OFDM Symbol duration [seconds]
 
@@ -46,3 +45,32 @@ payloadBitsPerFec = 1920;
 payloadScramblerInit = uint8([1 1 1 1 1 1 1 1 1 1 1 1 1]); % 0x1FFF
 % The rest of parameters of the payload are defined in the file
 % "parameters"
+
+
+%% Modulator
+fPHY = 50e6;                    % [Hz] Fixed by standard
+oversamplingFactor = 2;
+fs = fPHY*oversamplingFactor;   % [Hz] Sampling frequency, which will be the input of the DAC and ADC
+
+
+%% Interpolator FIR filter
+interpolatorFpass = 25e6;               % Passband frequency [Hz]
+interpolatorFstop = 27.2e6;             % Stopband frequency [Hz]
+interpolatorPassbandRippleDb = 0.1;     % Passband ripple [dB]
+interpolatorStopbandAttDb = 60;         % Stopband attenuation [dB]
+
+interpolatorSpec = fdesign.interpolator(oversamplingFactor, ...
+    'lowpass','Fp,Fst,Ap,Ast', ...
+    interpolatorFpass, ...
+    interpolatorFstop, ...
+    interpolatorPassbandRippleDb, ...
+    interpolatorStopbandAttDb, ...
+    fs);
+interpolatorFilter = design(interpolatorSpec,'SystemObject',true);
+
+% Group delay of the filter. delay = (nTaps - 1)/2
+% The delay should be an integer, therefore, nTaps should be odd.
+interpolatorDelay = mean(grpdelay(interpolatorFilter));     
+
+% Uncomment to plot filter response
+%fvtool(interpolatorFilter,'Fs', fs);
