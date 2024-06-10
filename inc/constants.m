@@ -7,6 +7,7 @@ ldpc;
 N = 256;                                % Number of subcarriers.
 nullIdx = (1:11)';                      % Carriers that are unused [1;nfft] == [-nfft/2*fsc; (nfft/2-1)*fsc] 
 numDataCarriers = N - length(nullIdx);  % Amount of subcarriers with actual data.
+oversamplingFactor = 2;
 
 OFDMSymbolDuration = 5120e-9;           % OFDM Symbol duration [seconds]
 

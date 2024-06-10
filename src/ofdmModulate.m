@@ -17,9 +17,8 @@ arguments(Output)
 end
 
     %% Parameters
-    N = 256;                        % Number of subcarriers.
-    p = 4;                          % Oversampling factor.
-    ofdmSymbolLength = (N+cpLen)*p; % Length of each OFDM symbol in samples
+    constants;
+    ofdmSymbolLength = (N+cpLen)*oversamplingFactor; % Length of each OFDM symbol in samples
     nSym = width(dataIn);           % Amount of OFDM symbols present in the current data.
     s = zeros(ofdmSymbolLength, width(dataIn));
 
@@ -27,9 +26,9 @@ end
     for i=1:1:nSym
         qamSignal = qammod(dataIn(:,i), 2^bitsPerSubcarrier, UnitAveragePower=true, PlotConstellation=false, InputType='bit');
         qamSignalScrambled = constellationScrambler(qamSignal, constellationScramblerInit);
-        y = ofdmmod(qamSignalScrambled, N, cpLen, nullIdx, OversamplingFactor=p);
-        n = (-cpLen*p:1:N*p-1)';
-        s(:,i) = real(y).*cos(pi*n/p) - imag(y).*sin(pi*n/p);
+        y = ofdmmod(qamSignalScrambled, N, cpLen, nullIdx, OversamplingFactor=oversamplingFactor);
+        n = (-cpLen*oversamplingFactor:1:N*oversamplingFactor-1)';
+        s(:,i) = real(y).*cos(pi*n/oversamplingFactor) - imag(y).*sin(pi*n/oversamplingFactor);
     end
 end
 
