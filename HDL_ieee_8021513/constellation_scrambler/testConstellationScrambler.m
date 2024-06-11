@@ -40,9 +40,8 @@ validIn = [
     false(100, 1)];
 
 %% Simulation Time
-fs = 1;                 % Output sample frequency
-latency = 300;         % Algorithm latency. Delay between input and output
-stopTime = (length(validIn)-1)/fs + latency;
+latency = 300/fPHY;         % Algorithm latency. Delay between input and output
+stopTime = (length(validIn)-1)/fPHY + latency;
 
 %% Run the simulation
 model_name = "HDLConstellationScrambler";
