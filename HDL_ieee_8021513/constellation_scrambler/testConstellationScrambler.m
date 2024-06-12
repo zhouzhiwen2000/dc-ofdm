@@ -5,39 +5,37 @@ addpath("../../inc");
 constants;
 
 %% Inputs
-delay = zeros(100,13);
+delay = zeros(numDataCarriers,13);
+
+si{1} = true(numDataCarriers, 13);
+si{2} = true(numDataCarriers,13);
+si{3} = repmat(channelScramblerInit, numDataCarriers, 1);
+si{4} = repmat(headerScramblerInit, numDataCarriers, 1);
+si{5} = repmat(payloadScramblerInit, numDataCarriers, 1);
+
+input{1} = ones(numDataCarriers, 1);
+input{2} = ones(numDataCarriers,1);
+input{3} = randi([0 255], numDataCarriers, 1) + 1i*randi([0 255], numDataCarriers, 1);
+input{4} = randi([0 255], numDataCarriers, 1) + 1i*randi([0 255], numDataCarriers, 1);
+input{5} = randi([0 255], numDataCarriers, 1) + 1i*randi([0 255], numDataCarriers, 1);
 
 scramblerInit = [
-    true(100, 13);
-    delay;
-    true(100,13);
-    %repmat(preambleScramblerInit, 100, 1);
-    delay;
-    repmat(channelScramblerInit, 100, 1);
-    delay;
-    repmat(headerScramblerInit, 100, 1);
-    delay;
-    repmat(payloadScramblerInit, 100, 1);
-    delay;
+    si{1};
+    si{2};
+    si{3};
+    si{4};
+    si{5};
 ];
 
 dataSymbols = [
-    ones(100, 1);
-    ones(100,1);
-    randi([0 255], length(scramblerInit)-100, 1) + 1i*randi([0 255], length(scramblerInit)-100, 1);
-    ];
+    input{1};
+    input{2};
+    input{3};
+    input{4};
+    input{5};
+];
 
-validIn = [
-    true(100, 1);
-    false(100, 1);
-    true(100, 1);
-    false(100,1);
-    true(100, 1);
-    false(100, 1);
-    true(100, 1);
-    false(100, 1);
-    true(100, 1);
-    false(100, 1)];
+validIn = true(length(dataSymbols), 1);
 
 %% Simulation Time
 latency = 300/fPHY;         % Algorithm latency. Delay between input and output
@@ -64,10 +62,10 @@ assert(isequal(length(startIdx), length(endIdx)), ...
 
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
-    data = dataSymbols(1+(i-1)*100:i*100);
-    expectedOut = constellationScrambler(data, scramblerInit(1+(i-1)*200,:));
+    expectedOut = constellationScrambler(input{i}, si{i}(1,:));
     assert(isequal(expectedOut, out));
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
+    disp("A")
 end
 
 disp("Test successfull!");
