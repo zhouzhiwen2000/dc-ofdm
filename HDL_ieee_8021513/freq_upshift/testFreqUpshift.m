@@ -4,10 +4,21 @@ addpath("../../src");
 addpath("../../inc");
 constants;
 
-%% Inputs  
-cpLen = 16;
-dataIn = randi([0,255], (N+cpLen)*oversamplingFactor, 1) + ...
-    1i*randi([0, 255], (N+cpLen)*oversamplingFactor, 1);
+%% Inputs
+input{1} = randi([0,255], N*oversamplingFactor, 1) + 1i*randi([0, 255], N*oversamplingFactor, 1);
+input{2} = randi([0,255], N*oversamplingFactor, 1) + 1i*randi([0, 255], N*oversamplingFactor, 1);
+
+dataIn = [
+    input{1};
+    input{2};
+];
+
+resetIn = [
+    true;
+    false(length(input{1})-1, 1);
+    true
+];
+
 validIn = true(length(dataIn), 1);
 maxError = 1e-3;    % Maximum error between out and expectedOut
 
@@ -33,21 +44,22 @@ endIdx = find(endOut == true);
 assert(isequal(length(startIdx), length(endIdx)), ...
     "Length of start and end should be the same.");
 
-
-n = (-cpLen*oversamplingFactor:1:N*oversamplingFactor-1)';
-expectedOut = real(dataIn).*cos(pi*n/oversamplingFactor) - imag(dataIn).*sin(pi*n/oversamplingFactor);
-
+dataOut = dataOut(startIdx:endIdx);
+out{1} = dataOut(1:length(input{1}));
+out{2} = dataOut(length(input{1})+1:end);
 
 for i=1:length(startIdx)
-    out = dataOut(startIdx(i):endIdx(i));
-    assert(iskindaequal(expectedOut, out, maxError), "Upshifter output is not the same");
+    n = (0:1:length(input{i})-1)';
+    expectedOut = real(input{i}).*cos(pi*n/oversamplingFactor) - imag(input{i}).*sin(pi*n/oversamplingFactor);
+    
+    assert(iskindaequal(expectedOut, out{i}, maxError), "Upshifter output is not the same");
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
 
 %% Plotting
 figure();
 subplot(2,1,1);
-plot(n, out, n, expectedOut);
+plot(n, out{1}, n, expectedOut);
 legend("Out", "ExpectedOut");
 xlabel("n [samples]");
 ylabel("Signals");
@@ -56,7 +68,7 @@ xlim([min(n), max(n)]);
 grid on;
 
 subplot(2,1,2);
-plot(n, abs(out-expectedOut));
+plot(n, abs(out{1}-expectedOut));
 xlabel("n [samples]");
 ylabel("Error");
 title("|out - expectedOut|");

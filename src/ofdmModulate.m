@@ -26,9 +26,11 @@ end
     for i=1:1:nSym
         qamSignal = qammod(dataIn(:,i), 2^bitsPerSubcarrier, UnitAveragePower=true, PlotConstellation=false, InputType='bit');
         qamSignalScrambled = constellationScrambler(qamSignal, constellationScramblerInit);
-        y = ofdmmod(qamSignalScrambled, N, cpLen, nullIdx, OversamplingFactor=oversamplingFactor);
-        n = (-cpLen*oversamplingFactor:1:N*oversamplingFactor-1)';
-        s(:,i) = real(y).*cos(pi*n/oversamplingFactor) - imag(y).*sin(pi*n/oversamplingFactor);
+        y(:,i) = ofdmmod(qamSignalScrambled, N, cpLen, nullIdx, OversamplingFactor=1);
     end
+    y = y(:);
+    y = interpolator(y);
+    n = (0:1:length(y)-1)';
+    s = real(y).*cos(pi*n/oversamplingFactor) - imag(y).*sin(pi*n/oversamplingFactor);
 end
 
