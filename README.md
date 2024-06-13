@@ -23,3 +23,18 @@ El bloque de Matlab [LDPC Encoder](https://la.mathworks.com/help/wireless-hdl/re
 * En la segunda columna de la matriz cuadrada de paridad, se reemplaza el número "x" de la última fila por un "-1".
 
 ![Double diagonal matrix](images/double_diagonal.png)
+
+### Cyclic prefix del preamble
+
+Según estándar, los prefijos cíclicos para los distintos elementos del PSDU son:
+
+* Preamble = 0;
+* Channel Estimation = N/4;
+* Header = N/4;
+* Payload = Arbitrary;
+
+Hay un bug con el bloque de Simulink de OFDM Modulator, al poner el prefijo cíclico en "0".
+
+Si el bloque tiene un valor de $CPLen = 0$, y luego intenta tomar cualquier otro valor, se rompe. Si el bloque tiene un valor de $CPLen != 0$, entonces puede cambiar libremente entre cualquier valor, mientras ese valor no sea cero.
+
+Conclusión: actualmente el valor del prefijo cíclico para el preamble está en "2" en vez de "0".
