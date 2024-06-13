@@ -13,7 +13,7 @@ OFDMSymbolDuration = 5120e-9;           % OFDM Symbol duration [seconds]
 %% Preamble
 preambleScramblerInit = uint8([0 1 1 0 0 1 1 1 0 1 1 0 1]);     % 0x16E6 = 0b1011011100110, but LSB first 
 preambleBitsPerSubcarrier = 1;
-preambleCyclicPrefixLen = 0;
+preambleCyclicPrefixLen = 2;    % TODO if this values is "0", as it should be, the Simulink block breaks
 preambleOFDMSymbols = preambleGenerate(nullIdx);
 preambleLUT = preambleOFDMSymbols(:);
 preambleDuration = OFDMSymbolDuration*width(preambleOFDMSymbols);
