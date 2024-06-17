@@ -28,6 +28,8 @@ end
 
 validIn = true(size(dataBits));
 
+newFrame = logical([0; 0; 0; 0; 0; 1;]);
+
 % All values for the parameters are LSB first
 scramblerInit = logical([1 1 0 0]);
 fecRate = logical([1 0 0]);
