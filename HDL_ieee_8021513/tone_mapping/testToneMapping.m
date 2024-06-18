@@ -5,27 +5,32 @@ addpath("../../inc/");
 constants;
 
 %% Inputs
-delay = false(100, 1);
+delay = false(200, 1);
 
-input{1} = true(numDataCarriers, 1);
-bitsPerSubcarrier{1} = 1;
+ofdmSymbols{1} = 1;
+bitsPerSubcarrierX{1} = 1;
+input{1} = true(numDataCarriers*ofdmSymbols{1}, 1);
 expectedOut{1} = input{1};
 
-input{2} = true(numDataCarriers*3, 1);
-bitsPerSubcarrier{2} = 1;
+ofdmSymbols{2} = 3;
+bitsPerSubcarrierX{2} = 1;
+input{2} = true(numDataCarriers*ofdmSymbols{2}, 1);
 expectedOut{2} = input{2};
 
-input{3} = true(numDataCarriers*4-25, 1);
-bitsPerSubcarrier{3} = 1;
+ofdmSymbols{3} = 1;
+bitsPerSubcarrierX{3} = 1;
+input{3} = true(numDataCarriers*ofdmSymbols{3} - 25, 1);
 expectedOut{3} = [input{3}; false(25, 1)];
 
-input{4} = true(numDataCarriers*2 - 9, 1);
-bitsPerSubcarrier{4} = 2;
-expectedOut{4} = [input{4}; false(9*4, 1);]; 
+ofdmSymbols{4} = 4;
+bitsPerSubcarrierX{4} = 2;
+input{4} = true(numDataCarriers*ofdmSymbols{4}*bitsPerSubcarrierX{4} - 72, 1);
+expectedOut{4} = [input{4}; false(72, 1);]; 
 
-input{5} = true(numDataCarriers*4 - 7, 1);
-bitsPerSubcarrier{5} = 4;
-expectedOut{5} = [input{5}; false(7*4, 1);];
+ofdmSymbols{5} = 3;
+bitsPerSubcarrierX{5} = 4;
+input{5} = true(numDataCarriers*ofdmSymbols{5}*bitsPerSubcarrierX{5} - 155, 1);
+expectedOut{5} = [input{5}; false(155, 1);];
 
 validIn = [
     true(size(input{1}));
@@ -50,6 +55,32 @@ dataIn = [
     input{4};
     delay;
     input{5};
+    delay;
+];
+
+bitsPerSubcarrier = [
+    repmat(bitsPerSubcarrierX{1}, size(expectedOut{1}));
+    delay;
+    repmat(bitsPerSubcarrierX{2}, size(expectedOut{2}));
+    delay;
+    repmat(bitsPerSubcarrierX{3}, size(expectedOut{3}));
+    delay;
+    repmat(bitsPerSubcarrierX{4}, size(expectedOut{4}));
+    delay;
+    repmat(bitsPerSubcarrierX{5}, size(expectedOut{5}));
+    delay;
+];
+
+payloadLenInOFDMSymbols = [
+    repmat(ofdmSymbols{1}, size(expectedOut{1}));
+    delay;
+    repmat(ofdmSymbols{2}, size(expectedOut{2}));
+    delay;
+    repmat(ofdmSymbols{3}, size(expectedOut{3}));
+    delay;
+    repmat(ofdmSymbols{4}, size(expectedOut{4}));
+    delay;
+    repmat(ofdmSymbols{5}, size(expectedOut{5}));
     delay;
 ];
 
@@ -80,7 +111,6 @@ for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
     assert(isequal(out, expectedOut{i}));
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0, "Valid is always active between Start and End signals");
-    disp(i)
 end
 
 disp("Simulation successful!");
