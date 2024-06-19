@@ -34,10 +34,13 @@ newFrame = logical([0; 0; 0; 0; 0; 1;]);
 scramblerInit = logical([1 1 0 0]);
 fecRate = logical([1 0 0]);
 blockSize = logical([0 0]);
+batId = logical([0 1 0 0 0]);
+psduSize = flip(dec2binl(payloadLenInWords, 24))';
+repNumber = logical([0 0 0]);
 
 %% Simulation Time
 fs = 1;                     % Output sample frequency
-latency = 10000;             % Algorithm latency. Delay between input and output
+latency = 3000;             % Algorithm latency. Delay between input and output
 stopTime = (length(dataChars)-1)/(fs) + latency;
 
 %% Run the simulation
@@ -53,7 +56,6 @@ validOut = get(simOut, "validOut");
 
 %% Compare with MATLAB reference algorithm
 dataBitsLsb = binl2tx(dataBits);
-expectedOut = false(payloadBitsPerFec, payloadLenInFecBlocks);
 for i=1:payloadLenInFecBlocks
     p = payloadScrambler(scramblerInit, dataBitsLsb(1+(i-1)*payloadBitsPerBlock0:payloadBitsPerBlock0*i));
     p = LDPCEncoder(p, binl2dec(flip(fecRate)), binl2dec(flip(blockSize)), false);
@@ -62,17 +64,18 @@ for i=1:payloadLenInFecBlocks
     expectedOut(:, i) = p;
 end
 
+expectedOut = toneMapping(expectedOut(:), binl2dec(flip(batId)));
+expectedOut = expectedOut(:);
+
 %% Actual test
 startIdx = find(startOut == true);
 endIdx = find(endOut == true);
 
 assert(~isempty(startIdx), "startIdx shouldn't be empty");
-assert(isequal(length(startIdx), length(endIdx)), ...
-    "Length of start and end should be the same.");
 
-for i=1:payloadLenInFecBlocks
-    out = dataOut(startIdx(i):endIdx(i));
-    assert(isequal(expectedOut(:,i), out));
-end
+out = dataOut(startIdx(1):endIdx(1));
+valid = validOut(startIdx(1):endIdx(1));
+out = out(valid == true);
+assert(isequal(expectedOut, out));
 
 disp("Test successfull!");
