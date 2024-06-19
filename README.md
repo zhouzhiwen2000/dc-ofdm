@@ -10,6 +10,16 @@ DC-OFDM implementation on Matlab/Simulink, for HDL Coder generation.
 
 ![Alt text](images/image-2.png)
 
+## Cosas incompletas del transmisor
+
+* En "payload full", el subsistema "fec_rate_to_number", devuelve un "2" constante.
+
+* LDPC encoder solamente soporta code rate "1/2".
+
+* Repetition para el payload no está soportado.
+
+* Puncturing para el payload no está soportado.
+
 ## Cambios respecto de la IEEE
 
 En esta sección voy a comentar todos las modificaciones que fueron necesarias hacer respecto del estándar IEEE 802.15.13.

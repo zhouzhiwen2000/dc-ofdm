@@ -1,4 +1,7 @@
 %% Test Tone Mapper
+% The tone mapper takes "n start" control signals and only outputs an "end"
+% when the whole frame is transmitted. This block allows spaces with "no
+% valid" in between several "starts".
 clc; clear; close all;
 addpath("../../src/")
 addpath("../../inc/");
@@ -9,28 +12,54 @@ delay = false(200, 1);
 
 ofdmSymbols{1} = 1;
 bitsPerSubcarrierX{1} = 1;
-input{1} = true(numDataCarriers*ofdmSymbols{1}, 1);
+input{1} = logical(randi([0 1], numDataCarriers*ofdmSymbols{1}, 1));
 expectedOut{1} = input{1};
 
 ofdmSymbols{2} = 3;
 bitsPerSubcarrierX{2} = 1;
-input{2} = true(numDataCarriers*ofdmSymbols{2}, 1);
+input{2} = logical(randi([0 1], numDataCarriers*ofdmSymbols{2}, 1));
 expectedOut{2} = input{2};
 
 ofdmSymbols{3} = 1;
 bitsPerSubcarrierX{3} = 1;
-input{3} = true(numDataCarriers*ofdmSymbols{3} - 25, 1);
+input{3} = logical(randi([0 1], numDataCarriers*ofdmSymbols{3} - 25, 1));
 expectedOut{3} = [input{3}; false(25, 1)];
 
 ofdmSymbols{4} = 4;
 bitsPerSubcarrierX{4} = 2;
-input{4} = true(numDataCarriers*ofdmSymbols{4}*bitsPerSubcarrierX{4} - 72, 1);
+input{4} = logical(randi([0 1], numDataCarriers*ofdmSymbols{4}*bitsPerSubcarrierX{4} - 72, 1));
 expectedOut{4} = [input{4}; false(72, 1);]; 
 
-ofdmSymbols{5} = 3;
+ofdmSymbols{5} = 2;
 bitsPerSubcarrierX{5} = 4;
-input{5} = true(numDataCarriers*ofdmSymbols{5}*bitsPerSubcarrierX{5} - 155, 1);
+input{5} = logical(randi([0 1], numDataCarriers*ofdmSymbols{5}*bitsPerSubcarrierX{5} - 155, 1));
 expectedOut{5} = [input{5}; false(155, 1);];
+
+% Next symbols are gonna be spread over multiple "start - end" cycles.
+ofdmSymbols{6} = 3;
+bitsPerSubcarrierX{6} = 2;
+input{6} = [
+    true(numDataCarriers*bitsPerSubcarrierX{6}, 1);
+    delay;
+    true(numDataCarriers*bitsPerSubcarrierX{6}, 1);
+    delay;
+    true(numDataCarriers*bitsPerSubcarrierX{6} - 65, 1);
+];
+expectedOut{6} = [
+    true(numDataCarriers*bitsPerSubcarrierX{6}, 1);
+    true(numDataCarriers*bitsPerSubcarrierX{6}, 1);
+    true(numDataCarriers*bitsPerSubcarrierX{6} - 65, 1); false(65, 1);
+];
+
+ofdmSymbols{7} = 4;
+bitsPerSubcarrierX{7} = 2;
+a = logical(randi([0 1], numDataCarriers*bitsPerSubcarrierX{7}, 1));
+b = logical(randi([0 1], numDataCarriers*bitsPerSubcarrierX{7}, 1));
+c = logical(randi([0 1], numDataCarriers*bitsPerSubcarrierX{7}, 1));
+d = logical(randi([0 1], numDataCarriers*bitsPerSubcarrierX{7} - 44, 1));
+input{7} = [a; delay; b; delay; c; delay; d;];
+expectedOut{7} = [a; b; c; d; false(44, 1);];
+
 
 validIn = [
     true(size(input{1}));
@@ -42,6 +71,13 @@ validIn = [
     true(size(input{4}));
     delay;
     true(size(input{5}));
+    delay;
+    logical(input{6});
+    delay;
+    true(numDataCarriers*bitsPerSubcarrierX{7}, 1); delay;
+    true(numDataCarriers*bitsPerSubcarrierX{7}, 1); delay;
+    true(numDataCarriers*bitsPerSubcarrierX{7}, 1); delay;
+    true(numDataCarriers*bitsPerSubcarrierX{7} - 44, 1);
     delay;
 ];
 
@@ -56,31 +92,54 @@ dataIn = [
     delay;
     input{5};
     delay;
+    input{6};
+    delay;
+    input{7};
 ];
 
 bitsPerSubcarrier = [
-    repmat(bitsPerSubcarrierX{1}, size(expectedOut{1}));
-    delay;
-    repmat(bitsPerSubcarrierX{2}, size(expectedOut{2}));
-    delay;
-    repmat(bitsPerSubcarrierX{3}, size(expectedOut{3}));
-    delay;
-    repmat(bitsPerSubcarrierX{4}, size(expectedOut{4}));
-    delay;
-    repmat(bitsPerSubcarrierX{5}, size(expectedOut{5}));
-    delay;
+    repmat(bitsPerSubcarrierX{1}, size(input{1}));
+    repmat(bitsPerSubcarrierX{2}, size(input{2}));
+    repmat(bitsPerSubcarrierX{3}, size(input{3}));
+    repmat(bitsPerSubcarrierX{4}, size(input{4}));
+    repmat(bitsPerSubcarrierX{5}, size(input{5}));
+    repmat(bitsPerSubcarrierX{6}, numDataCarriers*bitsPerSubcarrierX{6}*ofdmSymbols{6}-65, 1);
+    repmat(bitsPerSubcarrierX{7}, numDataCarriers*bitsPerSubcarrierX{7}*ofdmSymbols{7}-44, 1);
 ];
 
 payloadLenInOFDMSymbols = [
-    repmat(ofdmSymbols{1}, size(expectedOut{1}));
+    repmat(ofdmSymbols{1}, size(input{1}));
+    repmat(ofdmSymbols{2}, size(input{2}));
+    repmat(ofdmSymbols{3}, size(input{3}));
+    repmat(ofdmSymbols{4}, size(input{4}));
+    repmat(ofdmSymbols{5}, size(input{5}));
+    repmat(ofdmSymbols{6}, numDataCarriers*bitsPerSubcarrierX{6}*ofdmSymbols{6}-65, 1);
+    repmat(ofdmSymbols{7}, numDataCarriers*bitsPerSubcarrierX{7}*ofdmSymbols{7}-44, 1);
+];
+
+newFrame = [
+    true;
+    false(length(input{1})-1 -44, 1); % 44 is a random delay after the "newFrame" signal
     delay;
-    repmat(ofdmSymbols{2}, size(expectedOut{2}));
+    true;
+    false(44, 1);
+    false(length(input{2})-1-87, 1);
     delay;
-    repmat(ofdmSymbols{3}, size(expectedOut{3}));
+    true;
+    false(87, 1);
+    false(length(input{3})-1, 1);
     delay;
-    repmat(ofdmSymbols{4}, size(expectedOut{4}));
+    true;
+    false(length(input{4})-1, 1);
     delay;
-    repmat(ofdmSymbols{5}, size(expectedOut{5}));
+    true;
+    false(length(input{5})-1, 1);
+    delay;
+    true;
+    false(length(input{6})-41, 1);
+    delay;
+    true;
+    false(41, 1);
     delay;
 ];
 
@@ -104,13 +163,24 @@ endOut = get(simOut, "endOut");
 startIdx = find(startOut == true);
 endIdx = find(endOut == true);
 
-% make sure that start and end have the same size
-assert(isequal(length(startIdx), length(endIdx)), "Start and end indexes should be the same");
+% Make sure that start and end have the same size
+% Length index has added the amount of "starts" ignored in a same frame
+% (2 for input{6} and 3 for input{7})
+assert(isequal(length(startIdx), length(endIdx) + 2 + 3), "Start and end indexes should be the same");
 
-for i=1:length(startIdx)
-    out = dataOut(startIdx(i):endIdx(i));
+for i=1:length(endIdx)
+    if(i <= 5)
+        out = dataOut(startIdx(i):endIdx(i));
+        valid = validOut(startIdx(i):endIdx(i));
+    elseif(i == 6)
+        out = dataOut(startIdx(i):endIdx(i));
+        valid = validOut(startIdx(i):endIdx(i));
+    elseif(i == 7)
+        out = dataOut(startIdx(i+2):endIdx(i));
+        valid = validOut(startIdx(i+2):endIdx(i));
+    end
+    out = out(valid == true);
     assert(isequal(out, expectedOut{i}));
-    assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0, "Valid is always active between Start and End signals");
 end
 
 disp("Simulation successful!");
