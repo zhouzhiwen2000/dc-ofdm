@@ -164,21 +164,11 @@ startIdx = find(startOut == true);
 endIdx = find(endOut == true);
 
 % Make sure that start and end have the same size
-% Length index has added the amount of "starts" ignored in a same frame
-% (2 for input{6} and 3 for input{7})
-assert(isequal(length(startIdx), length(endIdx) + 2 + 3), "Start and end indexes should be the same");
+assert(isequal(length(startIdx), length(endIdx)), "Start and end indexes should be the same");
 
 for i=1:length(endIdx)
-    if(i <= 5)
-        out = dataOut(startIdx(i):endIdx(i));
-        valid = validOut(startIdx(i):endIdx(i));
-    elseif(i == 6)
-        out = dataOut(startIdx(i):endIdx(i));
-        valid = validOut(startIdx(i):endIdx(i));
-    elseif(i == 7)
-        out = dataOut(startIdx(i+2):endIdx(i));
-        valid = validOut(startIdx(i+2):endIdx(i));
-    end
+    out = dataOut(startIdx(i):endIdx(i));
+    valid = validOut(startIdx(i):endIdx(i));
     out = out(valid == true);
     assert(isequal(out, expectedOut{i}));
 end
