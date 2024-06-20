@@ -2,15 +2,18 @@
 % These variables can change between PSDUs
 constants;
 
+%% Payload
+% Define payload length
+payloadLenInFecBlocks = 2;
+payloadLenInBits = payloadLenInFecBlocks*payloadBitsPerBlock0;
+payloadLenInWords = payloadLenInBits/axiWidth;
+
 %% Header formation
 % All these variables are required to form the header. A more detailed
 % explanation of each parameter can be found on the standard.
 
 % Length of the payload, in octets
-psduSize = logical([ ...
-    0 0 0 0 0 0 0 0 ...
-    0 0 0 0 0 0 0 0 ...
-    0 0 0 0 0 0 0 0]);
+psduSize = dec2binl(payloadLenInWords, 24)';
 
 % TODO: add the size of the payload, which should be inferred from the rest
 % of the header values.
@@ -36,10 +39,10 @@ fecConcatenationFactor = logical([0 0 0]); % TODO
 scramblerInitialization = logical([1 1 1 1]);
 
 % batID determines the amount of bits allocated per subcarrier
-batId = logical([0 0 1 0 0]);
+batId = logical([0 0 0 1 0]);
 
 % Number of samples for the cyclic prefix. Ncp = k* N /32. 3 bits max
-cyclicPrefixId = logical([0 0 0]);
+cyclicPrefixId = logical([0 0 1]);
 
 % MIMO not supported
 explicitMimoPilotSymbolCombSpacing = logical([0 0 0]);
