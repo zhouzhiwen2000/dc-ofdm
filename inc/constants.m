@@ -86,7 +86,10 @@ interpolatorDelay = mean(grpdelay(interpolatorFilter));
 ncoPhaseStep = 1/(2*oversamplingFactor);
 
 % The NCO will have a phase resolution of 1/2^ncoWordLength.
-ncoWordLength = ceil(log2(2*oversamplingFactor)+1);
+ncoWordLength = ceil(log2(2*oversamplingFactor)+2);
+if (ncoWordLength < 4)
+    error("ncoWordLength must be greater than 4 (or HDL code can't be generated)");
+end
 
 % The phase increment takes a value from [0; 2^ncoWordLength]
 % A phase increment of "2^ncoWordLength" is equal to 2pi
