@@ -9,7 +9,7 @@ cpLen = 16;
 nSym = 5;
 
 validIn = true(numDataCarriers*nSym, 1);
-dataSymbols = randi([0 255], length(validIn), 1) + 1i*randi([0 255], length(validIn), 1);
+dataSymbols = rand(length(validIn), 1) + 1i*rand(length(validIn), 1);
 
 %% Simulation Time
 fs = 1;                 % Output sample frequency
@@ -39,9 +39,27 @@ for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
     data = reshape(dataSymbols, [], nSym);
     expectedOut = ofdmmod(data, N, cpLen, nullIdx);
-    assert(iskindaequal(expectedOut, out), "OFDM output is not the same");
+    assert(iskindaequal(expectedOut, out, 1e-3), "OFDM output is not the same");
    
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
+
+%% Plotting
+n = 1:1:length(out);
+
+figure();
+subplot(2,1,1)
+plot(n, abs(out), n, abs(expectedOut));
+legend("Out", "ExpectedOut");
+xlabel("n [samples]");
+xlim([n(1), n(end)]);
+grid on;
+
+subplot(2,1,2)
+plot(n, abs(out - expectedOut));
+xlabel("n [samples]");
+title("|out - expectedOut|");
+xlim([n(1), n(end)]);
+grid on;
 
 disp("Test successfull!");

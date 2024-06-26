@@ -5,8 +5,8 @@ addpath("../../inc");
 constants;
 
 %% Inputs
-input{1} = randi([0,255], N*oversamplingFactor, 1) + 1i*randi([0, 255], N*oversamplingFactor, 1);
-input{2} = randi([0,255], N*oversamplingFactor, 1) + 1i*randi([0, 255], N*oversamplingFactor, 1);
+input{1} = rand(N*oversamplingFactor, 1) + 1i*rand(N*oversamplingFactor, 1);
+input{2} = rand(N*oversamplingFactor, 1) + 1i*rand(N*oversamplingFactor, 1);
 
 dataIn = [
     input{1};
