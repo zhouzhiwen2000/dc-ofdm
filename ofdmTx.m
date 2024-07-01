@@ -7,12 +7,12 @@ constants;
 parameters;
 
 %% Header
-h = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
+hGen = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
     fecConcatenationFactor, scramblerInitialization, batId, cyclicPrefixId, ...
     explicitMimoPilotSymbolCombSpacing, explicitMimoPilotSymbolNumber);
-h = headerScrambler(h);
-h = LDPCEncoder(h, 0, 0, true);
-headerOFDMSymbols = headerRepetitionEncoder(h);
+hScrambled = headerScrambler(hGen);
+hLDPC = LDPCEncoder(hScrambled, 0, 0, true);
+headerOFDMSymbols = headerRepetitionEncoder(hLDPC);
 
 %% Payload
 p = logical(randi([0,1], payloadBitsPerBlock0, 1));
@@ -28,7 +28,10 @@ channelTx = ofdmModulate(channelOFDMSymbols, channelBitsPerSubcarrier, channelCy
 headerTx = ofdmModulate(headerOFDMSymbols, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit);
 payloadTx = ofdmModulate(payloadOFDMSymbols, payloadBitsPerSubcarrier, payloadCyclicPrefixLen, nullIdx, payloadScramblerInit);
 
+OFDMSignal = [preambleTx; channelTx; headerTx; payloadTx;];
+OFDMSignal = interpolator(OFDMSignal);
+OFDMSignal = upshifter(OFDMSignal);
+
 %% Plotting
-tx = [preambleTx(:); channelTx(:); headerTx(:); payloadTx(:);];
-t = (0:1:length(tx) - 1).';
-plot(t, tx);
+%t = (0:1/fs:length(OFDMSignal)/fs - 1/fs).';
+%plot(t, OFDMSignal);

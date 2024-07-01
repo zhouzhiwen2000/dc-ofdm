@@ -18,6 +18,7 @@ preambleOFDMSymbols = preambleGenerate(nullIdx);
 preambleLUT = preambleOFDMSymbols(:);
 preambleDuration = OFDMSymbolDuration*width(preambleOFDMSymbols);
 preambleDataCarriers = numDataCarriers*14;
+preambleOFDMSamples = (N + preambleCyclicPrefixLen)*14;
 
 %% Channel Estimation
 channelScramblerInit = uint8([1 0 1 0 0 0 0 0 1 0 0 0 1]);      % 0x1105 = 0b1000100000101, but LSB first
@@ -27,6 +28,7 @@ channelOFDMSymbols = channelEstimationGenerate(nullIdx);
 channelLUT = channelOFDMSymbols(:);
 channelDuration = OFDMSymbolDuration*2.5;
 channelDataCarriers = numDataCarriers*2;
+channelOFDMSamples = (N + channelCyclicPrefixLen)*2;
 
 %% Header
 headerCRCPoly = logical([1 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 1]);
@@ -37,6 +39,7 @@ headerBitsPerFec = 336;
 headerBitsPerOFDMSymbol = headerBitsPerSubcarrier*numDataCarriers;
 headerDuration = OFDMSymbolDuration*1.25;
 headerDataCarriers = numDataCarriers;
+headerOFDMSamples = (N + headerCyclicPrefixLen)*1;
 
 %% Payload
 payloadBitsPerBlock0 = 960;
