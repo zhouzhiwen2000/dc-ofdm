@@ -59,5 +59,16 @@ assert(isequal(cyclicPrefixIdRx, cyclicPrefixId));
 assert(isequal(explicitMimoPilotSymbolCombSpacingRx, explicitMimoPilotSymbolCombSpacing));
 assert(isequal(explicitMimoPilotSymbolNumberRx, explicitMimoPilotSymbolNumber));
 
+%% Estimate payload parameters from header
+payloadBitsPerSubcarrierRx = binl2dec(batIdRx);
+payloadCyclicPrefixLenRx = binl2dec(cyclicPrefixIdRx) * N / 32;
+
 %% Process payload
-%payloadRxLLR = ofdmDemodulate(payloadTx, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit, true);
+payloadRxLLR = ofdmDemodulate(payloadTx, payloadBitsPerSubcarrierRx, payloadCyclicPrefixLenRx, nullIdx, payloadScramblerInit, true);
+pRxLLR = removeToneMapping(payloadRxLLR, psduSizeRx);
+pScrambledRx = LDPCDecoder(pRxLLR, binl2dec(fecRateRx), binl2dec(blockSizeRx), false);
+pBitsRx = payloadScrambler(scramblerInitializationRx, pScrambledRx);
+
+assert(isequal(length(pRxLLR), payloadLenInBits));
+assert(isequal(pScrambledRx, pScrambled));
+assert(isequal(pBitsRx, pBits));
