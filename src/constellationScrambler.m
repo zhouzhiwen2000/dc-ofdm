@@ -1,4 +1,4 @@
-function [dataOut] = constellationScrambler(dataIn, init)
+function [dataOut] = constellationScrambler(dataIn, init, isRx)
 %CONSTELLATIONSCRAMBLER  LFSR Fibonacci with the polinomial 
 % X^13 + X^12 + X^11 + X^8 + 1. The phase of the input data is shifted
 % acorting to the two LSB results of this LFSR.
@@ -12,6 +12,7 @@ function [dataOut] = constellationScrambler(dataIn, init)
 arguments(Input)
     dataIn (:,1) double
     init (1,13) uint8
+    isRx logical = false
 end
 arguments(Output)
     dataOut (:,1) double
@@ -34,5 +35,12 @@ end
     % bit read is the LSB)
     % [21 43 65 87]
     LSB = 2*LSB(1:2:end) + LSB(2:2:end);
-    dataOut = dataIn.*(1i.^LSB);
+
+    if (isRx)
+        % If Rx, rotate -90°
+        dataOut = dataIn.*((-1i).^LSB);
+    else
+        % If Tx, rotate +90°
+        dataOut = dataIn.*(1i.^LSB);
+    end
 end
