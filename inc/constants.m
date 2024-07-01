@@ -94,3 +94,25 @@ end
 % The phase increment takes a value from [0; 2^ncoWordLength]
 % A phase increment of "2^ncoWordLength" is equal to 2pi
 ncoPhaseIncrement = 2^ncoWordLength*ncoPhaseStep;
+
+
+%% Downshifter LPF filter
+lpfFpass = 25e6;               % Passband frequency [Hz]
+lpfFstop = 49e6;               % Stopband frequency [Hz]
+lpfPassbandRippleDb = 0.001;     % Passband ripple [dB]
+lpfStopbandAttDb = 140;         % Stopband attenuation [dB]
+
+lpfSpec = fdesign.lowpass('Fp,Fst,Ap,Ast', ...
+    lpfFpass, ...
+    lpfFstop, ...
+    lpfPassbandRippleDb, ...
+    lpfStopbandAttDb, ...
+    fs);
+lpfFilter = design(lpfSpec, 'equiripple', 'SystemObject',true);
+
+% Group delay of the filter. delay = (nTaps - 1)/2
+% The delay should be an integer, therefore, nTaps should be odd.
+lpfDelay = mean(grpdelay(lpfFilter));
+
+% Uncomment to plot filter response
+%fvtool(lpfFilter,'Fs', fs);
