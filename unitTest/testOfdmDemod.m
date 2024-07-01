@@ -20,13 +20,13 @@ h = LDPCEncoder(h, 0, 0, true);
 headerOFDMSymbols = headerRepetitionEncoder(h);
 headerTx = ofdmModulate(headerOFDMSymbols, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit);
 
-out1 = ofdmDemodulate(preambleTx, preambleBitsPerSubcarrier, preambleCyclicPrefixLen, nullIdx, preambleScramblerInit);
+out1 = ofdmDemodulate(preambleTx, preambleBitsPerSubcarrier, preambleCyclicPrefixLen, nullIdx, preambleScramblerInit, false);
 expectedOut1 = preambleLUT;
 
-out2 = ofdmDemodulate(channelTx, channelBitsPerSubcarrier, channelCyclicPrefixLen, nullIdx, channelScramblerInit);
+out2 = ofdmDemodulate(channelTx, channelBitsPerSubcarrier, channelCyclicPrefixLen, nullIdx, channelScramblerInit, false);
 expectedOut2 = channelLUT;
 
-out3 = ofdmDemodulate(headerTx, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit);
+out3 = ofdmDemodulate(headerTx, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit, false);
 expectedOut3 = headerOFDMSymbols(:);
 
 %% Perform tests
