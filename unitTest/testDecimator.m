@@ -1,4 +1,4 @@
-%% Test Downshifter
+%% Test decimator
 clc; clear; close all;
 addpath("../src");
 addpath("../src/rx");
@@ -7,19 +7,19 @@ constants;
 
 %% Test cases
 % Size of the header after FEC encoding
-fs = 100e3;
-fc = 1e3;
+fs = 100e6;
+fc = 1e6;
 symbolNumber = 10;
 
 t = (0:1/fs:symbolNumber/fc-1/fs)';
 input = sin(2*pi*fc*t) + 1i*cos(2*pi*fc*t);
 
-out = downshifter(upshifter(input));
+out = decimator(downshifter(upshifter(interpolator(input))));
 
 expectedOut = input();
 
 %% Perform tests
-assert(iskindaequal(expectedOut(lpfDelay+1:end-lpfDelay), out(lpfDelay+1:end-lpfDelay), 1e-3));
+assert(iskindaequal(expectedOut(decimatorDelay+1:end-decimatorDelay), out(decimatorDelay+1:end-decimatorDelay), 5e-3));
 
 %% Plot
 figure();

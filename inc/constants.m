@@ -95,24 +95,22 @@ end
 % A phase increment of "2^ncoWordLength" is equal to 2pi
 ncoPhaseIncrement = 2^ncoWordLength*ncoPhaseStep;
 
+%% Decimator LPF filter
+decimatorFpass = 25e6;               % Passband frequency [Hz]
+decimatorFstop = 45.5e6;               % Stopband frequency [Hz]
+decimatorPassbandRippleDb = 0.01;     % Passband ripple [dB]
+decimatorStopbandAttDb = 120;         % Stopband attenuation [dB]
 
-%% Downshifter LPF filter
-lpfFpass = 25e6;               % Passband frequency [Hz]
-lpfFstop = 49e6;               % Stopband frequency [Hz]
-lpfPassbandRippleDb = 0.001;     % Passband ripple [dB]
-lpfStopbandAttDb = 140;         % Stopband attenuation [dB]
-
-lpfSpec = fdesign.lowpass('Fp,Fst,Ap,Ast', ...
-    lpfFpass, ...
-    lpfFstop, ...
-    lpfPassbandRippleDb, ...
-    lpfStopbandAttDb, ...
+decimatorSpec = fdesign.decimator(2, 'lowpass', 'Fp,Fst,Ap,Ast', ...
+    decimatorFpass, ...
+    decimatorFstop, ...
+    decimatorPassbandRippleDb, ...
+    decimatorStopbandAttDb, ...
     fs);
-lpfFilter = design(lpfSpec, 'equiripple', 'SystemObject',true);
+decimatorFilter = design(decimatorSpec, 'equiripple', 'SystemObject',true);
 
-% Group delay of the filter. delay = (nTaps - 1)/2
-% The delay should be an integer, therefore, nTaps should be odd.
-lpfDelay = mean(grpdelay(lpfFilter));
+% Group delay of the filter should be even.
+decimatorDelay = mean(grpdelay(decimatorFilter));
 
 % Uncomment to plot filter response
 %fvtool(lpfFilter,'Fs', fs);
