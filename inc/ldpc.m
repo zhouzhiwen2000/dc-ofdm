@@ -1,5 +1,5 @@
 %% Modified matrices to run the LDPC Encoder block (Not IEEE compliant)
-ldpcDecoderMaxNumberIterations = 10;
+ldpcDecoderMaxNumberIterations = 8;
 
 Hc_12H = [
     -1  -1  -1  6   -1  -1  9   6   -1  -1  2   -1  4   0   -1  -1  -1  -1  -1  -1  -1  -1  -1  -1;
