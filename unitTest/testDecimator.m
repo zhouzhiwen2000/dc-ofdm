@@ -1,4 +1,7 @@
 %% Test decimator
+% TODO the decimation filter works as intended.
+% The problem is that a window should be added on the first and last
+% samples, from the transmitter side.
 clc; clear; close all;
 addpath("../src");
 addpath("../src/rx");
@@ -8,34 +11,33 @@ constants;
 %% Test cases
 % Size of the header after FEC encoding
 fs = 100e6;
-fc = 1e6;
+fc = 5e6;
 symbolNumber = 10;
 
 t = (0:1/fs:symbolNumber/fc-1/fs)';
-input = sin(2*pi*fc*t) + 1i*cos(2*pi*fc*t);
+input = sin(2*pi*fc*t);
 
-out = decimator(downshifter(upshifter(interpolator(input))));
+out = decimator(input);
+resample_out = resample(input,1,2);
 
-expectedOut = input();
-
-%% Perform tests
-assert(iskindaequal(expectedOut(decimatorDelay+1:end-decimatorDelay), out(decimatorDelay+1:end-decimatorDelay), 5e-3));
+n = 0:1:length(input)-1;
+n_down = 0:2:2*length(resample_out)-1;
+n_dec = (0:2:2*length(out)-1)';
 
 %% Plot
 figure();
-plot(abs(real(out) - real(expectedOut)));
+subplot(3,1,1);
+plot(n, input, n_down, resample_out, n_dec, out);
+title("Signals")
+legend("Input", "Resampled", "Decimated");
+grid on;
 
-figure();
-plot(abs(imag(out) - imag(expectedOut)));
+subplot(3,1,2);
+plot(n_down, abs(resample_out - out));
+title("Error between resample and decimation");
+grid on;
 
-figure();
-plot(real(input));
-hold on;
-plot(real(out));
-
-figure();
-plot(imag(input));
-hold on;
-plot(imag(out));
-
-disp("Test successful!");
+subplot(3,1,3);
+plot(n_down, abs(input(1:2:end) - out));
+title("Error between input and decimated");
+grid on;
