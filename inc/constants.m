@@ -117,3 +117,7 @@ decimatorDelay = mean(grpdelay(decimatorFilter));
 
 % Uncomment to plot filter response
 %fvtool(lpfFilter,'Fs', fs);
+
+%% QAM constellations
+qamTwoBits = [3, 2, 1, 0];
+qamFourBits = [2, 3, 1, 0, 6, 7, 5, 4, 14, 15, 13, 12, 10, 11, 9, 8];

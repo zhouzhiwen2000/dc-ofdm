@@ -24,7 +24,20 @@ end
 
     %% Transmit each OFDM Symbol
     for i=1:1:nSym
-        qamSignal = qammod(dataIn(:,i), 2^bitsPerSubcarrier, UnitAveragePower=true, PlotConstellation=false, InputType='bit');
+        switch bitsPerSubcarrier
+            case 1
+                qamSignal = pskmod(dataIn(:,i), 2^bitsPerSubcarrier, PlotConstellation=false, InputType='bit');
+            case 2
+                qamConstellation = qamTwoBits;
+                qamSignal = qammod(dataIn(:,i), 2^bitsPerSubcarrier, qamConstellation, UnitAveragePower=true, PlotConstellation=false, InputType='bit');
+                
+            case 4
+                qamConstellation = qamFourBits;
+                qamSignal = qammod(dataIn(:,i), 2^bitsPerSubcarrier, qamConstellation, UnitAveragePower=true, PlotConstellation=false, InputType='bit');
+            otherwise
+                error("Unssuported QAM modulation order");
+        end
+        
         qamSignalScrambled = constellationScrambler(qamSignal, constellationScramblerInit);
         y(:,i) = ofdmmod(qamSignalScrambled, N, cpLen, nullIdx, OversamplingFactor=1);
     end

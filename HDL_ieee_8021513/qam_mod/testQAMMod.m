@@ -9,7 +9,7 @@ constants;
 %% Inputs
 delay = zeros(100,1);
 
-M = [1 2 4 6];
+M = [1 2 4];
 
 bitsPerSubcarrier = [
     ones(200, 1)*M(1);
@@ -17,8 +17,7 @@ bitsPerSubcarrier = [
     ones(200,1)*M(2);
     delay;
     ones(200,1)*M(3);
-    delay;
-    ones(200,1)*M(4);];
+];
 
 dataSymbols = randi([0 255], length(bitsPerSubcarrier), 1);
 
@@ -52,7 +51,21 @@ for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
     data = dataSymbols(1+(i-1)*200:i*200);
     data = bitand(data, 2^M(i)-1);
-    expectedOut = qammod(data, 2^M(i), UnitAveragePower=true, PlotConstellation=false, InputType='integer');
+
+    switch M(i)
+        case 1
+            expectedOut = pskmod(data, 2^M(i), PlotConstellation=false, InputType='integer');
+        case 2
+            qamConstellation = qamTwoBits;
+            expectedOut = qammod(data, 2^M(i), qamConstellation, UnitAveragePower=true, PlotConstellation=false, InputType='integer');
+            
+        case 4
+            qamConstellation = qamFourBits;
+            expectedOut = qammod(data, 2^M(i), qamConstellation, UnitAveragePower=true, PlotConstellation=false, InputType='integer');
+        otherwise
+            error("Unssuported QAM modulation order");
+    end
+    
     assert(iskindaequal(expectedOut, out, 1e-3));
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end

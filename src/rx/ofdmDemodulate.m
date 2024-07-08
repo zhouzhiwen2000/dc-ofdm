@@ -14,6 +14,7 @@ arguments(Output)
     dataOut (:,1)
 end
     constants;
+
     % This function returns a matrix where each column has an OFDM symbol
     qamSignalScrambled = ofdmdemod(ofdmIn, N, cpLen, 0, nullIdx);
     
@@ -25,10 +26,26 @@ end
     
     for i=1:1:width(qamSignalScrambled)
         qamSignal = constellationScrambler(qamSignalScrambled(:,i), constellationScramblerInit, true);
+        
         if (llr)
-            dataOut(:,i) = qamdemod(qamSignal, 2^bitsPerSubcarrier, 'bin', UnitAveragePower=true, PlotConstellation=false, outputType='approxllr');
+            outType = 'approxllr';
+            outDataType = 'single';
         else
-            dataOut(:,i) = qamdemod(qamSignal, 2^bitsPerSubcarrier, 'bin', UnitAveragePower=true, PlotConstellation=false, outputType='bit', outputDataType='logical');
+            outType = 'bit';
+            outDataType = 'logical';
+        end
+
+        switch bitsPerSubcarrier
+            case 1
+                dataOut(:,i) = pskdemod(qamSignal, 2^bitsPerSubcarrier, OutputType=outType, OutputDataType=outDataType);
+            case 2
+                qamConstellation = qamTwoBits;
+                dataOut(:,i) = qamdemod(qamSignal, 2^bitsPerSubcarrier, qamConstellation, UnitAveragePower=true, PlotConstellation=false, outputType=outType, outputDataType=outDataType);
+            case 4
+                qamConstellation = qamFourBits;
+                dataOut(:,i) = qamdemod(qamSignal, 2^bitsPerSubcarrier, qamConstellation, UnitAveragePower=true, PlotConstellation=false, outputType=outType, outputDataType=outDataType);
+            otherwise
+                error("Unssuported QAM modulation order");
         end
     end
     
