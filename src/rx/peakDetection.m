@@ -11,9 +11,10 @@ arguments(Output)
     peaks (:,1) double
 end
     s1 = zeros(length(dataIn), 1);
+    %s2 = zeros(length(dataIn), 1);
     for i=1+k:1:length(dataIn)-k
         s1(i) = ( min(dataIn(i-k:i-1)) + min(dataIn(i+1:i+k)) ) /2;
-        %s2(i) = dataIn(i) - (sum(dataIn(i-k:i-1)) + sum(dataIn(i+1:i+k)))/2;
+        %s2(i) = dataIn(i) - (sum(dataIn(i-k:i-1)) + sum(dataIn(i+1:i+k)))/(2*k);
     end
 
     indexes = find(s1 > threshold);

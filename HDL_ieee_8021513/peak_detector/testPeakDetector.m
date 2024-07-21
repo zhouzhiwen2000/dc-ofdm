@@ -1,17 +1,16 @@
 %% Test Peak Detection
-% Implementation of the algorith of local peak detection in the paper
-% "Simple Algorithms for Peak Detection in Time-Series"
+% TODO: peak detector HDL is not working correctly
+
 clc; clear; close all;
-addpath("../src");
-addpath("../src/rx");
-addpath("../inc");
+addpath("../../src");
+addpath("../../src/rx")
+addpath("../../inc");
+constants;
 
 %% Create input data
 %%% Generate a random signal with peaks
 inputLen = 2000;        % Size of input signal
 peakLen = 58;           % Length of the gaussian pulse, which is used as a peak        
-peakThreshold = 0.5;    % A peak will be considered only if it's value is greater than this threshold
-k = 8;                  % Window size for peak detection
 
 % Location of peaks in the input data
 peakPosition = [200 600 1500]';
@@ -34,16 +33,36 @@ for i=1:1:length(falsePeakPosition)
         dataIn(falsePeakPosition(i)-peakLen/2 : falsePeakPosition(i) + peakLen/2) + falsePeak;
 end
 
-dataIn = awgn(dataIn, 20);
+dataIn = awgn(dataIn, 40);
 
-%% Outputs and expected outputs
-out = peakDetection(dataIn, k, peakThreshold);
+expectedOut = peakDetection(dataIn, peakDetectorWindow, peakDetectorThreshold);
 
-%% Test
-% Don't assert, because the noise might move the peaks position
-%assert(isequal(out, peakPosition));
+%% Simulation Time
+latency = 300/fs;         % Algorithm latency. Delay between input and output
+stopTime = (length(dataIn)-1)/fs + latency;
 
-plot(dataIn)
+%% Run the simulation
+model_name = "HDLPeakDetector";
 
-disp("Check in the graph if the out peaks are correct");
-out
+load_system(model_name);
+simOut = sim(model_name);
+
+dataOut = get(simOut, "dataOut");
+counter = get(simOut, "counter");
+
+%% Compare with MATLAB reference algorithm
+indexes = find(dataOut ~= 0);
+indexes = counter(indexes);
+
+assert(isequal(indexes, expectedOut));
+
+plot(dataIn);
+
+disp("Test Successfull!");
+
+% for i=1:length(startIdx)
+%     out = dataOut(startIdx(i):endIdx(i));
+%     assert(iskindaequal(expectedOut, out, 5e-3));
+%     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
+% end
+

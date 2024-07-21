@@ -121,3 +121,7 @@ decimatorDelay = mean(grpdelay(decimatorFilter));
 %% QAM constellations
 qamTwoBits = [3, 2, 1, 0];
 qamFourBits = [2, 3, 1, 0, 6, 7, 5, 4, 14, 15, 13, 12, 10, 11, 9, 8];
+
+%% Peak detector
+peakDetectorWindow = 8;
+peakDetectorThreshold = 0.5;
