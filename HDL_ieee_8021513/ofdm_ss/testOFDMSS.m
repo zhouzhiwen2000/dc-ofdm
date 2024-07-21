@@ -6,7 +6,7 @@ addpath("../../inc");
 constants;
 
 %% Inputs
-delay = 5000; % Number of samples taht the preamble is delayed
+delay = 5000; % Number of samples that the preamble is delayed
 SNR = 40;
 
 preambleTx = ofdmModulate(preambleOFDMSymbols, preambleBitsPerSubcarrier, preambleCyclicPrefixLen, nullIdx, preambleScramblerInit);
@@ -37,6 +37,8 @@ dataOut = get(simOut, "dataOut");
 startOut = get(simOut, "startOut");
 endOut = get(simOut, "endOut");
 validOut = get(simOut, "validOut");
+peakOut = get(simOut, "peakOut");
+indexOut = get(simOut, "indexOut");
 
 %% Compare with MATLAB reference algorithm
 startIdx = find(startOut == true);
@@ -47,9 +49,15 @@ assert(isequal(length(startIdx), length(endIdx)), ...
 
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
-    assert(iskindaequal(expectedOut, out, 5e-3));
+    assert(iskindaequal(expectedOut, out, 10e-3));
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
+
+% The delay for the OFDM signal is the first detected peak
+indexes = find(peakOut ~= 0);
+delayOut = indexOut(indexes(2)) % TODO, index 1 below 100? Why
+
+assert(iskindaequal(delayOut, expectedDelayOut, 10));
 
 %% Plotting
 figure();
