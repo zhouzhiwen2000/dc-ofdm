@@ -41,6 +41,8 @@ validIn = [
     true(size(input{2}));
 ];
 
+newFrame = true;
+
 %% Simulation Time
 latency = 10/fs;         % Algorithm latency. Delay between input and output
 stopTime = (length(dataIn)-1)/fs + latency;
