@@ -8,13 +8,17 @@ constants;
 %% Inputs
 delay = false(500,1);
 
-payloadLenInFecBlocks = 2;
+payloadLenInFecBlocks = 3;
 payloadLenInBits = payloadLenInFecBlocks*payloadBitsPerBlock0;
 payloadLenInWords = payloadLenInBits/axiWidth;
 psduSize = flip(dec2binl(payloadLenInWords, 24))';
 
-input{1} = logical(randi([0 1], payloadLenInBits, 1));
-input{2} = logical(randi([0 1], payloadLenInBits, 1));
+% Note: Since where are using fec rate 1/2, the actual len is multiplied by
+% 2. Only valid if fec rate = 1/2.
+payloadLenInBitsAfterFec = payloadLenInBits*2;
+
+input{1} = logical(randi([0 1], payloadLenInBitsAfterFec, 1));
+input{2} = logical(randi([0 1], payloadLenInBitsAfterFec, 1));
 
 input{1} = toneMapping(input{1}, 4);
 input{1} = input{1}(:);

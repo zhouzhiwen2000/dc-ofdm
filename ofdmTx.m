@@ -15,11 +15,13 @@ hLDPC = LDPCEncoder(hScrambled, 0, 0, true);
 headerOFDMSymbols = headerRepetitionEncoder(hLDPC);
 
 %% Payload
-pBits = logical(randi([0,1], payloadBitsPerBlock0, 1));
-pScrambled = payloadScrambler(scramblerInitialization, pBits);
-pLDPC = LDPCEncoder(pScrambled, binl2dec(fecRate), binl2dec(blockSize), false);
-%p = puncturing(p, binl2dec(fecRate), binl2dec(blockSize));
-%p = payloadRepetitionEncoder(p, binl2dec(repetitionNumber));
+pBits = logical(randi([0,1], payloadBitsPerBlock0, payloadLenInFecBlocks));
+pLDPC = false(payloadBitsPerFec, payloadLenInFecBlocks);
+for i=1:1:payloadLenInFecBlocks
+    pScrambled = payloadScrambler(scramblerInitialization, pBits(:,i));
+    pLDPC(:,i) = LDPCEncoder(pScrambled, binl2dec(fecRate), binl2dec(blockSize), false);
+end
+pLDPC = pLDPC(:);
 payloadOFDMSymbols = toneMapping(pLDPC, binl2dec(batId));
 
 %% Transmiter

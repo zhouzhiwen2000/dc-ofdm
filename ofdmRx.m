@@ -66,9 +66,15 @@ payloadCyclicPrefixLenRx = binl2dec(cyclicPrefixIdRx) * N / 32;
 %% Process payload
 payloadRxLLR = ofdmDemodulate(payloadTx, payloadBitsPerSubcarrierRx, payloadCyclicPrefixLenRx, nullIdx, payloadScramblerInit, true);
 pRxLLR = removeToneMapping(payloadRxLLR, psduSizeRx);
-pScrambledRx = LDPCDecoder(pRxLLR, binl2dec(fecRateRx), binl2dec(blockSizeRx), false);
-pBitsRx = payloadScrambler(scramblerInitializationRx, pScrambledRx);
+pRxLLR = reshape(pRxLLR, payloadBitsPerFec, payloadLenInFecBlocks);
 
-assert(isequal(length(pRxLLR), payloadLenInBits));
-assert(isequal(pScrambledRx, pScrambled));
+pBitsRx = false(payloadBitsPerBlock0, payloadLenInFecBlocks);
+for i=1:1:payloadLenInFecBlocks
+    pScrambledRx = LDPCDecoder(pRxLLR(:,i), binl2dec(fecRateRx), binl2dec(blockSizeRx), false);
+    pBitsRx(:,i) = payloadScrambler(scramblerInitializationRx, pScrambledRx);
+end
+
+%% Assertions
 assert(isequal(pBitsRx, pBits));
+
+disp("Transmission successful!");

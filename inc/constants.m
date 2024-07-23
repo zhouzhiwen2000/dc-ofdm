@@ -47,7 +47,7 @@ payloadBitsPerBlock1 = 4320;
 axiWidth = 8;
 payloadWordsPerBlock0 = payloadBitsPerBlock0/axiWidth;
 payloadWordsPerBlock1 = payloadBitsPerBlock1/axiWidth;
-payloadBitsPerFec = 1920;
+payloadBitsPerFec = 1920;   % TODO: only valid if fec_rate = 1/2
 payloadScramblerInit = uint8([1 1 1 1 1 1 1 1 1 1 1 1 1]); % 0x1FFF
 % The rest of parameters of the payload are defined in the file
 % "parameters"

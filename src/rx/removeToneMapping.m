@@ -8,6 +8,9 @@ arguments(Output)
     dataOut (:,1) double
 end
     bitsInPayload = binl2dec(psduSize)*8;
-    dataOut = dataIn(1:bitsInPayload);
+    % TODO: this "*2" is only valid if fec_rate = 1/2.
+    bitsInPayloadAfterFec = bitsInPayload*2;
+
+    dataOut = dataIn(1:bitsInPayloadAfterFec);
 end
 
