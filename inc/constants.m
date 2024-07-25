@@ -19,6 +19,8 @@ preambleLUT = preambleOFDMSymbols(:);
 preambleDuration = OFDMSymbolDuration*width(preambleOFDMSymbols);
 preambleDataCarriers = numDataCarriers*14;
 preambleOFDMSamples = (N + preambleCyclicPrefixLen)*14;
+preambleFirstPartOFDMSamples = (N + preambleCyclicPrefixLen)*10;
+preambleSecondPartOFDMSamples = (N + preambleCyclicPrefixLen)*4;
 
 %% Channel Estimation
 channelScramblerInit = uint8([1 0 1 0 0 0 0 0 1 0 0 0 1]);      % 0x1105 = 0b1000100000101, but LSB first
