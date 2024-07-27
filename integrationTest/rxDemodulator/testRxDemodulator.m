@@ -66,24 +66,16 @@ payloadRxLLR = ofdmDemodulate(payloadRx, payloadBitsPerSubcarrier, payloadCyclic
 
 for i=1:1:4
     expectedOut{i} = preambleRxLLR(1 + numDataCarriers*preambleBitsPerSubcarrier*(i+10-1) : numDataCarriers*preambleBitsPerSubcarrier*(i+10));
-    M(i) = preambleBitsPerSubcarrier;
-    control(i) = 0;
 end
 
 for i=1:1:2
-    expectedOut{4+i} = channelRxLLR(1 + numDataCarriers*channelBitsPerSubcarrier*(i-1): numDataCarriers*channelBitsPerSubcarrier*i);
-    M(4+i) = channelBitsPerSubcarrier;
-    control(4+i) = 1;
+    expectedOut1{i} = channelRxLLR(1 + numDataCarriers*channelBitsPerSubcarrier*(i-1): numDataCarriers*channelBitsPerSubcarrier*i);
 end
 
-expectedOut{7} = headerRxLLR;
-M(7) = headerBitsPerSubcarrier;
-control(7) = 2;
+expectedOut2{1} = headerRxLLR;
 
 for i=1:1:payloadNumOFDMSymbols
-    expectedOut{7+i} = payloadRxLLR(1+numDataCarriers*payloadBitsPerSubcarrier*(i-1) : numDataCarriers*payloadBitsPerSubcarrier*i);
-    M(7+i) = payloadBitsPerSubcarrier;
-    control(7+i) = 3;
+    expectedOut3{i} = payloadRxLLR(1+numDataCarriers*payloadBitsPerSubcarrier*(i-1) : numDataCarriers*payloadBitsPerSubcarrier*i);
 end
 
 %% Simulation Time
@@ -97,10 +89,24 @@ load_system(model_name);
 simOut = sim(model_name);
 
 dataOut = get(simOut, "dataOut");
+
 startOut = get(simOut, "startOut");
 endOut = get(simOut, "endOut");
 validOut = get(simOut, "validOut");
-controlOut = get(simOut, "controlOut");
+
+startOut1 = get(simOut, "startOut1");
+endOut1 = get(simOut, "endOut1");
+validOut1 = get(simOut, "validOut1");
+
+startOut2 = get(simOut, "startOut2");
+endOut2 = get(simOut, "endOut2");
+validOut2 = get(simOut, "validOut2");
+
+startOut3 = get(simOut, "startOut3");
+endOut3 = get(simOut, "endOut3");
+validOut3 = get(simOut, "validOut3");
+
+
 lastOut = get(simOut, "lastOut");
 
 %% Compare with MATLAB reference algorithm
@@ -108,38 +114,72 @@ lastOut = get(simOut, "lastOut");
 startIdx = find(startOut == true);
 endIdx = find(endOut == true);
 
+startIdx1 = find(startOut1 == true);
+endIdx1 = find(endOut1 == true);
+
+startIdx2 = find(startOut2 == true);
+endIdx2 = find(endOut2 == true);
+
+startIdx3 = find(startOut3 == true);
+endIdx3 = find(endOut3 == true);
+
 assert(isequal(length(startIdx), length(endIdx)), ...
+    "Length of start and end should be the same.");
+assert(isequal(length(startIdx1), length(endIdx1)), ...
+    "Length of start and end should be the same.");
+assert(isequal(length(startIdx2), length(endIdx2)), ...
+    "Length of start and end should be the same.");
+assert(isequal(length(startIdx3), length(endIdx3)), ...
     "Length of start and end should be the same.");
 
 assert(~isempty(startIdx), "No start signal");
+assert(~isempty(startIdx1), "No start signal");
+assert(~isempty(startIdx2), "No start signal");
+assert(~isempty(startIdx3), "No start signal");
 
 for i=1:length(startIdx)
-    out = dataOut(startIdx(i):endIdx(i), end-M(i)+1:end);
+    out = dataOut(startIdx(i):endIdx(i), end-preambleBitsPerSubcarrier+1:end);
     out = out.';
     out = out(:);
     assert(iskindaequal(expectedOut{i}, out, 1.5), "Output mismatch");
-
-    controlCurrentOut = controlOut(startIdx(i):endIdx(i));
-    controlExpectedOut = control(i)*ones(length(controlCurrentOut), 1);
-    assert(isequal(controlCurrentOut, controlExpectedOut), "control signal should be aligned with the OFDM output");
-    assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
 
-assert(isequal(endIdx(i), find(lastOut == true)), "last OFDM symbol and last frame signal should match");
+for i=1:length(startIdx1)
+    out = dataOut(startIdx1(i):endIdx1(i), end-channelBitsPerSubcarrier+1:end);
+    out = out.';
+    out = out(:);
+    assert(iskindaequal(expectedOut1{i}, out, 1.5), "Output mismatch");
+end
+
+for i=1:length(startIdx2)
+    out = dataOut(startIdx2(i):endIdx2(i), end-headerBitsPerSubcarrier+1:end);
+    out = out.';
+    out = out(:);
+    assert(iskindaequal(expectedOut2{i}, out, 1.5), "Output mismatch");
+end
+
+for i=1:length(startIdx3)
+    out = dataOut(startIdx3(i):endIdx3(i), end-payloadBitsPerSubcarrier+1:end);
+    out = out.';
+    out = out(:);
+    assert(iskindaequal(expectedOut3{i}, out, 1.5), "Output mismatch");
+end
+
+assert(isequal(endIdx3(i), find(lastOut == true)), "last OFDM symbol and last frame signal should match");
 
 %% Plotting
-t = (0:1/fs:length(expectedOut{i})/fs-1/fs)';
+t = (0:1/fs:length(expectedOut3{i})/fs-1/fs)';
 
 figure();
 subplot(2,1,1)
-plot(t, out, t, expectedOut{i});
+plot(t, out, t, expectedOut3{i});
 legend("Out", "ExpectedOut");
 xlabel("n [samples]");
 xlim([t(1), t(end)]);
 grid on;
 
 subplot(2,1,2)
-plot(t, abs(out - expectedOut{i}));
+plot(t, abs(out - expectedOut3{i}));
 xlabel("n [samples]");
 title("|out - expectedOut|");
 xlim([t(1), t(end)]);
