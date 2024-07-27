@@ -22,6 +22,7 @@ channelRx = OFDMRx(preambleOFDMSamples+1 : ...
     preambleOFDMSamples + channelOFDMSamples);
 headerRx = OFDMRx(preambleOFDMSamples+channelOFDMSamples+1 : ...
     preambleOFDMSamples + channelOFDMSamples + headerOFDMSamples);
+payloadRx = OFDMRx(preambleOFDMSamples + channelOFDMSamples + headerOFDMSamples + 1: end);
 
 preambleRxBits = ofdmDemodulate(preambleRx, preambleBitsPerSubcarrier, preambleCyclicPrefixLen, nullIdx, preambleScramblerInit, false);
 channelRxBits = ofdmDemodulate(channelRx, channelBitsPerSubcarrier, channelCyclicPrefixLen, nullIdx, channelScramblerInit, false);
@@ -64,7 +65,7 @@ payloadBitsPerSubcarrierRx = binl2dec(batIdRx);
 payloadCyclicPrefixLenRx = binl2dec(cyclicPrefixIdRx) * N / 32;
 
 %% Process payload
-payloadRxLLR = ofdmDemodulate(payloadTx, payloadBitsPerSubcarrierRx, payloadCyclicPrefixLenRx, nullIdx, payloadScramblerInit, true);
+payloadRxLLR = ofdmDemodulate(payloadRx, payloadBitsPerSubcarrierRx, payloadCyclicPrefixLenRx, nullIdx, payloadScramblerInit, true);
 pRxLLR = removeToneMapping(payloadRxLLR, psduSizeRx);
 pRxLLR = reshape(pRxLLR, payloadBitsPerFec, payloadLenInFecBlocks);
 
