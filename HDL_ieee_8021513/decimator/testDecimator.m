@@ -6,26 +6,21 @@ addpath("../../inc");
 constants;
 
 %% Inputs
-nSym = 5;
-fc = 1e6;                      % Carrier frequency for sinusoidal function
-t = (0:1/fs:nSym/fc-1/fs)'; 
+t = (0:1/fs:(N+headerCyclicPrefixLen)/fPHY-1/fs)';            % Time vector is equal to "N" ofdm samples
+t_down = (0:1/fPHY:(N+headerCyclicPrefixLen)/fPHY-1/fPHY)';     % Time vector for downsampled signal
 
-input{1} = cos(2*pi*fc*t);
-input{2} = sin(2*pi*fc*t);
+% OFDM output is a senoidal function
+% fc = 5e6;                           % Carrier frequency for sinusoidal function
+% dataIn = cos(2*pi*fc*t);
+% validIn = true(length(t), 1);
 
-dataIn = [
-    input{1};
-    zeros(100, 1);
-    input{2};
-];
+% OFDM output is an actual OFDM symbol
+dataIn = rand(numDataCarriers, 1) + 1i*rand(numDataCarriers, 1);
+dataIn = ofdmmod(dataIn, N, headerCyclicPrefixLen, nullIdx);
+dataIn = interpolator(dataIn);
+validIn = true(length(dataIn), 1);
 
-validIn = [
-    true(size(input{1}));
-    false(100, 1);
-    true(size(input{2}));
-];
-
-maxError = 1e-3;    % Maximum error between out and expectedOut
+expectedOut = decimator(dataIn);
 
 %% Simulation Time
 latency = 200/fs;         % Algorithm latency. Delay between input and output
@@ -51,38 +46,33 @@ assert(isequal(length(startIdx), length(endIdx)), ...
 
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
-    expectedOut = decimator(input{i});
-    assert(iskindaequal(expectedOut, out, maxError));
+    assert(iskindaequal(expectedOut, out, 1e-3));
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
 
 %% Plotting
-n_in = (0:1:length(input{2})-1)';
-n_out = (0:2:length(input{2})-1)';
+resampledOut = resample(dataIn, 1, 2);
+
 figure();
-subplot(3,1,1);
-plot(n_in, input{2}, n_out, out, n_out, expectedOut);
-title("Signals");
-legend("Input", "Out", "ExpectedOut");
-xlabel("n [samples]");
-ylabel("Amplitude");
-xlim([min(n_in), max(n_in)]);
-grid on;
+subplot(3,1,1)
+plot(t*1e6, abs(dataIn), t_down*1e6, abs(expectedOut), t_down*1e6, abs(resampledOut));
+xlabel("Time [useg]");
+legend("Input", "Interpolated", "Resampled");
+xlim([min(t), max(t)]*1e6);
 
 subplot(3,1,2);
-plot(n_out, abs(out-expectedOut));
-xlabel("n [samples]");
-ylabel("Error between Matlab and Simulink");
+plot(t_down*1e6, abs(expectedOut-resampledOut));
+xlabel("Time [useg]");
+title("Error between interpolation FIR filter and resample FIR filter")
+xlim([min(t_down), max(t_down)]*1e6);
+
+subplot(3,1,3)
+plot(t_down*1e6, abs(out - expectedOut));
+xlabel("Time [useg]");
 title("|out - expectedOut|");
-xlim([min(n_out), max(n_out)]);
+xlim([t_down(1), t_down(end)]);
 grid on;
 
-subplot(3,1,3);
-plot(n_out, abs(input{2}(1:2:end) - out));
-xlabel("n [samples]");
-ylabel("Error between Input and Output");
-title("|out - input|");
-xlim([min(n_out), max(n_out)]);
-grid on;
+assert(iskindaequal(expectedOut, resampledOut, 0.1), "resample function and interpolation should be similar");
 
 disp("Test successfull!");
