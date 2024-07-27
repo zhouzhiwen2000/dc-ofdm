@@ -5,14 +5,20 @@ addpath("../../inc");
 constants;
 
 %% Inputs
-fc = 5e6;                           % Carrier frequency for sinusoidal function
-t = (0:1/fPHY:N/fPHY-1/fPHY)';      % Time vector is equal to "N" ofdm samples
+t = (0:1/fPHY:(N+headerCyclicPrefixLen)/fPHY-1/fPHY)';      % Time vector is equal to "N" ofdm samples
+t_up = (0:1/fs:(N+headerCyclicPrefixLen)/fPHY-1/fs)';       % Time vector for upsampled signal
 
 % OFDM output is a senoidal function
-% Add "zeros" to the function to compensate for the delay of the FIR filter
-dataSymbols = cos(2*pi*fc*t);
+%fc = 5e6;                           % Carrier frequency for sinusoidal function
+%dataSymbols = cos(2*pi*fc*t);
+%validIn = true(length(t), 1);
 
-validIn = true(length(t), 1);
+% OFDM output is an actual OFDM symbol
+dataSymbols = rand(numDataCarriers, 1) + 1i*rand(numDataCarriers, 1);
+dataSymbols = ofdmmod(dataSymbols, N, headerCyclicPrefixLen, nullIdx);
+validIn = true(length(dataSymbols), 1);
+
+expectedOut = interpolator(dataSymbols);
 
 %% Simulation Time
 latency = 200/fs;         % Algorithm latency. Delay between input and output
@@ -36,23 +42,18 @@ endIdx = find(endOut == true);
 assert(isequal(length(startIdx), length(endIdx)), ...
     "Length of start and end should be the same.");
 
-t_up = (0:1/fs:N/fPHY-1/fs)';       % Time vector for upsampled signal
-
-expectedOut = interpolator(dataSymbols);
-
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
     assert(iskindaequal(expectedOut, out, 1e-3), "OFDM output is not the same");
-   
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
 
 %% Plot signals
-resampledOut = resample(dataSymbols(1:N), 2, 1);
+resampledOut = resample(dataSymbols, 2, 1);
 
 figure();
 subplot(3,1,1)
-plot(t*1e6, dataSymbols(1:N), t_up*1e6, expectedOut, t_up*1e6, resampledOut);
+plot(t*1e6, abs(dataSymbols), t_up*1e6, abs(expectedOut), t_up*1e6, abs(resampledOut));
 xlabel("Time [useg]");
 legend("Input", "Interpolated", "Resampled");
 xlim([min(t_up), max(t_up)]*1e6);
