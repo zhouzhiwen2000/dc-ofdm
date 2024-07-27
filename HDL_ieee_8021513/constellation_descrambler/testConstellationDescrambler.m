@@ -13,9 +13,9 @@ si{5} = repmat(payloadScramblerInit, numDataCarriers, 1);
 
 input{1} = ones(numDataCarriers, 1);
 input{2} = ones(numDataCarriers,1);
-input{3} = randi([0 255], numDataCarriers, 1) + 1i*randi([0 255], numDataCarriers, 1);
-input{4} = randi([0 255], numDataCarriers, 1) + 1i*randi([0 255], numDataCarriers, 1);
-input{5} = randi([0 255], numDataCarriers, 1) + 1i*randi([0 255], numDataCarriers, 1);
+input{3} = rand(numDataCarriers, 1) + 1i*rand(numDataCarriers, 1);
+input{4} = rand(numDataCarriers, 1) + 1i*rand(numDataCarriers, 1);
+input{5} = rand(numDataCarriers, 1) + 1i*rand(numDataCarriers, 1);
 
 scramblerInit = [
     si{1};
@@ -30,15 +30,15 @@ scramblerInit = [
 ];
 
 dataSymbols = [
-    input{1};
+    constellationScrambler(input{1}, si{1}(1,:), false);
     false(10, 1);
-    input{2};
+    constellationScrambler(input{2}, si{2}(1,:), false);
     false(10, 1);
-    input{3};
+    constellationScrambler(input{3}, si{3}(1,:), false);
     false(10, 1);
-    input{4};
+    constellationScrambler(input{4}, si{4}(1,:), false);
     false(10, 1);
-    input{5};
+    constellationScrambler(input{5}, si{5}(1,:), false);
 ];
 
 validIn = [
@@ -78,9 +78,27 @@ assert(isequal(length(startIdx), length(endIdx)), ...
 
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
-    expectedOut = constellationScrambler(input{i}, si{i}(1,:), true);
-    assert(isequal(expectedOut, out));
+    expectedOut = input{i};
+    assert(iskindaequal(expectedOut, out, 1e-3));
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
+
+%% Plotting
+n = 1:1:length(out);
+
+figure();
+subplot(2,1,1)
+plot(n, abs(out), n, abs(expectedOut));
+legend("Out", "ExpectedOut");
+xlabel("n [samples]");
+xlim([n(1), n(end)]);
+grid on;
+
+subplot(2,1,2)
+plot(n, abs(out - expectedOut));
+xlabel("n [samples]");
+title("|out - expectedOut|");
+xlim([n(1), n(end)]);
+grid on;
 
 disp("Test successfull!");
