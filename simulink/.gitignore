@@ -6,3 +6,12 @@ wireless_hdl_examples
 WHDL*
 *.wdb
 hdl_prj
+
+*/slprj
+*/*.slxc
+*/xsim.dir*
+*/.Xil
+*/vivado.*
+*/hdl_prj
+*/*.wdb
+simulink_test
