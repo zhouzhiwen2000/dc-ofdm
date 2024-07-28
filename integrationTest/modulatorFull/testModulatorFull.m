@@ -20,12 +20,16 @@ h = headerScrambler(h);
 h = LDPCEncoder(h, 0, 0, true);
 headerOFDMSymbols = headerRepetitionEncoder(h);
 
-p = logical(randi([0,1], payloadBitsPerBlock0, 1));
-p = payloadScrambler(scramblerInitialization, p);
-p = LDPCEncoder(p, binl2dec(fecRate), binl2dec(blockSize), false);
-p = puncturing(p, binl2dec(fecRate), binl2dec(blockSize));
-p = payloadRepetitionEncoder(p, binl2dec(repetitionNumber));
-payloadOFDMSymbols = toneMapping(p, binl2dec(batId));
+dataBitsLsb = logical(randi([0 1], payloadLenInBits, 1));
+for i=1:payloadLenInFecBlocks
+    p = payloadScrambler(scramblerInitialization, dataBitsLsb(1+(i-1)*payloadBitsPerBlock0:payloadBitsPerBlock0*i));
+    p = LDPCEncoder(p, binl2dec(fecRate), binl2dec(blockSize), false);
+    p = puncturing(p, binl2dec(fecRate), binl2dec(blockSize));
+    p = payloadRepetitionEncoder(p, 1);
+    payloadTotal(:, i) = p;
+end
+payloadOFDMSymbols = toneMapping(payloadTotal(:), binl2dec(batId));
+
 
 %% Expected Output
 preambleTx = ofdmModulate(preambleOFDMSymbols, preambleBitsPerSubcarrier, preambleCyclicPrefixLen, nullIdx, preambleScramblerInit);
@@ -85,7 +89,7 @@ cpLen = [
 validIn = true(length(dataSymbols), 1);
 
 %% Simulation Time
-latency = 30000/fs;         % Algorithm latency. Delay between input and output
+latency = 1000000/fs;         % Algorithm latency. Delay between input and output
 stopTime = (length(validIn)-1)/fs + latency;
 
 %% Run the simulation
@@ -116,30 +120,32 @@ for i=1:length(startIdx)
 end
 
 %% Plotting
-t = (0:1/fs:length(expectedOut)/fs-1/fs)';
-
-figure();
-subplot(2,1,1)
-plot(t, out, t, expectedOut);
-legend("Out", "ExpectedOut");
-xlabel("n [samples]");
-xlim([t(1), t(end)]);
-grid on;
-
-subplot(2,1,2)
-plot(t, abs(out - expectedOut));
-xlabel("n [samples]");
-title("|out - expectedOut|");
-xlim([t(1), t(end)]);
-grid on;
-
-figure();
-resampledOut = resample(out, 2, 1);
-[psd, fVector] = pwelch(resampledOut, rectwin(length(resampledOut)), [], 2^16, 2*fs, "centered");
-plot(fVector/1e6, 10*log10(psd));
-title("PSD of the transmitted signal")
-xlabel("Freq. [MHz]");
-ylabel("PSD [dB/Hz]");
-grid on;
+if (all([simNormal == true, simLarge == false]))
+    t = (0:1/fs:length(expectedOut)/fs-1/fs)';
+    
+    figure();
+    subplot(2,1,1)
+    plot(t, out, t, expectedOut);
+    legend("Out", "ExpectedOut");
+    xlabel("n [samples]");
+    xlim([t(1), t(end)]);
+    grid on;
+    
+    subplot(2,1,2)
+    plot(t, abs(out - expectedOut));
+    xlabel("n [samples]");
+    title("|out - expectedOut|");
+    xlim([t(1), t(end)]);
+    grid on;
+    
+    figure();
+    resampledOut = resample(out, 2, 1);
+    [psd, fVector] = pwelch(resampledOut, rectwin(length(resampledOut)), [], 2^16, 2*fs, "centered");
+    plot(fVector/1e6, 10*log10(psd));
+    title("PSD of the transmitted signal")
+    xlabel("Freq. [MHz]");
+    ylabel("PSD [dB/Hz]");
+    grid on;
+end
 
 disp("Test successfull!");
