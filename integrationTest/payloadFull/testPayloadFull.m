@@ -12,10 +12,29 @@ addpath("../../inc");
 constants;
 
 %% Input
-% Define payload length
-payloadLenInFecBlocks = 3;
-payloadLenInBits = payloadLenInFecBlocks*payloadBitsPerBlock0;
-payloadLenInWords = payloadLenInBits/axiWidth;
+simNormal = true;
+simLarge = false;
+
+if (simNormal == true)
+    payloadLenInFecBlocks = 3;
+    payloadLenInBits = payloadLenInFecBlocks*payloadBitsPerBlock0;
+    payloadLenInWords = payloadLenInBits/axiWidth;
+    disp("Running normal simulation");
+
+elseif (simLarge == true)
+    % Define the payload length with the amount of words
+    payloadLenInWords = 2^16;
+    payloadLenInBits = payloadLenInWords*axiWidth;
+    payloadLenInFecBlocks = ceil(payloadLenInBits/payloadBitsPerBlock0);
+    
+    % The amount of bits and words should be a multiple of the fec block
+    % size.
+    payloadLenInBits = payloadLenInFecBlocks*payloadBitsPerBlock0;
+    payloadLenInWords = payloadLenInBits/axiWidth;
+    disp("Running large frame simulation");
+else
+    error("No simulation type selected");
+end
 
 % Create databits, as a matrix with 8 columns (each row is a char), and
 % then transform to chars.
@@ -39,8 +58,7 @@ psduSize = flip(dec2binl(payloadLenInWords, 24))';
 repNumber = logical([0 0 0]);
 
 %% Simulation Time
-fs = 1;                     % Output sample frequency
-latency = 3000;             % Algorithm latency. Delay between input and output
+latency = 1000000/fs;             % Algorithm latency. Delay between input and output
 stopTime = (length(dataChars)-1)/(fs) + latency;
 
 %% Run the simulation
