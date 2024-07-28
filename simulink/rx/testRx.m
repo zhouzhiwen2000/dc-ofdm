@@ -94,6 +94,7 @@ assert(isequal(length(startIdx), length(endIdx)), ...
     "Length of start and end should be the same.");
 
 assert(~isempty(startIdx), "No start signal");
+assert(isequal(length(startIdx), payloadLenInFecBlocks), "Wrong number of payload bits read");
 
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
