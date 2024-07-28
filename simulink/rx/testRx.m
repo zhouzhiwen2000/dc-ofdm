@@ -45,7 +45,6 @@ validIn = true(length(dataIn), 1);
 
 %% ExpectedOutput
 [reg0, reg1, reg2, reg3] = param2regs("parameters.m");
-expectedOut = pBits;
 
 %% Simulation Time
 latency = 30000/fs;         % Algorithm latency. Delay between input and output
