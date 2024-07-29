@@ -2,11 +2,32 @@
 % These variables can change between PSDUs
 constants;
 
+%% Simulation method
+simNormal = false;
+simLarge = true;
+
 %% Payload
 % Define payload length
-payloadLenInFecBlocks = 2;
-payloadLenInBits = payloadLenInFecBlocks*payloadBitsPerBlock0;
-payloadLenInWords = payloadLenInBits/axiWidth;
+if (simNormal == true)
+    payloadLenInFecBlocks = 2;
+    payloadLenInBits = payloadLenInFecBlocks*payloadBitsPerBlock0;
+    payloadLenInWords = payloadLenInBits/axiWidth;
+    disp("Running normal simulation");
+
+elseif (simLarge == true)
+    % Define the payload length with the amount of words
+    payloadLenInWords = 2^12;
+    payloadLenInBits = payloadLenInWords*axiWidth;
+    payloadLenInFecBlocks = ceil(payloadLenInBits/payloadBitsPerBlock0);
+    
+    % The amount of bits and words should be a multiple of the fec block
+    % size.
+    payloadLenInBits = payloadLenInFecBlocks*payloadBitsPerBlock0;
+    payloadLenInWords = payloadLenInBits/axiWidth;
+    disp("Running large frame simulation");
+else
+    error("No simulation type selected");
+end
 
 %% Header formation
 % All these variables are required to form the header. A more detailed

@@ -61,7 +61,7 @@ OFDMSignal = interpolator(OFDMSignal);
 expectedOut = upshifter(OFDMSignal);
 
 %% Simulation Time
-latency = 50000/fs;             % Algorithm latency. Delay between input and output
+latency = 10000000/fs;             % Algorithm latency. Delay between input and output
 stopTime = (length(validIn)-1)/(fs) + latency;
 
 %% Run the simulation
@@ -116,31 +116,33 @@ for i=1:length(startIdx)
 end
 
 %% Plotting
-t = (0:1/fs:length(expectedOut)/fs-1/fs)';
-
-figure();
-subplot(2,1,1)
-plot(t, out, t, expectedOut);
-legend("Out", "ExpectedOut");
-xlabel("n [samples]");
-xlim([t(1), t(end)]);
-grid on;
-
-subplot(2,1,2)
-plot(t, abs(out - expectedOut));
-xlabel("n [samples]");
-title("|out - expectedOut|");
-xlim([t(1), t(end)]);
-grid on;
-
-figure();
-resampledOut = resample(out, 2, 1);
-[psd, fVector] = pwelch(resampledOut, rectwin(length(resampledOut)), [], 2^16, 2*fs, "centered");
-plot(fVector/1e6, 10*log10(psd));
-title("PSD of the transmitted signal")
-xlabel("Freq. [MHz]");
-ylabel("PSD [dB/Hz]");
-grid on;
+if(all([simNormal == true, simLarge == false]))
+    t = (0:1/fs:length(expectedOut)/fs-1/fs)';
+    
+    figure();
+    subplot(2,1,1)
+    plot(t, out, t, expectedOut);
+    legend("Out", "ExpectedOut");
+    xlabel("n [samples]");
+    xlim([t(1), t(end)]);
+    grid on;
+    
+    subplot(2,1,2)
+    plot(t, abs(out - expectedOut));
+    xlabel("n [samples]");
+    title("|out - expectedOut|");
+    xlim([t(1), t(end)]);
+    grid on;
+    
+    figure();
+    resampledOut = resample(out, 2, 1);
+    [psd, fVector] = pwelch(resampledOut, rectwin(length(resampledOut)), [], 2^16, 2*fs, "centered");
+    plot(fVector/1e6, 10*log10(psd));
+    title("PSD of the transmitted signal")
+    xlabel("Freq. [MHz]");
+    ylabel("PSD [dB/Hz]");
+    grid on;
+end
 
 disp("Test successfull!");
 
