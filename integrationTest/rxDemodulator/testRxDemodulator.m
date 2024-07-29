@@ -79,7 +79,7 @@ for i=1:1:payloadNumOFDMSymbols
 end
 
 %% Simulation Time
-latency = 30000/fs;         % Algorithm latency. Delay between input and output
+latency = 1000000/fs;         % Algorithm latency. Delay between input and output
 stopTime = (length(validIn)-1)/fs + latency;
 
 %% Run the simulation

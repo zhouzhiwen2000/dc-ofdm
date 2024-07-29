@@ -55,5 +55,5 @@ payloadCyclicPrefixLen = binl2dec(cyclicPrefixId) * N / 32;
 payloadBitsPerOFDMSymbol = numDataCarriers*binl2dec(batId);
 
 % Note: the "*2" is beacuse of the fec rate of 1/2.
-payloadNumOFDMSymbols = binl2dec(psduSize)*axiWidth*2 / payloadBitsPerOFDMSymbol;
+payloadNumOFDMSymbols = ceil(double(binl2dec(psduSize)*axiWidth*2) / double(payloadBitsPerOFDMSymbol));
 payloadNumOFDMSamples = (payloadCyclicPrefixLen + N)*payloadNumOFDMSymbols;
