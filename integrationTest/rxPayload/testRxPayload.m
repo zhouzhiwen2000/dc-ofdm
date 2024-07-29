@@ -6,9 +6,29 @@ addpath("../../inc");
 constants;
 
 %% Inputs
-payloadLenInFecBlocks = 3;
-payloadLenInBits = payloadLenInFecBlocks*payloadBitsPerBlock0;
-payloadLenInWords = payloadLenInBits/axiWidth;
+simNormal = true;
+simLarge = false;
+
+if (simNormal == true)
+    payloadLenInFecBlocks = 3;
+    payloadLenInBits = payloadLenInFecBlocks*payloadBitsPerBlock0;
+    payloadLenInWords = payloadLenInBits/axiWidth;
+    disp("Running normal simulation");
+
+elseif (simLarge == true)
+    % Define the payload length with the amount of words
+    payloadLenInWords = 2^16;
+    payloadLenInBits = payloadLenInWords*axiWidth;
+    payloadLenInFecBlocks = ceil(payloadLenInBits/payloadBitsPerBlock0);
+    
+    % The amount of bits and words should be a multiple of the fec block
+    % size.
+    payloadLenInBits = payloadLenInFecBlocks*payloadBitsPerBlock0;
+    payloadLenInWords = payloadLenInBits/axiWidth;
+    disp("Running large frame simulation");
+else
+    error("No simulation type selected");
+end
 
 psduSize = dec2binl(payloadLenInWords, 24)';
 blockSize = logical([0 0]);
@@ -52,7 +72,7 @@ validIn = true(size(payloadRxLLR));
 newFrame = true;
 
 %% Simulation Time
-latency = 20000/fPHY;         % Algorithm latency. Delay between input and output
+latency = 1000000/fPHY;         % Algorithm latency. Delay between input and output
 stopTime = (length(payloadRxLLR)-1)/(fPHY) + latency;
 
 %% Run the simulation
