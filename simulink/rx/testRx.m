@@ -47,7 +47,7 @@ validIn = true(length(dataIn), 1);
 [reg0, reg1, reg2, reg3] = param2regs("parameters.m");
 
 %% Simulation Time
-latency = 30000/fs;         % Algorithm latency. Delay between input and output
+latency = 10000000/fs;         % Algorithm latency. Delay between input and output
 stopTime = (length(validIn)-1)/fs + latency;
 
 %% Run the simulation
