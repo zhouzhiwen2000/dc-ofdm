@@ -44,6 +44,8 @@ endIdx = find(endOut == true);
 assert(isequal(length(startIdx), length(endIdx)), ...
     "Length of start and end should be the same.");
 
+assert(~isempty(startIdx), "No start signal");
+
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
     assert(iskindaequal(expectedOut, out, 1e-3));
