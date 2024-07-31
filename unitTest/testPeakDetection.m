@@ -37,7 +37,7 @@ end
 dataIn = awgn(dataIn, 20);
 
 %% Outputs and expected outputs
-out = peakDetection(dataIn, k, peakThreshold);
+[out, s] = peakDetection(dataIn, k, peakThreshold);
 
 %% Test
 % Don't assert, because the noise might move the peaks position
