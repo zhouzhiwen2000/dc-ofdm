@@ -1,6 +1,7 @@
 %% Test Peak Detection
 % TODO: peak detector HDL is not working correctly
-
+% NOTE: este test queda en DESUSO, porque no se calcula más la función "s"
+% para encontrar el pico.
 clc; clear; close all;
 addpath("../../src");
 addpath("../../src/rx")

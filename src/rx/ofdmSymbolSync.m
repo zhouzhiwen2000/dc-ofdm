@@ -1,4 +1,4 @@
-function [ofdmSynched, delay, M] = ofdmSymbolSync(ofdmIn)
+function [ofdmSynched, delay, M, peaks] = ofdmSymbolSync(ofdmIn)
 %OFDMSYMBOLSYNC Synchronize OFDM symbols using the Cox and Schmidl method
 arguments(Input)
     ofdmIn (:,1) double
@@ -7,6 +7,7 @@ arguments(Output)
     ofdmSynched (:,1) double
     delay double
     M (:,1) double
+    peaks (:,1) double
 end
     constants;
 
@@ -25,8 +26,17 @@ end
     
         M(d) = abs(P)^2 / Rf^2;
     end
-    [~, delay] = max(M);
 
+    % Nota: parece que las funciones "M" del paper de Cox y "S" del paper 
+    % de peak detection son casi iguales. Por lo que se usa directamente
+    % "M" para detectar el pico
+    %[~, delay] = max(M);
+    peaks = rawPeakDetection(M, peakDetectorWindow, peakDetectorThreshold);
+    if (~isempty(peaks))
+        delay = peaks(1);
+    else
+        delay = 0;
+    end
     ofdmSynched = ofdmIn(delay+1:end);
 end
 
