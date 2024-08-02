@@ -1,4 +1,4 @@
-function [ofdmSynched, delay, M, peaks] = ofdmSymbolSync(ofdmIn)
+function [ofdmSynched, delay, M, peaks, P] = ofdmSymbolSync(ofdmIn)
 %OFDMSYMBOLSYNC Synchronize OFDM symbols using the Cox and Schmidl method
 arguments(Input)
     ofdmIn (:,1) double
@@ -8,6 +8,7 @@ arguments(Output)
     delay double
     M (:,1) double
     peaks (:,1) double
+    P (:, 1)
 end
     constants;
 
@@ -15,16 +16,17 @@ end
     % preamble
     L = (N + preambleCyclicPrefixLen)*5;    % Length of the training symbol (half of the ten preamble symbols)
     M = zeros(length(ofdmIn), 1);
+    P = zeros(length(ofdmIn), 1);
 
     for d=1:1:length(ofdmIn)-2*L
         firstSymbol = ofdmIn(d+1:d+L);
         secondSymbol = ofdmIn(d+L+1:d+2*L);
         bothSymbols = [firstSymbol; secondSymbol];
     
-        P = sum(firstSymbol.*conj(secondSymbol));
+        P(d) = sum(firstSymbol.*conj(secondSymbol));
         Rf = 1/2 * sum((abs(bothSymbols)).^2);
     
-        M(d) = abs(P)^2 / Rf^2;
+        M(d) = abs(P(d))^2 / Rf^2;
     end
 
     % Nota: parece que las funciones "M" del paper de Cox y "S" del paper 

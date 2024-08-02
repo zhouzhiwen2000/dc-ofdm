@@ -11,6 +11,10 @@ function [pBitsRx, err, psduSizeRx, messageDurationRx, blockSizeRx, ...
     % the cyclic prefix used for the payload)
     OFDMRx = downshifter(OFDMSignal);
     OFDMRx = decimator(OFDMRx);
+
+    %% Detect delay
+    [OFDMRx, delay] = ofdmSymbolSync(OFDMRx);
+    fprintf("Delay found: %d\n", delay);
     
     preambleRx = OFDMRx(1:preambleOFDMSamples);
     channelRx = OFDMRx(preambleOFDMSamples+1 : ...
@@ -37,6 +41,10 @@ function [pBitsRx, err, psduSizeRx, messageDurationRx, blockSizeRx, ...
     %% Estimate payload parameters from header
     payloadBitsPerSubcarrierRx = binl2dec(batIdRx);
     payloadCyclicPrefixLenRx = binl2dec(cyclicPrefixIdRx) * N / 32;
+
+    if (err == true)
+        error("Header was not read correctly");
+    end
     
     %% Process payload
     payloadRxLLR = ofdmDemodulate(payloadRx, payloadBitsPerSubcarrierRx, payloadCyclicPrefixLenRx, nullIdx, payloadScramblerInit, true);

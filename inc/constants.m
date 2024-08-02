@@ -87,7 +87,8 @@ interpolatorDelay = mean(grpdelay(interpolatorFilter));
 % Wanting to obtain the following expression:
 % sin(2*pi*n/(2*oversamplingFactor) + ncoPhaseOffset)
 
-% How much the phase is increment each "n" sample
+% How much the phase is incremented each "n" sample
+% Phase increment = pi * ncoPhaseStep.
 ncoPhaseStep = 1/(2*oversamplingFactor);
 
 % The NCO will have a phase resolution of 1/2^ncoWordLength.
