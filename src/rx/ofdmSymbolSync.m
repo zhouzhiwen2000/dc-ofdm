@@ -1,5 +1,8 @@
 function [ofdmSynched, delay, M, peaks, P] = ofdmSymbolSync(ofdmIn)
-%OFDMSYMBOLSYNC Synchronize OFDM symbols using the Cox and Schmidl method
+%OFDMSYMBOLSYNC Synchronize OFDM symbols using the Cox and Schmidl method.
+% Returns the ofdm signal with the delay and preamble removed.
+% Note: "M" function from the Cox paper and "S" function from the peak
+% detection function are almost the same. Therefore, simply "M" is used.
 arguments(Input)
     ofdmIn (:,1) double
 end
@@ -14,7 +17,7 @@ end
 
     % For the symbol, we will use the first ten repetitions of the OFDM
     % preamble
-    L = (N + preambleCyclicPrefixLen)*5;    % Length of the training symbol (half of the ten preamble symbols)
+    L = preambleFirstPartOFDMSamples/2; % Length of the training symbol (half of the ten preamble symbols)
     M = zeros(length(ofdmIn), 1);
     P = zeros(length(ofdmIn), 1);
 
@@ -29,9 +32,7 @@ end
         M(d) = abs(P(d))^2 / Rf^2;
     end
 
-    % Nota: parece que las funciones "M" del paper de Cox y "S" del paper 
-    % de peak detection son casi iguales. Por lo que se usa directamente
-    % "M" para detectar el pico
+    % Same as searching for the "max" of the function "M"
     %[~, delay] = max(M);
     peaks = rawPeakDetection(M, peakDetectorWindow, peakDetectorThreshold);
     if (~isempty(peaks))
@@ -39,6 +40,7 @@ end
     else
         delay = 0;
     end
-    ofdmSynched = ofdmIn(delay+1:end);
+
+    ofdmSynched = ofdmIn(1+delay+preambleOFDMSamples:end);
 end
 
