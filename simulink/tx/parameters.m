@@ -3,8 +3,8 @@
 constants;
 
 %% Simulation method
-simNormal = false;
-simLarge = true;
+simNormal = true;
+simLarge = false;
 
 %% Payload
 % Define payload length

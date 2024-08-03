@@ -5,7 +5,9 @@ ldpc;
 
 %% General
 N = 256;                                % Number of subcarriers.
-nullIdx = (1:11)';                      % Carriers that are unused [1;nfft] == [-nfft/2*fsc; (nfft/2-1)*fsc] 
+leftGuard = (1:11)';
+rightGuard = (240:256)';
+nullIdx = [leftGuard; rightGuard];                    % Carriers that are unused [1;nfft] == [-nfft/2*fsc; (nfft/2-1)*fsc] 
 numDataCarriers = N - length(nullIdx);  % Amount of subcarriers with actual data.
 
 OFDMSymbolDuration = 5120e-9;           % OFDM Symbol duration [seconds]
@@ -120,7 +122,7 @@ decimatorFilter = design(decimatorSpec, 'equiripple', 'SystemObject',true);
 decimatorDelay = mean(grpdelay(decimatorFilter));
 
 % Uncomment to plot filter response
-%fvtool(lpfFilter,'Fs', fs);
+%fvtool(decimatorFilter,'Fs', fs);
 
 %% QAM constellations
 qamTwoBits = [3, 2, 1, 0];
