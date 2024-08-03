@@ -6,7 +6,7 @@ ldpc;
 %% General
 N = 256;                                % Number of subcarriers.
 leftGuard = (1:11)';
-rightGuard = (240:256)';
+rightGuard = (230:256)';
 nullIdx = [leftGuard; rightGuard];                    % Carriers that are unused [1;nfft] == [-nfft/2*fsc; (nfft/2-1)*fsc] 
 numDataCarriers = N - length(nullIdx);  % Amount of subcarriers with actual data.
 
