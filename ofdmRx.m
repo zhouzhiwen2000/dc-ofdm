@@ -25,13 +25,10 @@ OFDMRx = decimator(OFDMRx);
 
 assert(isequal(delayIn, delayOut), "signal delay was properly detected");
 
-OFDMRx = OFDMRx(1+preambleOFDMSamples:end);
+[OFDMRx, channelEst] = ofdmChannelEstimation(OFDMRx);
 
-channelRx = OFDMRx(1 : channelOFDMSamples);
-headerRx = OFDMRx(channelOFDMSamples+1 : channelOFDMSamples + headerOFDMSamples);
-payloadRx = OFDMRx(channelOFDMSamples + headerOFDMSamples + 1: end);
-
-channelEst = ofdmChannelEstimation(channelRx);
+headerRx = OFDMRx(1 : headerOFDMSamples);
+payloadRx = OFDMRx(1+headerOFDMSamples : end);
 
 headerRxLLR = ofdmDemodulate(headerRx, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit, true, channelEst);
 
@@ -67,8 +64,7 @@ payloadBitsPerSubcarrierRx = binl2dec(batIdRx);
 payloadCyclicPrefixLenRx = binl2dec(cyclicPrefixIdRx) * N / 32;
 
 %% Process payload
-% TODO, enable channel EST here
-payloadRxLLR = ofdmDemodulate(payloadRx, payloadBitsPerSubcarrierRx, payloadCyclicPrefixLenRx, nullIdx, payloadScramblerInit, true);
+payloadRxLLR = ofdmDemodulate(payloadRx, payloadBitsPerSubcarrierRx, payloadCyclicPrefixLenRx, nullIdx, payloadScramblerInit, true, channelEst);
 pRxLLR = removeToneMapping(payloadRxLLR, psduSizeRx);
 pRxLLR = reshape(pRxLLR, payloadBitsPerFec, payloadLenInFecBlocks);
 

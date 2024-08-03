@@ -7,7 +7,7 @@ addpath("../../inc");
 addpath("../../src/rx");
 constants;
 
-parametersFile = "parameters.m";
+parametersFile = "sampleParametersFile.m";
 imageFile = "test_image.png";
 
 msg = imread(imageFile);

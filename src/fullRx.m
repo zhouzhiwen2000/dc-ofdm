@@ -1,34 +1,45 @@
-function [pBitsRx, err, psduSizeRx, messageDurationRx, blockSizeRx, ...
+function [pBitsRx, err, delay, frequencyOffset, channelEst, ...
+    psduSizeRx, messageDurationRx, blockSizeRx, ...
     fecRateRx, repetitionNumberRx, fecConcatenationFactorRx, ...
     scramblerInitializationRx, batIdRx, cyclicPrefixIdRx, ...
     explicitMimoPilotSymbolCombSpacingRx, ...
-    explicitMimoPilotSymbolNumberRx] = fullRx(OFDMSignal)
-%FULLRX Full Rx implementation
+    explicitMimoPilotSymbolNumberRx] = fullRx(OFDMSignal, carrierFrequencyOffset)
+%FULLRX Full Rx implementation. Returns the payload bits, and the header
+% parameters. If "err == 1", then the header was read with some errors.
+arguments(Input)
+    OFDMSignal (:, 1) double
+    carrierFrequencyOffset double = 0
+end
+arguments(Output)
+    pBitsRx (:, 1) logical
+    err logical
+    delay double
+    frequencyOffset double
+    channelEst double
+    psduSizeRx (24, 1) logical
+    messageDurationRx (16, 1) logical
+    blockSizeRx (2, 1) logical
+    fecRateRx (3, 1) logical
+    repetitionNumberRx (3, 1) logical
+    fecConcatenationFactorRx (3, 1) logical
+    scramblerInitializationRx (4, 1) logical
+    batIdRx (5,1) logical
+    cyclicPrefixIdRx (3, 1) logical
+    explicitMimoPilotSymbolCombSpacingRx (3, 1) logical
+    explicitMimoPilotSymbolNumberRx (3, 1) logical
+end
     constants;
 
-    %% Separate Preamble, Channel and Header
-    % Payload can't be processed until the header was obtained (I need to know
-    % the cyclic prefix used for the payload)
-    OFDMRx = downshifter(OFDMSignal);
+    %% Prepare OFDM samples to be demodulated
+    OFDMRx = downshifter(OFDMSignal, carrierFrequencyOffset);
     OFDMRx = decimator(OFDMRx);
 
-    %% Detect delay
-    [OFDMRx, delay] = ofdmSymbolSync(OFDMRx);
-    fprintf("Delay found: %d\n", delay);
-    
-    preambleRx = OFDMRx(1:preambleOFDMSamples);
-    channelRx = OFDMRx(preambleOFDMSamples+1 : ...
-        preambleOFDMSamples + channelOFDMSamples);
-    headerRx = OFDMRx(preambleOFDMSamples+channelOFDMSamples+1 : ...
-        preambleOFDMSamples + channelOFDMSamples + headerOFDMSamples);
-    payloadRx = OFDMRx(preambleOFDMSamples + channelOFDMSamples + headerOFDMSamples + 1: end);
-    
-    preambleRxBits = ofdmDemodulate(preambleRx, preambleBitsPerSubcarrier, preambleCyclicPrefixLen, nullIdx, preambleScramblerInit, false);
-    channelRxBits = ofdmDemodulate(channelRx, channelBitsPerSubcarrier, channelCyclicPrefixLen, nullIdx, channelScramblerInit, false);
-    headerRxLLR = ofdmDemodulate(headerRx, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit, true);
-    
+    [OFDMRx, delay, ~, ~, frequencyOffset] = ofdmSymbolSync(OFDMRx);
+    [OFDMRx, channelEst] = ofdmChannelEstimation(OFDMRx);
+
     %% Process header
-    % The header uses LLR, not bits.
+    headerRx = OFDMRx(1:headerOFDMSamples);
+    headerRxLLR = ofdmDemodulate(headerRx, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit, true, channelEst);
     hRxLLR = headerRemoveRepetition(headerRxLLR);
     hScrambledRx = LDPCDecoder(hRxLLR, 0, 0, true);
     hGenRx = headerScrambler(hScrambledRx);
@@ -43,11 +54,12 @@ function [pBitsRx, err, psduSizeRx, messageDurationRx, blockSizeRx, ...
     payloadCyclicPrefixLenRx = binl2dec(cyclicPrefixIdRx) * N / 32;
 
     if (err == true)
-        error("Header was not read correctly");
+        warning("Header was not read correctly");
     end
     
     %% Process payload
-    payloadRxLLR = ofdmDemodulate(payloadRx, payloadBitsPerSubcarrierRx, payloadCyclicPrefixLenRx, nullIdx, payloadScramblerInit, true);
+    payloadRx = OFDMRx(1+headerOFDMSamples:end);
+    payloadRxLLR = ofdmDemodulate(payloadRx, payloadBitsPerSubcarrierRx, payloadCyclicPrefixLenRx, nullIdx, payloadScramblerInit, true, channelEst);
     pRxLLR = removeToneMapping(payloadRxLLR, psduSizeRx);
 
     % Knowing the full size of the signal, reshape it to fit in the LDPC
