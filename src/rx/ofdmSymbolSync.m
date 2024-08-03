@@ -1,6 +1,19 @@
-function [ofdmSynched, delay, M, peaks, P] = ofdmSymbolSync(ofdmIn)
+function [ofdmSynched, delay, M, peaks, frequencyOffset] = ofdmSymbolSync(ofdmIn)
 %OFDMSYMBOLSYNC Synchronize OFDM symbols using the Cox and Schmidl method.
-% Returns the ofdm signal with the delay and preamble removed.
+% Both time synchronization and the CFO (carrier frequency offset) are
+% calculated. Returns the ofdm signal with the delay and preamble removed.
+%
+% The CFO is based on the Cox paper, and assumes that the phase delay
+% is less than pi (a phase delay less than "pi", is equal to a frequency
+% delay less than "1/T", where "T" is the time duration of the message.
+% For IEEE 802.15.13, "T is equal to the first 10 preamble symbols",
+% therefore:
+% Max delta frequency = 1/T = fsc / 10 = 50M/256 / 10 = 19.5 kHz.
+% Considering that, by standard, the oscillators precision is:
+% aPhyClockAccuracy = +- 50ppm, and the clock runs at 50MHz:
+% Max frequency ofset = 2*100u*50MHz = 10kHz, which is lower than the
+% maximum 19.5 kHz.
+% 
 % Note: "M" function from the Cox paper and "S" function from the peak
 % detection function are almost the same. Therefore, simply "M" is used.
 arguments(Input)
@@ -11,7 +24,7 @@ arguments(Output)
     delay double
     M (:,1) double
     peaks (:,1) double
-    P (:, 1)
+    frequencyOffset
 end
     constants;
 
@@ -41,6 +54,17 @@ end
         delay = 0;
     end
 
+    % Calculate frequency offset
+    deltaPhase = angle(P(delay));
+    T = preambleFirstPartOFDMSamples/fPHY;
+    frequencyOffset = deltaPhase / (pi*T);
+
+    if (delay == 1)
+        % Fix a bug where, if no delay is applied, is considered as a "1 symbol" delay.
+        delay = 0;
+    end
+
+    % Remove delay and preamble
     ofdmSynched = ofdmIn(1+delay+preambleOFDMSamples:end);
 end
 
