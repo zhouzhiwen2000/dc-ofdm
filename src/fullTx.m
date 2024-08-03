@@ -1,17 +1,14 @@
-function [OFDMSignal] = fullTx(paramFile, pBits)
+function [OFDMSignal] = fullTx(paramFile, pBits, carrierFrequencyOffset)
 %FULLTX Run a full transmitter.
 arguments(Input)
     paramFile string
     pBits (:, 1) logical
+    carrierFrequencyOffset double = 0
 end
 arguments(Output)
     OFDMSignal (:,1) double
 end
     constants;
-
-    %% Prepare parameters before making the header
-    [pBits, payloadLenInFecBlocks, payloadLenInBits, ...
-    payloadLenInWords, payloadExtraWords] = getPayloadParamsFromBits(pBits);
     run(paramFile);
     
     %% Header
@@ -40,6 +37,6 @@ end
     
     OFDMSignal = [preambleTx; channelTx; headerTx; payloadTx;];
     OFDMSignal = interpolator(OFDMSignal);
-    OFDMSignal = upshifter(OFDMSignal);
+    OFDMSignal = upshifter(OFDMSignal, carrierFrequencyOffset);
 end
 

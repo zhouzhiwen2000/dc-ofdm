@@ -1,39 +1,38 @@
 %% Parameters
-% These variables can change between PSDUs
+% This file is the template for any "parameters" required for transmission
+% of a PSDU.
+%   The variable "pBits" needs to be defined before calling this file, 
+%   which must contain the bits to be transferred in the payload.
 constants;
 
-%% Payload
-% Define payload length
-payloadLenInFecBlocks = 2;
-payloadLenInBits = payloadLenInFecBlocks*payloadBitsPerBlock0;
-payloadLenInWords = payloadLenInBits/axiWidth;
+%% Payload Parameters
+[pBits, payloadLenInFecBlocks, payloadLenInBits, ...
+    payloadLenInWords, payloadExtraWords] = getPayloadParamsFromBits(pBits);
 
 %% Header formation
-% All these variables are required to form the header. A more detailed
-% explanation of each parameter can be found on the standard.
-
 % Length of the payload, in octets
 psduSize = dec2binl(payloadLenInWords, 24)';
 
-% TODO: add the size of the payload, which should be inferred from the rest
-% of the header values.
-%messageDuration = (preambleDuration + channelDuration + headerDuration); 
-messageDuration = logical([ ...
-    0 0 0 0 0 0 0 0 ...
-    0 0 0 0 0 0 0 0]);
+% Amount of octets appended at the end of a payload, to make it a multiple 
+% of "payloadBitsPerBlock0".
+messageDuration = dec2binl(payloadExtraWords, 16)';
 
 % The size of the FEC encoded keyword
 % 0b00 = 960 bits or 0b01 = 4320 bits
+% Only 0b00 is allowed.
 blockSize = logical([0 0]);
 
 % 0b001 = 1/2; 0b010 = 2/3; 0b011 = 5/6; 0b100 = 16/18; 0b101 = 20/21
+% Only 0b001 is allowed.
 fecRate = logical([0 0 1]);
 
 % How many times the payload is repeated
 % 0b001 = 1; 0b010 = 2; 0b011 = 3; 0b100 = 4; 0b101 = 6; 0b110 = 8
+% This parameters is UNUSED.
 repetitionNumber = logical([0 0 1]);
 
-fecConcatenationFactor = logical([0 0 0]); % TODO
+% UNUSED
+fecConcatenationFactor = logical([0 0 0]);
 
 % First four bits of the payload constellation scrambler
 scramblerInitialization = logical([1 1 1 1]);
@@ -44,7 +43,7 @@ batId = logical([0 0 0 1 0]);
 % Number of samples for the cyclic prefix. Ncp = k* N /32. 3 bits max
 cyclicPrefixId = logical([0 0 1]);
 
-% MIMO not supported
+% MIMO not supported (UNUSED)
 explicitMimoPilotSymbolCombSpacing = logical([0 0 0]);
 explicitMimoPilotSymbolNumber = logical([0 0 0]);
 

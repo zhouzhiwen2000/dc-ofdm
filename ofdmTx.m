@@ -4,7 +4,12 @@ clc; clear; close all;
 addpath("src");
 addpath("inc")
 constants;
-parameters;
+
+%% Parameters
+parametersFile = "inc/sampleParametersFile";
+pBits = logical(randi([0,1], payloadBitsPerBlock0*3, 1));
+
+run(parametersFile);
 
 %% Header
 hGen = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
@@ -15,7 +20,7 @@ hLDPC = LDPCEncoder(hScrambled, 0, 0, true);
 headerOFDMSymbols = headerRepetitionEncoder(hLDPC);
 
 %% Payload
-pBits = logical(randi([0,1], payloadBitsPerBlock0, payloadLenInFecBlocks));
+pBits = reshape(pBits, payloadBitsPerBlock0, payloadLenInFecBlocks);
 pLDPC = false(payloadBitsPerFec, payloadLenInFecBlocks);
 for i=1:1:payloadLenInFecBlocks
     pScrambled = payloadScrambler(scramblerInitialization, pBits(:,i));
