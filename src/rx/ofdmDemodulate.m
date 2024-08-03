@@ -9,12 +9,20 @@ arguments(Input)
     nullIdx (:,1) double
     constellationScramblerInit (1,13) uint8
     llr logical =true
-    channelEst (:, 1) double = 0
+    channelEst (:, 1) double = 1
 end
 arguments(Output)
     dataOut (:,1)
 end
     constants;
+
+    if (llr)
+        outType = 'approxllr';
+        outDataType = 'single';
+    else
+        outType = 'bit';
+        outDataType = 'logical';
+    end
 
     % This function returns a matrix where each column has an OFDM symbol
     qamSignalScrambled = ofdmdemod(ofdmIn, N, cpLen, 0, nullIdx);
@@ -27,19 +35,7 @@ end
     
     for i=1:1:width(qamSignalScrambled)
         qamSignal = constellationScrambler(qamSignalScrambled(:,i), constellationScramblerInit, true);
-        
-        if (llr)
-            outType = 'approxllr';
-            outDataType = 'single';
-        else
-            outType = 'bit';
-            outDataType = 'logical';
-        end
-
-        if (channelEst(1) ~= 0)
-            disp("Channel estimated")
-            qamSignal = ofdmChannelEqualizer(qamSignal, channelEst);
-        end
+        qamSignal = ofdmChannelEqualizer(qamSignal, channelEst);
 
         switch bitsPerSubcarrier
             case 1
@@ -56,3 +52,4 @@ end
     end
     
     dataOut = dataOut(:);
+end

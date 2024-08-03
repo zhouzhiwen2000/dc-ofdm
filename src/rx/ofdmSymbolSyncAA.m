@@ -1,3 +1,4 @@
+%% UNUSED
 function [ofdmSynched, delay, M] = ofdmSymbolSyncAA(ofdmIn)
 %OFDMSYMBOLSYNC Synchronize OFDM symbols using the Min A A -A -A method.
 arguments(Input)

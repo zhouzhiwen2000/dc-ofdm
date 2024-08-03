@@ -17,12 +17,18 @@ arguments(Output)
 end
     constants;
 
+    % Get how many fec blocks need to be transmitted
     payloadLenInFecBlocks = ceil(length(pBitsIn)/payloadBitsPerBlock0);
+
+    % Adapt the message to fit in that amount of fec blocks.
     payloadLenInBits = payloadLenInFecBlocks*payloadBitsPerBlock0;
     payloadLenInWords = payloadLenInBits/axiWidth;
+
+    % Get the amount of added bits and words
     payloadExtraBits = payloadLenInBits - length(pBitsIn);
     payloadExtraWords = ceil(payloadExtraBits/8);
 
+    % Append the extra bits to the signal.
     pBitsOut = [pBitsIn; false(payloadExtraBits, 1)];
 end
 

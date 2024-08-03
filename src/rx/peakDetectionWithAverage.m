@@ -1,3 +1,4 @@
+%% UNUSED
 function [peaks, s] = peakDetectionWithAverage(dataIn, k, h)
 %PEAKDETECTION Detect a local peak, using mean and standard deviation of
 % as parameters

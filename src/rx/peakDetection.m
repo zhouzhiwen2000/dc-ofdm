@@ -1,3 +1,4 @@
+%% UNUSED
 function [peaks, s] = peakDetection(dataIn, k, threshold)
 %PEAKDETECTION Detect a local peak.
 %   Detects a local peak within a "2*K" sample window. Value is considered
