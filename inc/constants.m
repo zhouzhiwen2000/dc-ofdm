@@ -31,6 +31,7 @@ channelLUT = channelOFDMSymbols(:);
 channelDuration = OFDMSymbolDuration*2.5;
 channelDataCarriers = numDataCarriers*2;
 channelOFDMSamples = (N + channelCyclicPrefixLen)*2;
+channelEstRefence = pskmod(channelOFDMSymbols(:,1), 2^channelBitsPerSubcarrier, PlotConstellation=false, InputType='bit');
 
 %% Header
 headerCRCPoly = logical([1 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 1]);

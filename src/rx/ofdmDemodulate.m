@@ -1,4 +1,4 @@
-function [dataOut] = ofdmDemodulate(ofdmIn, bitsPerSubcarrier, cpLen, nullIdx, constellationScramblerInit, llr)
+function [dataOut] = ofdmDemodulate(ofdmIn, bitsPerSubcarrier, cpLen, nullIdx, constellationScramblerInit, llr, channelEst)
 %OFDMDEMODULATE Inverse operation to ofdmModulate. Receives OFDM symbols as
 % a matrix (each column is an OFDM symbol), and returns the data bits
 % serialized.
@@ -9,6 +9,7 @@ arguments(Input)
     nullIdx (:,1) double
     constellationScramblerInit (1,13) uint8
     llr logical =true
+    channelEst (:, 1) double = 0
 end
 arguments(Output)
     dataOut (:,1)
@@ -33,6 +34,11 @@ end
         else
             outType = 'bit';
             outDataType = 'logical';
+        end
+
+        if (channelEst(1) ~= 0)
+            disp("Channel estimated")
+            qamSignal = ofdmChannelEqualizer(qamSignal, channelEst);
         end
 
         switch bitsPerSubcarrier

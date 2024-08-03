@@ -11,28 +11,30 @@ parameters;
 ofdmTx; % Data is in OFDMSignal
 close all;
 
+%% Simulate Channel
+delayIn = 400;  % Delay in OFDM Samples
+OFDMRx = [zeros(delayIn*2, 1); OFDMSignal];
+
 %% Separate Preamble, Channel and Header
 % Payload can't be processed until the header was obtained (I need to know
 % the cyclic prefix used for the payload)
-OFDMRx = downshifter(OFDMSignal);
+OFDMRx = downshifter(OFDMRx);
 OFDMRx = decimator(OFDMRx);
 
-preambleRx = OFDMRx(1:preambleOFDMSamples);
-channelRx = OFDMRx(preambleOFDMSamples+1 : ...
-    preambleOFDMSamples + channelOFDMSamples);
-headerRx = OFDMRx(preambleOFDMSamples+channelOFDMSamples+1 : ...
-    preambleOFDMSamples + channelOFDMSamples + headerOFDMSamples);
-payloadRx = OFDMRx(preambleOFDMSamples + channelOFDMSamples + headerOFDMSamples + 1: end);
+[OFDMRx, delayOut] = ofdmSymbolSync(OFDMRx);
 
-preambleRxBits = ofdmDemodulate(preambleRx, preambleBitsPerSubcarrier, preambleCyclicPrefixLen, nullIdx, preambleScramblerInit, false);
-channelRxBits = ofdmDemodulate(channelRx, channelBitsPerSubcarrier, channelCyclicPrefixLen, nullIdx, channelScramblerInit, false);
-headerRxLLR = ofdmDemodulate(headerRx, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit, true);
+assert(isequal(delayIn, delayOut), "signal delay was properly detected");
 
-assert(isequal(preambleRxBits, preambleLUT));
-% TODO: channel has one bit with error, probably because of decimator and
-% downshifter errors.
-%assert(isequal(channelRxBits, channelLUT));
-disp("Warning, channel doesn't match");
+OFDMRx = OFDMRx(1+preambleOFDMSamples:end);
+
+channelRx = OFDMRx(1 : channelOFDMSamples);
+headerRx = OFDMRx(channelOFDMSamples+1 : channelOFDMSamples + headerOFDMSamples);
+payloadRx = OFDMRx(channelOFDMSamples + headerOFDMSamples + 1: end);
+
+channelEst = ofdmChannelEstimation(channelRx);
+
+headerRxLLR = ofdmDemodulate(headerRx, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit, true, channelEst);
+
 
 %% Process header
 % The header uses LLR, not bits.
@@ -65,6 +67,7 @@ payloadBitsPerSubcarrierRx = binl2dec(batIdRx);
 payloadCyclicPrefixLenRx = binl2dec(cyclicPrefixIdRx) * N / 32;
 
 %% Process payload
+% TODO, enable channel EST here
 payloadRxLLR = ofdmDemodulate(payloadRx, payloadBitsPerSubcarrierRx, payloadCyclicPrefixLenRx, nullIdx, payloadScramblerInit, true);
 pRxLLR = removeToneMapping(payloadRxLLR, psduSizeRx);
 pRxLLR = reshape(pRxLLR, payloadBitsPerFec, payloadLenInFecBlocks);
