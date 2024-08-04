@@ -6,23 +6,29 @@ addpath("../../inc");
 constants;
 
 %% Inputs
-delay = 5000; % Number of samples that the preamble is delayed
-SNR = 40;
+delayIn = 10000; % Number of samples that the preamble is delayed
+SNR = 60;
+frequencyOffsetIn = 5e3;
 
+% Generate OFDM signal with time delay and frequency offset
 preambleTx = ofdmModulate(preambleOFDMSymbols, preambleBitsPerSubcarrier, preambleCyclicPrefixLen, nullIdx, preambleScramblerInit);
+channelTx = ofdmModulate(channelOFDMSymbols, channelBitsPerSubcarrier, channelCyclicPrefixLen, nullIdx, channelScramblerInit);
+OFDMSignal = [preambleTx; channelTx];
+OFDMSignal = interpolator(OFDMSignal);
+OFDMSignal = upshifter(OFDMSignal);
 
-% Add noise
-dataIn = [zeros(delay, 1); preambleTx; zeros(delay, 1)];
-dataIn = awgn(dataIn, SNR);     
+OFDMRx = channelSimulation(OFDMSignal, delayIn, SNR);
+OFDMRx = downshifter(OFDMRx, frequencyOffsetIn);
+dataIn = decimator(OFDMRx);
 
-validIn = true(size(dataIn));
+validIn = true(length(dataIn)-preambleFirstPartOFDMSamples, 1);
 
 % Expected output
-[~, expectedDelayOut, expectedMOut, expectedPeaksOut] = ofdmSymbolSync(dataIn);
+[expectedOFDMOut, expectedDelayOut, expectedMOut, expectedPeaksOut, expectedFrequencyOffset] = ofdmSymbolSync(dataIn);
 
 %% Simulation Time
-latency = (delay+300)/fs;         % Algorithm latency. Delay between input and output
-stopTime = (length(validIn)-1)/fs + latency;
+latency = (delayIn+500)/fPHY;         % Algorithm latency. Delay between input and output
+stopTime = (length(validIn)-1)/fPHY + latency;
 
 %% Run the simulation
 model_name = "HDLOFDMSS";
@@ -37,34 +43,33 @@ endOut = get(simOut, "endOut");
 validOut = get(simOut, "validOut");
 peakOut = get(simOut, "peakOut");
 indexOut = get(simOut, "indexOut");
+frequencyOut = get(simOut, "frequencyOut");
 
-%% Compare with MATLAB reference algorithm
-% Compare first the function "M(d)"
+%% Test M(d)
 startIdx = find(startOut == true);
 endIdx = find(endOut == true);
 
 assert(isequal(length(startIdx), length(endIdx)), ...
     "Length of start and end should be the same.");
 
-% Test that M(d) is equal
 for i=1:length(startIdx)
     mOutSim = mOut(startIdx(i):endIdx(i));
     assert(iskindaequal(expectedMOut, mOutSim, 10e-3));
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
 
-% Test that the peaks detected are equal
-peaksSim = find(peakOut ~= 0);
-peaksSim = indexOut(peaksSim);
-assert(isequal(peaksSim, expectedPeaksOut));
+%% Test peaks
+peaksSim = indexOut(peakOut ~= 0) - preambleOFDMSamples;
+assert(isequal(peaksSim, expectedPeaksOut), "Peak position should be the same");
 
-% Test that the signal at the output is only the preamble
-startPreamble = find(peakOut == true);
-startPreamble = startPreamble(1);
-preambleWithNoise = dataIn(delay+1:delay+length(preambleTx));
-preambleSim = dataOut(startPreamble:startPreamble-1+length(preambleTx));
-assert(iskindaequal(preambleSim, preambleWithNoise, 1e-3));
+%% Test OFDM out
+startChannel = find(peakOut == true, 1);
+channelSim = dataOut(startChannel:startChannel-1+channelOFDMSamples);
+assert(iskindaequal(channelSim, expectedOFDMOut, 1e-3), "The output sample should be the first sample of the channel estimation");
 
+%% Test frequency offset
+frequencySim = frequencyOut(startChannel);
+assert(iskindaequal(frequencySim, expectedFrequencyOffset, 10), "Frequency Offset generated and calculated should be the same");
 
 %% Plotting
 figure();
