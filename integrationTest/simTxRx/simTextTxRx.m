@@ -1,4 +1,6 @@
 %% Test transmission and reception of text
+% TODO: check ehy adding the frequency offset in the upshifter brings wrong
+% results, but in the downshifter is properly detected and corrected.
 clc; clear; close all;
 addpath("../../src");
 addpath("../../inc");
@@ -6,10 +8,10 @@ addpath("../../src/rx");
 
 %% Parameters
 parametersFile = "sampleParametersFile.m";
-delayIn = 200;  % TODO, test odd delays
+delayIn = 200;
 SNR = 60;
 msg = 'From the VLC UTN project we wish you, the reader, a good day.';
-frequencyOffsetIn = 0e3; % TODO, add frequency correction and re test
+frequencyOffsetIn = 5e3;
 
 %% Message transmission
 pBits = str2binl(msg);

@@ -10,6 +10,11 @@ rightGuard = (230:256)';
 nullIdx = [leftGuard; rightGuard];                    % Carriers that are unused [1;nfft] == [-nfft/2*fsc; (nfft/2-1)*fsc] 
 numDataCarriers = N - length(nullIdx);  % Amount of subcarriers with actual data.
 
+% This parameter is only used in the matlab reference algorithm. It adds
+% zeroes only at the end of the transmission, to avoid a bug where the
+% calculated delay might be more than the actual delay, and the ofdm
+% demodulator fails for wrong size.
+simTimeWindowInSamples = N/4;
 OFDMSymbolDuration = 5120e-9;           % OFDM Symbol duration [seconds]
 
 %% Preamble

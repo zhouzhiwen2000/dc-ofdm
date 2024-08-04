@@ -31,10 +31,17 @@ end
     constants;
 
     %% Prepare OFDM samples to be demodulated
-    OFDMRx = downshifter(OFDMSignal, carrierFrequencyOffset);
+    OFDMRxRaw = downshifter(OFDMSignal, carrierFrequencyOffset);
+    OFDMRxRaw = decimator(OFDMRxRaw);
+
+    [~, delay, ~, ~, frequencyOffset] = ofdmSymbolSync(OFDMRxRaw);
+
+    %% Correct CFO
+    OFDMRx = OFDMSignal(1 + delay*2 + preambleOFDMSamples*2:end);
+    OFDMRx = downshifter(OFDMRx, carrierFrequencyOffset -frequencyOffset);
     OFDMRx = decimator(OFDMRx);
 
-    [OFDMRx, delay, ~, ~, frequencyOffset] = ofdmSymbolSync(OFDMRx);
+    %% Estimate channel
     [OFDMRx, channelEst] = ofdmChannelEstimation(OFDMRx);
 
     %% Process header
@@ -58,7 +65,11 @@ end
     end
     
     %% Process payload
+    % Remove the excess timingWindow added and the header samples
     payloadRx = OFDMRx(1+headerOFDMSamples:end);
+    excessPayloadSamples = mod(length(payloadRx),N+payloadCyclicPrefixLenRx);
+    payloadRx = payloadRx(1:end-excessPayloadSamples);
+
     payloadRxLLR = ofdmDemodulate(payloadRx, payloadBitsPerSubcarrierRx, payloadCyclicPrefixLenRx, nullIdx, payloadScramblerInit, true, channelEst);
     pRxLLR = removeToneMapping(payloadRxLLR, psduSizeRx);
 

@@ -38,5 +38,6 @@ end
     OFDMSignal = [preambleTx; channelTx; headerTx; payloadTx;];
     OFDMSignal = interpolator(OFDMSignal);
     OFDMSignal = upshifter(OFDMSignal, carrierFrequencyOffset);
+    OFDMSignal = [OFDMSignal; zeros(simTimeWindowInSamples, 1)];
 end
 
