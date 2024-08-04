@@ -21,6 +21,6 @@ arguments(Output)
         qamSignal(:,i) = constellationScrambler(qamSignalScrambled(:,i), channelScramblerInit, true);
      end
 
-    channelEst = (qamSignal(:,1) + qamSignal(:,2)) .* conj(channelEstRefence) / 2;
+    channelEst = (qamSignal(:,1) + qamSignal(:,2)) .* conj(channelEstReference) / 2;
     ofdmOut = ofdmIn(1+channelOFDMSamples:end);
 end
