@@ -20,7 +20,7 @@ end
     constants;
     ofdmSymbolLength = (N+cpLen)*oversamplingFactor; % Length of each OFDM symbol in samples
     nSym = width(dataIn);           % Amount of OFDM symbols present in the current data.
-    s = zeros(ofdmSymbolLength, width(dataIn));
+    y = [];
 
     %% Transmit each OFDM Symbol
     for i=1:1:nSym

@@ -70,6 +70,11 @@ end
     excessPayloadSamples = mod(length(payloadRx),N+payloadCyclicPrefixLenRx);
     payloadRx = payloadRx(1:end-excessPayloadSamples);
 
+    if (isempty(payloadRx))
+        pBitsRx = [];
+        return
+    end
+
     payloadRxLLR = ofdmDemodulate(payloadRx, payloadBitsPerSubcarrierRx, payloadCyclicPrefixLenRx, nullIdx, payloadScramblerInit, true, channelEst);
     pRxLLR = removeToneMapping(payloadRxLLR, psduSizeRx);
 
