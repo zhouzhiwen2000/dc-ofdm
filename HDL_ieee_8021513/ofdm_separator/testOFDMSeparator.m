@@ -30,25 +30,25 @@ channelTx = ofdmModulate(channelOFDMSymbols, channelBitsPerSubcarrier, channelCy
 headerTx = ofdmModulate(headerOFDMSymbols, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit);
 payloadTx = ofdmModulate(payloadOFDMSymbols, payloadBitsPerSubcarrier, payloadCyclicPrefixLen, nullIdx, payloadScramblerInit);
 
-delayLen = 500;
+delayLen = 5000;
 
 dataIn = [
-    preambleTx; channelTx; headerTx; payloadTx; zeros(delayLen, 1);
-    preambleTx; channelTx; headerTx; payloadTx;
+    zeros(delayLen, 1); preambleTx; channelTx; headerTx; payloadTx; 
+    zeros(delayLen, 1); preambleTx; channelTx; headerTx; payloadTx;
 ];
 
-% The peak is detected in the first sample of the second part of the 
-% preamble
+dataIn = awgn(dataIn, 60);
+
+% The peak is detected in the first sample of the channel estimation
 peakIn = [
-    false(preambleFirstPartOFDMSamples, 1); true; ...
-    false(preambleSecondPartOFDMSamples-1, 1);
-    false(length(channelTx), 1);
+    false(delayLen, 1);
+    false(preambleOFDMSamples, 1); true;
+    false(length(channelTx)-1, 1);
     false(length(headerTx), 1);
     false(length(payloadTx), 1);
     false(delayLen, 1);
-    false(preambleFirstPartOFDMSamples, 1); true; ...
-    false(preambleSecondPartOFDMSamples-1, 1);
-    false(length(channelTx), 1);
+    false(preambleOFDMSamples, 1); true;
+    false(length(channelTx)-1, 1);
     false(length(headerTx), 1);
     false(length(payloadTx), 1);
 ];
@@ -67,10 +67,6 @@ simOut = sim(model_name);
 
 dataOut = get(simOut, "dataOut");
 
-startOut = get(simOut, "startOut");
-endOut = get(simOut, "endOut");
-validOut = get(simOut, "validOut");
-
 startOut1 = get(simOut, "startOut1");
 endOut1 = get(simOut, "endOut1");
 validOut1 = get(simOut, "validOut1");
@@ -84,9 +80,6 @@ endOut3 = get(simOut, "endOut3");
 validOut3 = get(simOut, "validOut3");
 
 %% Compare with MATLAB reference algorithm
-startIdx = find(startOut == true);
-endIdx = find(endOut == true);
-
 startIdx1 = find(startOut1 == true);
 endIdx1 = find(endOut1 == true);
 
@@ -96,34 +89,26 @@ endIdx2 = find(endOut2 == true);
 startIdx3 = find(startOut3 == true);
 endIdx3 = find(endOut3 == true);
 
-assert(isequal(length(startIdx), length(endIdx)));
 assert(isequal(length(startIdx1), length(endIdx1)));
 assert(isequal(length(startIdx2), length(endIdx2)));
 assert(isequal(length(startIdx3), length(endIdx3)));
 
-
-for i=1:length(startIdx)
-    out = dataOut(startIdx(i):endIdx(i));
-    expectedOut = preambleTx(preambleFirstPartOFDMSamples+1:end);
-    assert(iskindaequal(expectedOut, out));
-end
-
 for i=1:length(startIdx1)
     out = dataOut(startIdx1(i):endIdx1(i));
     expectedOut = channelTx;
-    assert(iskindaequal(expectedOut, out));
+    assert(iskindaequal(expectedOut, out, 10e-3));
 end
 
 for i=1:length(startIdx2)
     out = dataOut(startIdx2(i):endIdx2(i));
     expectedOut = headerTx;
-    assert(iskindaequal(expectedOut, out));
+    assert(iskindaequal(expectedOut, out, 10e-3));
 end
 
 for i=1:length(startIdx3)
     out = dataOut(startIdx3(i):endIdx3(i));
     expectedOut = payloadTx;
-    assert(iskindaequal(expectedOut, out));
+    assert(iskindaequal(expectedOut, out, 10e-3));
 end
 
 disp("Test Successful!");
