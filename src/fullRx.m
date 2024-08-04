@@ -38,7 +38,7 @@ end
 
     %% Correct CFO
     OFDMRx = OFDMSignal(1 + delay*2 + preambleOFDMSamples*2:end);
-    OFDMRx = downshifter(OFDMRx, carrierFrequencyOffset -frequencyOffset);
+    OFDMRx = downshifter(OFDMRx, carrierFrequencyOffset +frequencyOffset);
     OFDMRx = decimator(OFDMRx);
 
     %% Estimate channel

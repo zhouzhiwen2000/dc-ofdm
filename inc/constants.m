@@ -136,3 +136,4 @@ qamFourBits = [2, 3, 1, 0, 6, 7, 5, 4, 14, 15, 13, 12, 10, 11, 9, 8];
 %% Peak detector
 peakDetectorWindow = 128;
 peakDetectorThreshold = 0.65;
+frequencyOffsetTimeWindow = preambleFirstPartOFDMSamples/fPHY;

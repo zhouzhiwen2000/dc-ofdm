@@ -35,6 +35,6 @@ assert(isequal(delayOut, delayIn/2), "Delays should match");
 assert(isscalar(peaks), "Only one peak should be detected");
 assert(isequal(ofdmOut, OFDMRx(1+delayOut+preambleOFDMSamples:end)), ...
     "OFDM output signal should remove the delay and preamble signal");
-assert(iskindaequal(frequencyOffsetDownshifter, frequencyOffset, 50));
+assert(iskindaequal(frequencyOffsetDownshifter, -frequencyOffset, 50));
 
 plot(M)

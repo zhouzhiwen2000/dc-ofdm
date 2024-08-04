@@ -31,15 +31,15 @@ end
     % For the symbol, we will use the first ten repetitions of the OFDM
     % preamble
     L = preambleFirstPartOFDMSamples/2; % Length of the training symbol (half of the ten preamble symbols)
-    M = zeros(length(ofdmIn), 1);
-    P = zeros(length(ofdmIn), 1);
+    M = zeros(length(ofdmIn)-2*L, 1);
+    P = zeros(length(ofdmIn)-2*L, 1);
 
     for d=1:1:length(ofdmIn)-2*L
         firstSymbol = ofdmIn(d+1:d+L);
         secondSymbol = ofdmIn(d+L+1:d+2*L);
         bothSymbols = [firstSymbol; secondSymbol];
     
-        P(d) = sum(firstSymbol.*conj(secondSymbol));
+        P(d) = sum(conj(firstSymbol).*secondSymbol);
         Rf = 1/2 * sum((abs(bothSymbols)).^2);
     
         M(d) = abs(P(d))^2 / Rf^2;
@@ -56,8 +56,7 @@ end
 
     % Calculate frequency offset
     deltaPhase = angle(P(delay));
-    T = preambleFirstPartOFDMSamples/fPHY;
-    frequencyOffset = deltaPhase / (pi*T);
+    frequencyOffset = deltaPhase / (pi*frequencyOffsetTimeWindow);
 
     if (delay == 1)
         % Fix a bug where, if no delay is applied, is considered as a "1 symbol" delay.

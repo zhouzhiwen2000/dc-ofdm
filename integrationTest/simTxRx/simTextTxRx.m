@@ -26,7 +26,7 @@ msgRx = binl2str(pBitsRx);
 assert(err==0, "The header should have been received without errors");
 assert(isequal(msg, msgRx), "Message should be equal");
 assert(iskindaequal(delayOut, delayIn/2, 1), "Delays should match");
-assert(iskindaequal(frequencyOffsetIn, frequencyOffsetOut, 50), ...
+assert(iskindaequal(frequencyOffsetIn, -frequencyOffsetOut, 50), ...
     "Frequency offset should be less than 50Hz");
 
 disp("Test Successfull!");
