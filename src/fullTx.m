@@ -1,9 +1,10 @@
-function [OFDMSignal] = fullTx(paramFile, pBits, carrierFrequencyOffset)
+function [OFDMSignal] = fullTx(paramFile, pBits, carrierFrequencyOffset, addTimeWindow)
 %FULLTX Run a full transmitter.
 arguments(Input)
     paramFile string
     pBits (:, 1) logical
     carrierFrequencyOffset double = 0
+    addTimeWindow logical = true
 end
 arguments(Output)
     OFDMSignal (:,1) double
@@ -38,6 +39,8 @@ end
     OFDMSignal = [preambleTx; channelTx; headerTx; payloadTx;];
     OFDMSignal = interpolator(OFDMSignal);
     OFDMSignal = upshifter(OFDMSignal, carrierFrequencyOffset);
-    OFDMSignal = [OFDMSignal; zeros(simTimeWindowInSamples, 1)];
+    if (addTimeWindow == true)
+        OFDMSignal = [OFDMSignal; zeros(simTimeWindowInSamples, 1)];
+    end
 end
 
