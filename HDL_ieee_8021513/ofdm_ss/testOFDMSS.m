@@ -6,7 +6,7 @@ addpath("../../inc");
 constants;
 
 %% Inputs
-delayIn = 10000; % Number of samples that the preamble is delayed
+delayIn = 100; % Number of samples that the preamble is delayed
 SNR = 60;
 frequencyOffsetIn = 5e3;
 
@@ -27,7 +27,7 @@ validIn = true(length(dataIn)-preambleFirstPartOFDMSamples, 1);
 [expectedOFDMOut, expectedDelayOut, expectedMOut, expectedPeaksOut, expectedFrequencyOffset] = ofdmSymbolSync(dataIn);
 
 %% Simulation Time
-latency = (delayIn+500)/fPHY;         % Algorithm latency. Delay between input and output
+latency = (delayIn+10000)/fPHY;         % Algorithm latency. Delay between input and output
 stopTime = (length(validIn)-1)/fPHY + latency;
 
 %% Run the simulation

@@ -61,6 +61,7 @@ end
     if (delay == 1)
         % Fix a bug where, if no delay is applied, is considered as a "1 symbol" delay.
         delay = 0;
+        peaks(1) = 0;
     end
 
     % Remove delay and preamble
