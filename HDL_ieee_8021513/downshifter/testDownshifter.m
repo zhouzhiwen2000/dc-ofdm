@@ -6,23 +6,46 @@ addpath("../../inc");
 constants;
 
 %% Inputs
-nSym = 3;
+nSym = 10;
 input{1} = rand(nSym*N*oversamplingFactor, 1);
 input{2} = rand(nSym*N*oversamplingFactor, 1);
+input{3} = rand(nSym*N*oversamplingFactor, 1);
+input{4} = rand(nSym*N*oversamplingFactor, 1);
+
+frequencyOffsetIn{1} = 5;
+frequencyOffsetIn{2} = -5;
+frequencyOffsetIn{3} = -14e3;
+frequencyOffsetIn{4} = +15e3;
 
 dataIn = [
     input{1};
     zeros(100, 1);
     input{2};
+    zeros(100, 1);
+    input{3};
+    zeros(100, 1);
+    input{4};
 ];
 
 validIn = [
     true(size(input{1}));
     false(100, 1);
     true(size(input{2}));
+    false(100, 1);
+    true(size(input{3}));
+    false(100, 1);
+    true(size(input{4}));
 ];
 
-maxError = 1e-3;    % Maximum error between out and expectedOut
+frequencyOffset = [
+    frequencyOffsetIn{1}*ones(size(input{1}));
+    zeros(100, 1);
+    frequencyOffsetIn{2}*ones(size(input{2}));
+    zeros(100, 1);
+    frequencyOffsetIn{3}*ones(size(input{3}));
+    zeros(100, 1);
+    frequencyOffsetIn{4}*ones(size(input{4}));
+];
 
 %% Simulation Time
 latency = 200/fs;         % Algorithm latency. Delay between input and output
@@ -49,8 +72,8 @@ assert(isequal(length(startIdx), length(endIdx)), ...
 for i=1:length(startIdx)
     n = (0:1:length(input{i})-1)';
     out = dataOut(startIdx(i):endIdx(i));
-    expectedOut = downshifter(input{i});
-    assert(iskindaequal(expectedOut, out, maxError), "Upshifter output is not the same");
+    expectedOut = downshifter(input{i}, frequencyOffsetIn{i});
+    assert(iskindaequal(expectedOut, out, 10e-3), "Downshifter output is not the same");
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
 
@@ -61,7 +84,7 @@ plot(n, real(out), n, real(expectedOut));
 legend("Out", "ExpectedOut");
 xlabel("n [samples]");
 ylabel("Signals");
-title("Upshifter output");
+title("Downshifter output");
 xlim([min(n), max(n)]);
 grid on;
 

@@ -106,22 +106,13 @@ end
 ncoUpshifterPhaseIncrement = 2^ncoUpshifterWordLength*ncoUpshifterPhaseStep;
 
 %% Downshifter NCO
-ncoDownshifterPhaseStep = 1/(2*oversamplingFactor);
-ncoDownshifterWordLength = ceil(log2(2*oversamplingFactor)+2);
-if (ncoDownshifterWordLength < 4)
-    error("ncoWordLength must be greater than 4 (or HDL code can't be generated)");
-end
-ncoDownshifterPhaseIncrement = 2^ncoDownshifterWordLength*ncoDownshifterPhaseStep;
-
 % These equations were taking from the "help" section of the NCO block.
-ncoFrequencyResolution = 10;        % Frequency resolution for the NCO
+ncoFrequencyResolution = 5;        % Frequency resolution for the NCO
 ncoCarrierFrequency = fPHY/2;       % Carrier frequency of the NCO
+ncoSFDR = 80;                       % Spurious free dynamic range [dB]
 
 ncoWordLength = ceil(log2(fs/ncoFrequencyResolution));
-if (ncoWordLength > 19)
-    %warning("NCO resolution truncated. Minimum frequency resolution is 191Hz");
-    ncoWordLength = 19; % Maximum value allowed by the NCO.
-end
+ncoQuantization = ceil((ncoSFDR-12)/6);
 ncoCarrierPhaseIncrement = ncoCarrierFrequency/fs*2^ncoWordLength;
 
 %% Decimator LPF filter
