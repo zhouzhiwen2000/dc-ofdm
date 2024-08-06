@@ -91,23 +91,38 @@ interpolatorDelay = mean(grpdelay(interpolatorFilter));
 % Uncomment to plot filter response
 %fvtool(interpolatorFilter,'Fs', fs);
 
-%% NCO (Numerical Controlled Oscillator)
-% Wanting to obtain the following expression:
-% sin(2*pi*n/(2*oversamplingFactor) + ncoPhaseOffset)
-
-% How much the phase is incremented each "n" sample
-% Phase increment = pi * ncoPhaseStep.
-ncoPhaseStep = 1/(2*oversamplingFactor);
+%% Upshifter NCO (Numerical Controlled Oscillator)
+% Upshifter NCO doesn't need too much resolution.
+ncoUpshifterPhaseStep = 1/(2*oversamplingFactor);
 
 % The NCO will have a phase resolution of 1/2^ncoWordLength.
-ncoWordLength = ceil(log2(2*oversamplingFactor)+2);
-if (ncoWordLength < 4)
+ncoUpshifterWordLength = ceil(log2(2*oversamplingFactor)+2);
+if (ncoUpshifterWordLength < 4)
     error("ncoWordLength must be greater than 4 (or HDL code can't be generated)");
 end
 
 % The phase increment takes a value from [0; 2^ncoWordLength]
 % A phase increment of "2^ncoWordLength" is equal to 2pi
-ncoPhaseIncrement = 2^ncoWordLength*ncoPhaseStep;
+ncoUpshifterPhaseIncrement = 2^ncoUpshifterWordLength*ncoUpshifterPhaseStep;
+
+%% Downshifter NCO
+ncoDownshifterPhaseStep = 1/(2*oversamplingFactor);
+ncoDownshifterWordLength = ceil(log2(2*oversamplingFactor)+2);
+if (ncoDownshifterWordLength < 4)
+    error("ncoWordLength must be greater than 4 (or HDL code can't be generated)");
+end
+ncoDownshifterPhaseIncrement = 2^ncoDownshifterWordLength*ncoDownshifterPhaseStep;
+
+% These equations were taking from the "help" section of the NCO block.
+ncoFrequencyResolution = 10;        % Frequency resolution for the NCO
+ncoCarrierFrequency = fPHY/2;       % Carrier frequency of the NCO
+
+ncoWordLength = ceil(log2(fs/ncoFrequencyResolution));
+if (ncoWordLength > 19)
+    %warning("NCO resolution truncated. Minimum frequency resolution is 191Hz");
+    ncoWordLength = 19; % Maximum value allowed by the NCO.
+end
+ncoCarrierPhaseIncrement = ncoCarrierFrequency/fs*2^ncoWordLength;
 
 %% Decimator LPF filter
 decimatorFpass = 25e6;               % Passband frequency [Hz]
