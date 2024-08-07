@@ -1,4 +1,4 @@
-function [OFDMSignal] = fullTx(paramFile, pBits, carrierFrequencyOffset, addTimeWindow)
+function [OFDMSignal, payloadExtraWords] = fullTx(paramFile, pBits, carrierFrequencyOffset, addTimeWindow)
 %FULLTX Run a full transmitter.
 arguments(Input)
     paramFile string
@@ -8,6 +8,7 @@ arguments(Input)
 end
 arguments(Output)
     OFDMSignal (:,1) double
+    payloadExtraWords double
 end
     constants;
     run(paramFile);

@@ -4,51 +4,23 @@ addpath("../../src");
 addpath("../../inc");
 addpath("../../src/rx");
 constants;
-parameters;
-
-%% Transmitter pre-processing
-hGen = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
-    fecConcatenationFactor, scramblerInitialization, batId, cyclicPrefixId, ...
-    explicitMimoPilotSymbolCombSpacing, explicitMimoPilotSymbolNumber);
-hScrambled = headerScrambler(hGen);
-hLDPC = LDPCEncoder(hScrambled, 0, 0, true);
-headerOFDMSymbols = headerRepetitionEncoder(hLDPC);
-
-pBits = logical(randi([0,1], payloadBitsPerBlock0, payloadLenInFecBlocks));
-pWords = uint8(zeros(payloadWordsPerBlock0, payloadLenInFecBlocks));
-for i=1:1:payloadLenInFecBlocks
-    pBitsLSB = binl2tx(pBits(:,i));
-    for j=1:1:payloadWordsPerBlock0
-        pWords(j,i) = binl2dec(pBitsLSB(1+(j-1)*8:j*8));
-    end
-end
-pLDPC = false(payloadBitsPerFec, payloadLenInFecBlocks);
-for i=1:1:payloadLenInFecBlocks
-    pScrambled = payloadScrambler(scramblerInitialization, pBits(:,i));
-    pLDPC(:,i) = LDPCEncoder(pScrambled, binl2dec(fecRate), binl2dec(blockSize), false);
-end
-pLDPC = pLDPC(:);
-payloadOFDMSymbols = toneMapping(pLDPC, binl2dec(batId));
-
-preambleTx = ofdmModulate(preambleOFDMSymbols, preambleBitsPerSubcarrier, preambleCyclicPrefixLen, nullIdx, preambleScramblerInit);
-channelTx = ofdmModulate(channelOFDMSymbols, channelBitsPerSubcarrier, channelCyclicPrefixLen, nullIdx, channelScramblerInit);
-headerTx = ofdmModulate(headerOFDMSymbols, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit);
-payloadTx = ofdmModulate(payloadOFDMSymbols, payloadBitsPerSubcarrier, payloadCyclicPrefixLen, nullIdx, payloadScramblerInit);
-
-OFDMSignal = [preambleTx; channelTx; headerTx; payloadTx;];
-OFDMSignal = interpolator(OFDMSignal);
-OFDMSignal = upshifter(OFDMSignal);
 
 %% Inputs
-dataIn = OFDMSignal;
-validIn = true(length(dataIn), 1);
+parametersFile = "sampleParametersFile";
+delayIn = 5000;
+SNR = 60;
+msgIn = 'This is a test of the RX for the UTN VLC Project!';
 
-%% ExpectedOutput
-[reg0, reg1, reg2, reg3] = param2regs("parameters.m");
+pBits = str2binl(msgIn);
+pBits = binl2tx(pBits);    % Input to the Tx should be LSB first.
+[OFDMSignal, payloadExtraWords] = fullTx(parametersFile, pBits);
+OFDMRx = channelSimulation(OFDMSignal, delayIn, SNR);
+dataIn = OFDMRx;
 
 %% Simulation Time
-latency = 10000000/fs;         % Algorithm latency. Delay between input and output
-stopTime = (length(validIn)-1)/fs + latency;
+latency = 100000/fs;         % Algorithm latency. Delay between input and output
+stopTime = (length(dataIn)-1)/fs + latency;
+payloadLenInFecBlocks = ceil(length(pBits)/payloadBitsPerBlock0);    % Used to end the simulation
 
 %% Run the simulation
 model_name = "HDLRx";
@@ -77,15 +49,15 @@ reg2Out = reg2Out(endOutIdx);
 reg3Out = get(simOut, "reg3Out");
 reg3Out = reg3Out(endOutIdx);
 
-%% Compare with MATLAB reference algorithm
-
-% Header was read correctly
+%% Compare header
+[reg0, reg1, reg2, reg3] = param2regs(parametersFile, pBits);
 assert(isequal(reg0Out, reg0));
 assert(isequal(reg1Out, reg1));
 assert(isequal(reg2Out, reg2));
 assert(isequal(reg3Out, reg3));
 disp("Header was read correctly!");
 
+%% Compare payload
 startIdx = find(startOut == true);
 endIdx = find(endOut == true);
 
@@ -95,11 +67,16 @@ assert(isequal(length(startIdx), length(endIdx)), ...
 assert(~isempty(startIdx), "No start signal");
 assert(isequal(length(startIdx), payloadLenInFecBlocks), "Wrong number of payload bits read");
 
+msgOut = '';
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
-    expectedOut = pWords(:,i);
-    assert(isequal(expectedOut, out));
+    if (i == length(startIdx))
+        out = out(1:end-payloadExtraWords);
+    end
+    msgOut = strcat(msgOut, char(out)');
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
+
+assert(isequal(msgOut, msgIn), "Sent and received message should be the same!");
 
 disp("Test successfull!");
