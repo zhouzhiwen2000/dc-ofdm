@@ -8,7 +8,7 @@ constants;
 paramFile = "param.m";
 run(paramFile);
 
-[reg0, reg1, reg2, reg3] = param2regs(paramFile);
+[reg0, reg1, reg2, reg3] = param2regs(paramFile, false);
 
 newFrame = logical([ ...
     1; ...

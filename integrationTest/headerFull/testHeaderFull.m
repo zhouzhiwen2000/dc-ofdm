@@ -11,7 +11,7 @@ constants;
 
 %% Input
 paramFile(1) = "param1.m";
-[reg0, reg1, reg2, reg3] = param2regs(paramFile(1));
+[reg0, reg1, reg2, reg3] = param2regs(paramFile(1), false);
 newFrame = logical([1; 0]);
 
 %% Simulation Time

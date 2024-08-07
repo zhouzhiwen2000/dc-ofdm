@@ -14,7 +14,7 @@ input = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetition
     explicitMimoPilotSymbolCombSpacing, explicitMimoPilotSymbolNumber);
 input = input(1:end-16);
 
-[reg0, reg1, reg2, reg3] = param2regs(paramFile);
+[reg0, reg1, reg2, reg3] = param2regs(paramFile, false);
 
 dataBits = input;
 validIn = true(size(input));

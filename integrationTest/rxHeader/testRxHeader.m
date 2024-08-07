@@ -8,7 +8,7 @@ constants;
 %% Inputs
 paramFile = "param.m";
 run(paramFile);
-[reg0, reg1, reg2, reg3] = param2regs(paramFile);
+[reg0, reg1, reg2, reg3] = param2regs(paramFile, false);
 
 h = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
     fecConcatenationFactor, scramblerInitialization, batId, cyclicPrefixId, ...

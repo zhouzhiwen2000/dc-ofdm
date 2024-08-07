@@ -25,7 +25,7 @@ else
     dataChars = [0 0];
 end
 
-[reg0, reg1, reg2, reg3] = param2regs("parameters");
+[reg0, reg1, reg2, reg3] = param2regs("parameters", false);
 newFrame = logical([1; 0]);
 
 %% Expected Output
