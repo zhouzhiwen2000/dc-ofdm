@@ -20,6 +20,7 @@ parametersFile = "sampleParametersFile";
 pBits = logical(randi([0,1], payloadBitsPerBlock0*2, 1));
 delayIn = 5000;
 SNR = 60;
+frequencyOffsetIn = 15e3;
 
 OFDMSignal = fullTx(parametersFile, pBits, 0, false);
 OFDMRx = channelSimulation(OFDMSignal, delayIn, SNR);
@@ -27,7 +28,6 @@ run(parametersFile);
 
 % Remove extra samples from time window
 dataIn = OFDMRx;
-validIn = true(length(dataIn), 1);
 psduSizeLSB = flip(psduSize);
 
 %% ExpectedOutput
@@ -51,7 +51,7 @@ end
 
 %% Simulation Time
 latency = 1000000/fs;         % Algorithm latency. Delay between input and output
-stopTime = (length(validIn)-1)/fs + latency;
+stopTime = (length(dataIn)-1)/fs + latency;
 
 %% Run the simulation
 model_name = "HDLRxDemodulator";
@@ -91,7 +91,7 @@ for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i), end-headerBitsPerSubcarrier+1:end);
     out = out.';
     headerOut = out(:);
-    assert(iskindaequal(expectedHeaderOut{i}, headerOut, 3), "Header mismatch");
+    assert(iskindaequal(expectedHeaderOut{i}, headerOut, 5), "Header mismatch");
 end
 
 for i=1:length(startIdx1)
