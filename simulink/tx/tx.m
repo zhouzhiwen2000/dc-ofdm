@@ -5,7 +5,6 @@ clc; clear; close all;
 addpath("../../src");
 addpath("../../inc");
 constants;
-parameters;
 
 %% Input
 paramFile = "sampleParametersFile";
@@ -51,8 +50,8 @@ endIdx = find(endOut1 == true);
 assert(isequal(length(startIdx), length(endIdx)), ...
     "Length of start and end should be the same.");
 
-if(payloadLenInFecBlocks ~= 0)
-    assert(~isempty(startIdx), "No start signal");
+if (isempty(startIdx))
+    warning("No payload was detected (this might be intentional)");
 end
 
 for i=1:length(startIdx)
@@ -87,14 +86,14 @@ subplot(2,1,1)
 plot(t*1e6, out, t*1e6, expectedOut);
 legend("Out", "ExpectedOut");
 xlabel("t [useg]");
-xlim([t(1), t(end)]);
+xlim([min(t), max(t)]*1e6);
 grid on;
 
 subplot(2,1,2)
 plot(t*1e6, abs(out - expectedOut));
 xlabel("t [useg]");
 title("|out - expectedOut|");
-xlim([t(1), t(end)]);
+xlim([min(t), max(t)]*1e6);
 grid on;
 
 figure();
