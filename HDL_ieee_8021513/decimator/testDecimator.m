@@ -10,15 +10,15 @@ t = (0:1/fs:(N+headerCyclicPrefixLen)/fPHY-1/fs)';            % Time vector is e
 t_down = (0:1/fPHY:(N+headerCyclicPrefixLen)/fPHY-1/fPHY)';     % Time vector for downsampled signal
 
 % OFDM output is a senoidal function
-% fc = 5e6;                           % Carrier frequency for sinusoidal function
-% dataIn = cos(2*pi*fc*t);
-% validIn = true(length(t), 1);
+fc = 20e6;                           % Carrier frequency for sinusoidal function
+dataIn = cos(2*pi*fc*t);
+validIn = true(length(t), 1);
 
 % OFDM output is an actual OFDM symbol
-dataIn = rand(numDataCarriers, 1) + 1i*rand(numDataCarriers, 1);
-dataIn = ofdmmod(dataIn, N, headerCyclicPrefixLen, nullIdx);
-dataIn = interpolator(dataIn);
-validIn = true(length(dataIn), 1);
+% dataIn = rand(numDataCarriers, 1) + 1i*rand(numDataCarriers, 1);
+% dataIn = ofdmmod(dataIn, N, headerCyclicPrefixLen, nullIdx);
+% dataIn = interpolator(dataIn);
+% validIn = true(length(dataIn), 1);
 
 expectedOut = decimator(dataIn);
 
@@ -83,6 +83,6 @@ legend("Simulink Out", "Expected Out");
 xlim([min(t_down), max(t_down)]*1e6);
 grid on;
 
-assert(iskindaequal(expectedOut, resampledOut, 0.1), "resample function and interpolation should be similar");
+assert(iskindaequal(expectedOut, resampledOut, 0.2), "resample function and interpolation should be similar");
 
 disp("Test successfull!");

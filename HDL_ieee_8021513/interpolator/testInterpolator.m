@@ -9,14 +9,14 @@ t = (0:1/fPHY:(N+headerCyclicPrefixLen)/fPHY-1/fPHY)';      % Time vector is equ
 t_up = (0:1/fs:(N+headerCyclicPrefixLen)/fPHY-1/fs)';       % Time vector for upsampled signal
 
 % OFDM output is a senoidal function
-%fc = 5e6;                           % Carrier frequency for sinusoidal function
-%dataSymbols = cos(2*pi*fc*t);
-%validIn = true(length(t), 1);
+fc = 5e6;                           % Carrier frequency for sinusoidal function
+dataSymbols = cos(2*pi*fc*t);
+validIn = true(length(t), 1);
 
 % OFDM output is an actual OFDM symbol
-dataSymbols = rand(numDataCarriers, 1) + 1i*rand(numDataCarriers, 1);
-dataSymbols = ofdmmod(dataSymbols, N, headerCyclicPrefixLen, nullIdx);
-validIn = true(length(dataSymbols), 1);
+% dataSymbols = rand(numDataCarriers, 1) + 1i*rand(numDataCarriers, 1);
+% dataSymbols = ofdmmod(dataSymbols, N, headerCyclicPrefixLen, nullIdx);
+% validIn = true(length(dataSymbols), 1);
 
 expectedOut = interpolator(dataSymbols);
 
@@ -68,7 +68,7 @@ subplot(3,1,3)
 plot(t_up*1e6, abs(out - expectedOut));
 xlabel("Time [useg]");
 title("|out - expectedOut|");
-xlim([t_up(1), t_up(end)]);
+xlim([min(t_up), max(t_up)]*1e6);
 grid on;
 
 assert(iskindaequal(expectedOut, resampledOut, 0.05), "resample function and interpolation should be similar");

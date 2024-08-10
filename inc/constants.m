@@ -5,10 +5,13 @@ ldpc;
 
 %% General
 N = 256;                                % Number of subcarriers.
-leftGuard = (1:11)';
-rightGuard = (230:256)';
-nullIdx = [leftGuard; rightGuard];                    % Carriers that are unused [1;nfft] == [-nfft/2*fsc; (nfft/2-1)*fsc] 
+leftGuard = (1:25)';
+rightGuard = (220:256)';
+nullIdx = [leftGuard; rightGuard];      % Carriers that are unused [1;nfft] == [-nfft/2*fsc; (nfft/2-1)*fsc] 
 numDataCarriers = N - length(nullIdx);  % Amount of subcarriers with actual data.
+if(numDataCarriers < 168)
+    error("A minimum of 168 data carriers are needed to transmit the header in a single OFDM symbol!");
+end
 
 % This parameter is only used in the matlab reference algorithm. It adds
 % zeroes only at the end of the transmission, to avoid a bug where the
@@ -70,10 +73,11 @@ fs = fPHY*oversamplingFactor;   % [Hz] Sampling frequency, which will be the inp
 
 
 %% Interpolator FIR filter
-interpolatorFpass = 25e6;               % Passband frequency [Hz]
-interpolatorFstop = 27.2e6;             % Stopband frequency [Hz]
+interpolatorFpass = 20e6;               % Passband frequency [Hz]
+interpolatorFstop = 30e6;               % Stopband frequency [Hz]
 interpolatorPassbandRippleDb = 0.1;     % Passband ripple [dB]
-interpolatorStopbandAttDb = 60;         % Stopband attenuation [dB]
+interpolatorStopbandAttDb = 80;         % Stopband attenuation [dB]
+
 
 interpolatorSpec = fdesign.interpolator(oversamplingFactor, ...
     'lowpass','Fp,Fst,Ap,Ast', ...
@@ -86,7 +90,10 @@ interpolatorFilter = design(interpolatorSpec,'SystemObject',true);
 
 % Group delay of the filter. delay = (nTaps - 1)/2
 % The delay should be an integer, therefore, nTaps should be odd.
-interpolatorDelay = mean(grpdelay(interpolatorFilter));     
+interpolatorDelay = mean(grpdelay(interpolatorFilter));
+if (mod(interpolatorDelay, 2) ~= 1)
+    error("Interpolator delay should be odd!");
+end
 
 % Uncomment to plot filter response
 %fvtool(interpolatorFilter,'Fs', fs);
@@ -116,10 +123,20 @@ ncoQuantization = ceil((ncoSFDR-12)/6);
 ncoCarrierPhaseIncrement = ncoCarrierFrequency/fs*2^ncoWordLength;
 
 %% Decimator LPF filter
-decimatorFpass = 25e6;               % Passband frequency [Hz]
-decimatorFstop = 45.5e6;               % Stopband frequency [Hz]
-decimatorPassbandRippleDb = 0.01;     % Passband ripple [dB]
-decimatorStopbandAttDb = 120;         % Stopband attenuation [dB]
+decimatorFpass = 20e6;               % Passband frequency [Hz]
+decimatorFstop = 25e6;               % Stopband frequency [Hz]
+decimatorPassbandRippleDb = 0.1;     % Passband ripple [dB]
+decimatorStopbandAttDb = 78;         % Stopband attenuation [dB]
+
+% decimatorFpass = 25e6;                % Passband frequency [Hz]
+% decimatorFstop = 45.5e6;              % Stopband frequency [Hz]
+% decimatorPassbandRippleDb = 0.01;     % Passband ripple [dB]
+% decimatorStopbandAttDb = 120;         % Stopband attenuation [dB]
+
+% decimatorFpass = 25e6;                  % Passband frequency [Hz]
+% decimatorFstop = 37e6;                  % Stopband frequency [Hz]
+% decimatorPassbandRippleDb = 0.01;       % Passband ripple [dB]
+% decimatorStopbandAttDb = 120;           % Stopband attenuation [dB]
 
 decimatorSpec = fdesign.decimator(2, 'lowpass', 'Fp,Fst,Ap,Ast', ...
     decimatorFpass, ...
@@ -131,6 +148,9 @@ decimatorFilter = design(decimatorSpec, 'equiripple', 'SystemObject',true);
 
 % Group delay of the filter should be even.
 decimatorDelay = mean(grpdelay(decimatorFilter));
+if (mod(decimatorDelay, 2) ~= 0)
+    error("decimatorDelay should be even!");
+end
 
 % Uncomment to plot filter response
 %fvtool(decimatorFilter,'Fs', fs);
