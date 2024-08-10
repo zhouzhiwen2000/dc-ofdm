@@ -38,7 +38,7 @@ grid on;
 % Which means that the frequency spectrum is going to be compressed by a
 % factor of "L", and we should see "L/2" extra repetitions of the spectrum.
 xUp = upsample(x, L);
-[psd, f] = pwelch(xUp, rectwin(length(xUp)), [], N, fs, "centered");
+[psd, f] = pwelch(xUp, rectwin(length(xUp)), [], N, fs*L, "centered");
 
 subplot(3,2,3);
 stem(ts, xUp);
@@ -57,7 +57,7 @@ grid on;
 %% Signal interpolated
 % When applied a FIR lowpass filter, only the compressed spectrum remains.
 xIn = resample(x, L, 1);
-[psd, f] = pwelch(xIn, rectwin(length(xIn)), [], N, fs, "centered");
+[psd, f] = pwelch(xIn, rectwin(length(xIn)), [], N, fs*L, "centered");
 
 subplot(3,2,5)
 stem(ts, xIn);
