@@ -56,8 +56,8 @@ peakIn = [
 psduSizeLSB = flip(psduSize);
 
 %% Simulation Time
-latency = 3000/fs;         % Algorithm latency. Delay between input and output
-stopTime = (length(peakIn)-1)/fs + latency;
+latency = 10000/fPHY;         % Algorithm latency. Delay between input and output
+stopTime = (length(peakIn)-1)/fPHY + latency;
 
 %% Run the simulation
 model_name = "HDLOFDMSeparator";
