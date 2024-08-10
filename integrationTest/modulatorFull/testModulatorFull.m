@@ -125,17 +125,17 @@ if (all([simNormal == true, simLarge == false]))
     
     figure();
     subplot(2,1,1)
-    plot(t, out, t, expectedOut);
+    plot(t*1e6, out, t*1e6, expectedOut);
     legend("Out", "ExpectedOut");
-    xlabel("n [samples]");
-    xlim([t(1), t(end)]);
+    xlabel("Time [useg]");
+    xlim([min(t), max(t)]*1e6);
     grid on;
     
     subplot(2,1,2)
-    plot(t, abs(out - expectedOut));
-    xlabel("n [samples]");
+    plot(t*1e6, abs(out - expectedOut));
+    xlabel("Time [useg]");
     title("|out - expectedOut|");
-    xlim([t(1), t(end)]);
+    xlim([min(t), max(t)]*1e6);
     grid on;
     
     figure();
