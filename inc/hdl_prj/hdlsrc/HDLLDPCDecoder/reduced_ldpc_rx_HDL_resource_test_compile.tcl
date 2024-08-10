@@ -1,0 +1,17 @@
+add_files -fileset sim_1 -norecurse /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/inc/hdl_prj/hdlsrc/HDLLDPCDecoder/reduced_ldpc_rx_HDL_resource_test_pac.vhd
+add_files -fileset sim_1 -norecurse /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/inc/hdl_prj/hdlsrc/HDLLDPCDecoder/CodeParameters.vhd
+add_files -fileset sim_1 -norecurse /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/inc/hdl_prj/hdlsrc/HDLLDPCDecoder/SimpleDualPortRAM_generic.vhd
+add_files -fileset sim_1 -norecurse /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/inc/hdl_prj/hdlsrc/HDLLDPCDecoder/BarrelRotator.vhd
+add_files -fileset sim_1 -norecurse /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/inc/hdl_prj/hdlsrc/HDLLDPCDecoder/BetaCalculation_1.vhd
+add_files -fileset sim_1 -norecurse /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/inc/hdl_prj/hdlsrc/HDLLDPCDecoder/BetaDecompress_1.vhd
+add_files -fileset sim_1 -norecurse /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/inc/hdl_prj/hdlsrc/HDLLDPCDecoder/VariableNodeUnit.vhd
+add_files -fileset sim_1 -norecurse /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/inc/hdl_prj/hdlsrc/HDLLDPCDecoder/CheckNodeUnit.vhd
+add_files -fileset sim_1 -norecurse /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/inc/hdl_prj/hdlsrc/HDLLDPCDecoder/BetaCalculation_2.vhd
+add_files -fileset sim_1 -norecurse /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/inc/hdl_prj/hdlsrc/HDLLDPCDecoder/BetaDecompress_2.vhd
+add_files -fileset sim_1 -norecurse /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/inc/hdl_prj/hdlsrc/HDLLDPCDecoder/AposterioriUnit.vhd
+add_files -fileset sim_1 -norecurse /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/inc/hdl_prj/hdlsrc/HDLLDPCDecoder/FunctionalUnit.vhd
+add_files -fileset sim_1 -norecurse /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/inc/hdl_prj/hdlsrc/HDLLDPCDecoder/CheckNodeRAM.vhd
+add_files -fileset sim_1 -norecurse /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/inc/hdl_prj/hdlsrc/HDLLDPCDecoder/FinalDecision.vhd
+add_files -fileset sim_1 -norecurse /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/inc/hdl_prj/hdlsrc/HDLLDPCDecoder/DecoderCore.vhd
+add_files -fileset sim_1 -norecurse /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/inc/hdl_prj/hdlsrc/HDLLDPCDecoder/Hc_12S_B80.vhd
+add_files -fileset sim_1 -norecurse /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/inc/hdl_prj/hdlsrc/HDLLDPCDecoder/reduced_ldpc_rx_HDL_resource_test.vhd

@@ -18,7 +18,7 @@ OFDMRx = channelSimulation(OFDMSignal, delayIn, SNR);
 dataIn = OFDMRx;
 
 %% Simulation Time
-latency = 100000/fs;         % Algorithm latency. Delay between input and output
+latency = 10000000/fs;         % Algorithm latency. Delay between input and output
 stopTime = (length(dataIn)-1)/fs + latency;
 payloadLenInFecBlocks = ceil(length(pBits)/payloadBitsPerBlock0);    % Used to end the simulation
 
