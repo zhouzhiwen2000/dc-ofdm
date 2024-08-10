@@ -56,23 +56,31 @@ end
 resampledOut = resample(dataIn, 1, 2);
 
 figure();
-subplot(3,1,1)
+subplot(4,1,1)
 plot(t*1e6, abs(dataIn), t_down*1e6, abs(expectedOut), t_down*1e6, abs(resampledOut));
 xlabel("Time [useg]");
 legend("Input", "Interpolated", "Resampled");
 xlim([min(t), max(t)]*1e6);
 
-subplot(3,1,2);
+subplot(4,1,2);
 plot(t_down*1e6, abs(expectedOut-resampledOut));
 xlabel("Time [useg]");
 title("Error between interpolation FIR filter and resample FIR filter")
 xlim([min(t_down), max(t_down)]*1e6);
 
-subplot(3,1,3)
+subplot(4,1,3)
 plot(t_down*1e6, abs(out - expectedOut));
 xlabel("Time [useg]");
 title("|out - expectedOut|");
-xlim([t_down(1), t_down(end)]);
+xlim([min(t_down), max(t_down)]*1e6);
+grid on;
+
+subplot(4,1,4)
+plot(t_down*1e6, abs(out), t_down*1e6, abs(expectedOut));
+xlabel("Time [useg]");
+title("Output");
+legend("Simulink Out", "Expected Out");
+xlim([min(t_down), max(t_down)]*1e6);
 grid on;
 
 assert(iskindaequal(expectedOut, resampledOut, 0.1), "resample function and interpolation should be similar");
