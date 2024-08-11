@@ -33,11 +33,6 @@ end
 
 newFrame = true;
 
-% Run parameters file to get the following header constants
-pBits = [];
-run(paramFile);
-
-
 %% Expected Output Payload
 expectedOut = cell(length(msgIn), 1);
 scramblerInitLSB = zeros(4, 1, length(msgIn)+1);

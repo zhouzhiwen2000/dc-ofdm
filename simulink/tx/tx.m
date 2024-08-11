@@ -8,20 +8,39 @@ constants;
 
 %% Input
 paramFile = "sampleParametersFile";
-msgIn = ['This is an example message used to test the transmitter. ' ...
+msgIn{1} = ['This is an example message used to test the transmitter. ' ...
     'It is made large on purpose to test for a large message being ' ...
     'transmitted'];
-pBits = str2binl(msgIn);
-pBits = getPayloadParamsFromBits(pBits);
-pWords = binl2str(pBits);
+msgIn{2} = 'This is a second message';
+msgIn{3} = 'This is a third message';
 
-validIn = true(length(pWords), 1);
-newFrame = logical([1; 0]);
+pWords = [];
+validIn = [];
+lastIn = [];
+for i=1:1:length(msgIn)
+    pBitsRaw{i} = str2binl(msgIn{i});
+    pBitsRaw{i} = getPayloadParamsFromBits(pBitsRaw{i});
+    pWords = [pWords binl2str(pBitsRaw{i})];
+    len = length(binl2str(pBitsRaw{i}));
+    validIn = [validIn; true(len, 1);];
+    lastIn = [lastIn; false(len-1, 1); true;];
+end
 
-[reg0, reg1, reg2, reg3] = param2regs("parameters", pBits);
+newFrame = true;
 
 %% Expected Output
-[expectedOut, ~, payloadOFDMSymbols] = fullTx(paramFile, binl2tx(pBits), 0, false);
+expectedOut = cell(length(msgIn), 1);
+payloadOFDMSymbols = cell(length(msgIn), 1);
+reg0 = zeros(length(msgIn), 1);
+reg1 = zeros(length(msgIn), 1);
+reg2 = zeros(length(msgIn), 1);
+reg3 = zeros(length(msgIn), 1);
+
+for i=1:1:length(msgIn)
+    [reg0(i,1), reg1(i,1), reg2(i,1), reg3(i,1)] = param2regs(paramFile, pBitsRaw{i});
+    [expectedOut{i}, ~, payloadOFDMSymbols{i}] = fullTx(paramFile, binl2tx(pBitsRaw{i}), 0, false);
+    payloadOFDMSymbols{i} = payloadOFDMSymbols{i}(:);
+end
 
 %% Simulation Time
 latency = 10000000/fs;             % Algorithm latency. Delay between input and output
@@ -44,53 +63,53 @@ endOut1 = get(simOut, "endOut1");
 validOut1 = get(simOut, "validOut1");
 
 %% Payload is well formed
-startIdx = find(startOut1 == true);
-endIdx = find(endOut1 == true);
+startIdx1 = find(startOut1 == true);
+endIdx1 = find(endOut1 == true);
 
-assert(isequal(length(startIdx), length(endIdx)), ...
-    "Length of start and end should be the same.");
+assert(~isempty(startIdx1), ...
+    "StartIdx shouldn't be empty");
+assert(isequal(length(startIdx1), length(endIdx1)), ...
+    "Start and end should be of the same size");
+assert(isequal(length(startIdx1), length(msgIn)), ...
+    "Messages and start indexes should be the same number");
 
-if (isempty(startIdx))
-    warning("No payload was detected (this might be intentional)");
-end
-
-for i=1:length(startIdx)
-    out = dataOut1(startIdx(i):endIdx(i));
-    valid = validOut1(startIdx(1):endIdx(1));
+for i=1:1:length(msgIn)
+    out = dataOut1(startIdx1(i):endIdx1(i));
+    valid = validOut1(startIdx1(i):endIdx1(i));
     out = out(valid == true);
-    assert(isequal(payloadOFDMSymbols(:), out), "Outputs don't match");
+    assert(isequal(payloadOFDMSymbols{i}, out));
 end
-
-disp("Payload is well formed!")
 
 %% Compare with MATLAB reference algorithm
 startIdx = find(startOut == true);
 endIdx = find(endOut == true);
 
+assert(~isempty(startIdx), ...
+    "StartIdx shouldn't be empty");
 assert(isequal(length(startIdx), length(endIdx)), ...
-    "Length of start and end should be the same.");
-
-assert(~isempty(startIdx), "No start signal");
+    "Start and end should be of the same size");
+assert(isequal(length(startIdx), length(msgIn)), ...
+    "Messages and start indexes should be the same number");
 
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
-    assert(iskindaequal(expectedOut, out, 1e-3), "Outputs don't match");
+    assert(iskindaequal(expectedOut{i}, out, 1e-3), "Outputs don't match");
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
 
 %% Plotting
-t = (0:1/fs:length(expectedOut)/fs-1/fs)';
+t = (0:1/fs:length(expectedOut{i})/fs-1/fs)';
 
 figure();
 subplot(2,1,1)
-plot(t*1e6, out, t*1e6, expectedOut);
+plot(t*1e6, out, t*1e6, expectedOut{i});
 legend("Out", "ExpectedOut");
 xlabel("t [useg]");
 xlim([min(t), max(t)]*1e6);
 grid on;
 
 subplot(2,1,2)
-plot(t*1e6, abs(out - expectedOut));
+plot(t*1e6, abs(out - expectedOut{i}));
 xlabel("t [useg]");
 title("|out - expectedOut|");
 xlim([min(t), max(t)]*1e6);
