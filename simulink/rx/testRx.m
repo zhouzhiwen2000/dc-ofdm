@@ -9,7 +9,8 @@ constants;
 parametersFile = "sampleParametersFile";
 delayIn = 5000;
 SNR = 60;
-msgIn = 'This is a test of the RX for the UTN VLC Project!';
+%msgIn = 'This is a test of the RX for the UTN VLC Project!';
+msgIn = randomStr(100);
 
 pBits = str2binl(msgIn);
 pBits = binl2tx(pBits);    % Input to the Tx should be LSB first.
