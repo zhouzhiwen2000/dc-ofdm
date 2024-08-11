@@ -2,7 +2,7 @@
 --Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
---Date        : Sat Aug 10 09:40:38 2024
+--Date        : Sun Aug 11 18:44:56 2024
 --Host        : cotti-machine running 64-bit Ubuntu 22.04.3 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -579,6 +579,10 @@ library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
 entity design_1 is
   port (
+    AXI4_Stream_Slave_0_tdata : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    AXI4_Stream_Slave_0_tlast : in STD_LOGIC;
+    AXI4_Stream_Slave_0_tready : out STD_LOGIC;
+    AXI4_Stream_Slave_0_tvalid : in STD_LOGIC;
     DDR_addr : inout STD_LOGIC_VECTOR ( 14 downto 0 );
     DDR_ba : inout STD_LOGIC_VECTOR ( 2 downto 0 );
     DDR_cas_n : inout STD_LOGIC;
@@ -599,10 +603,12 @@ entity design_1 is
     FIXED_IO_mio : inout STD_LOGIC_VECTOR ( 53 downto 0 );
     FIXED_IO_ps_clk : inout STD_LOGIC;
     FIXED_IO_ps_porb : inout STD_LOGIC;
-    FIXED_IO_ps_srstb : inout STD_LOGIC
+    FIXED_IO_ps_srstb : inout STD_LOGIC;
+    data_out_0 : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    valid_out_0 : out STD_LOGIC
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=6,numReposBlks=4,numNonXlnxBlks=1,numHierBlks=2,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=2,da_clkrst_cnt=2,da_ps7_cnt=1,synth_mode=Hierarchical}";
+  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=6,numReposBlks=4,numNonXlnxBlks=1,numHierBlks=2,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=3,da_clkrst_cnt=3,da_ps7_cnt=1,synth_mode=Hierarchical}";
   attribute HW_HANDOFF : string;
   attribute HW_HANDOFF of design_1 : entity is "design_1.hwdef";
 end design_1;
@@ -688,7 +694,7 @@ architecture STRUCTURE of design_1 is
     peripheral_aresetn : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
   end component design_1_rst_ps7_0_50M_0;
-  component design_1_full_tx_ip_fir_reduc_0_0 is
+  component design_1_full_tx_ip_0_0 is
   port (
     IPCORE_CLK : in STD_LOGIC;
     IPCORE_RESETN : in STD_LOGIC;
@@ -707,6 +713,8 @@ architecture STRUCTURE of design_1 is
     AXI4_Lite_ARVALID : in STD_LOGIC;
     AXI4_Lite_RREADY : in STD_LOGIC;
     AXI4_Stream_Slave_TREADY : out STD_LOGIC;
+    data_out : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    valid_out : out STD_LOGIC;
     AXI4_Lite_AWREADY : out STD_LOGIC;
     AXI4_Lite_WREADY : out STD_LOGIC;
     AXI4_Lite_BRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
@@ -716,7 +724,13 @@ architecture STRUCTURE of design_1 is
     AXI4_Lite_RRESP : out STD_LOGIC_VECTOR ( 1 downto 0 );
     AXI4_Lite_RVALID : out STD_LOGIC
   );
-  end component design_1_full_tx_ip_fir_reduc_0_0;
+  end component design_1_full_tx_ip_0_0;
+  signal AXI4_Stream_Slave_0_1_TDATA : STD_LOGIC_VECTOR ( 7 downto 0 );
+  signal AXI4_Stream_Slave_0_1_TLAST : STD_LOGIC;
+  signal AXI4_Stream_Slave_0_1_TREADY : STD_LOGIC;
+  signal AXI4_Stream_Slave_0_1_TVALID : STD_LOGIC;
+  signal full_tx_ip_0_data_out : STD_LOGIC_VECTOR ( 15 downto 0 );
+  signal full_tx_ip_0_valid_out : STD_LOGIC;
   signal processing_system7_0_DDR_ADDR : STD_LOGIC_VECTOR ( 14 downto 0 );
   signal processing_system7_0_DDR_BA : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal processing_system7_0_DDR_CAS_N : STD_LOGIC;
@@ -796,12 +810,14 @@ architecture STRUCTURE of design_1 is
   signal ps7_0_axi_periph_M00_AXI_WSTRB : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal ps7_0_axi_periph_M00_AXI_WVALID : STD_LOGIC;
   signal rst_ps7_0_50M_peripheral_aresetn : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal NLW_full_tx_ip_fir_reduc_0_AXI4_Stream_Slave_TREADY_UNCONNECTED : STD_LOGIC;
   signal NLW_rst_ps7_0_50M_mb_reset_UNCONNECTED : STD_LOGIC;
   signal NLW_rst_ps7_0_50M_bus_struct_reset_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
   signal NLW_rst_ps7_0_50M_interconnect_aresetn_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
   signal NLW_rst_ps7_0_50M_peripheral_reset_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
   attribute X_INTERFACE_INFO : string;
+  attribute X_INTERFACE_INFO of AXI4_Stream_Slave_0_tlast : signal is "xilinx.com:interface:axis:1.0 AXI4_Stream_Slave_0 TLAST";
+  attribute X_INTERFACE_INFO of AXI4_Stream_Slave_0_tready : signal is "xilinx.com:interface:axis:1.0 AXI4_Stream_Slave_0 TREADY";
+  attribute X_INTERFACE_INFO of AXI4_Stream_Slave_0_tvalid : signal is "xilinx.com:interface:axis:1.0 AXI4_Stream_Slave_0 TVALID";
   attribute X_INTERFACE_INFO of DDR_cas_n : signal is "xilinx.com:interface:ddrx:1.0 DDR CAS_N";
   attribute X_INTERFACE_INFO of DDR_ck_n : signal is "xilinx.com:interface:ddrx:1.0 DDR CK_N";
   attribute X_INTERFACE_INFO of DDR_ck_p : signal is "xilinx.com:interface:ddrx:1.0 DDR CK_P";
@@ -818,6 +834,8 @@ architecture STRUCTURE of design_1 is
   attribute X_INTERFACE_INFO of FIXED_IO_ps_clk : signal is "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_CLK";
   attribute X_INTERFACE_INFO of FIXED_IO_ps_porb : signal is "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_PORB";
   attribute X_INTERFACE_INFO of FIXED_IO_ps_srstb : signal is "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_SRSTB";
+  attribute X_INTERFACE_INFO of AXI4_Stream_Slave_0_tdata : signal is "xilinx.com:interface:axis:1.0 AXI4_Stream_Slave_0 TDATA";
+  attribute X_INTERFACE_PARAMETER of AXI4_Stream_Slave_0_tdata : signal is "XIL_INTERFACENAME AXI4_Stream_Slave_0, FREQ_HZ 100000000, HAS_TKEEP 0, HAS_TLAST 1, HAS_TREADY 1, HAS_TSTRB 0, INSERT_VIP 0, LAYERED_METADATA undef, PHASE 0.0, TDATA_NUM_BYTES 1, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0";
   attribute X_INTERFACE_INFO of DDR_addr : signal is "xilinx.com:interface:ddrx:1.0 DDR ADDR";
   attribute X_INTERFACE_PARAMETER of DDR_addr : signal is "XIL_INTERFACENAME DDR, AXI_ARBITRATION_SCHEME TDM, BURST_LENGTH 8, CAN_DEBUG false, CAS_LATENCY 11, CAS_WRITE_LATENCY 11, CS_ENABLED true, DATA_MASK_ENABLED true, DATA_WIDTH 8, MEMORY_TYPE COMPONENTS, MEM_ADDR_MAP ROW_COLUMN_BANK, SLOT Single, TIMEPERIOD_PS 1250";
   attribute X_INTERFACE_INFO of DDR_ba : signal is "xilinx.com:interface:ddrx:1.0 DDR BA";
@@ -827,7 +845,13 @@ architecture STRUCTURE of design_1 is
   attribute X_INTERFACE_INFO of DDR_dqs_p : signal is "xilinx.com:interface:ddrx:1.0 DDR DQS_P";
   attribute X_INTERFACE_INFO of FIXED_IO_mio : signal is "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO MIO";
 begin
-full_tx_ip_fir_reduc_0: component design_1_full_tx_ip_fir_reduc_0_0
+  AXI4_Stream_Slave_0_1_TDATA(7 downto 0) <= AXI4_Stream_Slave_0_tdata(7 downto 0);
+  AXI4_Stream_Slave_0_1_TLAST <= AXI4_Stream_Slave_0_tlast;
+  AXI4_Stream_Slave_0_1_TVALID <= AXI4_Stream_Slave_0_tvalid;
+  AXI4_Stream_Slave_0_tready <= AXI4_Stream_Slave_0_1_TREADY;
+  data_out_0(15 downto 0) <= full_tx_ip_0_data_out(15 downto 0);
+  valid_out_0 <= full_tx_ip_0_valid_out;
+full_tx_ip_0: component design_1_full_tx_ip_0_0
      port map (
       AXI4_Lite_ACLK => processing_system7_0_FCLK_CLK0,
       AXI4_Lite_ARADDR(15 downto 0) => ps7_0_axi_periph_M00_AXI_ARADDR(15 downto 0),
@@ -848,12 +872,14 @@ full_tx_ip_fir_reduc_0: component design_1_full_tx_ip_fir_reduc_0_0
       AXI4_Lite_WREADY => ps7_0_axi_periph_M00_AXI_WREADY,
       AXI4_Lite_WSTRB(3 downto 0) => ps7_0_axi_periph_M00_AXI_WSTRB(3 downto 0),
       AXI4_Lite_WVALID => ps7_0_axi_periph_M00_AXI_WVALID,
-      AXI4_Stream_Slave_TDATA(7 downto 0) => B"00000000",
-      AXI4_Stream_Slave_TLAST => '0',
-      AXI4_Stream_Slave_TREADY => NLW_full_tx_ip_fir_reduc_0_AXI4_Stream_Slave_TREADY_UNCONNECTED,
-      AXI4_Stream_Slave_TVALID => '0',
+      AXI4_Stream_Slave_TDATA(7 downto 0) => AXI4_Stream_Slave_0_1_TDATA(7 downto 0),
+      AXI4_Stream_Slave_TLAST => AXI4_Stream_Slave_0_1_TLAST,
+      AXI4_Stream_Slave_TREADY => AXI4_Stream_Slave_0_1_TREADY,
+      AXI4_Stream_Slave_TVALID => AXI4_Stream_Slave_0_1_TVALID,
       IPCORE_CLK => processing_system7_0_FCLK_CLK0,
-      IPCORE_RESETN => rst_ps7_0_50M_peripheral_aresetn(0)
+      IPCORE_RESETN => rst_ps7_0_50M_peripheral_aresetn(0),
+      data_out(15 downto 0) => full_tx_ip_0_data_out(15 downto 0),
+      valid_out => full_tx_ip_0_valid_out
     );
 processing_system7_0: component design_1_processing_system7_0_0
      port map (

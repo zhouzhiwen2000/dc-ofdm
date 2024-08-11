@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0xCC6CFA53B4580162",
+      "boundary_crc": "0x5E1E7D82EEC9BA2E",
       "device": "xc7z010clg400-1",
       "gen_directory": "../../../../red_pitaya_tx.gen/sources_1/bd/design_1",
       "name": "design_1",
@@ -18,7 +18,7 @@
         }
       },
       "rst_ps7_0_50M": "",
-      "full_tx_ip_fir_reduc_0": ""
+      "full_tx_ip_0": ""
     },
     "interface_ports": {
       "DDR": {
@@ -188,6 +188,82 @@
             "direction": "IO"
           }
         }
+      },
+      "AXI4_Stream_Slave_0": {
+        "mode": "Slave",
+        "vlnv_bus_definition": "xilinx.com:interface:axis:1.0",
+        "vlnv": "xilinx.com:interface:axis_rtl:1.0",
+        "parameters": {
+          "FREQ_HZ": {
+            "value": "100000000",
+            "value_src": "default"
+          },
+          "HAS_TKEEP": {
+            "value": "0"
+          },
+          "HAS_TLAST": {
+            "value": "1"
+          },
+          "HAS_TREADY": {
+            "value": "1"
+          },
+          "HAS_TSTRB": {
+            "value": "0"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "LAYERED_METADATA": {
+            "value": "undef"
+          },
+          "PHASE": {
+            "value": "0.0",
+            "value_src": "default"
+          },
+          "TDATA_NUM_BYTES": {
+            "value": "1"
+          },
+          "TDEST_WIDTH": {
+            "value": "0"
+          },
+          "TID_WIDTH": {
+            "value": "0"
+          },
+          "TUSER_WIDTH": {
+            "value": "0"
+          }
+        },
+        "port_maps": {
+          "TDATA": {
+            "physical_name": "AXI4_Stream_Slave_0_tdata",
+            "direction": "I",
+            "left": "7",
+            "right": "0"
+          },
+          "TVALID": {
+            "physical_name": "AXI4_Stream_Slave_0_tvalid",
+            "direction": "I"
+          },
+          "TLAST": {
+            "physical_name": "AXI4_Stream_Slave_0_tlast",
+            "direction": "I"
+          },
+          "TREADY": {
+            "physical_name": "AXI4_Stream_Slave_0_tready",
+            "direction": "O"
+          }
+        }
+      }
+    },
+    "ports": {
+      "data_out_0": {
+        "direction": "O",
+        "left": "15",
+        "right": "0"
+      },
+      "valid_out_0": {
+        "direction": "O"
       }
     },
     "components": {
@@ -214,7 +290,7 @@
             "value": "10.000000"
           },
           "PCW_ACT_FPGA0_PERIPHERAL_FREQMHZ": {
-            "value": "50.000000"
+            "value": "100.000000"
           },
           "PCW_ACT_FPGA1_PERIPHERAL_FREQMHZ": {
             "value": "10.000000"
@@ -268,7 +344,7 @@
             "value": "111.111115"
           },
           "PCW_CLK0_FREQ": {
-            "value": "50000000"
+            "value": "100000000"
           },
           "PCW_CLK1_FREQ": {
             "value": "10000000"
@@ -281,6 +357,9 @@
           },
           "PCW_DDR_RAM_HIGHADDR": {
             "value": "0x3FFFFFFF"
+          },
+          "PCW_FPGA0_PERIPHERAL_FREQMHZ": {
+            "value": "100"
           },
           "PCW_FPGA_FCLK0_ENABLE": {
             "value": "1"
@@ -656,15 +735,21 @@
         "xci_path": "ip/design_1_rst_ps7_0_50M_0/design_1_rst_ps7_0_50M_0.xci",
         "inst_hier_path": "rst_ps7_0_50M"
       },
-      "full_tx_ip_fir_reduc_0": {
-        "vlnv": "user.org:ip:full_tx_ip_fir_reduced:1.0",
-        "ip_revision": "2113683816",
-        "xci_name": "design_1_full_tx_ip_fir_reduc_0_0",
-        "xci_path": "ip/design_1_full_tx_ip_fir_reduc_0_0/design_1_full_tx_ip_fir_reduc_0_0.xci",
-        "inst_hier_path": "full_tx_ip_fir_reduc_0"
+      "full_tx_ip_0": {
+        "vlnv": "user.org:ip:full_tx_ip:2.0",
+        "ip_revision": "2113685797",
+        "xci_name": "design_1_full_tx_ip_0_0",
+        "xci_path": "ip/design_1_full_tx_ip_0_0/design_1_full_tx_ip_0_0.xci",
+        "inst_hier_path": "full_tx_ip_0"
       }
     },
     "interface_nets": {
+      "AXI4_Stream_Slave_0_1": {
+        "interface_ports": [
+          "AXI4_Stream_Slave_0",
+          "full_tx_ip_0/AXI4_Stream_Slave"
+        ]
+      },
       "processing_system7_0_DDR": {
         "interface_ports": [
           "DDR",
@@ -686,11 +771,23 @@
       "ps7_0_axi_periph_M00_AXI": {
         "interface_ports": [
           "ps7_0_axi_periph/M00_AXI",
-          "full_tx_ip_fir_reduc_0/AXI4_Lite"
+          "full_tx_ip_0/AXI4_Lite"
         ]
       }
     },
     "nets": {
+      "full_tx_ip_0_data_out": {
+        "ports": [
+          "full_tx_ip_0/data_out",
+          "data_out_0"
+        ]
+      },
+      "full_tx_ip_0_valid_out": {
+        "ports": [
+          "full_tx_ip_0/valid_out",
+          "valid_out_0"
+        ]
+      },
       "processing_system7_0_FCLK_CLK0": {
         "ports": [
           "processing_system7_0/FCLK_CLK0",
@@ -699,8 +796,8 @@
           "rst_ps7_0_50M/slowest_sync_clk",
           "ps7_0_axi_periph/M00_ACLK",
           "ps7_0_axi_periph/ACLK",
-          "full_tx_ip_fir_reduc_0/AXI4_Lite_ACLK",
-          "full_tx_ip_fir_reduc_0/IPCORE_CLK"
+          "full_tx_ip_0/AXI4_Lite_ACLK",
+          "full_tx_ip_0/IPCORE_CLK"
         ]
       },
       "processing_system7_0_FCLK_RESET0_N": {
@@ -715,8 +812,8 @@
           "ps7_0_axi_periph/S00_ARESETN",
           "ps7_0_axi_periph/M00_ARESETN",
           "ps7_0_axi_periph/ARESETN",
-          "full_tx_ip_fir_reduc_0/AXI4_Lite_ARESETN",
-          "full_tx_ip_fir_reduc_0/IPCORE_RESETN"
+          "full_tx_ip_0/AXI4_Lite_ARESETN",
+          "full_tx_ip_0/IPCORE_RESETN"
         ]
       }
     },
@@ -725,8 +822,8 @@
         "address_spaces": {
           "Data": {
             "segments": {
-              "SEG_full_tx_ip_fir_reduc_0_reg0": {
-                "address_block": "/full_tx_ip_fir_reduc_0/AXI4_Lite/reg0",
+              "SEG_full_tx_ip_0_reg0": {
+                "address_block": "/full_tx_ip_0/AXI4_Lite/reg0",
                 "offset": "0x43C00000",
                 "range": "64K"
               }

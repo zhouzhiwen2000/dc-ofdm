@@ -3,7 +3,7 @@
 	"modules": {
 		"design_1": {
 			"proto_instances": {
-				"/full_tx_ip_fir_reduc_0/AXI4_Lite": {
+				"/full_tx_ip_0/AXI4_Lite": {
 					"interface": "xilinx.com:interface:aximm:1.0",
 					"ports": {
 						"ACLK": { "actual": "AXI4_Lite_ACLK"},
@@ -25,6 +25,17 @@
 						"WREADY": { "actual": "AXI4_Lite_WREADY"},
 						"WSTRB": { "actual": "AXI4_Lite_WSTRB[3:0]"},
 						"WVALID": { "actual": "AXI4_Lite_WVALID"}
+					}
+				},
+				"/full_tx_ip_0/AXI4_Stream_Slave": {
+					"interface": "xilinx.com:interface:axis:1.0",
+					"ports": {
+						"ACLK": { "actual": "IPCORE_CLK"},
+						"ARESETN": { "actual": "IPCORE_RESETN"},
+						"TDATA": { "actual": "AXI4_Stream_Slave_TDATA[7:0]"},
+						"TLAST": { "actual": "AXI4_Stream_Slave_TLAST"},
+						"TREADY": { "actual": "AXI4_Stream_Slave_TREADY"},
+						"TVALID": { "actual": "AXI4_Stream_Slave_TVALID"}
 					}
 				},
 				"/processing_system7_0/M_AXI_GP0": {
