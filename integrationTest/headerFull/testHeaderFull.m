@@ -10,14 +10,15 @@ addpath("../../inc");
 constants;
 
 %% Input
-paramFile(1) = "param1.m";
-[reg0, reg1, reg2, reg3] = param2regs(paramFile(1), false);
+paramFile = ["param1.m", "param1.m"];
+for i=1:1:length(paramFile)
+    [reg0(i), reg1(i), reg2(i), reg3(i)] = param2regs(paramFile(i), false);
+end
 newFrame = logical([1; 0]);
 
 %% Simulation Time
-fs = 1;                     % Output sample frequency
-latency = 500;             % Algorithm latency. Delay between input and output
-stopTime = (length(newFrame)-1)/(fs) + latency;
+latency = 10000/fs;             % Algorithm latency. Delay between input and output
+stopTime = latency;
 
 %% Run the simulation
 model_name = "HDLHeaderFull";
