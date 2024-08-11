@@ -3,31 +3,32 @@ clc; clear; close all;
 addpath("../../src");
 addpath("../../inc");
 constants;
-parameters;
 
 %% Input
+paramFile = "sampleParametersFile";
+delayIn = 1000; % Used for channel simulation in Simulink
+% msgIn = ['This is an example message used to test the transmitter. ' ...
+%     'It is made large on purpose to test for a large message being ' ...
+%     'transmitted'];
+msgIn = randomStr(4096);
 
-% Create databits, as a matrix with 8 columns (each row is a char), and
-% then transform to chars.
-if(payloadLenInFecBlocks ~= 0)
-    dataBits = logical(randi([0 1], payloadLenInBits, 1));
-    dataBitsMat = reshape(dataBits, axiWidth, payloadLenInWords)';
-    dataIn = uint8(zeros(payloadLenInWords, 1));
-    for i = 1:payloadLenInWords
-        dataIn(i) = uint8(binl2dec(dataBitsMat(i,:)));
-    end
-    validIn = true(size(dataBits));
-else
-    validIn = false;
-    dataBits = 0;
-    dataIn = [0 0];
-end
+pBits = str2binl(msgIn);
+pBits = getPayloadParamsFromBits(pBits);
+pWords = binl2str(pBits);
 
-[reg0, reg1, reg2, reg3] = param2regs("parameters", false);
+validIn = true(length(pWords), 1);
 newFrame = logical([1; 0]);
 
+[reg0, reg1, reg2, reg3] = param2regs(paramFile, pBits);
+
+% payloadLenInFecBlocks is used to end the simulation, and
+% payloadExtraWords is used to remove the additional bytes from the
+% messsage.
+[~, payloadLenInFecBlocks, ~, ~, payloadExtraWords] = ...
+    getPayloadParamsFromBits(pBits);
+
 %% Simulation Time
-latency = 60000/fs;         % Algorithm latency. Delay between input and output
+latency = 1000000/fs;         % Algorithm latency. Delay between input and output
 stopTime = (length(validIn)-1)/fs + latency;
 
 %% Run the simulation
@@ -57,15 +58,14 @@ reg2Out = reg2Out(endOutIdx);
 reg3Out = get(simOut, "reg3Out");
 reg3Out = reg3Out(endOutIdx);
 
-%% Compare with MATLAB reference algorithm
-
-% Header was read correctly
+%% Compare header
 assert(isequal(reg0Out, reg0));
 assert(isequal(reg1Out, reg1));
 assert(isequal(reg2Out, reg2));
 assert(isequal(reg3Out, reg3));
 disp("Header was read correctly!");
 
+%% Compare payload
 startIdx = find(startOut == true);
 endIdx = find(endOut == true);
 
@@ -75,11 +75,17 @@ assert(isequal(length(startIdx), length(endIdx)), ...
 assert(~isempty(startIdx), "No start signal");
 assert(isequal(length(startIdx), payloadLenInFecBlocks), "Wrong number of payload bits read");
 
-expectedOut = reshape(dataIn, payloadWordsPerBlock0, []);
+
+msgOut = '';
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
-    assert(isequal(expectedOut(:,i), out));
+    if (i == length(startIdx))
+        out = out(1:end-payloadExtraWords);
+    end
+    msgOut = strcat(msgOut, char(out)');
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
+
+assert(isequal(msgOut, msgIn), "Sent and received message should be the same!");
 
 disp("Test successfull!");
