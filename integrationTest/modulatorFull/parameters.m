@@ -66,7 +66,7 @@ scramblerInitialization = logical([1 1 1 1]);
 batId = logical([0 0 1 0 0]);
 
 % Number of samples for the cyclic prefix. Ncp = k* N /32. 3 bits max
-cyclicPrefixId = logical([0 0 0]);
+cyclicPrefixId = logical([0 0 1]);
 
 % MIMO not supported
 explicitMimoPilotSymbolCombSpacing = logical([0 0 0]);

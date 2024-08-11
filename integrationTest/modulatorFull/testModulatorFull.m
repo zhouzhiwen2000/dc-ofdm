@@ -42,6 +42,9 @@ OFDMSignal = interpolator(OFDMSignal);
 expectedOut = upshifter(OFDMSignal);
 
 %% Inputs
+% The same symbol will be sent "numberOfRepetitions" times.
+numberOfRepetitions = 2;
+delayLen = 1000;
 
 % Raw bits to words for the header
 hx = headerOFDMSymbols(:);
@@ -50,7 +53,7 @@ for i=1:headerBitsPerSubcarrier:length(hx)-1
     h(floor(i/headerBitsPerSubcarrier)+1) = binl2dec(hx(i:i+headerBitsPerSubcarrier-1));
 end
 
-% Raw bits to wrodds for the payload
+% Raw bits to words for the payload
 px = payloadOFDMSymbols(:);
 p = zeros(length(payloadOFDMSymbols(:))/payloadBitsPerSubcarrier, 1);
 for i=1:payloadBitsPerSubcarrier:length(px)-1
@@ -68,25 +71,30 @@ bitsPerSubcarrier = [
     repmat(preambleBitsPerSubcarrier, length(preambleOFDMSymbols(:)), 1);
     repmat(channelBitsPerSubcarrier, length(channelOFDMSymbols(:)), 1);
     repmat(headerBitsPerSubcarrier, length(headerOFDMSymbols(:))/headerBitsPerSubcarrier, 1);
-    repmat(payloadBitsPerSubcarrier, length(payloadOFDMSymbols(:)), 1);
-
+    repmat(payloadBitsPerSubcarrier, length(payloadOFDMSymbols(:))/payloadBitsPerSubcarrier, 1);
+    zeros(delayLen, 1);
 ];
 
 init = [
     repmat(preambleScramblerInit, length(preambleOFDMSymbols(:)), 1);
     repmat(channelScramblerInit, length(channelOFDMSymbols(:)), 1);
     repmat(headerScramblerInit, length(headerOFDMSymbols(:))/headerBitsPerSubcarrier, 1);
-    repmat(payloadScramblerInit, length(payloadOFDMSymbols(:)), 1);
+    repmat(payloadScramblerInit, length(payloadOFDMSymbols(:))/payloadBitsPerSubcarrier, 1);
+    zeros(delayLen, 13);
 ];
 
 cpLen = [
     repmat(preambleCyclicPrefixLen, length(preambleOFDMSymbols(:)), 1);
     repmat(channelCyclicPrefixLen, length(channelOFDMSymbols(:)), 1);
     repmat(headerCyclicPrefixLen, length(headerOFDMSymbols(:))/headerBitsPerSubcarrier, 1);
-    repmat(payloadCyclicPrefixLen, length(payloadOFDMSymbols(:)), 1);
+    repmat(payloadCyclicPrefixLen, length(payloadOFDMSymbols(:))/payloadBitsPerSubcarrier, 1);
+    zeros(delayLen, 1);
 ];
 
-validIn = true(length(dataSymbols), 1);
+validIn = [
+    true(length(dataSymbols), 1);
+    false(delayLen, 1);
+];
 
 %% Simulation Time
 latency = 1000000/fs;         % Algorithm latency. Delay between input and output
