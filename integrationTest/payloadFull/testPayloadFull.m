@@ -12,54 +12,67 @@ addpath("../../inc");
 constants;
 
 %% Input
-simNormal = true;
-simLarge = false;
+paramFile = "sampleParametersFile";
+msgIn{1} = ['This is an example message used to test the transmitter. ' ...
+    'It is made large on purpose to test for a large message being ' ...
+    'transmitted'];
+msgIn{2} = 'This is a second message';
+msgIn{3} = 'This is a third message';
 
-if (simNormal == true)
-    payloadLenInFecBlocks = 3;
-    payloadLenInBits = payloadLenInFecBlocks*payloadBitsPerBlock0;
-    payloadLenInWords = payloadLenInBits/axiWidth;
-    disp("Running normal simulation");
-
-elseif (simLarge == true)
-    % Define the payload length with the amount of words
-    payloadLenInWords = 2^16;
-    payloadLenInBits = payloadLenInWords*axiWidth;
-    payloadLenInFecBlocks = ceil(payloadLenInBits/payloadBitsPerBlock0);
-    
-    % The amount of bits and words should be a multiple of the fec block
-    % size.
-    payloadLenInBits = payloadLenInFecBlocks*payloadBitsPerBlock0;
-    payloadLenInWords = payloadLenInBits/axiWidth;
-    disp("Running large frame simulation");
-else
-    error("No simulation type selected");
+pWords = [];
+validIn = [];
+lastIn = [];
+for i=1:1:length(msgIn)
+    pBitsRaw{i} = str2binl(msgIn{i});
+    pBitsRaw{i} = getPayloadParamsFromBits(pBitsRaw{i});
+    pWords = [pWords binl2str(pBitsRaw{i})];
+    len = length(binl2str(pBitsRaw{i}));
+    validIn = [validIn; true(len, 1);];
+    lastIn = [lastIn; false(len-1, 1); true;];
 end
 
-% Create databits, as a matrix with 8 columns (each row is a char), and
-% then transform to chars.
-dataBits = logical(randi([0 1], payloadLenInBits, 1));
-dataBitsMat = reshape(dataBits, axiWidth, payloadLenInWords)';
-dataChars = uint8(zeros(payloadLenInWords, 1));
-for i = 1:payloadLenInWords
-    dataChars(i) = uint8(binl2dec(dataBitsMat(i,:)));
+newFrame = true;
+
+% Run parameters file to get the following header constants
+pBits = [];
+run(paramFile);
+
+
+%% Expected Output Payload
+expectedOut = cell(length(msgIn), 1);
+scramblerInitLSB = zeros(4, 1, length(msgIn)+1);
+fecRateLSB = zeros(3, 1, length(msgIn)+1);
+blockSizeLSB = zeros(2, 1, length(msgIn)+1);
+batIdLSB = zeros(5, 1, length(msgIn)+1);
+psduSizeLSB = zeros(24, 1, length(msgIn)+1);
+repNumberLSB = zeros(3, 1, length(msgIn)+1);
+
+for j=1:1:length(msgIn)
+    % Update header parameters and set in tx order
+    pBits = binl2tx(pBitsRaw{j});
+    run(paramFile);
+    scramblerInitLSB(:,1, j) = flip(scramblerInitialization);
+    fecRateLSB(:,1, j) = flip(fecRate);
+    blockSizeLSB(:,1, j) = flip(blockSize);
+    batIdLSB(:,1, j) = flip(batId);
+    psduSizeLSB(:,1, j) = flip(psduSize);
+    repNumberLSB(:,1, j) = flip(repetitionNumber);
+
+    pBits = reshape(pBits, payloadBitsPerBlock0, payloadLenInFecBlocks);
+    pLDPC = false(payloadBitsPerFec, payloadLenInFecBlocks);
+    for i=1:1:payloadLenInFecBlocks
+        pScrambled = payloadScrambler(scramblerInitialization, pBits(:,i));
+        pLDPC(:,i) = LDPCEncoder(pScrambled, binl2dec(fecRate), binl2dec(blockSize), false);
+    end
+    pLDPC = pLDPC(:);
+    payloadOFDMSymbols = toneMapping(pLDPC, binl2dec(batId));
+    expectedOut{j} = payloadOFDMSymbols(:);
 end
 
-validIn = true(size(dataBits));
-
-newFrame = logical([0; 0; 0; 0; 0; 1;]);
-
-% All values for the parameters are LSB first
-scramblerInit = logical([1 1 0 0]);
-fecRate = logical([1 0 0]);
-blockSize = logical([0 0]);
-batId = logical([0 1 0 0 0]);
-psduSize = flip(dec2binl(payloadLenInWords, 24))';
-repNumber = logical([0 0 0]);
 
 %% Simulation Time
-latency = 1000000/fs;             % Algorithm latency. Delay between input and output
-stopTime = (length(dataChars)-1)/(fs) + latency;
+latency = 10000/fs;             % Algorithm latency. Delay between input and output
+stopTime = (length(pWords)-1)/fs + latency;
 
 %% Run the simulation
 model_name = "HDLPayloadFull";
@@ -72,28 +85,22 @@ startOut = get(simOut, "startOut");
 endOut = get(simOut, "endOut");
 validOut = get(simOut, "validOut");
 
-%% Compare with MATLAB reference algorithm
-dataBitsLsb = binl2tx(dataBits);
-for i=1:payloadLenInFecBlocks
-    p = payloadScrambler(scramblerInit, dataBitsLsb(1+(i-1)*payloadBitsPerBlock0:payloadBitsPerBlock0*i));
-    p = LDPCEncoder(p, binl2dec(flip(fecRate)), binl2dec(flip(blockSize)), false);
-    p = puncturing(p, binl2dec(flip(fecRate)), binl2dec(flip(blockSize)));
-    p = payloadRepetitionEncoder(p, 1);
-    expectedOut(:, i) = p;
-end
-
-expectedOut = toneMapping(expectedOut(:), binl2dec(flip(batId)));
-expectedOut = expectedOut(:);
-
 %% Actual test
 startIdx = find(startOut == true);
 endIdx = find(endOut == true);
 
-assert(~isempty(startIdx), "startIdx shouldn't be empty");
+assert(~isempty(startIdx), ...
+    "StartIdx shouldn't be empty");
+assert(isequal(length(startIdx), length(endIdx)), ...
+    "Start and end should be of the same size");
+assert(isequal(length(startIdx), length(msgIn)), ...
+    "Messages and start indexes should be the same number");
 
-out = dataOut(startIdx(1):endIdx(1));
-valid = validOut(startIdx(1):endIdx(1));
-out = out(valid == true);
-assert(isequal(expectedOut, out));
+for i=1:1:length(msgIn)
+    out = dataOut(startIdx(i):endIdx(i));
+    valid = validOut(startIdx(i):endIdx(i));
+    out = out(valid == true);
+    assert(isequal(expectedOut{i}, out));
+end
 
 disp("Test successfull!");
