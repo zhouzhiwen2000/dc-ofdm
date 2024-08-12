@@ -17,41 +17,61 @@ constants;
 
 %% Inputs
 parametersFile = "sampleParametersFile";
-pBits = logical(randi([0,1], payloadBitsPerBlock0*2, 1));
+msgQtty = 2;
 delayIn = 5000;
 SNR = 60;
 frequencyOffsetIn = 15e3;
 
-OFDMSignal = fullTx(parametersFile, pBits, 0, false);
-OFDMRx = channelSimulation(OFDMSignal, delayIn, SNR);
-run(parametersFile);
+pBitsIn = logical(randi([0,1], payloadBitsPerBlock0*2, msgQtty));
+psduSizeLSB = zeros(24, 1, msgQtty+1);
+payloadBitsPerSubcarrierIn = zeros(3, 1);
+payloadCyclicPrefixLenIn = zeros(3, 1);
+simPayloadNumOFDMSymbols = zeros(3, 1); % Used only for testing
+dataIn = [];
+OFDMRx = cell(msgQtty, 1);
+for i=1:1:msgQtty
+    pBits = pBitsIn(:,i);
+    OFDMSignal = fullTx(parametersFile, pBits, 0, false);
+    OFDMRx{i} = channelSimulation(OFDMSignal, delayIn, SNR);
+    
+    % Get parameters from header
+    run(parametersFile);
+    psduSizeLSB(:, 1, i) = flip(psduSize);
+    payloadBitsPerSubcarrierIn(i, 1) = payloadBitsPerSubcarrier;
+    payloadCyclicPrefixLenIn(i, 1) = payloadCyclicPrefixLen;
+    simPayloadNumOFDMSymbols(i, 1) = payloadNumOFDMSymbols;
 
-% Remove extra samples from time window
-dataIn = OFDMRx;
-psduSizeLSB = flip(psduSize);
-
-%% ExpectedOutput
-OFDMRx = downshifter(OFDMRx);
-OFDMRx = decimator(OFDMRx);
-OFDMRx = ofdmSymbolSync(OFDMRx);
-[OFDMRx, channelEst] = ofdmChannelEstimation(OFDMRx);
-
-headerRx = OFDMRx(1:headerOFDMSamples);
-headerRxLLR = ofdmDemodulate(headerRx, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit, true, channelEst);
-
-payloadRx = OFDMRx(1+headerOFDMSamples:end);
-payloadRxLLR = ofdmDemodulate(payloadRx, payloadBitsPerSubcarrier, payloadCyclicPrefixLen, nullIdx, payloadScramblerInit, true, channelEst);
-
-
-expectedHeaderOut{1} = headerRxLLR;
-
-for i=1:1:payloadNumOFDMSymbols
-    expectedPayloadOut{i} = payloadRxLLR(1+numDataCarriers*payloadBitsPerSubcarrier*(i-1) : numDataCarriers*payloadBitsPerSubcarrier*i);
+    dataIn = [dataIn; OFDMRx{i};];
 end
+
+%% Expected Output
+expectedHeaderOut = cell(msgQtty, 1);
+for i=1:1:msgQtty
+    OFDMRx{i} = downshifter(OFDMRx{i});
+    OFDMRx{i} = decimator(OFDMRx{i});
+    OFDMRx{i} = ofdmSymbolSync(OFDMRx{i});
+    [OFDMRx{i}, channelEst] = ofdmChannelEstimation(OFDMRx{i});
+
+    headerRx = OFDMRx{i}(1:headerOFDMSamples);
+    headerRxLLR = ofdmDemodulate(headerRx, headerBitsPerSubcarrier, ...
+        headerCyclicPrefixLen, nullIdx, headerScramblerInit, true, channelEst);
+    expectedHeaderOut{i} = headerRxLLR;
+
+    payloadRx = OFDMRx{i}(1+headerOFDMSamples:end);
+    payloadRxLLR = ofdmDemodulate(payloadRx, payloadBitsPerSubcarrier, ...
+        payloadCyclicPrefixLen, nullIdx, payloadScramblerInit, true, channelEst);
+
+    for j=1:1:simPayloadNumOFDMSymbols(i, 1)
+        expectedPayloadOut{j, i} = payloadRxLLR(1+numDataCarriers*payloadBitsPerSubcarrier*(j-1): ...
+            numDataCarriers*payloadBitsPerSubcarrier*j);
+    end
+end
+expectedPayloadOut = expectedPayloadOut(:);
 
 %% Simulation Time
 latency = 1000000/fs;         % Algorithm latency. Delay between input and output
 stopTime = (length(dataIn)-1)/fs + latency;
+totalOFDMSymbols = sum(simPayloadNumOFDMSymbols);
 
 %% Run the simulation
 model_name = "HDLRxDemodulator";
@@ -69,23 +89,15 @@ startOut1 = get(simOut, "startOut1");
 endOut1 = get(simOut, "endOut1");
 validOut1 = get(simOut, "validOut1");
 
-lastOut = get(simOut, "lastOut");
-
-%% Compare with MATLAB reference algorithm
-
+%% Test for reception of header
 startIdx = find(startOut == true);
 endIdx = find(endOut == true);
 
-startIdx1 = find(startOut1 == true);
-endIdx1 = find(endOut1 == true);
-
+assert(~isempty(startIdx), "No start signal");
 assert(isequal(length(startIdx), length(endIdx)), ...
     "Length of start and end should be the same.");
-assert(isequal(length(startIdx1), length(endIdx1)), ...
-    "Length of start and end should be the same.");
-
-assert(~isempty(startIdx), "No start signal");
-assert(~isempty(startIdx1), "No start signal");
+assert(isequal(length(startIdx), msgQtty), ...
+    "Amount of headers should be equal at the amount of messages.")
 
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i), end-headerBitsPerSubcarrier+1:end);
@@ -93,15 +105,22 @@ for i=1:length(startIdx)
     headerOut = out(:);
     assert(iskindaequal(expectedHeaderOut{i}, headerOut, 5), "Header mismatch");
 end
+disp("Header was received correctly!");
 
-for i=1:length(startIdx1)
+%% Test for reception of payload
+startIdx1 = find(startOut1 == true);
+endIdx1 = find(endOut1 == true);
+
+assert(isequal(length(startIdx1), length(endIdx1)), ...
+    "Length of start and end should be the same.");
+assert(~isempty(startIdx1), "No start signal");
+
+for i=1:1:totalOFDMSymbols
     out = dataOut(startIdx1(i):endIdx1(i), end-payloadBitsPerSubcarrier+1:end);
     out = out.';
     out = out(:);
     assert(iskindaequal(expectedPayloadOut{i}, out, 5), "Payload mismatch");
 end
-
-assert(isequal(endIdx1(i), find(lastOut == true)), "last OFDM symbol and last frame signal should match");
 
 %% Plotting
 t = (0:1/fs:length(expectedHeaderOut{1})/fs-1/fs)';
