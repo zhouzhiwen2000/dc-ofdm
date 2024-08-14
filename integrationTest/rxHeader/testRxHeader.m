@@ -19,12 +19,12 @@ h = headerRepetitionEncoder(h);
 h = ofdmModulate(h, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit);
 dataLLR = ofdmDemodulate(h, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit, true);
 
-dataLLR = [dataLLR; zeros(5000, 1); dataLLR];
-
 startIn = [
     true; false(length(dataLLR)-1, 1); false(5000, 1);
     true;
 ];
+
+dataLLR = [dataLLR; zeros(5000, 1); dataLLR];
 
 %% Simulation Time
 latency = 10000/fPHY;         % Algorithm latency. Delay between input and output
@@ -51,7 +51,7 @@ assert(~isempty(headerEndOutIdx), ...
 assert(isequal(length(headerEndOutIdx), 2), ...
     "There should be the same amount of headers received than messages sent.");
 
-for i=1:i:length(headerEndOutIdx)
+for i=1:1:length(headerEndOutIdx)
     assert(isequal(reg0Out(headerEndOutIdx(i)), reg0));
     assert(isequal(reg1Out(headerEndOutIdx(i)), reg1));
     assert(isequal(reg2Out(headerEndOutIdx(i)), reg2));
