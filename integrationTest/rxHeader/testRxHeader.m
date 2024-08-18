@@ -6,25 +6,31 @@ addpath("../../inc");
 constants;
 
 %% Inputs
-paramFile = "param.m";
-run(paramFile);
-[reg0, reg1, reg2, reg3] = param2regs(paramFile, false);
+paramFile{1} = "param.m";
+paramFile{2} = "param2.m";
 
-h = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
-    fecConcatenationFactor, scramblerInitialization, batId, cyclicPrefixId, ...
-    explicitMimoPilotSymbolCombSpacing, explicitMimoPilotSymbolNumber);
-h = headerScrambler(h);
-h = LDPCEncoder(h, 0, 0, true);
-h = headerRepetitionEncoder(h);
-h = ofdmModulate(h, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit);
-dataLLR = ofdmDemodulate(h, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit, true);
-
-startIn = [
-    true; false(length(dataLLR)-1, 1); false(5000, 1);
-    true;
-];
-
-dataLLR = [dataLLR; zeros(5000, 1); dataLLR];
+startIn = [];
+dataLLR = [];
+reg0 = zeros(length(paramFile), 1);
+reg1 = zeros(size(reg0));
+reg2 = zeros(size(reg0));
+reg3 = zeros(size(reg0));
+for i =1:1:length(paramFile)
+    run(paramFile{i});
+    [reg0(i,1), reg1(i,1), reg2(i,1), reg3(i,1)] = param2regs(paramFile{i}, false);
+    
+    h = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
+        fecConcatenationFactor, scramblerInitialization, batId, cyclicPrefixId, ...
+        explicitMimoPilotSymbolCombSpacing, explicitMimoPilotSymbolNumber);
+    h = headerScrambler(h);
+    h = LDPCEncoder(h, 0, 0, true);
+    h = headerRepetitionEncoder(h);
+    h = ofdmModulate(h, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit);
+    llr = ofdmDemodulate(h, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit, true);
+    
+    startIn = [startIn; true; false(length(llr)-1, 1); false(5000, 1);];
+    dataLLR = [dataLLR; llr; zeros(5000, 1);];
+end
 
 %% Simulation Time
 latency = 10000/fPHY;         % Algorithm latency. Delay between input and output
@@ -48,14 +54,14 @@ headerEndOutIdx = find(headerEndOut == true);
 
 assert(~isempty(headerEndOutIdx), ...
     "headerEndOutIdx shouldn't be empty");
-assert(isequal(length(headerEndOutIdx), 2), ...
+assert(isequal(length(headerEndOutIdx), length(paramFile)), ...
     "There should be the same amount of headers received than messages sent.");
 
 for i=1:1:length(headerEndOutIdx)
-    assert(isequal(reg0Out(headerEndOutIdx(i)), reg0));
-    assert(isequal(reg1Out(headerEndOutIdx(i)), reg1));
-    assert(isequal(reg2Out(headerEndOutIdx(i)), reg2));
-    assert(isequal(reg3Out(headerEndOutIdx(i)), reg3));
+    assert(isequal(reg0Out(headerEndOutIdx(i)), reg0(i,1)));
+    assert(isequal(reg1Out(headerEndOutIdx(i)), reg1(i,1)));
+    assert(isequal(reg2Out(headerEndOutIdx(i)), reg2(i,1)));
+    assert(isequal(reg3Out(headerEndOutIdx(i)), reg3(i,1)));
 end
 
 disp("Test successfull!");
