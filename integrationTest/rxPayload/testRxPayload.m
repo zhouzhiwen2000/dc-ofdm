@@ -6,74 +6,63 @@ addpath("../../inc");
 constants;
 
 %% Inputs
-simNormal = true;
-simLarge = false;
+paramFile = "sampleParametersFile";
 
-if (simNormal == true)
-    payloadLenInFecBlocks = 3;
-    payloadLenInBits = payloadLenInFecBlocks*payloadBitsPerBlock0;
-    payloadLenInWords = payloadLenInBits/axiWidth;
-    disp("Running normal simulation");
+% The inputs from Simulink are read in a special manner:
+% Because of the "remove tone mapping", and extra "ready" signal is sent,
+% but no new payload data is sent to the LDPC block. Therefore, if you
+% store serially all the data for the payload, you should consider this
+% "extra" symbols.
+% The solution is to create different inputs in Simulink, that are called
+% for each individual message.
+msgIn{1} = ['Sample message to test the payload, made large to have more' ...
+    'than one fec block in bits as size. Something more to say? Well, ' ...
+    'this project has taken a lot of time, and Im tired. I hope that, at' ...
+    'the end, the odyssey had a purpose (puts a cigarrete on his mouth and' ...
+    'epic music starts fading in from the background'];
+msgIn{2} = 'Next message';
+msgQtty = length(msgIn);
 
-elseif (simLarge == true)
-    % Define the payload length with the amount of words
-    payloadLenInWords = 2^16;
-    payloadLenInBits = payloadLenInWords*axiWidth;
-    payloadLenInFecBlocks = ceil(payloadLenInBits/payloadBitsPerBlock0);
+% Preallocation
+scramblerInitLSB = false(4,1,msgQtty+1);
+fecRateLSB = false(3,1,msgQtty+1);
+blockSizeLSB = false(2,1,msgQtty+1);
+batIdLSB = false(5,1, msgQtty+1);
+psduSizeLSB = false(24,1,msgQtty+1);
+simPayloadExtraWords = zeros(msgQtty, 1);
+simPayloadLenInFecBlocks = zeros(msgQtty, 1);
+payloadRxLLR = cell(msgQtty);
+validIn = cell(msgQtty);
+newFrame = [];
+
+% Prepare received payloads
+for i=1:1:msgQtty
+    pBits = str2binl(msgIn{i});
+    pBits = binl2tx(pBits);     % Transmitted symbols should be LSB first
+        
+    % Make LSB first parameters for the HDL block
+    run(paramFile);
+    scramblerInitLSB(:, 1, i) = flip(scramblerInitialization);
+    fecRateLSB(:, 1, i) = flip(fecRate);
+    blockSizeLSB(:, 1, i) = flip(blockSize);
+    batIdLSB(:, 1, i) = flip(batId);
+    psduSizeLSB(:, 1, i) = flip(psduSize);
+    simPayloadLenInFecBlocks(i, 1) = length(pBits)/payloadBitsPerBlock0;
     
-    % The amount of bits and words should be a multiple of the fec block
-    % size.
-    payloadLenInBits = payloadLenInFecBlocks*payloadBitsPerBlock0;
-    payloadLenInWords = payloadLenInBits/axiWidth;
-    disp("Running large frame simulation");
-else
-    error("No simulation type selected");
+    [~, simPayloadExtraWords(i, 1), payloadOFDMSymbols] = fullTx(paramFile, pBits, 0, false);
+    
+    payloadTx = ofdmModulate(payloadOFDMSymbols, payloadBitsPerSubcarrier, payloadCyclicPrefixLen, nullIdx, payloadScramblerInit);
+    payloadRxLLR{i} = ofdmDemodulate(payloadTx, payloadBitsPerSubcarrier, payloadCyclicPrefixLen, nullIdx, payloadScramblerInit, true);
+    
+    validIn{i} = true(size(payloadRxLLR{i}));
+    newFrame = [newFrame; true; false(length(payloadRxLLR{i})-1, 1); false(50000, 1)];
 end
 
-psduSize = dec2binl(payloadLenInWords, 24)';
-blockSize = logical([0 0]);
-fecRate = logical([0 0 1]);
-repetitionNumber = logical([0 0 1]);
-scramblerInitialization = logical([1 1 1 1]);
-batId = logical([0 0 0 1 0]);
-cyclicPrefixId = logical([0 0 1]);
-
-payloadBitsPerSubcarrier = binl2dec(batId);
-payloadCyclicPrefixLen = binl2dec(cyclicPrefixId) * N / 32;
-
-% Make LSB first parameters for the HDL block
-scramblerInitLSB = flip(scramblerInitialization);
-fecRateLSB = flip(fecRate);
-blockSizeLSB = flip(blockSize);
-batIdLSB = flip(batId);
-psduSizeLSB = flip(psduSize);
-
-% Generate input data
-pBits = logical(randi([0,1], payloadBitsPerBlock0, payloadLenInFecBlocks));
-pWords = uint8(zeros(payloadWordsPerBlock0, payloadLenInFecBlocks));
-for i=1:1:payloadLenInFecBlocks
-    pBitsLSB = binl2tx(pBits(:,i));
-    for j=1:1:payloadWordsPerBlock0
-        pWords(j,i) = binl2dec(pBitsLSB(1+(j-1)*8:j*8));
-    end
-end
-
-pLDPC = false(payloadBitsPerFec, payloadLenInFecBlocks);
-for i=1:1:payloadLenInFecBlocks
-    pScrambled = payloadScrambler(scramblerInitialization, pBits(:,i));
-    pLDPC(:,i) = LDPCEncoder(pScrambled, binl2dec(fecRate), binl2dec(blockSize), false);
-end
-pLDPC = pLDPC(:);
-payloadOFDMSymbols = toneMapping(pLDPC, binl2dec(batId));
-payloadTx = ofdmModulate(payloadOFDMSymbols, payloadBitsPerSubcarrier, payloadCyclicPrefixLen, nullIdx, payloadScramblerInit);
-payloadRxLLR = ofdmDemodulate(payloadTx, payloadBitsPerSubcarrier, payloadCyclicPrefixLen, nullIdx, payloadScramblerInit, true);
-
-validIn = true(size(payloadRxLLR));
-newFrame = true;
 
 %% Simulation Time
 latency = 1000000/fPHY;         % Algorithm latency. Delay between input and output
 stopTime = (length(payloadRxLLR)-1)/(fPHY) + latency;
+totalPayloadFecBlocks = sum(simPayloadLenInFecBlocks);    % Used to end the simulation
 
 %% Run the simulation
 model_name = "HDLRxPayload";
@@ -90,16 +79,26 @@ validOut = get(simOut, "validOut");
 startIdx = find(startOut == true);
 endIdx = find(endOut == true);
 
+assert(~isempty(startIdx), ...
+    "StartIdx shouldn't be empty");
 assert(isequal(length(startIdx), length(endIdx)), ...
-    "Length of start and end should be the same.");
+    "Start and end should be of the same size");
+assert(isequal(length(startIdx), totalPayloadFecBlocks), ...
+    "Amount of received fec blocks should be the same as sent");
 
-assert(~isempty(startIdx));
-
-for i=1:length(startIdx)
-    out = dataOut(startIdx(i):endIdx(i));
-    expectedOut = pWords(:,i);
-    assert(isequal(expectedOut, out));
-    assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
+lastIndex = 1;
+for j=1:1:length(msgIn)
+    msgOut = '';
+    for i=lastIndex:1:lastIndex -1 + simPayloadLenInFecBlocks(j,1)
+        out = dataOut(startIdx(i):endIdx(i));
+        if (i == lastIndex -1 + simPayloadLenInFecBlocks(j,1))
+            out = out(1:end-simPayloadExtraWords(j,1));
+        end
+        msgOut = strcat(msgOut, char(out)');
+        assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
+    end
+    lastIndex = i + 1;
+    assert(isequal(msgOut, msgIn{j}), "Sent and received message should be the same!");
 end
 
 disp("Test successfull!");
