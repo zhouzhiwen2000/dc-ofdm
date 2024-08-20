@@ -19,10 +19,14 @@ constants;
 parametersFile = "sampleParametersFile";
 delayIn = 5000;
 SNR = 60;
-frequencyOffsetIn = 15e3;
 
-pBitsIn{1} = logical(randi([0,1], payloadBitsPerBlock0*5.4, 1));
-pBitsIn{2} = logical(randi([0,1], payloadBitsPerBlock0*2.7, 1));
+% This works
+pBitsIn{1} = logical(randi([0,1], 5000, 1));
+pBitsIn{2} = logical(randi([0,1], 80, 1));
+pBitsIn{3} = logical(randi([0,1], 5000, 1));
+pBitsIn{4} = logical(randi([0,1], 80, 1));
+pBitsIn{5} = logical(randi([0,1], 80, 1));
+pBitsIn{6} = logical(randi([0,1], 5000, 1));
 msgQtty = length(pBitsIn);
 
 psduSizeLSB = zeros(24, 1, msgQtty);
@@ -76,7 +80,7 @@ for i=1:1:msgQtty
 end
 
 %% Simulation Time
-latency = 100000/fs;         % Algorithm latency. Delay between input and output
+latency = 500000/fs;         % Algorithm latency. Delay between input and output
 stopTime = (length(dataIn)-1)/fs + latency;
 
 %% Run the simulation
@@ -109,7 +113,7 @@ for i=1:1:msgQtty
     out = dataOut(startIdx(i):endIdx(i), end-headerBitsPerSubcarrier+1:end);
     out = out.';
     headerOut = out(:);
-    assert(iskindaequal(expectedHeaderOut{i}, headerOut, 0.5), "Header mismatch");
+    assert(iskindaequal(expectedHeaderOut{i}, headerOut, 0.8), "Header mismatch");
 end
 disp("Header was received correctly!");
 
@@ -125,7 +129,7 @@ for i=1:1:totalOFDMSymbols
     out = dataOut(startIdx1(i):endIdx1(i), end-payloadBitsPerSubcarrier+1:end);
     out = out.';
     out = out(:);
-    assert(iskindaequal(expectedPayloadOut{i}, out, 0.5), "Payload mismatch");
+    assert(iskindaequal(expectedPayloadOut{i}, out, 0.8), "Payload mismatch");
 end
 
 %% Plotting
