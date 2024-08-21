@@ -21,6 +21,7 @@ msgIn{1} = ['Sample message to test the payload, made large to have more' ...
     'the end, the odyssey had a purpose (puts a cigarrete on his mouth and' ...
     'epic music starts fading in from the background'];
 msgIn{2} = 'Next message';
+msgIn{3} = 'Third is a charm!';
 msgQtty = length(msgIn);
 
 % Preallocation
