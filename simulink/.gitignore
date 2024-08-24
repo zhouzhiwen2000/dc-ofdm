@@ -6,6 +6,7 @@ wireless_hdl_examples
 WHDL*
 *.wdb
 hdl_prj
+*.mat
 
 */slprj
 */*.slxc
