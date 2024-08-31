@@ -1,0 +1,53 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"0.964401",
+   "Default View_TopLeft":"-113,-254",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.5.8 2022-09-21 7111 VDI=41 GEI=38 GUI=JA:10.0 TLS
+#  -string -flagsOSRD
+preplace port port-id_header_0 -pg 1 -lvl 3 -x 910 -y -40 -defaultsOSRD
+preplace port port-id_new_frame_0 -pg 1 -lvl 0 -x 0 -y -120 -defaultsOSRD
+preplace port port-id_next_frame_0 -pg 1 -lvl 3 -x 910 -y -20 -defaultsOSRD
+preplace port port-id_clk_in1_0 -pg 1 -lvl 0 -x 0 -y 220 -defaultsOSRD
+preplace port port-id_reset_0 -pg 1 -lvl 0 -x 0 -y 200 -defaultsOSRD
+preplace portBus bat_id_0 -pg 1 -lvl 0 -x 0 -y 40 -defaultsOSRD
+preplace portBus block_size_0 -pg 1 -lvl 0 -x 0 -y -60 -defaultsOSRD
+preplace portBus concat_factor_0 -pg 1 -lvl 0 -x 0 -y 0 -defaultsOSRD
+preplace portBus cp_id_0 -pg 1 -lvl 0 -x 0 -y 60 -defaultsOSRD
+preplace portBus fec_rate_0 -pg 1 -lvl 0 -x 0 -y -40 -defaultsOSRD
+preplace portBus mimo_number_0 -pg 1 -lvl 0 -x 0 -y 100 -defaultsOSRD
+preplace portBus mimo_spacing_0 -pg 1 -lvl 0 -x 0 -y 80 -defaultsOSRD
+preplace portBus msg_duration_0 -pg 1 -lvl 0 -x 0 -y -80 -defaultsOSRD
+preplace portBus psdu_size_0 -pg 1 -lvl 0 -x 0 -y -100 -defaultsOSRD
+preplace portBus rep_number_0 -pg 1 -lvl 0 -x 0 -y -20 -defaultsOSRD
+preplace portBus scrambler_init_0 -pg 1 -lvl 0 -x 0 -y 20 -defaultsOSRD
+preplace inst header_full_ip_0 -pg 1 -lvl 1 -x 330 -y -30 -defaultsOSRD
+preplace inst clk_wiz -pg 1 -lvl 1 -x 330 -y 210 -defaultsOSRD
+preplace inst rst_clk_wiz_100M -pg 1 -lvl 2 -x 690 -y -60 -defaultsOSRD
+preplace netloc clk_wiz_clk_out1 1 0 2 190 -220 470
+preplace netloc clk_wiz_locked 1 1 1 510 -20n
+preplace netloc rst_clk_wiz_100M_peripheral_aresetn 1 0 3 180 -230 NJ -230 870
+preplace netloc bat_id_0_1 1 0 1 NJ 40
+preplace netloc block_size_0_1 1 0 1 NJ -60
+preplace netloc concat_factor_0_1 1 0 1 NJ 0
+preplace netloc cp_id_0_1 1 0 1 NJ 60
+preplace netloc fec_rate_0_1 1 0 1 NJ -40
+preplace netloc header_full_ip_0_header 1 1 2 490J 40 890J
+preplace netloc mimo_number_0_1 1 0 1 NJ 100
+preplace netloc mimo_spacing_0_1 1 0 1 NJ 80
+preplace netloc msg_duration_0_1 1 0 1 NJ -80
+preplace netloc new_frame_0_1 1 0 1 NJ -120
+preplace netloc header_full_ip_0_next_frame 1 1 2 480J -160 880J
+preplace netloc psdu_size_0_1 1 0 1 NJ -100
+preplace netloc rep_number_0_1 1 0 1 NJ -20
+preplace netloc scrambler_init_0_1 1 0 1 NJ 20
+preplace netloc clk_in1_0_1 1 0 1 NJ 220
+preplace netloc reset_0_1 1 0 2 190J 280 500
+levelinfo -pg 1 0 330 690 910
+pagesize -pg 1 -db -bbox -sgen -210 -240 1060 920
+"
+}
+{
+   "da_board_cnt":"1",
+   "da_clkrst_cnt":"1"
+}
