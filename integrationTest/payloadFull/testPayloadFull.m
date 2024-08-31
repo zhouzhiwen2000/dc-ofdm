@@ -66,7 +66,7 @@ end
 
 
 %% Simulation Time
-latency = 10000/fs;             % Algorithm latency. Delay between input and output
+latency = 100000/fs;             % Algorithm latency. Delay between input and output
 stopTime = (length(pWords)-1)/fs + latency;
 
 %% Run the simulation

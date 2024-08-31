@@ -17,7 +17,6 @@ Bloque generado con solamente adaptative pipelining:
 
 ![Alt text](images/adaptative_pipelining.png)
 
-
 Bloque base sin delay:
 
 ![Alt text](images/base_sin_delay.png)

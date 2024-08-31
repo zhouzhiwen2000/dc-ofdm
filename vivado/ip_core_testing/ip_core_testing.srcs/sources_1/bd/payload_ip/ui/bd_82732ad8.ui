@@ -1,0 +1,59 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"0.896241",
+   "Default View_TopLeft":"-216,-242",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.5.8 2022-09-21 7111 VDI=41 GEI=38 GUI=JA:10.0 TLS
+#  -string -flagsOSRD
+preplace port AXI4_Lite_0 -pg 1 -lvl 0 -x -10 -y -160 -defaultsOSRD
+preplace port port-id_clk_100MHz -pg 1 -lvl 0 -x -10 -y 240 -defaultsOSRD
+preplace port port-id_reset_rtl -pg 1 -lvl 0 -x -10 -y 220 -defaultsOSRD
+preplace port port-id_AXI4_Lite_ACLK_0 -pg 1 -lvl 0 -x -10 -y 100 -defaultsOSRD
+preplace port port-id_AXI4_Lite_ARESETN_0 -pg 1 -lvl 0 -x -10 -y 120 -defaultsOSRD
+preplace port port-id_last_frame_0 -pg 1 -lvl 0 -x -10 -y -60 -defaultsOSRD
+preplace port port-id_new_frame_0 -pg 1 -lvl 0 -x -10 -y -40 -defaultsOSRD
+preplace port port-id_payload_0 -pg 1 -lvl 3 -x 880 -y -50 -defaultsOSRD
+preplace port port-id_ready_0 -pg 1 -lvl 3 -x 880 -y -30 -defaultsOSRD
+preplace port port-id_valid_in_0 -pg 1 -lvl 0 -x -10 -y -80 -defaultsOSRD
+preplace portBus bat_id_0 -pg 1 -lvl 0 -x -10 -y 40 -defaultsOSRD
+preplace portBus bits_per_subcarrier_0 -pg 1 -lvl 3 -x 880 -y 10 -defaultsOSRD
+preplace portBus block_size_0 -pg 1 -lvl 0 -x -10 -y 20 -defaultsOSRD
+preplace portBus data_in_0 -pg 1 -lvl 0 -x -10 -y -100 -defaultsOSRD
+preplace portBus fec_rate_0 -pg 1 -lvl 0 -x -10 -y 0 -defaultsOSRD
+preplace portBus len_in_ofdm_symbols_0 -pg 1 -lvl 3 -x 880 -y -10 -defaultsOSRD
+preplace portBus psdu_size_0 -pg 1 -lvl 0 -x -10 -y 60 -defaultsOSRD
+preplace portBus rep_number_0 -pg 1 -lvl 0 -x -10 -y 80 -defaultsOSRD
+preplace portBus scrambler_init_0 -pg 1 -lvl 0 -x -10 -y -20 -defaultsOSRD
+preplace inst payload_full_ip_0 -pg 1 -lvl 1 -x 220 -y -20 -defaultsOSRD
+preplace inst clk_wiz -pg 1 -lvl 1 -x 220 -y 230 -defaultsOSRD
+preplace inst rst_clk_wiz_100M -pg 1 -lvl 2 -x 640 -y -40 -defaultsOSRD
+preplace netloc clk_wiz_clk_out1 1 0 2 30 300 440
+preplace netloc clk_wiz_locked 1 1 1 450 0n
+preplace netloc rst_clk_wiz_100M_peripheral_aresetn 1 0 3 20 320 NJ 320 820
+preplace netloc clk_100MHz_1 1 0 1 NJ 240
+preplace netloc reset_rtl_1 1 0 2 10 310 460J
+preplace netloc AXI4_Lite_ACLK_0_1 1 0 1 NJ 100
+preplace netloc AXI4_Lite_ARESETN_0_1 1 0 1 NJ 120
+preplace netloc bat_id_0_1 1 0 1 NJ 40
+preplace netloc payload_full_ip_0_bits_per_subcarrier 1 1 2 410J 60 850J
+preplace netloc block_size_0_1 1 0 1 NJ 20
+preplace netloc data_in_0_1 1 0 1 NJ -100
+preplace netloc fec_rate_0_1 1 0 1 NJ 0
+preplace netloc last_frame_0_1 1 0 1 NJ -60
+preplace netloc payload_full_ip_0_len_in_ofdm_symbols 1 1 2 420J 70 840J
+preplace netloc new_frame_0_1 1 0 1 NJ -40
+preplace netloc payload_full_ip_0_payload 1 1 2 430J 80 830J
+preplace netloc psdu_size_0_1 1 0 1 NJ 60
+preplace netloc payload_full_ip_0_ready 1 1 2 410J -140 820J
+preplace netloc rep_number_0_1 1 0 1 NJ 80
+preplace netloc scrambler_init_0_1 1 0 1 NJ -20
+preplace netloc valid_in_0_1 1 0 1 NJ -80
+preplace netloc AXI4_Lite_0_1 1 0 1 NJ -160
+levelinfo -pg 1 -10 220 640 880
+pagesize -pg 1 -db -bbox -sgen -220 -220 1150 400
+"
+}
+{
+   "da_board_cnt":"3",
+   "da_clkrst_cnt":"1"
+}
