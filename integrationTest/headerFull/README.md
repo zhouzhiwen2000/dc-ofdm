@@ -21,3 +21,12 @@ No hace falta optimizar este bloque.
 Nota: el IP Core generado no tiene la salida de "ctrl_out" porque ese tipo de bus con tres señales juntas no es compatible.
 
 ![Alt text](images/vivado_diagram.png)
+
+Por las dudas, tratamos de optimizar este bloque, para chequear que no haya problemas luego:
+
+Utilizando las tres optimizaciones de pipeline:
+
+![Alt text](images/aa.png)
+
+Como podemos ver, el timing no mejoro. De hecho, viendo el reporte de utilización se puede apreciar que no se agrega ningún delay!
+
