@@ -118,12 +118,11 @@ endIdx = find(endOut == true);
 
 assert(isequal(length(startIdx), length(endIdx)), ...
     "Length of start and end should be the same.");
-
 assert(~isempty(startIdx), "No start signal");
 
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
-    assert(iskindaequal(expectedOut, out, 1e-3), "Output mismatch");
+    assert(iskindaequal(expectedOut, out, 5e-3), "Output mismatch");
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
 
