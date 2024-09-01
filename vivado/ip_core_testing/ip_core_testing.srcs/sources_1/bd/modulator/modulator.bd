@@ -1,0 +1,207 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0x839205227A7D7B93",
+      "device": "xc7z010clg400-1",
+      "gen_directory": "../../../../ip_core_testing.gen/sources_1/bd/modulator",
+      "name": "modulator",
+      "rev_ctrl_bd_flag": "RevCtrlBdOff",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2023.2",
+      "validated": "true"
+    },
+    "design_tree": {
+      "clk_wiz": "",
+      "rst_clk_wiz_100M": "",
+      "full_ofdm_modulator_0": ""
+    },
+    "ports": {
+      "clk_100MHz": {
+        "type": "clk",
+        "direction": "I",
+        "parameters": {
+          "CLK_DOMAIN": {
+            "value": "modulator_clk_100MHz",
+            "value_src": "default"
+          },
+          "FREQ_HZ": {
+            "value": "100000000"
+          },
+          "FREQ_TOLERANCE_HZ": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "PHASE": {
+            "value": "0.0",
+            "value_src": "default"
+          }
+        }
+      },
+      "reset_rtl": {
+        "type": "rst",
+        "direction": "I",
+        "parameters": {
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "POLARITY": {
+            "value": "ACTIVE_HIGH"
+          }
+        }
+      },
+      "bits_per_subcarrier_0": {
+        "direction": "I",
+        "left": "3",
+        "right": "0"
+      },
+      "cp_len_0": {
+        "direction": "I",
+        "left": "7",
+        "right": "0"
+      },
+      "data_in_0": {
+        "direction": "I",
+        "left": "11",
+        "right": "0"
+      },
+      "data_out_0": {
+        "direction": "O",
+        "left": "11",
+        "right": "0"
+      },
+      "init_0": {
+        "direction": "I",
+        "left": "12",
+        "right": "0"
+      },
+      "new_ofdm_sym_0": {
+        "direction": "I"
+      },
+      "ready_0": {
+        "direction": "O"
+      },
+      "valid_in_0": {
+        "direction": "I"
+      },
+      "valid_out_0": {
+        "direction": "O"
+      }
+    },
+    "components": {
+      "clk_wiz": {
+        "vlnv": "xilinx.com:ip:clk_wiz:6.0",
+        "ip_revision": "13",
+        "xci_name": "modulator_clk_wiz_0",
+        "xci_path": "ip/modulator_clk_wiz_0/modulator_clk_wiz_0.xci",
+        "inst_hier_path": "clk_wiz"
+      },
+      "rst_clk_wiz_100M": {
+        "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
+        "ip_revision": "14",
+        "xci_name": "modulator_rst_clk_wiz_100M_0",
+        "xci_path": "ip/modulator_rst_clk_wiz_100M_0/modulator_rst_clk_wiz_100M_0.xci",
+        "inst_hier_path": "rst_clk_wiz_100M"
+      },
+      "full_ofdm_modulator_0": {
+        "vlnv": "user.org:ip:full_ofdm_modulator_ip:3.0",
+        "ip_revision": "1000000",
+        "xci_name": "modulator_full_ofdm_modulator_0_0",
+        "xci_path": "ip/modulator_full_ofdm_modulator_0_0/modulator_full_ofdm_modulator_0_0.xci",
+        "inst_hier_path": "full_ofdm_modulator_0"
+      }
+    },
+    "nets": {
+      "bits_per_subcarrier_0_1": {
+        "ports": [
+          "bits_per_subcarrier_0",
+          "full_ofdm_modulator_0/bits_per_subcarrier"
+        ]
+      },
+      "clk_100MHz_1": {
+        "ports": [
+          "clk_100MHz",
+          "clk_wiz/clk_in1"
+        ]
+      },
+      "clk_wiz_clk_out1": {
+        "ports": [
+          "clk_wiz/clk_out1",
+          "rst_clk_wiz_100M/slowest_sync_clk",
+          "full_ofdm_modulator_0/IPCORE_CLK"
+        ]
+      },
+      "clk_wiz_locked": {
+        "ports": [
+          "clk_wiz/locked",
+          "rst_clk_wiz_100M/dcm_locked"
+        ]
+      },
+      "cp_len_0_1": {
+        "ports": [
+          "cp_len_0",
+          "full_ofdm_modulator_0/cp_len"
+        ]
+      },
+      "data_in_0_1": {
+        "ports": [
+          "data_in_0",
+          "full_ofdm_modulator_0/data_in"
+        ]
+      },
+      "full_ofdm_modulator_0_data_out": {
+        "ports": [
+          "full_ofdm_modulator_0/data_out",
+          "data_out_0"
+        ]
+      },
+      "full_ofdm_modulator_0_ready": {
+        "ports": [
+          "full_ofdm_modulator_0/ready",
+          "ready_0"
+        ]
+      },
+      "full_ofdm_modulator_0_valid_out": {
+        "ports": [
+          "full_ofdm_modulator_0/valid_out",
+          "valid_out_0"
+        ]
+      },
+      "init_0_1": {
+        "ports": [
+          "init_0",
+          "full_ofdm_modulator_0/init"
+        ]
+      },
+      "new_ofdm_sym_0_1": {
+        "ports": [
+          "new_ofdm_sym_0",
+          "full_ofdm_modulator_0/new_ofdm_sym"
+        ]
+      },
+      "reset_rtl_1": {
+        "ports": [
+          "reset_rtl",
+          "clk_wiz/reset",
+          "rst_clk_wiz_100M/ext_reset_in"
+        ]
+      },
+      "rst_clk_wiz_100M_peripheral_aresetn": {
+        "ports": [
+          "rst_clk_wiz_100M/peripheral_aresetn",
+          "full_ofdm_modulator_0/IPCORE_RESETN"
+        ]
+      },
+      "valid_in_0_1": {
+        "ports": [
+          "valid_in_0",
+          "full_ofdm_modulator_0/valid_in"
+        ]
+      }
+    }
+  }
+}
