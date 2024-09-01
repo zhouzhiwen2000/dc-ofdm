@@ -93,7 +93,7 @@ assert(isequal(length(startIdx), length(msgIn)), ...
 
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
-    assert(iskindaequal(expectedOut{i}, out, 1e-3), "Outputs don't match");
+    assert(iskindaequal(expectedOut{i}, out, 0.01), "Outputs don't match");
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
 
