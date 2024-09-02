@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="dut_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="\$unit_xpm_cdc_sv_220102727 " />
+            <top_module name="dut_tb" />
+            <top_module name="full_tx_ip_src_full_tx_pac" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="94,358.781 ns"></ZoomStartTime>
+      <ZoomEndTime time="94,426.245 ns"></ZoomEndTime>
+      <Cursor1Time time="101,000.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="225"></NameColumnWidth>
+      <ValueColumnWidth column_width="105"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="17" />
+   <wvobject type="logic" fp_name="/dut_tb/clk_12_5">
+      <obj_property name="ElementShortName">clk_12_5</obj_property>
+      <obj_property name="ObjectShortName">clk_12_5</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/dut_tb/clk_100">
+      <obj_property name="ElementShortName">clk_100</obj_property>
+      <obj_property name="ObjectShortName">clk_100</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/dut_tb/dut_instance/dut_tx_i/full_tx_ip_0/data_in">
+      <obj_property name="ElementShortName">data_in[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/dut_tb/dut_instance/dut_tx_i/full_tx_ip_0/valid_in">
+      <obj_property name="ElementShortName">valid_in</obj_property>
+      <obj_property name="ObjectShortName">valid_in</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/dut_tb/dut_instance/dut_tx_i/full_tx_ip_0_ready">
+      <obj_property name="ElementShortName">full_tx_ip_0_ready</obj_property>
+      <obj_property name="ObjectShortName">full_tx_ip_0_ready</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/dut_tb/rst">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/dut_tb/new_frame_in_0">
+      <obj_property name="ElementShortName">new_frame_in_0</obj_property>
+      <obj_property name="ObjectShortName">new_frame_in_0</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/dut_tb/data_out_0">
+      <obj_property name="ElementShortName">data_out_0[11:0]</obj_property>
+      <obj_property name="ObjectShortName">data_out_0[11:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/dut_tb/valid_out_0">
+      <obj_property name="ElementShortName">valid_out_0</obj_property>
+      <obj_property name="ObjectShortName">valid_out_0</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/dut_tb/s_axis_tdata_0">
+      <obj_property name="ElementShortName">s_axis_tdata_0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">s_axis_tdata_0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/dut_tb/s_axis_tlast_0">
+      <obj_property name="ElementShortName">s_axis_tlast_0</obj_property>
+      <obj_property name="ObjectShortName">s_axis_tlast_0</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/dut_tb/s_axis_tvalid_0">
+      <obj_property name="ElementShortName">s_axis_tvalid_0</obj_property>
+      <obj_property name="ObjectShortName">s_axis_tvalid_0</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/dut_tb/s_axis_tready_0">
+      <obj_property name="ElementShortName">s_axis_tready_0</obj_property>
+      <obj_property name="ObjectShortName">s_axis_tready_0</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/dut_tb/dut_instance/dut_tx_i/full_tx_ip_0/U0/u_full_tx_ip_dut_inst/u_full_tx_ip_src_full_tx/u_clock_crossing/preamble_valid">
+      <obj_property name="ElementShortName">preamble_valid</obj_property>
+      <obj_property name="ObjectShortName">preamble_valid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/dut_tb/dut_instance/dut_tx_i/full_tx_ip_0/U0/u_full_tx_ip_dut_inst/u_full_tx_ip_src_full_tx/u_clock_crossing/channel_valid">
+      <obj_property name="ElementShortName">channel_valid</obj_property>
+      <obj_property name="ObjectShortName">channel_valid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/dut_tb/dut_instance/dut_tx_i/full_tx_ip_0/U0/u_full_tx_ip_dut_inst/u_full_tx_ip_src_full_tx/u_clock_crossing/header_valid">
+      <obj_property name="ElementShortName">header_valid</obj_property>
+      <obj_property name="ObjectShortName">header_valid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/dut_tb/dut_instance/dut_tx_i/full_tx_ip_0/U0/u_full_tx_ip_dut_inst/u_full_tx_ip_src_full_tx/u_clock_crossing/payload_valid_out">
+      <obj_property name="ElementShortName">payload_valid_out</obj_property>
+      <obj_property name="ObjectShortName">payload_valid_out</obj_property>
+   </wvobject>
+</wave_config>
