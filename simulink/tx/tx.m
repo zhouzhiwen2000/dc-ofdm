@@ -125,3 +125,19 @@ ylabel("PSD [dB/Hz]");
 grid on;
 
 disp("Test successfull!");
+
+%% Create Vivado data file for VHDL testbench
+
+% Generate input file
+fileName = "data_in.mem";
+input = {dataIn;};
+bitLen = 8;
+header = "dataIn";
+createVivadoDataFile(fileName, input, bitLen, header, ",");
+
+% Generate output file
+fileName = "data_out.mem";
+input = {dataOut;};
+bitLen = 8;
+header = "dataOut";
+createVivadoDataFile(fileName, input, bitLen, header, ",");

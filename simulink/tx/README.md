@@ -47,3 +47,28 @@ En amarillo, todos los recursos asignados al modulador de OFDM.
 ## Reduciendo cantidad de bits en OFDM modulator
 
 Viendo que no da el timing, reduzco la cantidad de bits para reducir el fanout y la densidad de ruteo en la zona (ver el README del Tx Modulator, donde se hacen estas pruebas).
+
+
+## Problemas al querer hacer el testbench en VHDL
+
+Un problema que se presentó es que los clocks de las señales no estaban "en fase".
+
+En la siguiente imagen, las señales "clk_12_5" y "full_tx_ip_0_ready" funcionan ambas a 12.5Mhz.
+
+Por cómo está construido el IP Core de Matlab, al Ip Core le entra una señal de 100MHz, y luego instancia un contador hasta 8, y usa el "count_hit" como clock.
+
+El tema es que este contador "x8" y el clock de afuera no están en fase.
+
+![Alt text](images/ii.png)
+
+Tenemos dos opciones: o desfasamos el clock "interno" del IP Core, o desfasamos el clock externo que maneja la FIFO.
+
+La solución más sencilla, y la que se usa, es desfasar el clock externo. Se necesitan hacer dos cambios en el modelo de Vivado:
+
+1. En el clocking Wizard, agregar el desfase (360/8 = 45° por ciclo de clock, necesitamos corrernos cinco ciclos = 225°)
+
+    ![Alt text](images/jj.png)
+
+2. Desfasar sólo el clock no es suficiente, sino lo importante es desfasar los resets. Todos los IP Cores están sincronizados a la señal de reset que reciban. Si te fijas, el IP Core que resetea la placa tiene como entrada "slowest_sync_clk", lo cual indicaría que hay que entrarle con el clock más lento (12.5MHz). Pero sí hacemos eso, entonces el desfase de clocks no nos va a importar, porque todos los IP Cores van a estar sincronizados con el rising edge de 12.5MHz "corrigiendo el desfase". Si usamos como entrada el clock de 100MHz, ahora los IP Cores van a estar sincronizados al clock de 100MHz. Sin embargo, la FIFO no se va a resetear hasta que reciba un rising edge de su clock de 12.5MHz, entonces se preserva el desfase de clocks que impusimos al principio.
+
+    ![Alt text](images/kk.png)
