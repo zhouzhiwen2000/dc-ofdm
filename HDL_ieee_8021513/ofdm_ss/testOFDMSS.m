@@ -14,7 +14,7 @@ frequencyOffsetIn = 5e3;
 preambleTx = ofdmModulate(preambleOFDMSymbols, preambleBitsPerSubcarrier, preambleCyclicPrefixLen, nullIdx, preambleScramblerInit);
 channelTx = ofdmModulate(channelOFDMSymbols, channelBitsPerSubcarrier, channelCyclicPrefixLen, nullIdx, channelScramblerInit);
 OFDMSignal = [preambleTx; channelTx];
-OFDMSignal = interpolator(OFDMSignal);
+OFDMSignal = txInterpolator(OFDMSignal);
 OFDMSignal = upshifter(OFDMSignal);
 
 OFDMRx = channelSimulation(OFDMSignal, delayIn, SNR);

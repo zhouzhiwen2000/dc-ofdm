@@ -70,33 +70,27 @@ payloadScramblerInit = uint8([1 1 1 1 1 1 1 1 1 1 1 1 1]); % 0x1FFF
 fPHY = 50e6;                    % [Hz] Fixed by standard
 oversamplingFactor = 2;
 fs = fPHY*oversamplingFactor;   % [Hz] Sampling frequency, which will be the input of the DAC and ADC
+txL = 5; % Upsampling factor for interpolator.
+
+%% Tx Interpolator FIR filter
+txInterpolatorFpass = 20e6;               % Passband frequency [Hz]
+txInterpolatorFstop = 43e6;               % Stopband frequency [Hz]
+txInterpolatorPassbandRippleDb = 0.1;     % Passband ripple [dB]
+txInterpolatorStopbandAttDb = 80;         % Stopband attenuation [dB]
 
 
-%% Interpolator FIR filter
-interpolatorFpass = 20e6;               % Passband frequency [Hz]
-interpolatorFstop = 30e6;               % Stopband frequency [Hz]
-interpolatorPassbandRippleDb = 0.1;     % Passband ripple [dB]
-interpolatorStopbandAttDb = 80;         % Stopband attenuation [dB]
-
-
-interpolatorSpec = fdesign.interpolator(oversamplingFactor, ...
+txInterpolatorSpec = fdesign.interpolator(txL, ...
     'lowpass','Fp,Fst,Ap,Ast', ...
-    interpolatorFpass, ...
-    interpolatorFstop, ...
-    interpolatorPassbandRippleDb, ...
-    interpolatorStopbandAttDb, ...
-    fs);
-interpolatorFilter = design(interpolatorSpec,'SystemObject',true);
-
-% Group delay of the filter. delay = (nTaps - 1)/2
-% The delay should be an integer, therefore, nTaps should be odd.
-interpolatorDelay = mean(grpdelay(interpolatorFilter));
-if (mod(interpolatorDelay, 2) ~= 1)
-    error("Interpolator delay should be odd!");
-end
+    txInterpolatorFpass, ...
+    txInterpolatorFstop, ...
+    txInterpolatorPassbandRippleDb, ...
+    txInterpolatorStopbandAttDb, ...
+    fPHY*txL);
+txInterpolatorFilter = design(txInterpolatorSpec,'SystemObject',true);
+txInterpolatorDelay = mean(grpdelay(txInterpolatorFilter));
 
 % Uncomment to plot filter response
-%fvtool(interpolatorFilter,'Fs', fs);
+%fvtool(txInterpolatorFilter,'Fs', fPHY*txL);
 
 %% Upshifter NCO (Numerical Controlled Oscillator)
 % Upshifter NCO doesn't need too much resolution.

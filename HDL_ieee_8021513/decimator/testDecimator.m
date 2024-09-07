@@ -17,7 +17,7 @@ validIn = true(length(t), 1);
 % OFDM output is an actual OFDM symbol
 % dataIn = rand(numDataCarriers, 1) + 1i*rand(numDataCarriers, 1);
 % dataIn = ofdmmod(dataIn, N, headerCyclicPrefixLen, nullIdx);
-% dataIn = interpolator(dataIn);
+% dataIn = txInterpolator(dataIn);
 % validIn = true(length(dataIn), 1);
 
 expectedOut = decimator(dataIn);

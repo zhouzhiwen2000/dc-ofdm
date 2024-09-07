@@ -40,7 +40,7 @@ end
     payloadTx = ofdmModulate(payloadOFDMSymbols, payloadBitsPerSubcarrier, payloadCyclicPrefixLen, nullIdx, payloadScramblerInit);
     
     OFDMSignal = [preambleTx; channelTx; headerTx; payloadTx;];
-    OFDMSignal = interpolator(OFDMSignal);
+    OFDMSignal = txInterpolator(OFDMSignal);
     OFDMSignal = upshifter(OFDMSignal, carrierFrequencyOffset);
     if (addTimeWindow == true)
         OFDMSignal = [OFDMSignal; zeros(simTimeWindowInSamples, 1)];

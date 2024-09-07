@@ -37,7 +37,7 @@ OFDMSignal = cos(2*pi*fc*t);
 % OFDMSignal = [preambleTx; channelTx; headerTx];
 
 %% ExpectedOut
-expectedOut = interpolator(OFDMSignal);
+expectedOut = txInterpolator(OFDMSignal);
 expectedOut = upshifter(expectedOut);
 expectedOut = downshifter(expectedOut);
 expectedOut = decimator(expectedOut);
