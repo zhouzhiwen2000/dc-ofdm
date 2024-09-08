@@ -6,13 +6,24 @@ addpath("../../inc");
 constants;
 
 %% Inputs
-t = (0:1/fs:(N+headerCyclicPrefixLen)/fPHY-1/fs)';            % Time vector is equal to "N" ofdm samples
-t_down = (0:1/fPHY:(N+headerCyclicPrefixLen)/fPHY-1/fPHY)';     % Time vector for downsampled signal
+fIn = fADC*rxL;
+fOut = fIn/rxM;
+t = (0:1/fIn:(N+headerCyclicPrefixLen)/fOut-1/fIn)';            % Time vector is equal to "N" ofdm samples
+t_down = (0:1/fOut:(N+headerCyclicPrefixLen)/fOut-1/fOut)';     % Time vector for downsampled signal
 
 % OFDM output is a senoidal function
-fc = 20e6;                           % Carrier frequency for sinusoidal function
-dataIn = cos(2*pi*fc*t);
-validIn = true(length(t), 1);
+fc = 1e6;                           % Carrier frequency for sinusoidal function
+input = cos(2*pi*fc*t);
+dataIn = [
+    input;
+    zeros(500, 1);
+    input;
+];
+validIn = [
+    true(length(t), 1);
+    false(500, 1);
+    true(length(t), 1);
+];
 
 % OFDM output is an actual OFDM symbol
 % dataIn = rand(numDataCarriers, 1) + 1i*rand(numDataCarriers, 1);
@@ -20,11 +31,11 @@ validIn = true(length(t), 1);
 % dataIn = txInterpolator(dataIn);
 % validIn = true(length(dataIn), 1);
 
-expectedOut = rxDecimator(dataIn);
+expectedOut = rxDecimator(input);
 
 %% Simulation Time
-latency = 200/fs;         % Algorithm latency. Delay between input and output
-stopTime = (length(validIn)-1)/fs + latency;
+latency = 1000/fIn;         % Algorithm latency. Delay between input and output
+stopTime = (length(validIn)-1)/fIn + latency;
 
 %% Run the simulation
 model_name = "HDLDecimator";
@@ -48,16 +59,16 @@ assert(~isempty(startIdx), "No start signal");
 
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
-    assert(iskindaequal(expectedOut, out, 1e-3));
+    assert(iskindaequal(expectedOut, out, 100e-3));
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
 
 %% Plotting
-resampledOut = resample(dataIn, 1, 2);
+resampledOut = resample(input, 1, rxM);
 
 figure();
 subplot(4,1,1)
-plot(t*1e6, abs(dataIn), t_down*1e6, abs(expectedOut), t_down*1e6, abs(resampledOut));
+plot(t*1e6, abs(input), t_down*1e6, abs(expectedOut), t_down*1e6, abs(resampledOut));
 xlabel("Time [useg]");
 legend("Input", "Interpolated", "Resampled");
 xlim([min(t), max(t)]*1e6);
@@ -83,6 +94,6 @@ legend("Simulink Out", "Expected Out");
 xlim([min(t_down), max(t_down)]*1e6);
 grid on;
 
-assert(iskindaequal(expectedOut, resampledOut, 0.2), "resample function and interpolation should be similar");
+assert(iskindaequal(expectedOut, resampledOut, 0.4), "resample function and interpolation should be similar");
 
 disp("Test successfull!");

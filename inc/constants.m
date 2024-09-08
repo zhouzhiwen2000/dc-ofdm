@@ -173,7 +173,8 @@ rxM = 5;
 rxDecimatorFpass = 20e6;               % Passband frequency [Hz]
 rxDecimatorFstop = 25e6;               % Stopband frequency [Hz]
 rxDecimatorPassbandRippleDb = 0.1;     % Passband ripple [dB]
-rxDecimatorStopbandAttDb = 78;         % Stopband attenuation [dB]
+rxDecimatorStopbandAttDb = 81;         % Stopband attenuation [dB]
+rxDecimatorStopbandAttDbForSim = 78;   % Used for simulation [dB]
 
 rxDecimatorSpec = fdesign.decimator(rxM, 'lowpass', 'Fp,Fst,Ap,Ast', ...
     rxDecimatorFpass, ...
@@ -183,12 +184,27 @@ rxDecimatorSpec = fdesign.decimator(rxM, 'lowpass', 'Fp,Fst,Ap,Ast', ...
     fADC*rxL);
 rxDecimatorFilter = design(rxDecimatorSpec, 'equiripple', 'SystemObject',true);
 
+rxDecimatorSpecForSim = fdesign.decimator(rxM, 'lowpass', 'Fp,Fst,Ap,Ast', ...
+    rxDecimatorFpass, ...
+    rxDecimatorFstop, ...
+    rxDecimatorPassbandRippleDb, ...
+    rxDecimatorStopbandAttDbForSim, ...
+    fADC*rxL);
+rxDecimatorFilterForSim = design(rxDecimatorSpecForSim, 'equiripple', 'SystemObject',true);
+
 % Group delay of the filter should be even.
 rxDecimatorDelay = mean(grpdelay(rxDecimatorFilter));
-if (rxDecimatorDelay ~= round(rxDecimatorDelay))
-    error("rxDecimatorDelay should be an integer!");
-elseif (mod(rxDecimatorDelay, rxM) ~= 0)
-    error("rxDecimatorDelay should be a multiple of rxM!");
+if (rxDecimatorDelay == round(rxDecimatorDelay))
+    error("rxDecimatorDelay should be fractional!");
+elseif (mod(round(rxDecimatorDelay), rxM) ~= 3)
+    error("rxDecimatorDelay should be mod(delay, rxM) == 1");
+end
+
+rxDecimatorDelayForSim = mean(grpdelay(rxDecimatorFilterForSim));
+if (rxDecimatorDelayForSim ~= round(rxDecimatorDelayForSim))
+    error("rxDecimatorDelayForSim should be an integer!");
+elseif (mod(rxDecimatorDelayForSim, rxM) ~= 0)
+    error("rxDecimatorDelayForSim should be multiple of rxM!");
 end
 
 % Uncomment to plot filter response

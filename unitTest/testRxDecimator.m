@@ -6,7 +6,6 @@ addpath("../inc");
 constants;
 
 %% Test cases
-% Size of the header after FEC encoding
 fIn = fADC*rxM;
 fc = 5e6;
 symbolNumber = 10;
@@ -35,6 +34,6 @@ title("Error between resample and decimation");
 grid on;
 
 subplot(3,1,3);
-plot(n_down, abs(input(1:txM:end) - out));
+plot(n_down, abs(input(1:rxM:end) - out));
 title("Error between input and decimated");
 grid on;
