@@ -98,7 +98,7 @@ for i=1:length(startIdx)
 end
 
 %% Plotting
-t = (0:1/fs:length(expectedOut{i})/fs-1/fs)';
+t = (0:1/fDAC:length(expectedOut{i})/fDAC-1/fDAC)';
 
 figure();
 subplot(2,1,1)
@@ -117,7 +117,7 @@ grid on;
 
 figure();
 resampledOut = resample(out, 2, 1);
-[psd, fVector] = pwelch(resampledOut, rectwin(length(resampledOut)), [], 2^16, 2*fs, "centered");
+[psd, fVector] = pwelch(resampledOut, rectwin(length(resampledOut)), [], 2^16, 2*fDAC, "centered");
 plot(fVector/1e6, 10*log10(psd));
 title("PSD of the transmitted signal")
 xlabel("Freq. [MHz]");

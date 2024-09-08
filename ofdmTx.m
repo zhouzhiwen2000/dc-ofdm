@@ -37,6 +37,7 @@ payloadTx = ofdmModulate(payloadOFDMSymbols, payloadBitsPerSubcarrier, payloadCy
 
 OFDMSignal = [preambleTx; channelTx; headerTx; payloadTx;];
 OFDMSignal = txInterpolator(OFDMSignal);
+OFDMSignal = txDecimator(OFDMSignal);
 OFDMSignal = upshifter(OFDMSignal);
 
 %% Plotting

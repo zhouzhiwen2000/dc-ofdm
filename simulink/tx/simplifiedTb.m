@@ -31,7 +31,7 @@ newFrame = true;
 payloadOFDMSymbols = payloadOFDMSymbols(:);
 
 %% Simulation Time
-latency = 10000000/fs;             % Algorithm latency. Delay between input and output
+latency = 1000000/fs;             % Algorithm latency. Delay between input and output
 stopTime = (length(validIn)-1)/(fs) + latency;
 
 %% Run the simulation

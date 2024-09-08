@@ -79,7 +79,6 @@ txInterpolatorFstop = 29e6;               % Stopband frequency [Hz]
 txInterpolatorPassbandRippleDb = 0.1;     % Passband ripple [dB]
 txInterpolatorStopbandAttDb = 80;         % Stopband attenuation [dB]
 
-
 txInterpolatorSpec = fdesign.interpolator(txL, ...
     'lowpass','Fp,Fst,Ap,Ast', ...
     txInterpolatorFpass, ...
@@ -108,7 +107,7 @@ txDecimatorSpec = fdesign.decimator(txM, 'lowpass', 'Fp,Fst,Ap,Ast', ...
     txDecimatorFstop, ...
     txDecimatorPassbandRippleDb, ...
     txDecimatorStopbandAttDb, ...
-    fPHY*txL/txM);
+    fPHY*txL);
 txDecimatorFilter = design(txDecimatorSpec, 'equiripple', 'SystemObject',true);
 
 % Group delay of the filter should be even.
@@ -120,7 +119,7 @@ elseif (mod(txDecimatorDelay, txM) ~= 0)
 end
 
 % Uncomment to plot filter response
-%fvtool(txDecimatorFilter,'Fs', fPHY*txL/txM);
+fvtool(txDecimatorFilter,'Fs', fPHY*txL);
 
 fDAC = fPHY*txL/txM;
 fADC = fDAC;
