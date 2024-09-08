@@ -19,7 +19,7 @@ OFDMRx = [zeros(delayIn*2, 1); OFDMSignal];
 % Payload can't be processed until the header was obtained (I need to know
 % the cyclic prefix used for the payload)
 OFDMRx = downshifter(OFDMRx);
-OFDMRx = decimator(OFDMRx);
+OFDMRx = rxDecimator(OFDMRx);
 
 [OFDMRx, delayOut] = ofdmSymbolSync(OFDMRx);
 

@@ -20,7 +20,7 @@ validIn = true(length(t), 1);
 % dataIn = txInterpolator(dataIn);
 % validIn = true(length(dataIn), 1);
 
-expectedOut = decimator(dataIn);
+expectedOut = rxDecimator(dataIn);
 
 %% Simulation Time
 latency = 200/fs;         % Algorithm latency. Delay between input and output

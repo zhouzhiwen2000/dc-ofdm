@@ -59,7 +59,7 @@ counterExpectedOut = 0;
 expectedPayloadOut = cell(totalOFDMSymbols, 1);
 for i=1:1:msgQtty
     OFDMRx{i} = downshifter(OFDMRx{i});
-    OFDMRx{i} = decimator(OFDMRx{i});
+    OFDMRx{i} = rxDecimator(OFDMRx{i});
     OFDMRx{i} = ofdmSymbolSync(OFDMRx{i});
     [OFDMRx{i}, channelEst] = ofdmChannelEstimation(OFDMRx{i});
 

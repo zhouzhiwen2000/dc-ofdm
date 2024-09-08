@@ -19,7 +19,7 @@ OFDMSignal = upshifter(OFDMSignal);
 
 OFDMRx = channelSimulation(OFDMSignal, delayIn, SNR);
 OFDMRx = downshifter(OFDMRx, frequencyOffsetIn);
-dataIn = decimator(OFDMRx);
+dataIn = rxDecimator(OFDMRx);
 
 validIn = true(length(dataIn)-preambleFirstPartOFDMSamples, 1);
 

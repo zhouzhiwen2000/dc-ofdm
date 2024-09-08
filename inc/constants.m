@@ -119,7 +119,7 @@ elseif (mod(txDecimatorDelay, txM) ~= 0)
 end
 
 % Uncomment to plot filter response
-fvtool(txDecimatorFilter,'Fs', fPHY*txL);
+%fvtool(txDecimatorFilter,'Fs', fPHY*txL);
 
 fDAC = fPHY*txL/txM;
 fADC = fDAC;
@@ -145,38 +145,54 @@ ncoWordLength = ceil(log2(fs/ncoFrequencyResolution));
 ncoQuantization = ceil((ncoSFDR-12)/6);
 ncoCarrierPhaseIncrement = round(ncoCarrierFrequency/fs*2^ncoWordLength);
 
-%% Decimator LPF filter
-decimatorFpass = 20e6;               % Passband frequency [Hz]
-decimatorFstop = 25e6;               % Stopband frequency [Hz]
-decimatorPassbandRippleDb = 0.1;     % Passband ripple [dB]
-decimatorStopbandAttDb = 78;         % Stopband attenuation [dB]
+%% Rx Interpolator FIR filter
+rxL = 2;                                  % Upsampling factor for interpolator.
+rxInterpolatorFpass = 20e6;               % Passband frequency [Hz]
+rxInterpolatorFstop = 29e6;               % Stopband frequency [Hz]
+rxInterpolatorPassbandRippleDb = 0.1;     % Passband ripple [dB]
+rxInterpolatorStopbandAttDb = 80;         % Stopband attenuation [dB]
 
-% decimatorFpass = 25e6;                % Passband frequency [Hz]
-% decimatorFstop = 45.5e6;              % Stopband frequency [Hz]
-% decimatorPassbandRippleDb = 0.01;     % Passband ripple [dB]
-% decimatorStopbandAttDb = 120;         % Stopband attenuation [dB]
-
-% decimatorFpass = 25e6;                  % Passband frequency [Hz]
-% decimatorFstop = 37e6;                  % Stopband frequency [Hz]
-% decimatorPassbandRippleDb = 0.01;       % Passband ripple [dB]
-% decimatorStopbandAttDb = 120;           % Stopband attenuation [dB]
-
-decimatorSpec = fdesign.decimator(2, 'lowpass', 'Fp,Fst,Ap,Ast', ...
-    decimatorFpass, ...
-    decimatorFstop, ...
-    decimatorPassbandRippleDb, ...
-    decimatorStopbandAttDb, ...
-    fs);
-decimatorFilter = design(decimatorSpec, 'equiripple', 'SystemObject',true);
-
-% Group delay of the filter should be even.
-decimatorDelay = mean(grpdelay(decimatorFilter));
-if (mod(decimatorDelay, 2) ~= 0)
-    error("decimatorDelay should be even!");
+rxInterpolatorSpec = fdesign.interpolator(rxL, ...
+    'lowpass','Fp,Fst,Ap,Ast', ...
+    rxInterpolatorFpass, ...
+    rxInterpolatorFstop, ...
+    rxInterpolatorPassbandRippleDb, ...
+    rxInterpolatorStopbandAttDb, ...
+    fADC*rxL);
+rxInterpolatorFilter = design(rxInterpolatorSpec,'SystemObject',true);
+rxInterpolatorDelay = mean(grpdelay(rxInterpolatorFilter));
+if (rxInterpolatorDelay ~= round(rxInterpolatorDelay))
+    error("rxInterpolatorDelay should be an integer!");
 end
 
 % Uncomment to plot filter response
-%fvtool(decimatorFilter,'Fs', fs);
+%fvtool(rxInterpolatorFilter,'Fs', fADC*rxL);
+
+%% Decimator LPF filter
+rxM = 5;
+rxDecimatorFpass = 20e6;               % Passband frequency [Hz]
+rxDecimatorFstop = 25e6;               % Stopband frequency [Hz]
+rxDecimatorPassbandRippleDb = 0.1;     % Passband ripple [dB]
+rxDecimatorStopbandAttDb = 78;         % Stopband attenuation [dB]
+
+rxDecimatorSpec = fdesign.decimator(rxM, 'lowpass', 'Fp,Fst,Ap,Ast', ...
+    rxDecimatorFpass, ...
+    rxDecimatorFstop, ...
+    rxDecimatorPassbandRippleDb, ...
+    rxDecimatorStopbandAttDb, ...
+    fADC*rxL);
+rxDecimatorFilter = design(rxDecimatorSpec, 'equiripple', 'SystemObject',true);
+
+% Group delay of the filter should be even.
+rxDecimatorDelay = mean(grpdelay(rxDecimatorFilter));
+if (rxDecimatorDelay ~= round(rxDecimatorDelay))
+    error("rxDecimatorDelay should be an integer!");
+elseif (mod(rxDecimatorDelay, rxM) ~= 0)
+    error("rxDecimatorDelay should be a multiple of rxM!");
+end
+
+% Uncomment to plot filter response
+%fvtool(rxDecimatorFilter,'Fs', fADC);
 
 %% QAM constellations
 qamTwoBits = [3, 2, 1, 0];

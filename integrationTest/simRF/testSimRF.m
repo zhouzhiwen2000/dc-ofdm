@@ -40,7 +40,7 @@ OFDMSignal = cos(2*pi*fc*t);
 expectedOut = txInterpolator(OFDMSignal);
 expectedOut = upshifter(expectedOut);
 expectedOut = downshifter(expectedOut);
-expectedOut = decimator(expectedOut);
+expectedOut = rxDecimator(expectedOut);
 
 assert(iskindaequal(expectedOut, OFDMSignal, 0.5), "Input and Output should be similar");
 

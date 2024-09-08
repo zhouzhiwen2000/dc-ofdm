@@ -21,7 +21,7 @@ frequencyOffsetDownshifter = 1e3;
 OFDMTx = fullTx(parametersFile, pBits, frequencyOffsetUpshifter);
 OFDMRx = channelSimulation(OFDMTx, delayIn, SNR);
 OFDMRx = downshifter(OFDMRx, frequencyOffsetDownshifter);
-OFDMRx = decimator(OFDMRx);
+OFDMRx = rxDecimator(OFDMRx);
 
 %% Synchronize
 [ofdmOut, delayOut, M, peaks, frequencyOffset] = ofdmSymbolSync(OFDMRx);

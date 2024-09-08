@@ -14,7 +14,7 @@ paramFile = "sampleParametersFile";
 pBits = [];
 OFDMTx = fullTx(paramFile, pBits, 0, false);
 OFDMRx = downshifter(OFDMTx);
-OFDMRx = decimator(OFDMRx);
+OFDMRx = rxDecimator(OFDMRx);
 OFDMRx = OFDMRx(1+preambleOFDMSamples:end);
 
 % Demodulate channel and header

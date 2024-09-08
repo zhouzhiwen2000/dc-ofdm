@@ -32,14 +32,14 @@ end
 
     %% Prepare OFDM samples to be demodulated
     OFDMRxRaw = downshifter(OFDMSignal, carrierFrequencyOffset);
-    OFDMRxRaw = decimator(OFDMRxRaw);
+    OFDMRxRaw = rxDecimator(OFDMRxRaw);
 
     [~, delay, ~, ~, frequencyOffset] = ofdmSymbolSync(OFDMRxRaw);
 
     %% Correct CFO
     OFDMRx = OFDMSignal(1 + delay*2 + preambleOFDMSamples*2:end);
     OFDMRx = downshifter(OFDMRx, carrierFrequencyOffset +frequencyOffset);
-    OFDMRx = decimator(OFDMRx);
+    OFDMRx = rxDecimator(OFDMRx);
 
     %% Estimate channel
     [OFDMRx, channelEst] = ofdmChannelEstimation(OFDMRx);
