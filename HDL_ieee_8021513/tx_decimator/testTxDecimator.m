@@ -13,8 +13,17 @@ t_down = (0:1/fOut:(N+headerCyclicPrefixLen)/fOut-1/fOut)';     % Time vector fo
 
 % OFDM output is a senoidal function
 fc = 20e6;                           % Carrier frequency for sinusoidal function
-dataIn = cos(2*pi*fc*t);
-validIn = true(length(t), 1);
+input = cos(2*pi*fc*t);
+dataIn = [
+    input;
+    zeros(200, 1);
+    input;
+];
+validIn = [
+    true(length(t), 1);
+    false(200, 1);
+    true(length(t), 1);
+];
 
 % OFDM output is an actual OFDM symbol
 % dataIn = rand(numDataCarriers, 1) + 1i*rand(numDataCarriers, 1);
@@ -22,7 +31,7 @@ validIn = true(length(t), 1);
 % dataIn = txInterpolator(dataIn);
 % validIn = true(length(dataIn), 1);
 
-expectedOut = txDecimator(dataIn);
+expectedOut = txDecimator(input);
 
 %% Simulation Time
 latency = 2000/fIn;         % Algorithm latency. Delay between input and output
@@ -55,11 +64,11 @@ for i=1:length(startIdx)
 end
 
 %% Plotting
-resampledOut = resample(dataIn, 1, txM);
+resampledOut = resample(input, 1, txM);
 
 figure();
 subplot(4,1,1)
-plot(t*1e6, abs(dataIn), t_down*1e6, abs(expectedOut), t_down*1e6, abs(resampledOut));
+plot(t*1e6, abs(input), t_down*1e6, abs(expectedOut), t_down*1e6, abs(resampledOut));
 xlabel("Time [useg]");
 legend("Input", "Interpolated", "Resampled");
 xlim([min(t), max(t)]*1e6);

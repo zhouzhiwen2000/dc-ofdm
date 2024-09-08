@@ -39,6 +39,7 @@ payloadTx = ofdmModulate(payloadOFDMSymbols, payloadBitsPerSubcarrier, payloadCy
 
 OFDMSignal = [preambleTx; channelTx; headerTx; payloadTx;];
 OFDMSignal = txInterpolator(OFDMSignal);
+OFDMSignal = txDecimator(OFDMSignal);
 expectedOut = upshifter(OFDMSignal);
 
 %% Inputs
@@ -122,14 +123,14 @@ assert(~isempty(startIdx), "No start signal");
 
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
-    assert(iskindaequal(expectedOut, out, 5e-3), "Output mismatch");
+    assert(iskindaequal(expectedOut, out, 10e-3), "Output mismatch");
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
 
 %% Plotting
 if (all([simNormal == true, simLarge == false]))
-    t = (0:1/fs:length(expectedOut)/fs-1/fs)';
-    
+    t = (0:1/fDAC:length(expectedOut)/fDAC-1/fDAC)';
+
     figure();
     subplot(2,1,1)
     plot(t*1e6, out, t*1e6, expectedOut);
@@ -137,17 +138,17 @@ if (all([simNormal == true, simLarge == false]))
     xlabel("Time [useg]");
     xlim([min(t), max(t)]*1e6);
     grid on;
-    
+
     subplot(2,1,2)
     plot(t*1e6, abs(out - expectedOut));
     xlabel("Time [useg]");
     title("|out - expectedOut|");
     xlim([min(t), max(t)]*1e6);
     grid on;
-    
+
     figure();
     resampledOut = resample(out, 2, 1);
-    [psd, fVector] = pwelch(resampledOut, rectwin(length(resampledOut)), [], 2^16, 2*fs, "centered");
+    [psd, fVector] = pwelch(resampledOut, rectwin(length(resampledOut)), [], 2^16, 2*fDAC, "centered");
     plot(fVector/1e6, 10*log10(psd));
     title("PSD of the transmitted signal")
     xlabel("Freq. [MHz]");

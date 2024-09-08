@@ -75,7 +75,7 @@ fs = fPHY*oversamplingFactor;   % [Hz] Sampling frequency, which will be the inp
 %% Tx Interpolator FIR filter
 txL = 5;                                  % Upsampling factor for interpolator.
 txInterpolatorFpass = 20e6;               % Passband frequency [Hz]
-txInterpolatorFstop = 43e6;               % Stopband frequency [Hz]
+txInterpolatorFstop = 29e6;               % Stopband frequency [Hz]
 txInterpolatorPassbandRippleDb = 0.1;     % Passband ripple [dB]
 txInterpolatorStopbandAttDb = 80;         % Stopband attenuation [dB]
 
@@ -99,7 +99,7 @@ end
 %% Tx Decimator FIR filter
 txM = 2;                               % Decimator downsampling factor
 txDecimatorFpass = 20e6;               % Passband frequency [Hz]
-txDecimatorFstop = 25.5e6;               % Stopband frequency [Hz]
+txDecimatorFstop = 24.8e6;               % Stopband frequency [Hz]
 txDecimatorPassbandRippleDb = 0.1;     % Passband ripple [dB]
 txDecimatorStopbandAttDb = 78;         % Stopband attenuation [dB]
 
