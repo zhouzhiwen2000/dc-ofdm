@@ -141,9 +141,9 @@ ncoFrequencyResolution = 5;        % Frequency resolution for the NCO
 ncoCarrierFrequency = fPHY/2;       % Carrier frequency of the NCO
 ncoSFDR = 80;                       % Spurious free dynamic range [dB]
 
-ncoWordLength = ceil(log2(fs/ncoFrequencyResolution));
+ncoWordLength = ceil(log2(fADC/ncoFrequencyResolution));
 ncoQuantization = ceil((ncoSFDR-12)/6);
-ncoCarrierPhaseIncrement = round(ncoCarrierFrequency/fs*2^ncoWordLength);
+ncoCarrierPhaseIncrement = round(ncoCarrierFrequency/fADC*2^ncoWordLength);
 
 %% Rx Interpolator FIR filter
 rxL = 2;                                  % Upsampling factor for interpolator.

@@ -48,8 +48,8 @@ frequencyOffset = [
 ];
 
 %% Simulation Time
-latency = 200/fs;         % Algorithm latency. Delay between input and output
-stopTime = (length(validIn)-1)/fs + latency;
+latency = 200/fADC;         % Algorithm latency. Delay between input and output
+stopTime = (length(validIn)-1)/fADC + latency;
 
 %% Run the simulation
 model_name = "HDLDownshifter";
