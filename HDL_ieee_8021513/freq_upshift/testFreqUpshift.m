@@ -5,8 +5,9 @@ addpath("../../inc");
 constants;
 
 %% Inputs
-input{1} = rand(N*oversamplingFactor, 1) + 1i*rand(N*oversamplingFactor, 1);
-input{2} = rand(N*oversamplingFactor, 1) + 1i*rand(N*oversamplingFactor, 1);
+fTest = fPHY*txL/txM;
+input{1} = rand(50000, 1) + 1i*rand(50000, 1);
+input{2} = ones(1000, 1)*(1 + 1i);
 
 dataIn = [
     input{1};
@@ -20,11 +21,10 @@ resetIn = [
 ];
 
 validIn = true(length(dataIn), 1);
-maxError = 1e-3;    % Maximum error between out and expectedOut
 
 %% Simulation Time
-latency = 200/fs;         % Algorithm latency. Delay between input and output
-stopTime = (length(validIn)-1)/fs + latency;
+latency = 2000/fTest;         % Algorithm latency. Delay between input and output
+stopTime = (length(validIn)-1)/fTest + latency;
 
 %% Run the simulation
 model_name = "HDLFreqUpshift";
@@ -49,17 +49,18 @@ out{1} = dataOut(1:length(input{1}));
 out{2} = dataOut(length(input{1})+1:end);
 
 for i=1:length(startIdx)
-    n = (0:1:length(input{i})-1)';
-    expectedOut = real(input{i}).*cos(pi*n/oversamplingFactor) - imag(input{i}).*sin(pi*n/oversamplingFactor);
+    expectedOut = upshifter(input{i});
     
-    assert(iskindaequal(expectedOut, out{i}, maxError), "Upshifter output is not the same");
+    assert(iskindaequal(expectedOut, out{i}, 10e-3), "Upshifter output is not the same");
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
 
 %% Plotting
+n = 1:1:length(input{i});
+
 figure();
 subplot(2,1,1);
-plot(n, out{1}, n, expectedOut);
+plot(n, out{i}, n, expectedOut);
 legend("Out", "ExpectedOut");
 xlabel("n [samples]");
 ylabel("Signals");
@@ -68,7 +69,7 @@ xlim([min(n), max(n)]);
 grid on;
 
 subplot(2,1,2);
-plot(n, abs(out{1}-expectedOut));
+plot(n, abs(out{i}-expectedOut));
 xlabel("n [samples]");
 ylabel("Error");
 title("|out - expectedOut|");

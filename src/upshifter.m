@@ -8,8 +8,11 @@ arguments(Output)
     s (:,1)
 end
     constants;
+    % "p" equal the oversampling factor
+    % It acounts for the error in the carrier frequency produced by the NCO
+    p = txL/txM*ncoUpCarrierFrequency/ncoUpActualFreq;
     n = (0:1:length(y)-1)';
-    s = real(y).*cos(pi*n/oversamplingFactor + 2*pi*frequencyOffset/fs*n) - ...
-        imag(y).*sin(pi*n/oversamplingFactor + 2*pi*frequencyOffset/fs*n);
+    s = real(y).*cos(pi*n/p + 2*pi*frequencyOffset/fDAC*n) - ...
+        imag(y).*sin(pi*n/p + 2*pi*frequencyOffset/fDAC*n);
 end
 

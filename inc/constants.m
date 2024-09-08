@@ -122,19 +122,19 @@ end
 % Uncomment to plot filter response
 %fvtool(txDecimatorFilter,'Fs', fPHY*txL/txM);
 
+fDAC = fPHY*txL/txM;
+fADC = fDAC;
+
 %% Upshifter NCO (Numerical Controlled Oscillator)
-% Upshifter NCO doesn't need too much resolution.
-ncoUpshifterPhaseStep = 1/(2*oversamplingFactor);
+% These equations were taking from the "help" section of the NCO block.
+ncoUpFrequencyResolution = 100;         % Frequency resolution for the NCO
+ncoUpCarrierFrequency = fPHY/2;       % Carrier frequency of the NCO
+ncoUpSFDR = 80;                       % Spurious free dynamic range [dB]
 
-% The NCO will have a phase resolution of 1/2^ncoWordLength.
-ncoUpshifterWordLength = ceil(log2(2*oversamplingFactor)+2);
-if (ncoUpshifterWordLength < 4)
-    error("ncoWordLength must be greater than 4 (or HDL code can't be generated)");
-end
-
-% The phase increment takes a value from [0; 2^ncoWordLength]
-% A phase increment of "2^ncoWordLength" is equal to 2pi
-ncoUpshifterPhaseIncrement = 2^ncoUpshifterWordLength*ncoUpshifterPhaseStep;
+ncoUpWordLength = ceil(log2(fDAC/ncoUpFrequencyResolution));
+ncoUpQuantization = ceil((ncoUpSFDR-12)/6);
+ncoUpCarrierPhaseIncrement = round(ncoUpCarrierFrequency/fDAC*2^ncoUpWordLength);
+ncoUpActualFreq = ncoUpCarrierPhaseIncrement*fDAC/(2^ncoUpWordLength);
 
 %% Downshifter NCO
 % These equations were taking from the "help" section of the NCO block.
@@ -144,7 +144,7 @@ ncoSFDR = 80;                       % Spurious free dynamic range [dB]
 
 ncoWordLength = ceil(log2(fs/ncoFrequencyResolution));
 ncoQuantization = ceil((ncoSFDR-12)/6);
-ncoCarrierPhaseIncrement = ncoCarrierFrequency/fs*2^ncoWordLength;
+ncoCarrierPhaseIncrement = round(ncoCarrierFrequency/fs*2^ncoWordLength);
 
 %% Decimator LPF filter
 decimatorFpass = 20e6;               % Passband frequency [Hz]
