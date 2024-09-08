@@ -70,9 +70,10 @@ payloadScramblerInit = uint8([1 1 1 1 1 1 1 1 1 1 1 1 1]); % 0x1FFF
 fPHY = 50e6;                    % [Hz] Fixed by standard
 oversamplingFactor = 2;
 fs = fPHY*oversamplingFactor;   % [Hz] Sampling frequency, which will be the input of the DAC and ADC
-txL = 5; % Upsampling factor for interpolator.
+
 
 %% Tx Interpolator FIR filter
+txL = 5;                                  % Upsampling factor for interpolator.
 txInterpolatorFpass = 20e6;               % Passband frequency [Hz]
 txInterpolatorFstop = 43e6;               % Stopband frequency [Hz]
 txInterpolatorPassbandRippleDb = 0.1;     % Passband ripple [dB]
@@ -88,9 +89,38 @@ txInterpolatorSpec = fdesign.interpolator(txL, ...
     fPHY*txL);
 txInterpolatorFilter = design(txInterpolatorSpec,'SystemObject',true);
 txInterpolatorDelay = mean(grpdelay(txInterpolatorFilter));
+if (txInterpolatorDelay ~= round(txInterpolatorDelay))
+    error("txInterpolatorDelay should be an integer!");
+end
 
 % Uncomment to plot filter response
 %fvtool(txInterpolatorFilter,'Fs', fPHY*txL);
+
+%% Tx Decimator FIR filter
+txM = 2;                               % Decimator downsampling factor
+txDecimatorFpass = 20e6;               % Passband frequency [Hz]
+txDecimatorFstop = 25.5e6;               % Stopband frequency [Hz]
+txDecimatorPassbandRippleDb = 0.1;     % Passband ripple [dB]
+txDecimatorStopbandAttDb = 78;         % Stopband attenuation [dB]
+
+txDecimatorSpec = fdesign.decimator(txM, 'lowpass', 'Fp,Fst,Ap,Ast', ...
+    txDecimatorFpass, ...
+    txDecimatorFstop, ...
+    txDecimatorPassbandRippleDb, ...
+    txDecimatorStopbandAttDb, ...
+    fPHY*txL/txM);
+txDecimatorFilter = design(txDecimatorSpec, 'equiripple', 'SystemObject',true);
+
+% Group delay of the filter should be even.
+txDecimatorDelay = mean(grpdelay(txDecimatorFilter));
+if (txDecimatorDelay ~= round(txDecimatorDelay))
+    error("txDecimatorDelay should be an integer!");
+elseif (mod(txDecimatorDelay, txM) ~= 0)
+    error("txDecimatorDelay should be a multiple of txM!");
+end
+
+% Uncomment to plot filter response
+%fvtool(txDecimatorFilter,'Fs', fPHY*txL/txM);
 
 %% Upshifter NCO (Numerical Controlled Oscillator)
 % Upshifter NCO doesn't need too much resolution.
