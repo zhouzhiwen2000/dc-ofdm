@@ -1,4 +1,4 @@
-function header = headerGenerate(psduSize, messageDuration, blockSize, ...
+function header = headerGenerate(CONST, psduSize, messageDuration, blockSize, ...
     fecRate, repetitionNumber, fecConcatenationFactor, ...
     scramblerInitialization, batId, cyclicPrefixId, ...
     explicitMimoPilotSymbolCombSpacing, explicitMimoPilotSymbolNumber)
@@ -8,6 +8,7 @@ function header = headerGenerate(psduSize, messageDuration, blockSize, ...
 % Outputs:
 %   - header = Header in transmit order.
 arguments(Input)
+    CONST
     psduSize (24, 1) logical
     messageDuration (16, 1) logical
     blockSize (2, 1) logical
@@ -22,9 +23,7 @@ arguments(Input)
 end
 arguments(Output)
     header (168, 1) logical
-end
-    constants;
-    
+end    
     %%% Prepare header fields in transmit order.
     frameType = binl2tx(logical([1 1 0 0]));
     frameSubType = binl2tx(logical([0 0 0 0]));
@@ -54,6 +53,6 @@ end
         reserved78; explicitMimoPilotSymbolNumber; reserved109];
     
     % Apply CRC
-    header = crcGenerate(headerCRCPoly, header);
+    header = crcGenerate(CONST.headerCRCPoly, header);
     
 end

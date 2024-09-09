@@ -1,6 +1,7 @@
-function [dataOut] = removeToneMapping(dataIn, psduSize)
+function [dataOut] = removeToneMapping(CONST, dataIn, psduSize)
 %REMOVETONEMAPPING Remove tone mapping from payload bits.
 arguments(Input)
+    CONST
     dataIn(:,1) double
     psduSize double
 end

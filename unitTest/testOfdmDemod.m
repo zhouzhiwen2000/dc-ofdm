@@ -5,28 +5,41 @@ addpath("../src");
 addpath("../src/rx");
 addpath("../inc");
 constants;
-parameters;
 
 %% Test cases
-% Size of the header after FEC encoding
-preambleTx = ofdmModulate(preambleOFDMSymbols, preambleBitsPerSubcarrier, preambleCyclicPrefixLen, nullIdx, preambleScramblerInit);
-channelTx = ofdmModulate(channelOFDMSymbols, channelBitsPerSubcarrier, channelCyclicPrefixLen, nullIdx, channelScramblerInit);
+pBits = [];
+run("sampleParametersFile.m");
 
-h = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
+% Size of the header after FEC encoding
+preambleTx = ofdmModulate(CONST, CONST.preambleOFDMSymbols, ...
+    CONST.preambleBitsPerSubcarrier, CONST.preambleCyclicPrefixLen, ...
+    CONST.preambleScramblerInit);
+
+channelTx = ofdmModulate(CONST, CONST.channelOFDMSymbols, ...
+    CONST.channelBitsPerSubcarrier, CONST.channelCyclicPrefixLen, ...
+    CONST.channelScramblerInit);
+
+h = headerGenerate(CONST, psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
     fecConcatenationFactor, scramblerInitialization, batId, cyclicPrefixId, ...
     explicitMimoPilotSymbolCombSpacing, explicitMimoPilotSymbolNumber);
-h = headerScrambler(h);
-h = LDPCEncoder(h, 0, 0, true);
-headerOFDMSymbols = headerRepetitionEncoder(h);
-headerTx = ofdmModulate(headerOFDMSymbols, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit);
+h = headerScrambler(CONST, h);
+h = LDPCEncoder(CONST, h, 0, 0, true);
+headerOFDMSymbols = headerRepetitionEncoder(CONST, h);
 
-out1 = ofdmDemodulate(preambleTx, preambleBitsPerSubcarrier, preambleCyclicPrefixLen, nullIdx, preambleScramblerInit, false);
-expectedOut1 = preambleLUT;
+headerTx = ofdmModulate(CONST, headerOFDMSymbols, ...
+    CONST.headerBitsPerSubcarrier, CONST.headerCyclicPrefixLen, ...
+    CONST.headerScramblerInit);
 
-out2 = ofdmDemodulate(channelTx, channelBitsPerSubcarrier, channelCyclicPrefixLen, nullIdx, channelScramblerInit, false);
-expectedOut2 = channelLUT;
+out1 = ofdmDemodulate(CONST, preambleTx, CONST.preambleBitsPerSubcarrier, ...
+    CONST.preambleCyclicPrefixLen, CONST.preambleScramblerInit, false);
+expectedOut1 = CONST.preambleLUT;
 
-out3 = ofdmDemodulate(headerTx, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit, false);
+out2 = ofdmDemodulate(CONST, channelTx, CONST.channelBitsPerSubcarrier, ...
+    CONST.channelCyclicPrefixLen, CONST.channelScramblerInit, false);
+expectedOut2 = CONST.channelLUT;
+
+out3 = ofdmDemodulate(CONST, headerTx, CONST.headerBitsPerSubcarrier, ...
+    CONST.headerCyclicPrefixLen, CONST.headerScramblerInit, false);
 expectedOut3 = headerOFDMSymbols(:);
 
 %% Perform tests

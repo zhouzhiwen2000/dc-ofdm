@@ -1,12 +1,10 @@
-function [dataOut] = txDecimator(dataIn)
+function [dataOut] = txDecimator(CONST, dataIn)
 %TXDECIMATOR Inverse operation to interpolation.
-    constants;
-
-    dataIn = [dataIn; zeros(txDecimatorDelay, 1)];
-    dataOut = txDecimatorFilter(dataIn);
+    dataIn = [dataIn; zeros(CONST.txDecimatorDelay, 1)];
+    dataOut = CONST.txDecimatorFilter(dataIn);
     
     % Remove delay from FIR filter
-    dataOut(1:txDecimatorDelay/txM) = [];
+    dataOut(1:CONST.txDecimatorDelay/CONST.txM) = [];
 end
 
 

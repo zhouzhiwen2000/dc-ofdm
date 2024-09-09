@@ -3,11 +3,10 @@
 % of a PSDU.
 %   The variable "pBits" needs to be defined before calling this file, 
 %   which must contain the bits to be transferred in the payload.
-constants;
 
 %% Payload Parameters
 [pBits, payloadLenInFecBlocks, payloadLenInBits, ...
-    payloadLenInWords, payloadExtraWords] = getPayloadParamsFromBits(pBits);
+    payloadLenInWords, payloadExtraWords] = getPayloadParamsFromBits(CONST, pBits);
 
 %% Header formation
 % Length of the payload, in octets
@@ -49,10 +48,10 @@ explicitMimoPilotSymbolNumber = logical([0 0 0]);
 
 %% Calculated parameters for the payload
 payloadBitsPerSubcarrier = binl2dec(batId);
-payloadCyclicPrefixLen = binl2dec(cyclicPrefixId) * N / 32;
+payloadCyclicPrefixLen = binl2dec(cyclicPrefixId) * CONST.N / 32;
 
-payloadBitsPerOFDMSymbol = numDataCarriers*binl2dec(batId);
+payloadBitsPerOFDMSymbol = CONST.numDataCarriers*binl2dec(batId);
 
 % Note: the "*2" is beacuse of the fec rate of 1/2.
-payloadNumOFDMSymbols = ceil(double(binl2dec(psduSize)*axiWidth*2) / double(payloadBitsPerOFDMSymbol));
-payloadNumOFDMSamples = (payloadCyclicPrefixLen + N)*payloadNumOFDMSymbols;
+payloadNumOFDMSymbols = ceil(double(binl2dec(psduSize)*CONST.axiWidth*2) / double(payloadBitsPerOFDMSymbol));
+payloadNumOFDMSamples = (payloadCyclicPrefixLen + CONST.N)*payloadNumOFDMSymbols;

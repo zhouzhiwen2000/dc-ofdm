@@ -1,7 +1,8 @@
 %% UNUSED
-function [ofdmSynched, delay, M] = ofdmSymbolSyncAA(ofdmIn)
+function [ofdmSynched, delay, M] = ofdmSymbolSyncAA(CONST, ofdmIn)
 %OFDMSYMBOLSYNC Synchronize OFDM symbols using the Min A A -A -A method.
 arguments(Input)
+    CONST
     ofdmIn (:,1) double
 end
 arguments(Output)
@@ -9,11 +10,9 @@ arguments(Output)
     delay double
     M (:,1) double
 end
-    constants;
-
     % For the symbol, we will use the first ten repetitions of the OFDM
     % preamble
-    L = (N + preambleCyclicPrefixLen);    % Length of the training symbol
+    L = (CONST.N + CONST.preambleCyclicPrefixLen);    % Length of the training symbol
     M = zeros(length(ofdmIn), 1);
 
     for d=1:1:length(ofdmIn)-4*L

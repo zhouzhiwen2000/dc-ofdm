@@ -3,10 +3,11 @@ function [pBitsRx, err, delay, frequencyOffset, channelEst, ...
     fecRateRx, repetitionNumberRx, fecConcatenationFactorRx, ...
     scramblerInitializationRx, batIdRx, cyclicPrefixIdRx, ...
     explicitMimoPilotSymbolCombSpacingRx, ...
-    explicitMimoPilotSymbolNumberRx] = fullRx(OFDMSignal, carrierFrequencyOffset)
+    explicitMimoPilotSymbolNumberRx] = fullRx(CONST, OFDMSignal, carrierFrequencyOffset)
 %FULLRX Full Rx implementation. Returns the payload bits, and the header
 % parameters. If "err == 1", then the header was read with some errors.
 arguments(Input)
+    CONST
     OFDMSignal (:, 1) double
     carrierFrequencyOffset double = 0
 end
@@ -28,37 +29,35 @@ arguments(Output)
     explicitMimoPilotSymbolCombSpacingRx (3, 1) logical
     explicitMimoPilotSymbolNumberRx (3, 1) logical
 end
-    constants;
-
     %% Prepare OFDM samples to be demodulated
-    OFDMRxRaw = downshifter(OFDMSignal, carrierFrequencyOffset);
-    OFDMRxRaw = rxDecimator(OFDMRxRaw);
+    OFDMRxRaw = downshifter(CONST, OFDMSignal, carrierFrequencyOffset);
+    OFDMRxRaw = rxDecimator(CONST, OFDMRxRaw);
 
-    [~, delay, ~, ~, frequencyOffset] = ofdmSymbolSync(OFDMRxRaw);
+    [~, delay, ~, ~, frequencyOffset] = ofdmSymbolSync(CONST, OFDMRxRaw);
 
     %% Correct CFO
-    OFDMRx = OFDMSignal(1 + delay*2 + preambleOFDMSamples*2:end);
-    OFDMRx = downshifter(OFDMRx, carrierFrequencyOffset +frequencyOffset);
-    OFDMRx = rxDecimator(OFDMRx);
+    OFDMRx = OFDMSignal(1 + delay*2 + CONST.preambleOFDMSamples*2:end);
+    OFDMRx = downshifter(CONST, OFDMRx, carrierFrequencyOffset +frequencyOffset);
+    OFDMRx = rxDecimator(CONST, OFDMRx);
 
     %% Estimate channel
-    [OFDMRx, channelEst] = ofdmChannelEstimation(OFDMRx);
+    [OFDMRx, channelEst] = ofdmChannelEstimation(CONST, OFDMRx);
 
     %% Process header
-    headerRx = OFDMRx(1:headerOFDMSamples);
-    headerRxLLR = ofdmDemodulate(headerRx, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit, true, channelEst);
-    hRxLLR = headerRemoveRepetition(headerRxLLR);
-    hScrambledRx = LDPCDecoder(hRxLLR, 0, 0, true);
-    hGenRx = headerScrambler(hScrambledRx);
+    headerRx = OFDMRx(1:CONST.headerOFDMSamples);
+    headerRxLLR = ofdmDemodulate(CONST, headerRx, headerBitsPerSubcarrier, headerCyclicPrefixLen, headerScramblerInit, true, channelEst);
+    hRxLLR = headerRemoveRepetition(CONST, headerRxLLR);
+    hScrambledRx = LDPCDecoder(CONST, hRxLLR, 0, 0, true);
+    hGenRx = headerScrambler(CONST, hScrambledRx);
     [err, psduSizeRx, messageDurationRx, blockSizeRx, ...
         fecRateRx, repetitionNumberRx, fecConcatenationFactorRx, ...
         scramblerInitializationRx, batIdRx, cyclicPrefixIdRx, ...
         explicitMimoPilotSymbolCombSpacingRx, ...
-        explicitMimoPilotSymbolNumberRx] = headerSeparate(hGenRx);
+        explicitMimoPilotSymbolNumberRx] = headerSeparate(CONST, hGenRx);
     
     %% Estimate payload parameters from header
     payloadBitsPerSubcarrierRx = binl2dec(batIdRx);
-    payloadCyclicPrefixLenRx = binl2dec(cyclicPrefixIdRx) * N / 32;
+    payloadCyclicPrefixLenRx = binl2dec(cyclicPrefixIdRx) * CONST.N / 32;
 
     if (err == true)
         warning("Header was not read correctly");
@@ -66,8 +65,8 @@ end
     
     %% Process payload
     % Remove the excess timingWindow added and the header samples
-    payloadRx = OFDMRx(1+headerOFDMSamples:end);
-    excessPayloadSamples = mod(length(payloadRx),N+payloadCyclicPrefixLenRx);
+    payloadRx = OFDMRx(1+CONST.headerOFDMSamples:end);
+    excessPayloadSamples = mod(length(payloadRx),CONST.N+payloadCyclicPrefixLenRx);
     payloadRx = payloadRx(1:end-excessPayloadSamples);
 
     if (isempty(payloadRx))
@@ -75,18 +74,18 @@ end
         return
     end
 
-    payloadRxLLR = ofdmDemodulate(payloadRx, payloadBitsPerSubcarrierRx, payloadCyclicPrefixLenRx, nullIdx, payloadScramblerInit, true, channelEst);
-    pRxLLR = removeToneMapping(payloadRxLLR, psduSizeRx);
+    payloadRxLLR = ofdmDemodulate(CONST, payloadRx, payloadBitsPerSubcarrierRx, payloadCyclicPrefixLenRx, payloadScramblerInit, true, channelEst);
+    pRxLLR = removeToneMapping(CONST, payloadRxLLR, psduSizeRx);
 
     % Knowing the full size of the signal, reshape it to fit in the LDPC
     % decoder
     pRxLLR = reshape(pRxLLR, payloadBitsPerFec, []);
     payloadLenInFecBlocks = width(pRxLLR);
     
-    pBitsRx = false(payloadBitsPerBlock0, payloadLenInFecBlocks);
+    pBitsRx = false(CONST.payloadBitsPerBlock0, payloadLenInFecBlocks);
     for i=1:1:payloadLenInFecBlocks
-        pScrambledRx = LDPCDecoder(pRxLLR(:,i), binl2dec(fecRateRx), binl2dec(blockSizeRx), false);
-        pBitsRx(:,i) = payloadScrambler(scramblerInitializationRx, pScrambledRx);
+        pScrambledRx = LDPCDecoder(CONST, pRxLLR(:,i), binl2dec(fecRateRx), binl2dec(blockSizeRx), false);
+        pBitsRx(:,i) = payloadScrambler(CONST, scramblerInitializationRx, pScrambledRx);
     end
     pBitsRx = pBitsRx(:);
 

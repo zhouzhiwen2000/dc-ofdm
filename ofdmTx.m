@@ -7,39 +7,46 @@ constants;
 
 %% Parameters
 parametersFile = "inc/sampleParametersFile";
-pBits = logical(randi([0,1], payloadBitsPerBlock0*3, 1));
+pBits = logical(randi([0,1], CONST.payloadBitsPerBlock0*3, 1));
 
 run(parametersFile);
 
 %% Header
-hGen = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
+hGen = headerGenerate(CONST, psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
     fecConcatenationFactor, scramblerInitialization, batId, cyclicPrefixId, ...
     explicitMimoPilotSymbolCombSpacing, explicitMimoPilotSymbolNumber);
-hScrambled = headerScrambler(hGen);
-hLDPC = LDPCEncoder(hScrambled, 0, 0, true);
-headerOFDMSymbols = headerRepetitionEncoder(hLDPC);
+hScrambled = headerScrambler(CONST, hGen);
+hLDPC = LDPCEncoder(CONST, hScrambled, 0, 0, true);
+headerOFDMSymbols = headerRepetitionEncoder(CONST, hLDPC);
 
 %% Payload
-pBits = reshape(pBits, payloadBitsPerBlock0, payloadLenInFecBlocks);
-pLDPC = false(payloadBitsPerFec, payloadLenInFecBlocks);
+pBits = reshape(pBits, CONST.payloadBitsPerBlock0, payloadLenInFecBlocks);
+pLDPC = false(CONST.payloadBitsPerFec, payloadLenInFecBlocks);
 for i=1:1:payloadLenInFecBlocks
-    pScrambled = payloadScrambler(scramblerInitialization, pBits(:,i));
-    pLDPC(:,i) = LDPCEncoder(pScrambled, binl2dec(fecRate), binl2dec(blockSize), false);
+    pScrambled = payloadScrambler(CONST, scramblerInitialization, pBits(:,i));
+    pLDPC(:,i) = LDPCEncoder(CONST, pScrambled, binl2dec(fecRate), binl2dec(blockSize), false);
 end
 pLDPC = pLDPC(:);
-payloadOFDMSymbols = toneMapping(pLDPC, binl2dec(batId));
+payloadOFDMSymbols = toneMapping(CONST, pLDPC, binl2dec(batId));
 
 %% Transmiter
-preambleTx = ofdmModulate(preambleOFDMSymbols, preambleBitsPerSubcarrier, preambleCyclicPrefixLen, nullIdx, preambleScramblerInit);
-channelTx = ofdmModulate(channelOFDMSymbols, channelBitsPerSubcarrier, channelCyclicPrefixLen, nullIdx, channelScramblerInit);
-headerTx = ofdmModulate(headerOFDMSymbols, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit);
-payloadTx = ofdmModulate(payloadOFDMSymbols, payloadBitsPerSubcarrier, payloadCyclicPrefixLen, nullIdx, payloadScramblerInit);
+preambleTx = ofdmModulate(CONST, CONST.preambleOFDMSymbols, ...
+    CONST.preambleBitsPerSubcarrier, CONST.preambleCyclicPrefixLen, ...
+    CONST.preambleScramblerInit);
+
+channelTx = ofdmModulate(CONST, CONST.channelOFDMSymbols, ...
+    CONST.channelBitsPerSubcarrier, CONST.channelCyclicPrefixLen, ...
+    CONST.channelScramblerInit);
+
+headerTx = ofdmModulate(CONST, headerOFDMSymbols, ...
+    CONST.headerBitsPerSubcarrier, CONST.headerCyclicPrefixLen, ...
+    CONST.headerScramblerInit);
+
+payloadTx = ofdmModulate(CONST, payloadOFDMSymbols, ...
+    payloadBitsPerSubcarrier, payloadCyclicPrefixLen, ...
+    CONST.payloadScramblerInit);
 
 OFDMSignal = [preambleTx; channelTx; headerTx; payloadTx;];
-OFDMSignal = txInterpolator(OFDMSignal);
-OFDMSignal = txDecimator(OFDMSignal);
-OFDMSignal = upshifter(OFDMSignal);
-
-%% Plotting
-%t = (0:1/fs:length(OFDMSignal)/fs - 1/fs).';
-%plot(t, OFDMSignal);
+OFDMSignal = txInterpolator(CONST, OFDMSignal);
+OFDMSignal = txDecimator(CONST, OFDMSignal);
+OFDMSignal = upshifter(CONST, OFDMSignal);

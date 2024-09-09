@@ -5,44 +5,43 @@ addpath("src");
 addpath("src/rx")
 addpath("inc")
 constants;
-parameters;
 
 %% Run transmitter
 ofdmTx; % Data is in OFDMSignal
-close all;
 
 %% Simulate Channel
 delayIn = 400;  % Delay in OFDM Samples
-OFDMRx = [zeros(delayIn*2, 1); OFDMSignal];
+OFDMRx = [zeros(delayIn*CONST.rxM/CONST.rxL, 1); OFDMSignal];
 
 %% Separate Preamble, Channel and Header
 % Payload can't be processed until the header was obtained (I need to know
 % the cyclic prefix used for the payload)
-OFDMRx = downshifter(OFDMRx);
-OFDMRx = rxDecimator(OFDMRx);
+OFDMRx = downshifter(CONST, OFDMRx);
+OFDMRx = rxInterpolator(CONST, OFDMRx);
+OFDMRx = rxDecimator(CONST, OFDMRx);
 
-[OFDMRx, delayOut] = ofdmSymbolSync(OFDMRx);
+[OFDMRx, delayOut] = ofdmSymbolSync(CONST, OFDMRx);
 
 assert(isequal(delayIn, delayOut), "signal delay was properly detected");
 
-[OFDMRx, channelEst] = ofdmChannelEstimation(OFDMRx);
+[OFDMRx, channelEst] = ofdmChannelEstimation(CONST, OFDMRx);
 
-headerRx = OFDMRx(1 : headerOFDMSamples);
-payloadRx = OFDMRx(1+headerOFDMSamples : end);
+headerRx = OFDMRx(1 : CONST.headerOFDMSamples);
+payloadRx = OFDMRx(1+CONST.headerOFDMSamples : end);
 
-headerRxLLR = ofdmDemodulate(headerRx, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit, true, channelEst);
-
+headerRxLLR = ofdmDemodulate(CONST, headerRx, CONST.headerBitsPerSubcarrier, ...
+    CONST.headerCyclicPrefixLen, CONST.headerScramblerInit, true, channelEst);
 
 %% Process header
 % The header uses LLR, not bits.
-hRxLLR = headerRemoveRepetition(headerRxLLR);
-hScrambledRx = LDPCDecoder(hRxLLR, 0, 0, true);
-hGenRx = headerScrambler(hScrambledRx);
+hRxLLR = headerRemoveRepetition(CONST, headerRxLLR);
+hScrambledRx = LDPCDecoder(CONST, hRxLLR, 0, 0, true);
+hGenRx = headerScrambler(CONST, hScrambledRx);
 [err, psduSizeRx, messageDurationRx, blockSizeRx, ...
     fecRateRx, repetitionNumberRx, fecConcatenationFactorRx, ...
     scramblerInitializationRx, batIdRx, cyclicPrefixIdRx, ...
     explicitMimoPilotSymbolCombSpacingRx, ...
-    explicitMimoPilotSymbolNumberRx] = headerSeparate(hGenRx);
+    explicitMimoPilotSymbolNumberRx] = headerSeparate(CONST, hGenRx);
 
 assert(isequal(hScrambledRx, hScrambled));
 assert(isequal(hGenRx, hGen));
@@ -61,17 +60,18 @@ assert(isequal(explicitMimoPilotSymbolNumberRx, explicitMimoPilotSymbolNumber));
 
 %% Estimate payload parameters from header
 payloadBitsPerSubcarrierRx = binl2dec(batIdRx);
-payloadCyclicPrefixLenRx = binl2dec(cyclicPrefixIdRx) * N / 32;
+payloadCyclicPrefixLenRx = binl2dec(cyclicPrefixIdRx) * CONST.N / 32;
 
 %% Process payload
-payloadRxLLR = ofdmDemodulate(payloadRx, payloadBitsPerSubcarrierRx, payloadCyclicPrefixLenRx, nullIdx, payloadScramblerInit, true, channelEst);
-pRxLLR = removeToneMapping(payloadRxLLR, psduSizeRx);
-pRxLLR = reshape(pRxLLR, payloadBitsPerFec, payloadLenInFecBlocks);
+payloadRxLLR = ofdmDemodulate(CONST, payloadRx, payloadBitsPerSubcarrierRx, ...
+    payloadCyclicPrefixLenRx, CONST. payloadScramblerInit, true, channelEst);
+pRxLLR = removeToneMapping(CONST, payloadRxLLR, psduSizeRx);
+pRxLLR = reshape(pRxLLR, CONST.payloadBitsPerFec, payloadLenInFecBlocks);
 
-pBitsRx = false(payloadBitsPerBlock0, payloadLenInFecBlocks);
+pBitsRx = false(CONST.payloadBitsPerBlock0, payloadLenInFecBlocks);
 for i=1:1:payloadLenInFecBlocks
-    pScrambledRx = LDPCDecoder(pRxLLR(:,i), binl2dec(fecRateRx), binl2dec(blockSizeRx), false);
-    pBitsRx(:,i) = payloadScrambler(scramblerInitializationRx, pScrambledRx);
+    pScrambledRx = LDPCDecoder(CONST, pRxLLR(:,i), binl2dec(fecRateRx), binl2dec(blockSizeRx), false);
+    pBitsRx(:,i) = payloadScrambler(CONST, scramblerInitializationRx, pScrambledRx);
 end
 
 %% Assertions

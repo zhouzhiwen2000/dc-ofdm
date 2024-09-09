@@ -6,19 +6,19 @@ addpath("../inc");
 constants;
 
 %% Test cases
-fIn = fADC*rxM;
+fIn = CONST.fADC*CONST.rxM;
 fc = 5e6;
 symbolNumber = 10;
 
 t = (0:1/fIn:symbolNumber/fc-1/fIn)';
 input = sin(2*pi*fc*t);
 
-out = rxDecimator(input);
-resample_out = resample(input,1,rxM);
+out = rxDecimator(CONST, input);
+resample_out = resample(input, 1, CONST.rxM);
 
 n = 1:1:length(input);
-n_down = 1:rxM:rxM*length(resample_out);
-n_dec = (1:rxM:rxM*length(out))';
+n_down = 1 : CONST.rxM : CONST.rxM*length(resample_out);
+n_dec = (1 : CONST.rxM : CONST.rxM*length(out))';
 
 %% Plot
 figure();
@@ -34,6 +34,6 @@ title("Error between resample and decimation");
 grid on;
 
 subplot(3,1,3);
-plot(n_down, abs(input(1:rxM:end) - out));
+plot(n_down, abs(input(1:CONST.rxM:end) - out));
 title("Error between input and decimated");
 grid on;

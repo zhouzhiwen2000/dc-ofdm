@@ -9,20 +9,20 @@ constants;
 fc = 5e6;
 symbolNumber = 10;
 
-t = (0:1/fADC:symbolNumber/fc-1/fADC)';
+t = (0: 1/CONST.fADC : symbolNumber/fc - 1/CONST.fADC)';
 input = sin(2*pi*fc*t);
 
-out = rxInterpolator(input);
-resample_out = resample(input,rxL,1);
+out = rxInterpolator(CONST, input);
+resample_out = resample(input, CONST.rxL, 1);
 
 %% Plot
 %%% Use this plotting when the amount of samples of the input and output
 %%% don't match
-plot(out);
-hold on;
-plot(resample_out);
+% plot(out);
+% hold on;
+% plot(resample_out);
 
-n_in  = 1:rxL:length(out);
+n_in  = 1 : CONST.rxL : length(out);
 n_out = 1:1:length(out);
 
 figure();
@@ -38,6 +38,6 @@ title("Error between resample and decimation");
 grid on;
 
 subplot(3,1,3);
-plot(n_in, abs(input - out(1:rxL:end)));
+plot(n_in, abs(input - out(1:CONST.rxL:end)));
 title("Error between input and decimated");
 grid on;

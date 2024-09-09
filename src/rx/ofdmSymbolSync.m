@@ -1,4 +1,4 @@
-function [ofdmSynched, delay, M, peaks, frequencyOffset] = ofdmSymbolSync(ofdmIn)
+function [ofdmSynched, delay, M, peaks, frequencyOffset] = ofdmSymbolSync(CONST, ofdmIn)
 %OFDMSYMBOLSYNC Synchronize OFDM symbols using the Cox and Schmidl method.
 % Both time synchronization and the CFO (carrier frequency offset) are
 % calculated. Returns the ofdm signal with the delay and preamble removed.
@@ -17,6 +17,7 @@ function [ofdmSynched, delay, M, peaks, frequencyOffset] = ofdmSymbolSync(ofdmIn
 % Note: "M" function from the Cox paper and "S" function from the peak
 % detection function are almost the same. Therefore, simply "M" is used.
 arguments(Input)
+    CONST
     ofdmIn (:,1) double
 end
 arguments(Output)
@@ -26,11 +27,9 @@ arguments(Output)
     peaks (:,1) double
     frequencyOffset
 end
-    constants;
-
     % For the symbol, we will use the first ten repetitions of the OFDM
     % preamble
-    L = preambleFirstPartOFDMSamples/2; % Length of the training symbol (half of the ten preamble symbols)
+    L = CONST.preambleFirstPartOFDMSamples/2; % Length of the training symbol (half of the ten preamble symbols)
     M = zeros(length(ofdmIn)-2*L, 1);
     P = zeros(length(ofdmIn)-2*L, 1);
 
@@ -47,7 +46,7 @@ end
 
     % Same as searching for the "max" of the function "M"
     %[~, delay] = max(M);
-    peaks = rawPeakDetection(M, peakDetectorWindow, peakDetectorThreshold);
+    peaks = rawPeakDetection(M, CONST.peakDetectorWindow, CONST.peakDetectorThreshold);
     if (~isempty(peaks))
         delay = peaks(1);
     else
@@ -56,7 +55,7 @@ end
 
     % Calculate frequency offset
     deltaPhase = angle(P(delay));
-    frequencyOffset = deltaPhase / (pi*frequencyOffsetTimeWindow);
+    frequencyOffset = deltaPhase / (pi*CONST.frequencyOffsetTimeWindow);
 
     if (delay == 1)
         % Fix a bug where, if no delay is applied, is considered as a "1 symbol" delay.
@@ -65,6 +64,6 @@ end
     end
 
     % Remove delay and preamble
-    ofdmSynched = ofdmIn(1+delay+preambleOFDMSamples:end);
+    ofdmSynched = ofdmIn(1+delay+CONST.preambleOFDMSamples:end);
 end
 

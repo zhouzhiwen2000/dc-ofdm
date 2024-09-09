@@ -2,10 +2,11 @@ function [err, psduSizeRx, messageDurationRx, blockSizeRx, ...
     fecRateRx, repetitionNumberRx, fecConcatenationFactorRx, ...
     scramblerInitializationRx, batIdRx, cyclicPrefixIdRx, ...
     explicitMimoPilotSymbolCombSpacingRx, explicitMimoPilotSymbolNumberRx] = ...
-    headerSeparate(header)
+    headerSeparate(CONST, header)
 %HEADERSEPARATE Summary of this function goes here
 %   Detailed explanation goes here
 arguments(Input)
+    CONST
     header (168, 1) logical
 end
 arguments(Output)
@@ -24,7 +25,7 @@ arguments(Output)
 end
     constants;
     % Check CRC
-    [header, err] = crcDecode(headerCRCPoly, header);
+    [header, err] = crcDecode(CONST.headerCRCPoly, header);
 
     % Extract values
     psduSizeRx = flip(header(9:32));

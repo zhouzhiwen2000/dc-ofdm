@@ -1,4 +1,4 @@
-function s = ofdmModulate(dataIn, bitsPerSubcarrier, cpLen, nullIdx, constellationScramblerInit)
+function s = ofdmModulate(CONST, dataIn, bitsPerSubcarrier, cpLen, constellationScramblerInit)
 %OFDMMODULATE Modulate the input data. This functions makes the following
 % things:
 %   - Takes the binary symbols, and does constellation mapping of order M.
@@ -6,10 +6,10 @@ function s = ofdmModulate(dataIn, bitsPerSubcarrier, cpLen, nullIdx, constellati
 %   - Produces the OFDM signal, with cyclic prefix and oversampling.
 %   - Makes the frequency upshift of the signal.
 arguments(Input)
+    CONST
     dataIn (:,:) uint8
     bitsPerSubcarrier double
     cpLen double
-    nullIdx (:,1) double
     constellationScramblerInit (1,13) uint8
 end
 arguments(Output)
@@ -17,8 +17,6 @@ arguments(Output)
 end
 
     %% Parameters
-    constants;
-    ofdmSymbolLength = (N+cpLen)*oversamplingFactor; % Length of each OFDM symbol in samples
     nSym = width(dataIn);           % Amount of OFDM symbols present in the current data.
     y = [];
 
@@ -28,7 +26,7 @@ end
             case 1
                 qamSignal = pskmod(dataIn(:,i), 2^bitsPerSubcarrier, PlotConstellation=false, InputType='bit');
             case 2
-                qamConstellation = qamTwoBits;
+                qamConstellation = CONST.qamTwoBits;
                 qamSignal = qammod(dataIn(:,i), 2^bitsPerSubcarrier, qamConstellation, UnitAveragePower=true, PlotConstellation=false, InputType='bit');
                 
             case 4
@@ -39,7 +37,7 @@ end
         end
         
         qamSignalScrambled = constellationScrambler(qamSignal, constellationScramblerInit);
-        y(:,i) = ofdmmod(qamSignalScrambled, N, cpLen, nullIdx, OversamplingFactor=1);
+        y(:,i) = ofdmmod(qamSignalScrambled, CONST.N, cpLen, CONST.nullIdx, OversamplingFactor=1);
     end
     s = y(:);
 end

@@ -1,19 +1,18 @@
-function [s] = downshifter(y, frequencyOffset)
+function [s] = downshifter(CONST, y, frequencyOffset)
 %DOWNSHIFTER Inverse operation to upshifter.
 arguments(Input)
+    CONST
     y (:, 1)
     frequencyOffset double = 0
 end
 arguments(Output)
     s (:,1)
-end
-    constants;
-    
-    p = rxM/rxL;
+end    
+    p = CONST.rxM / CONST.rxL;
     n = (0:1:length(y)-1)';
 
-    s_real = 2*y.*cos(pi*n/p + 2*pi*frequencyOffset/fADC*n);
-    s_imag = -2*y.*sin(pi*n/p + 2*pi*frequencyOffset/fADC*n);
+    s_real = 2*y.*cos(pi*n/p + 2*pi*frequencyOffset/CONST.fADC*n);
+    s_imag = -2*y.*sin(pi*n/p + 2*pi*frequencyOffset/CONST.fADC*n);
 
     s = s_real + 1i*s_imag;
 end

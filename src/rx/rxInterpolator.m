@@ -1,12 +1,10 @@
-function dataOut = rxInterpolator(dataIn)
+function dataOut = rxInterpolator(CONST, dataIn)
 %INTERPOLATOR Interpolate signal.
-    constants;
-    
-    dataIn = [dataIn; zeros(rxInterpolatorDelay, 1)];
-    dataOut = rxInterpolatorFilter(dataIn);
+    dataIn = [dataIn; zeros(CONST.rxInterpolatorDelay, 1)];
+    dataOut = CONST.rxInterpolatorFilter(dataIn);
     
     % Remove delay from FIR filter
-    dataOut(1:rxInterpolatorDelay) = [];
-    dataOut(end-rxInterpolatorDelay*(rxL-1)+1:end) = [];
+    dataOut(1:CONST.rxInterpolatorDelay) = [];
+    dataOut(end-CONST.rxInterpolatorDelay*(CONST.rxL-1)+1:end) = [];
 end
 
