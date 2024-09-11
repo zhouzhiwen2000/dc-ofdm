@@ -1,6 +1,8 @@
 %% Test Payload Scrambler
 clc; clear; close all;
-addpath("../../src/")
+addpath("../../src/");
+addpath("../../inc");
+constants;
 
 %% Inputs
 input1 = true(32,1);
@@ -48,9 +50,9 @@ endOut = get(simOut, "endOut");
 
 
 %% Compare with MATLAB reference algorithm
-expectedOut{1} = payloadScrambler(SI1(1,:), input1);
+expectedOut{1} = payloadScrambler(CONST, SI1(1,:), input1);
 expectedOut{2} = expectedOut{1};
-expectedOut{3} = payloadScrambler(SI3(1,:), input3);
+expectedOut{3} = payloadScrambler(CONST, SI3(1,:), input3);
 
 startIdx = find(startOut == true);
 endIdx = find(endOut == true);

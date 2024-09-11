@@ -5,8 +5,8 @@ constants;
 %% Payload
 % Define payload length
 payloadLenInFecBlocks = 2;
-payloadLenInBits = payloadLenInFecBlocks*payloadBitsPerBlock0;
-payloadLenInWords = payloadLenInBits/axiWidth;
+payloadLenInBits = payloadLenInFecBlocks*CONST.payloadBitsPerBlock0;
+payloadLenInWords = payloadLenInBits/CONST.axiWidth;
 
 %% Header formation
 % All these variables are required to form the header. A more detailed
@@ -50,10 +50,10 @@ explicitMimoPilotSymbolNumber = logical([0 0 0]);
 
 %% Calculated parameters for the payload
 payloadBitsPerSubcarrier = binl2dec(batId);
-payloadCyclicPrefixLen = binl2dec(cyclicPrefixId) * N / 32;
+payloadCyclicPrefixLen = binl2dec(cyclicPrefixId) * CONST.N / 32;
 
-payloadBitsPerOFDMSymbol = numDataCarriers*binl2dec(batId);
+payloadBitsPerOFDMSymbol = CONST.numDataCarriers*binl2dec(batId);
 
 % Note: the "*2" is beacuse of the fec rate of 1/2.
-payloadNumOFDMSymbols = binl2dec(psduSize)*axiWidth*2 / payloadBitsPerOFDMSymbol;
-payloadNumOFDMSamples = (payloadCyclicPrefixLen + N)*payloadNumOFDMSymbols;
+payloadNumOFDMSymbols = binl2dec(psduSize)*CONST.axiWidth*2 / payloadBitsPerOFDMSymbol;
+payloadNumOFDMSamples = (payloadCyclicPrefixLen + CONST.N)*payloadNumOFDMSymbols;

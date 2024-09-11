@@ -5,17 +5,17 @@ addpath("../../inc");
 constants;
 
 %% Inputs
-si{1} = true(numDataCarriers, 13);
-si{2} = true(numDataCarriers, 13);
-si{3} = repmat(channelScramblerInit, numDataCarriers, 1);
-si{4} = repmat(headerScramblerInit, numDataCarriers, 1);
-si{5} = repmat(payloadScramblerInit, numDataCarriers, 1);
+si{1} = true(CONST.numDataCarriers, 13);
+si{2} = true(CONST.numDataCarriers, 13);
+si{3} = repmat(CONST.channelScramblerInit, CONST.numDataCarriers, 1);
+si{4} = repmat(CONST.headerScramblerInit, CONST.numDataCarriers, 1);
+si{5} = repmat(CONST.payloadScramblerInit, CONST.numDataCarriers, 1);
 
-input{1} = ones(numDataCarriers, 1);
-input{2} = ones(numDataCarriers,1);
-input{3} = rand(numDataCarriers, 1) + 1i*rand(numDataCarriers, 1);
-input{4} = rand(numDataCarriers, 1) + 1i*rand(numDataCarriers, 1);
-input{5} = rand(numDataCarriers, 1) + 1i*rand(numDataCarriers, 1);
+input{1} = ones(CONST.numDataCarriers, 1);
+input{2} = ones(CONST.numDataCarriers,1);
+input{3} = rand(CONST.numDataCarriers, 1) + 1i*rand(CONST.numDataCarriers, 1);
+input{4} = rand(CONST.numDataCarriers, 1) + 1i*rand(CONST.numDataCarriers, 1);
+input{5} = rand(CONST.numDataCarriers, 1) + 1i*rand(CONST.numDataCarriers, 1);
 
 scramblerInit = [
     si{1};
@@ -54,8 +54,8 @@ validIn = [
 ];
 
 %% Simulation Time
-latency = 300/fPHY;         % Algorithm latency. Delay between input and output
-stopTime = (length(validIn)-1)/fPHY + latency;
+latency = 300/CONST.fPHY;         % Algorithm latency. Delay between input and output
+stopTime = (length(validIn)-1)/CONST.fPHY + latency;
 
 %% Run the simulation
 model_name = "HDLConstellationDescrambler";

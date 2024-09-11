@@ -24,7 +24,7 @@ cyclicPrefixId = logical([1 0 0])';
 explicitMimoPilotSymbolCombSpacing = logical([0 0 1])';
 explicitMimoPilotSymbolNumber = logical([1 0 0])';
 
-input = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
+input = headerGenerate(CONST, psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
     fecConcatenationFactor, scramblerInitialization, batId, cyclicPrefixId, ...
     explicitMimoPilotSymbolCombSpacing, explicitMimoPilotSymbolNumber);
 
@@ -81,7 +81,7 @@ expectedOut = logical([ ...
     0 0 0 0 0 0 0 0 ... % Reserved 141-148
     0 0 0])';           % Reserved 149-151
 
-expectedOut = crcGenerate(headerCRCPoly, expectedOut);
+expectedOut = crcGenerate(CONST.headerCRCPoly, expectedOut);
 
 startIdx = find(startOut == true);
 endIdx = find(endOut == true);

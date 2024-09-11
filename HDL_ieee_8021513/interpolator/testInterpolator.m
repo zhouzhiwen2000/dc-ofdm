@@ -5,24 +5,20 @@ addpath("../../inc");
 constants;
 
 %% Inputs
-t = (0:1/fPHY:(N+headerCyclicPrefixLen)/fPHY-1/fPHY)';      % Time vector is equal to "N" ofdm samples
-t_up = (0:1/(fPHY*txL):(N+headerCyclicPrefixLen)/fPHY-1/(fPHY*txL))';       % Time vector for upsampled signal
+t = (0:1/CONST.fPHY : (CONST.N+CONST.headerCyclicPrefixLen)/CONST.fPHY - 1/CONST.fPHY)';      % Time vector is equal to "N" ofdm samples
+t_up = (0:1/(CONST.fPHY*CONST.txL) : ...
+    (CONST.N+CONST.headerCyclicPrefixLen)/CONST.fPHY - 1/(CONST.fPHY*CONST.txL))';       % Time vector for upsampled signal
 
 % OFDM output is a senoidal function
 fc = 5e6;                           % Carrier frequency for sinusoidal function
 dataSymbols = cos(2*pi*fc*t);
 validIn = true(length(t), 1);
 
-% OFDM output is an actual OFDM symbol
-% dataSymbols = rand(numDataCarriers, 1) + 1i*rand(numDataCarriers, 1);
-% dataSymbols = ofdmmod(dataSymbols, N, headerCyclicPrefixLen, nullIdx);
-% validIn = true(length(dataSymbols), 1);
-
-expectedOut = txInterpolator(dataSymbols);
+expectedOut = txInterpolator(CONST, dataSymbols);
 
 %% Simulation Time
-latency = 2000/(fPHY*txL);         % Algorithm latency. Delay between input and output
-stopTime = 2*(length(validIn)-1)/(fPHY*txL) + latency;
+latency = 2000/(CONST.fPHY*CONST.txL);         % Algorithm latency. Delay between input and output
+stopTime = 2*(length(validIn)-1)/(CONST.fPHY*CONST.txL) + latency;
 
 %% Run the simulation
 model_name = "HDLInterpolator";
@@ -49,7 +45,7 @@ for i=1:length(startIdx)
 end
 
 %% Plot signals
-resampledOut = resample(dataSymbols, txL, 1);
+resampledOut = resample(dataSymbols, CONST.txL, 1);
 
 figure();
 subplot(3,1,1)

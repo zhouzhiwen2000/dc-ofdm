@@ -11,24 +11,33 @@ SNR = 60;
 frequencyOffsetIn = 5e3;
 
 % Generate OFDM signal with time delay and frequency offset
-preambleTx = ofdmModulate(preambleOFDMSymbols, preambleBitsPerSubcarrier, preambleCyclicPrefixLen, nullIdx, preambleScramblerInit);
-channelTx = ofdmModulate(channelOFDMSymbols, channelBitsPerSubcarrier, channelCyclicPrefixLen, nullIdx, channelScramblerInit);
+preambleTx = ofdmModulate(CONST, CONST.preambleOFDMSymbols, ...
+    CONST.preambleBitsPerSubcarrier, CONST.preambleCyclicPrefixLen, ...
+    CONST.preambleScramblerInit);
+
+channelTx = ofdmModulate(CONST, CONST.channelOFDMSymbols, ...
+    CONST.channelBitsPerSubcarrier, CONST.channelCyclicPrefixLen, ...
+    CONST.channelScramblerInit);
+
 OFDMSignal = [preambleTx; channelTx];
-OFDMSignal = txInterpolator(OFDMSignal);
-OFDMSignal = upshifter(OFDMSignal);
+OFDMSignal = txInterpolator(CONST, OFDMSignal);
+OFDMSignal = txDecimator(CONST, OFDMSignal);
+OFDMSignal = upshifter(CONST, OFDMSignal);
 
 OFDMRx = channelSimulation(OFDMSignal, delayIn, SNR);
-OFDMRx = downshifter(OFDMRx, frequencyOffsetIn);
-dataIn = rxDecimator(OFDMRx);
+OFDMRx = downshifter(CONST, OFDMRx, frequencyOffsetIn);
+OFDMRx = rxInterpolator(CONST, OFDMRx);
+dataIn = rxDecimator(CONST, OFDMRx);
 
-validIn = true(length(dataIn)-preambleFirstPartOFDMSamples, 1);
+validIn = true(length(dataIn)-CONST.preambleFirstPartOFDMSamples, 1);
 
 % Expected output
-[expectedOFDMOut, expectedDelayOut, expectedMOut, expectedPeaksOut, expectedFrequencyOffset] = ofdmSymbolSync(dataIn);
+[expectedOFDMOut, expectedDelayOut, expectedMOut, expectedPeaksOut, ...
+    expectedFrequencyOffset] = ofdmSymbolSync(CONST, dataIn);
 
 %% Simulation Time
-latency = (delayIn+10000)/fPHY;         % Algorithm latency. Delay between input and output
-stopTime = (length(validIn)-1)/fPHY + latency;
+latency = (delayIn+10000)/CONST.fPHY;         % Algorithm latency. Delay between input and output
+stopTime = (length(validIn)-1)/CONST.fPHY + latency;
 
 %% Run the simulation
 model_name = "HDLOFDMSS";
@@ -59,12 +68,12 @@ for i=1:length(startIdx)
 end
 
 %% Test peaks
-peaksSim = indexOut(peakOut ~= 0) - preambleOFDMSamples;
+peaksSim = indexOut(peakOut ~= 0) - CONST.preambleOFDMSamples;
 assert(isequal(peaksSim, expectedPeaksOut), "Peak position should be the same");
 
 %% Test OFDM out
 startChannel = find(peakOut == true, 1);
-channelSim = dataOut(startChannel:startChannel-1+channelOFDMSamples);
+channelSim = dataOut(startChannel:startChannel-1+CONST.channelOFDMSamples);
 assert(iskindaequal(channelSim, expectedOFDMOut, 1e-3), "The output sample should be the first sample of the channel estimation");
 
 %% Test frequency offset

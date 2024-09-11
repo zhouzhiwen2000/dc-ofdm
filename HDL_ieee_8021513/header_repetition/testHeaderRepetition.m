@@ -7,8 +7,8 @@ constants;
 %% Inputs
 delay = false(500,1);
 
-input{1} = logical(randi([0 1], headerBitsPerFec, 1));
-input{2} = logical(randi([0 1], headerBitsPerFec, 1));
+input{1} = logical(randi([0 1], CONST.headerBitsPerFec, 1));
+input{2} = logical(randi([0 1], CONST.headerBitsPerFec, 1));
 
 dataBits = [
     input{1};
@@ -16,9 +16,9 @@ dataBits = [
     input{2};];
 
 validIn = [
-    true(headerBitsPerFec, 1);
+    true(CONST.headerBitsPerFec, 1);
     delay;
-    true(headerBitsPerFec, 1);];
+    true(CONST.headerBitsPerFec, 1);];
 
 %% Simulation Time
 fs = 1/8;                 % Output sample frequency
@@ -46,7 +46,7 @@ assert(isequal(length(startIdx), length(endIdx)), ...
 
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
-    expectedOut = headerRepetitionEncoder(input{i});
+    expectedOut = headerRepetitionEncoder(CONST, input{i});
     assert(isequal(expectedOut, out));
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end

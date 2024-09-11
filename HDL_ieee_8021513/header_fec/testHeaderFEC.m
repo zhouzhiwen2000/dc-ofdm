@@ -2,8 +2,7 @@
 clc; clear; close all;
 addpath("../../src");
 addpath("../../inc");
-
-ldpc;
+constants;
 
 %% Inputs
 headerBits = 168;
@@ -38,7 +37,7 @@ assert(isequal(length(startIdx), length(endIdx)), ...
 
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
-    expectedOut = LDPCEncoder(dataBits, 0, 0, true);
+    expectedOut = LDPCEncoder(CONST, dataBits, 0, 0, true);
     assert(isequal(expectedOut, out));
 end
 

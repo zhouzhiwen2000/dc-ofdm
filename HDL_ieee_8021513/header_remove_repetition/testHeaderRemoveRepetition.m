@@ -8,14 +8,14 @@ constants;
 %% Inputs
 delay = false(500,1);
 
-input{1} = logical(randi([0 1], headerBitsPerFec, 1));
-input{2} = logical(randi([0 1], headerBitsPerFec, 1));
+input{1} = logical(randi([0 1], CONST.headerBitsPerFec, 1));
+input{2} = logical(randi([0 1], CONST.headerBitsPerFec, 1));
 
-input{1} = headerRepetitionEncoder(input{1});
-input{2} = headerRepetitionEncoder(input{2});
+input{1} = headerRepetitionEncoder(CONST, input{1});
+input{2} = headerRepetitionEncoder(CONST, input{2});
 
-expectedOut{1} = headerRemoveRepetition(input{1});
-expectedOut{2} = headerRemoveRepetition(input{2});
+expectedOut{1} = headerRemoveRepetition(CONST, input{1});
+expectedOut{2} = headerRemoveRepetition(CONST, input{2});
 
 dataBits = [
     input{1};
@@ -31,8 +31,8 @@ startIn = [
 ];
 
 %% Simulation Time
-latency = 10/fs;         % Algorithm latency. Delay between input and output
-stopTime = (length(dataBits)-1)/fs + latency;
+latency = 10/CONST.fs;         % Algorithm latency. Delay between input and output
+stopTime = (length(dataBits)-1)/CONST.fs + latency;
 
 %% Run the simulation
 model_name = "HDLHeaderRemoveRepetition";

@@ -5,19 +5,24 @@ addpath("../../inc");
 constants;
 
 %% Inputs
-t = (0:1/fADC:(N+headerCyclicPrefixLen)/fADC-1/fADC)';      % Time vector is equal to "N" ofdm samples
-t_up = (0:1/(fADC*rxL):(N+headerCyclicPrefixLen)/fADC-1/(fADC*rxL))';       % Time vector for upsampled signal
+% Time vector is equal to "N" ofdm samples
+t = (0 : 1/CONST.fADC : ...
+    (CONST.N + CONST.headerCyclicPrefixLen) / CONST.fADC - 1/CONST.fADC)';
+
+% Time vector for upsampled signal
+t_up = (0 : 1/(CONST.fADC*CONST.rxL) : ...
+    (CONST.N+CONST.headerCyclicPrefixLen)/CONST.fADC - 1/(CONST.fADC*CONST.rxL))';
 
 % OFDM output is a senoidal function
 fc = 5e6;                           % Carrier frequency for sinusoidal function
 dataSymbols = cos(2*pi*fc*t);
 validIn = true(length(t), 1);
 
-expectedOut = rxInterpolator(dataSymbols);
+expectedOut = rxInterpolator(CONST, dataSymbols);
 
 %% Simulation Time
-latency = 2000/(fADC*rxL);         % Algorithm latency. Delay between input and output
-stopTime = 2*(length(validIn)-1)/(fADC*rxL) + latency;
+latency = 2000/(CONST.fADC*CONST.rxL);         % Algorithm latency. Delay between input and output
+stopTime = 2*(length(validIn)-1)/(CONST.fADC*CONST.rxL) + latency;
 
 %% Run the simulation
 model_name = "HDLRxInterpolator";
@@ -44,7 +49,7 @@ for i=1:length(startIdx)
 end
 
 %% Plot signals
-resampledOut = resample(dataSymbols, rxL, 1);
+resampledOut = resample(dataSymbols, CONST.rxL, 1);
 
 figure();
 subplot(3,1,1)

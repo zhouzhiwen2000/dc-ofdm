@@ -236,3 +236,6 @@ CONST.qamFourBits = [2, 3, 1, 0, 6, 7, 5, 4, 14, 15, 13, 12, 10, 11, 9, 8];
 CONST.peakDetectorWindow = 128;
 CONST.peakDetectorThreshold = 0.65;
 CONST.frequencyOffsetTimeWindow = CONST.preambleFirstPartOFDMSamples/CONST.fPHY;
+
+%% Simulink model constants
+CONST.FIFOOFDMSize = 10000; % Previous value was 2100

@@ -7,7 +7,7 @@ constants;
 %% Inputs
 cpLen = 16;
 nSym = 5;
-len = numDataCarriers*nSym;
+len = CONST.numDataCarriers*nSym;
 
 validIn = [false(10, 1); true(len, 1);];
 dataSymbols = rand(len, 1) + 1i*rand(len, 1);
@@ -17,9 +17,8 @@ dataSymbols = rand(len, 1) + 1i*rand(len, 1);
 %dataSymbols = sqrt(2)*exp(2i*pi*fc*n/fs);
 
 %% Simulation Time
-fs = 1;                 % Output sample frequency
-latency = 3000;         % Algorithm latency. Delay between input and output
-stopTime = (length(validIn)-1)/fs + latency;
+latency = 3000/CONST.fPHY;         % Algorithm latency. Delay between input and output
+stopTime = (length(validIn)-1)/CONST.fPHY + latency;
 
 %% Run the simulation
 model_name = "HDLOFDMMod";
@@ -43,8 +42,8 @@ assert(isequal(length(startIdx), length(endIdx)), ...
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
     data = reshape(dataSymbols, [], nSym);
-    expectedOut = ofdmmod(data, N, cpLen, nullIdx);
-    %assert(iskindaequal(expectedOut, out, 1e-3), "OFDM output is not the same");
+    expectedOut = ofdmmod(data, CONST.N, cpLen, CONST.nullIdx);
+    assert(iskindaequal(expectedOut, out, 1e-3), "OFDM output is not the same");
    
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end

@@ -12,24 +12,29 @@ constants;
 delayBetweenOFDMSymbols = false(100, 1);
 paramFile = "sampleParametersFile";
 pBits = [];
-OFDMTx = fullTx(paramFile, pBits, 0, false);
-OFDMRx = downshifter(OFDMTx);
-OFDMRx = rxDecimator(OFDMRx);
-OFDMRx = OFDMRx(1+preambleOFDMSamples:end);
+OFDMTx = fullTx(CONST, paramFile, pBits, 0, false);
+OFDMRx = downshifter(CONST, OFDMTx);
+OFDMRx = rxInterpolator(CONST, OFDMRx);
+OFDMRx = rxDecimator(CONST, OFDMRx);
+OFDMRx = OFDMRx(1+CONST.preambleOFDMSamples:end);
 
 % Demodulate channel and header
-channelRx = OFDMRx(1:channelOFDMSamples); 
-headerRx = OFDMRx(1+channelOFDMSamples:end);
+channelRx = OFDMRx(1:CONST.channelOFDMSamples); 
+headerRx = OFDMRx(1+CONST.channelOFDMSamples:end);
 
-channelCarriers = ofdmdemod(channelRx, N, channelCyclicPrefixLen, 0, nullIdx);
-headerCarriers = ofdmdemod(headerRx, N, headerCyclicPrefixLen, 0, nullIdx);
+channelCarriers = ofdmdemod(channelRx, CONST.N, ...
+    CONST.channelCyclicPrefixLen, 0, CONST.nullIdx);
+headerCarriers = ofdmdemod(headerRx, CONST.N, ...
+    CONST.headerCyclicPrefixLen, 0, CONST.nullIdx);
 
 for i=1:1:width(channelCarriers)
-    channelCarriers(:,i) = constellationScrambler(channelCarriers(:,i), channelScramblerInit, true);
+    channelCarriers(:,i) = constellationScrambler( ...
+        channelCarriers(:,i), CONST.channelScramblerInit, true);
 end
 
 for i=1:1:width(headerCarriers)
-    headerCarriers(:,i) = constellationScrambler(headerCarriers(:,i), headerScramblerInit, true);
+    headerCarriers(:,i) = constellationScrambler( ...
+        headerCarriers(:,i), CONST.headerScramblerInit, true);
 end
 dataIn = [
     channelCarriers(:,1);
@@ -53,13 +58,15 @@ validChannelIn = [
 ];
 
 %% Expected Output
-[OFDMHeader, channelEst] = ofdmChannelEstimation(OFDMRx);
+[OFDMHeader, channelEst] = ofdmChannelEstimation(CONST, OFDMRx);
     
-qamSignalScrambled = ofdmdemod(OFDMHeader, N, headerCyclicPrefixLen, 0, nullIdx);
+qamSignalScrambled = ofdmdemod(OFDMHeader, CONST.N, ...
+    CONST.headerCyclicPrefixLen, 0, CONST.nullIdx);
 
 qamSignal = zeros(size(qamSignalScrambled));
  for i=1:1:width(qamSignalScrambled)
-    qamSignal = constellationScrambler(qamSignalScrambled(:,i), headerScramblerInit, true);
+    qamSignal = constellationScrambler(qamSignalScrambled(:,i), ...
+        CONST.headerScramblerInit, true);
     qamSignal = ofdmChannelEqualizer(qamSignal, channelEst);
  end
 
@@ -67,8 +74,8 @@ qamSignal = zeros(size(qamSignalScrambled));
  expectedOut = qamSignal;
 
 %% Simulation Time
-latency = 300/fPHY;
-stopTime = (length(dataIn)-1)/fPHY + latency;
+latency = 300/CONST.fPHY;
+stopTime = (length(dataIn)-1)/CONST.fPHY + latency;
 
 %% Run the simulation
 model_name = "HDLChannelEstimator";

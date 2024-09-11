@@ -9,16 +9,16 @@ constants;
 cpLen = 16;
 nSym = 5;
 
-input = rand(numDataCarriers, nSym) + 1i*rand(numDataCarriers, nSym);
-dataSymbols = ofdmmod(input, N, cpLen, nullIdx);
+input = rand(CONST.numDataCarriers, nSym) + 1i*rand(CONST.numDataCarriers, nSym);
+dataSymbols = ofdmmod(input, CONST.N, cpLen, CONST.nullIdx);
 validIn = true(length(dataSymbols), 1);
 dataSymbols = dataSymbols(:);
 
 expectedOut = input;
 
 %% Simulation Time
-latency = 3000/fs;         % Algorithm latency. Delay between input and output
-stopTime = (length(validIn)-1)/fs + latency;
+latency = 3000/CONST.fPHY;         % Algorithm latency. Delay between input and output
+stopTime = (length(validIn)-1)/CONST.fPHY + latency;
 
 %% Run the simulation
 model_name = "HDLOfdmDemod";

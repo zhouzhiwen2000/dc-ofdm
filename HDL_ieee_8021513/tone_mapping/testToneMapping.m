@@ -12,51 +12,51 @@ delay = false(200, 1);
 
 ofdmSymbols{1} = 1;
 bitsPerSubcarrierX{1} = 1;
-input{1} = logical(randi([0 1], numDataCarriers*ofdmSymbols{1}, 1));
+input{1} = logical(randi([0 1], CONST.numDataCarriers*ofdmSymbols{1}, 1));
 expectedOut{1} = input{1};
 
 ofdmSymbols{2} = 3;
 bitsPerSubcarrierX{2} = 1;
-input{2} = logical(randi([0 1], numDataCarriers*ofdmSymbols{2}, 1));
+input{2} = logical(randi([0 1], CONST.numDataCarriers*ofdmSymbols{2}, 1));
 expectedOut{2} = input{2};
 
 ofdmSymbols{3} = 1;
 bitsPerSubcarrierX{3} = 1;
-input{3} = logical(randi([0 1], numDataCarriers*ofdmSymbols{3} - 25, 1));
+input{3} = logical(randi([0 1], CONST.numDataCarriers*ofdmSymbols{3} - 25, 1));
 expectedOut{3} = [input{3}; false(25, 1)];
 
 ofdmSymbols{4} = 4;
 bitsPerSubcarrierX{4} = 2;
-input{4} = logical(randi([0 1], numDataCarriers*ofdmSymbols{4}*bitsPerSubcarrierX{4} - 72, 1));
+input{4} = logical(randi([0 1], CONST.numDataCarriers*ofdmSymbols{4}*bitsPerSubcarrierX{4} - 72, 1));
 expectedOut{4} = [input{4}; false(72, 1);]; 
 
 ofdmSymbols{5} = 2;
 bitsPerSubcarrierX{5} = 4;
-input{5} = logical(randi([0 1], numDataCarriers*ofdmSymbols{5}*bitsPerSubcarrierX{5} - 155, 1));
+input{5} = logical(randi([0 1], CONST.numDataCarriers*ofdmSymbols{5}*bitsPerSubcarrierX{5} - 155, 1));
 expectedOut{5} = [input{5}; false(155, 1);];
 
 % Next symbols are gonna be spread over multiple "start - end" cycles.
 ofdmSymbols{6} = 3;
 bitsPerSubcarrierX{6} = 2;
 input{6} = [
-    true(numDataCarriers*bitsPerSubcarrierX{6}, 1);
+    true(CONST.numDataCarriers*bitsPerSubcarrierX{6}, 1);
     delay;
-    true(numDataCarriers*bitsPerSubcarrierX{6}, 1);
+    true(CONST.numDataCarriers*bitsPerSubcarrierX{6}, 1);
     delay;
-    true(numDataCarriers*bitsPerSubcarrierX{6} - 65, 1);
+    true(CONST.numDataCarriers*bitsPerSubcarrierX{6} - 65, 1);
 ];
 expectedOut{6} = [
-    true(numDataCarriers*bitsPerSubcarrierX{6}, 1);
-    true(numDataCarriers*bitsPerSubcarrierX{6}, 1);
-    true(numDataCarriers*bitsPerSubcarrierX{6} - 65, 1); false(65, 1);
+    true(CONST.numDataCarriers*bitsPerSubcarrierX{6}, 1);
+    true(CONST.numDataCarriers*bitsPerSubcarrierX{6}, 1);
+    true(CONST.numDataCarriers*bitsPerSubcarrierX{6} - 65, 1); false(65, 1);
 ];
 
 ofdmSymbols{7} = 4;
 bitsPerSubcarrierX{7} = 2;
-a = logical(randi([0 1], numDataCarriers*bitsPerSubcarrierX{7}, 1));
-b = logical(randi([0 1], numDataCarriers*bitsPerSubcarrierX{7}, 1));
-c = logical(randi([0 1], numDataCarriers*bitsPerSubcarrierX{7}, 1));
-d = logical(randi([0 1], numDataCarriers*bitsPerSubcarrierX{7} - 44, 1));
+a = logical(randi([0 1], CONST.numDataCarriers*bitsPerSubcarrierX{7}, 1));
+b = logical(randi([0 1], CONST.numDataCarriers*bitsPerSubcarrierX{7}, 1));
+c = logical(randi([0 1], CONST.numDataCarriers*bitsPerSubcarrierX{7}, 1));
+d = logical(randi([0 1], CONST.numDataCarriers*bitsPerSubcarrierX{7} - 44, 1));
 input{7} = [a; delay; b; delay; c; delay; d;];
 expectedOut{7} = [a; b; c; d; false(44, 1);];
 
@@ -74,10 +74,10 @@ validIn = [
     delay;
     logical(input{6});
     delay;
-    true(numDataCarriers*bitsPerSubcarrierX{7}, 1); delay;
-    true(numDataCarriers*bitsPerSubcarrierX{7}, 1); delay;
-    true(numDataCarriers*bitsPerSubcarrierX{7}, 1); delay;
-    true(numDataCarriers*bitsPerSubcarrierX{7} - 44, 1);
+    true(CONST.numDataCarriers*bitsPerSubcarrierX{7}, 1); delay;
+    true(CONST.numDataCarriers*bitsPerSubcarrierX{7}, 1); delay;
+    true(CONST.numDataCarriers*bitsPerSubcarrierX{7}, 1); delay;
+    true(CONST.numDataCarriers*bitsPerSubcarrierX{7} - 44, 1);
     delay;
 ];
 
@@ -103,8 +103,8 @@ bitsPerSubcarrier = [
     repmat(bitsPerSubcarrierX{3}, size(input{3}));
     repmat(bitsPerSubcarrierX{4}, size(input{4}));
     repmat(bitsPerSubcarrierX{5}, size(input{5}));
-    repmat(bitsPerSubcarrierX{6}, numDataCarriers*bitsPerSubcarrierX{6}*ofdmSymbols{6}-65, 1);
-    repmat(bitsPerSubcarrierX{7}, numDataCarriers*bitsPerSubcarrierX{7}*ofdmSymbols{7}-44, 1);
+    repmat(bitsPerSubcarrierX{6}, CONST.numDataCarriers*bitsPerSubcarrierX{6}*ofdmSymbols{6}-65, 1);
+    repmat(bitsPerSubcarrierX{7}, CONST.numDataCarriers*bitsPerSubcarrierX{7}*ofdmSymbols{7}-44, 1);
 ];
 
 payloadLenInOFDMSymbols = [
@@ -113,8 +113,8 @@ payloadLenInOFDMSymbols = [
     repmat(ofdmSymbols{3}, size(input{3}));
     repmat(ofdmSymbols{4}, size(input{4}));
     repmat(ofdmSymbols{5}, size(input{5}));
-    repmat(ofdmSymbols{6}, numDataCarriers*bitsPerSubcarrierX{6}*ofdmSymbols{6}-65, 1);
-    repmat(ofdmSymbols{7}, numDataCarriers*bitsPerSubcarrierX{7}*ofdmSymbols{7}-44, 1);
+    repmat(ofdmSymbols{6}, CONST.numDataCarriers*bitsPerSubcarrierX{6}*ofdmSymbols{6}-65, 1);
+    repmat(ofdmSymbols{7}, CONST.numDataCarriers*bitsPerSubcarrierX{7}*ofdmSymbols{7}-44, 1);
 ];
 
 newFrame = [

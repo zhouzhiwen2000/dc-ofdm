@@ -5,7 +5,7 @@ addpath("../../inc");
 constants;
 
 %% Inputs
-fTest = fPHY*txL/txM;
+fTest = CONST.fPHY*CONST.txL/CONST.txM;
 input{1} = rand(50000, 1) + 1i*rand(50000, 1);
 input{2} = ones(1000, 1)*(1 + 1i);
 
@@ -49,7 +49,7 @@ out{1} = dataOut(1:length(input{1}));
 out{2} = dataOut(length(input{1})+1:end);
 
 for i=1:length(startIdx)
-    expectedOut = upshifter(input{i});
+    expectedOut = upshifter(CONST, input{i});
     
     assert(iskindaequal(expectedOut, out{i}, 10e-3), "Upshifter output is not the same");
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);

@@ -7,28 +7,38 @@ constants;
 parameters;
 
 %% Header
-hGen = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
+hGen = headerGenerate(CONST, psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
     fecConcatenationFactor, scramblerInitialization, batId, cyclicPrefixId, ...
     explicitMimoPilotSymbolCombSpacing, explicitMimoPilotSymbolNumber);
-hScrambled = headerScrambler(hGen);
-hLDPC = LDPCEncoder(hScrambled, 0, 0, true);
-headerOFDMSymbols = headerRepetitionEncoder(hLDPC);
+hScrambled = headerScrambler(CONST, hGen);
+hLDPC = LDPCEncoder(CONST, hScrambled, 0, 0, true);
+headerOFDMSymbols = headerRepetitionEncoder(CONST, hLDPC);
 
 %% Payload
-pBits = logical(randi([0,1], payloadBitsPerBlock0, payloadLenInFecBlocks));
-pLDPC = false(payloadBitsPerFec, payloadLenInFecBlocks);
+pBits = logical(randi([0,1], CONST.payloadBitsPerBlock0, payloadLenInFecBlocks));
+pLDPC = false(CONST.payloadBitsPerFec, payloadLenInFecBlocks);
 for i=1:1:payloadLenInFecBlocks
-    pScrambled = payloadScrambler(scramblerInitialization, pBits(:,i));
-    pLDPC(:,i) = LDPCEncoder(pScrambled, binl2dec(fecRate), binl2dec(blockSize), false);
+    pScrambled = payloadScrambler(CONST, scramblerInitialization, pBits(:,i));
+    pLDPC(:,i) = LDPCEncoder(CONST, pScrambled, binl2dec(fecRate), binl2dec(blockSize), false);
 end
 pLDPC = pLDPC(:);
-payloadOFDMSymbols = toneMapping(pLDPC, binl2dec(batId));
+payloadOFDMSymbols = toneMapping(CONST, pLDPC, binl2dec(batId));
 
 %% Transmiter
-preambleTx = ofdmModulate(preambleOFDMSymbols, preambleBitsPerSubcarrier, preambleCyclicPrefixLen, nullIdx, preambleScramblerInit);
-channelTx = ofdmModulate(channelOFDMSymbols, channelBitsPerSubcarrier, channelCyclicPrefixLen, nullIdx, channelScramblerInit);
-headerTx = ofdmModulate(headerOFDMSymbols, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit);
-payloadTx = ofdmModulate(payloadOFDMSymbols, payloadBitsPerSubcarrier, payloadCyclicPrefixLen, nullIdx, payloadScramblerInit);
+preambleTx = ofdmModulate(CONST, CONST.preambleOFDMSymbols, ...
+    CONST.preambleBitsPerSubcarrier, CONST.preambleCyclicPrefixLen, ...
+    CONST.preambleScramblerInit);
+
+channelTx = ofdmModulate(CONST, CONST.channelOFDMSymbols, ...
+    CONST.channelBitsPerSubcarrier, CONST.channelCyclicPrefixLen, ...
+    CONST.channelScramblerInit);
+
+headerTx = ofdmModulate(CONST, headerOFDMSymbols, ...
+    CONST.headerBitsPerSubcarrier, CONST.headerCyclicPrefixLen, ...
+    CONST.headerScramblerInit);
+
+payloadTx = ofdmModulate(CONST, payloadOFDMSymbols, payloadBitsPerSubcarrier, ...
+    payloadCyclicPrefixLen, CONST.payloadScramblerInit);
 
 delayLen = 5000;
 
@@ -42,12 +52,12 @@ dataIn = awgn(dataIn, 60);
 % The peak is detected in the first sample of the channel estimation
 peakIn = [
     false(delayLen, 1);
-    false(preambleOFDMSamples, 1); true;
+    false(CONST.preambleOFDMSamples, 1); true;
     false(length(channelTx)-1, 1);
     false(length(headerTx), 1);
     false(length(payloadTx), 1);
     false(delayLen, 1);
-    false(preambleOFDMSamples, 1); true;
+    false(CONST.preambleOFDMSamples, 1); true;
     false(length(channelTx)-1, 1);
     false(length(headerTx), 1);
     false(length(payloadTx), 1);
@@ -56,8 +66,8 @@ peakIn = [
 psduSizeLSB = flip(psduSize);
 
 %% Simulation Time
-latency = 10000/fPHY;         % Algorithm latency. Delay between input and output
-stopTime = (length(peakIn)-1)/fPHY + latency;
+latency = 10000/CONST.fPHY;         % Algorithm latency. Delay between input and output
+stopTime = (length(peakIn)-1)/CONST.fPHY + latency;
 
 %% Run the simulation
 model_name = "HDLOFDMSeparator";
@@ -97,18 +107,21 @@ for i=1:length(startIdx1)
     out = dataOut(startIdx1(i):endIdx1(i));
     expectedOut = channelTx;
     assert(iskindaequal(expectedOut, out, 10e-3));
+    disp("Channel OK!");
 end
 
 for i=1:length(startIdx2)
     out = dataOut(startIdx2(i):endIdx2(i));
     expectedOut = headerTx;
     assert(iskindaequal(expectedOut, out, 10e-3));
+    disp("Header OK!");
 end
 
 for i=1:length(startIdx3)
     out = dataOut(startIdx3(i):endIdx3(i));
     expectedOut = payloadTx;
     assert(iskindaequal(expectedOut, out, 10e-3));
+    disp("Payload OK!");
 end
 
 disp("Test Successful!");

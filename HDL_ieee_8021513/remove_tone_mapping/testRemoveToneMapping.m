@@ -9,8 +9,8 @@ constants;
 delay = false(500,1);
 
 payloadLenInFecBlocks = 3;
-payloadLenInBits = payloadLenInFecBlocks*payloadBitsPerBlock0;
-payloadLenInWords = payloadLenInBits/axiWidth;
+payloadLenInBits = payloadLenInFecBlocks*CONST.payloadBitsPerBlock0;
+payloadLenInWords = payloadLenInBits/CONST.axiWidth;
 psduSize = flip(dec2binl(payloadLenInWords, 24))';
 
 % Note: Since where are using fec rate 1/2, the actual len is multiplied by
@@ -20,14 +20,14 @@ payloadLenInBitsAfterFec = payloadLenInBits*2;
 input{1} = logical(randi([0 1], payloadLenInBitsAfterFec, 1));
 input{2} = logical(randi([0 1], payloadLenInBitsAfterFec, 1));
 
-input{1} = toneMapping(input{1}, 4);
+input{1} = toneMapping(CONST, input{1}, 4);
 input{1} = input{1}(:);
 
-input{2} = toneMapping(input{2}, 2);
+input{2} = toneMapping(CONST, input{2}, 2);
 input{2} = input{2}(:);
 
-expectedOut{1} = removeToneMapping(input{1}, flip(psduSize));
-expectedOut{2} = removeToneMapping(input{2}, flip(psduSize));
+expectedOut{1} = removeToneMapping(CONST, input{1}, flip(psduSize));
+expectedOut{2} = removeToneMapping(CONST, input{2}, flip(psduSize));
 
 dataIn = [
     input{1};
@@ -44,8 +44,8 @@ validIn = [
 newFrame = true;
 
 %% Simulation Time
-latency = 10/fs;         % Algorithm latency. Delay between input and output
-stopTime = (length(dataIn)-1)/fs + latency;
+latency = 10/CONST.fs;         % Algorithm latency. Delay between input and output
+stopTime = (length(dataIn)-1)/CONST.fs + latency;
 
 %% Run the simulation
 model_name = "HDLRemoveToneMapping";

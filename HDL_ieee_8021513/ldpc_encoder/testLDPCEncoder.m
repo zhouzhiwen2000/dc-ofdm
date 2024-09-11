@@ -2,8 +2,7 @@
 clc; clear; close all;
 addpath("../../src");
 addpath("../../inc");
-
-ldpc;
+constants;
 
 %% Inputs
 dataBits = [];
@@ -78,7 +77,7 @@ assert(isequal(length(startIdx), length(endIdx)), ...
 
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
-    expectedOut = LDPCEncoder(input{i}, binl2dec(R(i,:)'), binl2dec(K(i,:)'), false);
+    expectedOut = LDPCEncoder(CONST, input{i}, binl2dec(R(i,:)'), binl2dec(K(i,:)'), false);
     assert(isequal(expectedOut, out));
 end
 

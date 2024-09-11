@@ -1,6 +1,4 @@
-clc; clear; close all;
-
-%% Test Header FEC
+%% Test QAM Modulation
 clc; clear; close all;
 addpath("../../src");
 addpath("../../inc");
@@ -24,9 +22,8 @@ dataSymbols = randi([0 255], length(bitsPerSubcarrier), 1);
 validIn = logical(bitsPerSubcarrier);
 
 %% Simulation Time
-fs = 1;                 % Output sample frequency
-latency = 300;         % Algorithm latency. Delay between input and output
-stopTime = (length(validIn)-1)/fs + latency;
+latency = 300/CONST.fs;         % Algorithm latency. Delay between input and output
+stopTime = (length(validIn)-1)/CONST.fs + latency;
 
 %% Run the simulation
 model_name = "HDLQAMMod";
@@ -56,11 +53,11 @@ for i=1:length(startIdx)
         case 1
             expectedOut = pskmod(data, 2^M(i), PlotConstellation=false, InputType='integer');
         case 2
-            qamConstellation = qamTwoBits;
+            qamConstellation = CONST.qamTwoBits;
             expectedOut = qammod(data, 2^M(i), qamConstellation, UnitAveragePower=true, PlotConstellation=false, InputType='integer');
             
         case 4
-            qamConstellation = qamFourBits;
+            qamConstellation = CONST.qamFourBits;
             expectedOut = qammod(data, 2^M(i), qamConstellation, UnitAveragePower=true, PlotConstellation=false, InputType='integer');
         otherwise
             error("Unssuported QAM modulation order");

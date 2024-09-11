@@ -9,7 +9,7 @@ param;
 %% Inputs
 delay = false(500,1);
 
-input{1} = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
+input{1} = headerGenerate(CONST, psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
     fecConcatenationFactor, scramblerInitialization, batId, cyclicPrefixId, ...
     explicitMimoPilotSymbolCombSpacing, explicitMimoPilotSymbolNumber);
 expectedOut{1} = input{1}(1:end-16);
@@ -42,8 +42,8 @@ validIn = [
 ];
 
 %% Simulation Time
-latency = 200/fs;         % Algorithm latency. Delay between input and output
-stopTime = (length(dataBits)-1)/fs + latency;
+latency = 200/CONST.fs;         % Algorithm latency. Delay between input and output
+stopTime = (length(dataBits)-1)/CONST.fs + latency;
 
 %% Run the simulation
 model_name = "HDLHeaderCRCRx";

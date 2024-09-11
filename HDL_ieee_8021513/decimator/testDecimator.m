@@ -6,10 +6,10 @@ addpath("../../inc");
 constants;
 
 %% Inputs
-fIn = fADC*rxL;
-fOut = fIn/rxM;
-t = (0:1/fIn:(N+headerCyclicPrefixLen)/fOut-1/fIn)';            % Time vector is equal to "N" ofdm samples
-t_down = (0:1/fOut:(N+headerCyclicPrefixLen)/fOut-1/fOut)';     % Time vector for downsampled signal
+fIn = CONST.fADC*CONST.rxL;
+fOut = fIn/CONST.rxM;
+t = (0:1/fIn:(CONST.N+CONST.headerCyclicPrefixLen)/fOut-1/fIn)';            % Time vector is equal to "N" ofdm samples
+t_down = (0:1/fOut:(CONST.N+CONST.headerCyclicPrefixLen)/fOut-1/fOut)';     % Time vector for downsampled signal
 
 % OFDM output is a senoidal function
 fc = 1e6;                           % Carrier frequency for sinusoidal function
@@ -25,13 +25,7 @@ validIn = [
     true(length(t), 1);
 ];
 
-% OFDM output is an actual OFDM symbol
-% dataIn = rand(numDataCarriers, 1) + 1i*rand(numDataCarriers, 1);
-% dataIn = ofdmmod(dataIn, N, headerCyclicPrefixLen, nullIdx);
-% dataIn = txInterpolator(dataIn);
-% validIn = true(length(dataIn), 1);
-
-expectedOut = rxDecimator(input);
+expectedOut = rxDecimator(CONST, input);
 
 %% Simulation Time
 latency = 1000/fIn;         % Algorithm latency. Delay between input and output
@@ -64,7 +58,7 @@ for i=1:length(startIdx)
 end
 
 %% Plotting
-resampledOut = resample(input, 1, rxM);
+resampledOut = resample(input, 1, CONST.rxM);
 
 figure();
 subplot(4,1,1)

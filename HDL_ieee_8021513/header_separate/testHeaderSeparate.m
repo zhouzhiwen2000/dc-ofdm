@@ -9,7 +9,7 @@ constants;
 paramFile = "param.m";
 run(paramFile);
 
-input = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
+input = headerGenerate(CONST, psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
     fecConcatenationFactor, scramblerInitialization, batId, cyclicPrefixId, ...
     explicitMimoPilotSymbolCombSpacing, explicitMimoPilotSymbolNumber);
 input = input(1:end-16);
@@ -20,8 +20,8 @@ dataBits = input;
 validIn = true(size(input));
 
 %% Simulation Time
-latency = 100/fPHY;         % Algorithm latency. Delay between input and output
-stopTime = (length(dataBits)-1)/(2*fPHY) + latency;
+latency = 100/CONST.fPHY;         % Algorithm latency. Delay between input and output
+stopTime = (length(dataBits)-1)/CONST.fs + latency;
 
 %% Run the simulation
 model_name = "HDLHeaderSeparate";

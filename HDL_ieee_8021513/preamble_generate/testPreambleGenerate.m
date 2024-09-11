@@ -12,9 +12,8 @@ newFrame = logical([ ...
     false(5000, 1)]);
 
 %% Simulation Time
-fs = 1;                 % Output sample frequency
-latency = 100;          % Algorithm latency. Delay between input and output
-stopTime = (length(newFrame)-1)/fs + latency;
+latency = 100/CONST.fs;          % Algorithm latency. Delay between input and output
+stopTime = (length(newFrame)-1)/CONST.fs + latency;
 
 %% Run the simulation
 model_name = "HDLPreambleGenerate";
@@ -35,7 +34,7 @@ endIdx = find(endOut == true);
 assert(isequal(length(startIdx), length(endIdx)), ...
     "Length of start and end should be the same.");
 
-expectedOut = preambleLUT;
+expectedOut = CONST.preambleLUT;
 
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));

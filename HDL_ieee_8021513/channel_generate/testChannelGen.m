@@ -35,7 +35,7 @@ endIdx = find(endOut == true);
 assert(isequal(length(startIdx), length(endIdx)), ...
     "Length of start and end should be the same.");
 
-expectedOut = channelLUT;
+expectedOut = CONST.channelLUT;
 
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));

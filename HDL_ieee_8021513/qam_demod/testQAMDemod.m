@@ -33,12 +33,12 @@ for i=1:1:length(M)
             dataSymbols(:,i) = awgn(dataSymbols(:,i), SNR);
             expectedOut{i} = pskdemod(dataSymbols(:,i), 2^M(i), OutputType='approxllr');
         case 2
-            qamConstellation = qamTwoBits;
+            qamConstellation = CONST.qamTwoBits;
             dataSymbols(:,i) = qammod(input(:,i), 2^M(i), qamConstellation, UnitAveragePower=true, PlotConstellation=false, InputType='integer');
             dataSymbols(:,i) = awgn(dataSymbols(:,i), SNR);
             expectedOut{i} = qamdemod(dataSymbols(:,i), 2^M(i), qamConstellation, UnitAveragePower=true, PlotConstellation=false, outputType='approxllr');
         case 4
-            qamConstellation = qamFourBits;
+            qamConstellation = CONST.qamFourBits;
             dataSymbols(:,i) = qammod(input(:,i), 2^M(i), qamConstellation, UnitAveragePower=true, PlotConstellation=false, InputType='integer');
             dataSymbols(:,i) = awgn(dataSymbols(:,i), SNR);
             expectedOut{i} = qamdemod(dataSymbols(:,i), 2^M(i), qamConstellation, UnitAveragePower=true, PlotConstellation=false, outputType='approxllr');
@@ -56,8 +56,8 @@ dataSymbols = [
 ];
 
 %% Simulation Time
-latency = 300/fs;         % Algorithm latency. Delay between input and output
-stopTime = (length(validIn)-1)/fs + latency;
+latency = 300/CONST.fs;         % Algorithm latency. Delay between input and output
+stopTime = (length(validIn)-1)/CONST.fs + latency;
 
 %% Run the simulation
 model_name = "HDLQAMDemod";
@@ -71,7 +71,6 @@ endOut = get(simOut, "endOut");
 validOut = get(simOut, "validOut");
 
 %% Compare with MATLAB reference algorithm
-
 startIdx = find(startOut == true);
 endIdx = find(endOut == true);
 
