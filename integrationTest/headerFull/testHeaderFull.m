@@ -12,7 +12,7 @@ constants;
 %% Input
 paramFile = ["param1.m", "param2.m"];
 for i=1:1:length(paramFile)
-    [reg0(i), reg1(i), reg2(i), reg3(i)] = param2regs(paramFile(i), false);
+    [reg0(i), reg1(i), reg2(i), reg3(i)] = param2regs(CONST, paramFile(i), false);
 end
 newFrame = logical([1; 0]);
 

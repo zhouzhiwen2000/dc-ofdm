@@ -17,7 +17,7 @@ validIn = [];
 lastIn = [];
 
 pBitsRaw = str2binl(msgIn);
-pBitsRaw = getPayloadParamsFromBits(pBitsRaw);
+pBitsRaw = getPayloadParamsFromBits(CONST, pBitsRaw);
 pWords = [pWords binl2str(pBitsRaw)];
 len = length(binl2str(pBitsRaw));
 validIn = [validIn; true(len, 1);];
@@ -26,13 +26,13 @@ lastIn = [lastIn; false(len-1, 1); true;];
 newFrame = true;
 
 %% Expected Output
-[reg0, reg1, reg2, reg3] = param2regs(paramFile, pBitsRaw);
-[expectedOut, ~, payloadOFDMSymbols] = fullTx(paramFile, binl2tx(pBitsRaw), 0, false);
+[reg0, reg1, reg2, reg3] = param2regs(CONST, paramFile, pBitsRaw);
+[expectedOut, ~, payloadOFDMSymbols] = fullTx(CONST, paramFile, binl2tx(pBitsRaw), 0, false);
 payloadOFDMSymbols = payloadOFDMSymbols(:);
 
 %% Simulation Time
-latency = 1000000/fs;             % Algorithm latency. Delay between input and output
-stopTime = (length(validIn)-1)/(fs) + latency;
+latency = 1000000/CONST.fs;             % Algorithm latency. Delay between input and output
+stopTime = (length(validIn)-1)/CONST.fs + latency;
 
 %% Run the simulation
 model_name = "simplifiedTxTestbench";

@@ -26,19 +26,19 @@ reg3 = zeros(length(msgIn), 1);
 for i=1:1:length(msgIn)
     pBits = str2binl(msgIn{i});
     pBits = binl2tx(pBits);    % Input to the Rx should be LSB first.
-    [OFDMSignal, payloadExtraWords(i, 1)] = fullTx(parametersFile, pBits);
+    [OFDMSignal, payloadExtraWords(i, 1)] = fullTx(CONST, parametersFile, pBits);
     OFDMRx = channelSimulation(OFDMSignal, delayIn, SNR);
     dataIn = [dataIn; OFDMRx;];
 
     % Get registers for output
-    [reg0(i, 1), reg1(i, 1), reg2(i, 1), reg3(i, 1)] = param2regs(parametersFile, pBits);
+    [reg0(i, 1), reg1(i, 1), reg2(i, 1), reg3(i, 1)] = param2regs(CONST, parametersFile, pBits);
 
-    payloadLenInFecBlocks(i, 1) = ceil(length(pBits)/payloadBitsPerBlock0);    % Used to end the simulation
+    payloadLenInFecBlocks(i, 1) = ceil(length(pBits)/CONST.payloadBitsPerBlock0);    % Used to end the simulation
 end
 
 %% Simulation Time
-latency = 10000000/fs;         % Algorithm latency. Delay between input and output
-stopTime = (length(dataIn)-1)/fs + latency;
+latency = 10000000/CONST.fs;         % Algorithm latency. Delay between input and output
+stopTime = (length(dataIn)-1)/CONST.fs + latency;
 totalPayloadFecBlocks = sum(payloadLenInFecBlocks);    % Used to end the simulation
 
 %% Run the simulation

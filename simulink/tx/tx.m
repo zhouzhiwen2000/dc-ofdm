@@ -1,6 +1,5 @@
 %% Transmitter
 % This file contains a fully functional transmitter.
-
 clc; clear; close all;
 addpath("../../src");
 addpath("../../inc");
@@ -19,7 +18,7 @@ validIn = [];
 lastIn = [];
 for i=1:1:length(msgIn)
     pBitsRaw{i} = str2binl(msgIn{i});
-    pBitsRaw{i} = getPayloadParamsFromBits(pBitsRaw{i});
+    pBitsRaw{i} = getPayloadParamsFromBits(CONST, pBitsRaw{i});
     pWords = [pWords binl2str(pBitsRaw{i})];
     len = length(binl2str(pBitsRaw{i}));
     validIn = [validIn; true(len, 1);];
@@ -37,14 +36,14 @@ reg2 = zeros(length(msgIn), 1);
 reg3 = zeros(length(msgIn), 1);
 
 for i=1:1:length(msgIn)
-    [reg0(i,1), reg1(i,1), reg2(i,1), reg3(i,1)] = param2regs(paramFile, pBitsRaw{i});
-    [expectedOut{i}, ~, payloadOFDMSymbols{i}] = fullTx(paramFile, binl2tx(pBitsRaw{i}), 0, false);
+    [reg0(i,1), reg1(i,1), reg2(i,1), reg3(i,1)] = param2regs(CONST, paramFile, pBitsRaw{i});
+    [expectedOut{i}, ~, payloadOFDMSymbols{i}] = fullTx(CONST, paramFile, binl2tx(pBitsRaw{i}), 0, false);
     payloadOFDMSymbols{i} = payloadOFDMSymbols{i}(:);
 end
 
 %% Simulation Time
-latency = 10000000/fs;             % Algorithm latency. Delay between input and output
-stopTime = (length(validIn)-1)/(fs) + latency;
+latency = 10000000/CONST.fs;             % Algorithm latency. Delay between input and output
+stopTime = (length(validIn)-1)/CONST.fs + latency;
 
 %% Run the simulation
 model_name = "HDLTx";
@@ -98,7 +97,7 @@ for i=1:length(startIdx)
 end
 
 %% Plotting
-t = (0:1/fDAC:length(expectedOut{i})/fDAC-1/fDAC)';
+t = (0:1/CONST.fDAC:length(expectedOut{i})/CONST.fDAC - 1/CONST.fDAC)';
 
 figure();
 subplot(2,1,1)
@@ -116,8 +115,8 @@ xlim([min(t), max(t)]*1e6);
 grid on;
 
 figure();
-resampledOut = resample(out, 2, 1);
-[psd, fVector] = pwelch(resampledOut, rectwin(length(resampledOut)), [], 2^16, 2*fDAC, "centered");
+resampledOut = resample(out, CONST.txL, CONST.txM);
+[psd, fVector] = pwelch(resampledOut, rectwin(length(resampledOut)), [], 2^16, 2*CONST.fDAC, "centered");
 plot(fVector/1e6, 10*log10(psd));
 title("PSD of the transmitted signal")
 xlabel("Freq. [MHz]");

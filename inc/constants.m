@@ -239,3 +239,4 @@ CONST.frequencyOffsetTimeWindow = CONST.preambleFirstPartOFDMSamples/CONST.fPHY;
 
 %% Simulink model constants
 CONST.FIFOOFDMSize = 10000; % Previous value was 2100
+CONST.FIFORxPayloadSize = 40000;

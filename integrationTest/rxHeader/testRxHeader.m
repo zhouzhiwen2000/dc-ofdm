@@ -17,7 +17,7 @@ reg2 = zeros(size(reg0));
 reg3 = zeros(size(reg0));
 for i =1:1:length(paramFile)
     run(paramFile{i});
-    [reg0(i,1), reg1(i,1), reg2(i,1), reg3(i,1)] = param2regs(paramFile{i}, false);
+    [reg0(i,1), reg1(i,1), reg2(i,1), reg3(i,1)] = param2regs(CONST, paramFile{i}, false);
     
     h = headerGenerate(CONST, psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
         fecConcatenationFactor, scramblerInitialization, batId, cyclicPrefixId, ...

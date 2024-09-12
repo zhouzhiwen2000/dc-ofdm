@@ -28,20 +28,21 @@ payloadExtraWords = zeros(msgQtty, 1);
 
 for i=1:1:msgQtty
     pBits = str2binl(msgIn{i});
-    [pBits, payloadLenInFecBlocks(i), ~, ~, payloadExtraWords(i)] = getPayloadParamsFromBits(pBits);
+    [pBits, payloadLenInFecBlocks(i), ~, ~, payloadExtraWords(i)] = ...
+        getPayloadParamsFromBits(CONST, pBits);
     pWords = [pWords, binl2str(pBits)];
     len = length(binl2str(pBits));
     lastIn = [lastIn; false(len-1, 1); true;];
 
-    [reg0(i), reg1(i), reg2(i), reg3(i)] = param2regs(paramFile, pBits);
+    [reg0(i), reg1(i), reg2(i), reg3(i)] = param2regs(CONST, paramFile, pBits);
 end
 
 validIn = true(length(pWords), 1);
 newFrame = logical([1; 0]);
 
 %% Simulation Time
-latency = 1000000/fs;         % Algorithm latency. Delay between input and output
-stopTime = (length(validIn)-1)/fs + latency;
+latency = 1000000/CONST.fs;         % Algorithm latency. Delay between input and output
+stopTime = (length(validIn)-1)/CONST.fs + latency;
 totalPayloadFecBlocks = sum(payloadLenInFecBlocks);    % Used to end the simulation
 
 %% Run the simulation

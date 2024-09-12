@@ -1,8 +1,9 @@
-function [reg0, reg1, reg2, reg3] = param2regs(paramFile, pBits)
+function [reg0, reg1, reg2, reg3] = param2regs(CONST, paramFile, pBits)
 %PARAM2REGS Given the parameters for the PSDU, this function returns the
 %configuration registers. Values written to this function must be MSB
 %first.
 arguments(Input)
+    CONST
     paramFile string
     pBits (:,1) logical
 end
