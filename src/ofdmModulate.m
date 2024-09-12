@@ -30,7 +30,7 @@ end
                 qamSignal = qammod(dataIn(:,i), 2^bitsPerSubcarrier, qamConstellation, UnitAveragePower=true, PlotConstellation=false, InputType='bit');
                 
             case 4
-                qamConstellation = qamFourBits;
+                qamConstellation = CONST.qamFourBits;
                 qamSignal = qammod(dataIn(:,i), 2^bitsPerSubcarrier, qamConstellation, UnitAveragePower=true, PlotConstellation=false, InputType='bit');
             otherwise
                 error("Unssuported QAM modulation order");

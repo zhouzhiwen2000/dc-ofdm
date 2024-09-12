@@ -19,22 +19,24 @@ for i =1:1:length(paramFile)
     run(paramFile{i});
     [reg0(i,1), reg1(i,1), reg2(i,1), reg3(i,1)] = param2regs(paramFile{i}, false);
     
-    h = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
+    h = headerGenerate(CONST, psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
         fecConcatenationFactor, scramblerInitialization, batId, cyclicPrefixId, ...
         explicitMimoPilotSymbolCombSpacing, explicitMimoPilotSymbolNumber);
-    h = headerScrambler(h);
-    h = LDPCEncoder(h, 0, 0, true);
-    h = headerRepetitionEncoder(h);
-    h = ofdmModulate(h, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit);
-    llr = ofdmDemodulate(h, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit, true);
+    h = headerScrambler(CONST, h);
+    h = LDPCEncoder(CONST, h, 0, 0, true);
+    h = headerRepetitionEncoder(CONST, h);
+    h = ofdmModulate(CONST, h, CONST.headerBitsPerSubcarrier, ...
+        CONST.headerCyclicPrefixLen, CONST.headerScramblerInit);
+    llr = ofdmDemodulate(CONST, h, CONST.headerBitsPerSubcarrier, ...
+        CONST.headerCyclicPrefixLen, CONST.headerScramblerInit, true);
     
     startIn = [startIn; true; false(length(llr)-1, 1); false(5000, 1);];
     dataLLR = [dataLLR; llr; zeros(5000, 1);];
 end
 
 %% Simulation Time
-latency = 10000/fPHY;         % Algorithm latency. Delay between input and output
-stopTime = (length(dataLLR)-1)/(2*fPHY) + latency;
+latency = 10000/CONST.fPHY;         % Algorithm latency. Delay between input and output
+stopTime = (length(dataLLR)-1)/CONST.fs + latency;
 
 %% Run the simulation
 model_name = "HDLRxHeader";

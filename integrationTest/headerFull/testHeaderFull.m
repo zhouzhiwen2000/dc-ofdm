@@ -10,14 +10,14 @@ addpath("../../inc");
 constants;
 
 %% Input
-paramFile = ["param1.m", "param1.m"];
+paramFile = ["param1.m", "param2.m"];
 for i=1:1:length(paramFile)
     [reg0(i), reg1(i), reg2(i), reg3(i)] = param2regs(paramFile(i), false);
 end
 newFrame = logical([1; 0]);
 
 %% Simulation Time
-latency = 10000/fs;             % Algorithm latency. Delay between input and output
+latency = 10000/CONST.fs;             % Algorithm latency. Delay between input and output
 stopTime = latency;
 
 %% Run the simulation
@@ -32,15 +32,15 @@ endOut = get(simOut, "endOut");
 validOut = get(simOut, "validOut");
 
 %% Compare with MATLAB reference algorithm
-expectedOut = zeros(headerBitsPerOFDMSymbol, length(paramFile));
+expectedOut = zeros(CONST.headerBitsPerOFDMSymbol, length(paramFile));
 for i=1:length(paramFile)
     run(paramFile(i));
-    h = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
+    h = headerGenerate(CONST, psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
             fecConcatenationFactor, scramblerInitialization, batId, cyclicPrefixId, ...
             explicitMimoPilotSymbolCombSpacing, explicitMimoPilotSymbolNumber);
-    h = headerScrambler(h);
-    h = LDPCEncoder(h, 0, 0, true);
-    expectedOut(:,i) = headerRepetitionEncoder(h);
+    h = headerScrambler(CONST, h);
+    h = LDPCEncoder(CONST, h, 0, 0, true);
+    expectedOut(:,i) = headerRepetitionEncoder(CONST, h);
 end
 
 %% Actual test

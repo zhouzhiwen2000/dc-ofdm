@@ -31,13 +31,18 @@ arguments(Output)
 end
     %% Prepare OFDM samples to be demodulated
     OFDMRxRaw = downshifter(CONST, OFDMSignal, carrierFrequencyOffset);
+    OFDMRxRaw = rxInterpolator(CONST, OFDMRxRaw);
     OFDMRxRaw = rxDecimator(CONST, OFDMRxRaw);
 
     [~, delay, ~, ~, frequencyOffset] = ofdmSymbolSync(CONST, OFDMRxRaw);
 
     %% Correct CFO
-    OFDMRx = OFDMSignal(1 + delay*2 + CONST.preambleOFDMSamples*2:end);
+    % Demodulate the rest of the OFDM symbol, but knowing the frequency
+    % offset
+    p = CONST.rxM/CONST.rxL;
+    OFDMRx = OFDMSignal(1 + round((delay + CONST.preambleOFDMSamples)*p):end);
     OFDMRx = downshifter(CONST, OFDMRx, carrierFrequencyOffset +frequencyOffset);
+    OFDMRx = rxInterpolator(CONST, OFDMRx);
     OFDMRx = rxDecimator(CONST, OFDMRx);
 
     %% Estimate channel
@@ -45,7 +50,9 @@ end
 
     %% Process header
     headerRx = OFDMRx(1:CONST.headerOFDMSamples);
-    headerRxLLR = ofdmDemodulate(CONST, headerRx, headerBitsPerSubcarrier, headerCyclicPrefixLen, headerScramblerInit, true, channelEst);
+    headerRxLLR = ofdmDemodulate(CONST, headerRx, ...
+        CONST.headerBitsPerSubcarrier, CONST.headerCyclicPrefixLen, ...
+        CONST.headerScramblerInit, true, channelEst);
     hRxLLR = headerRemoveRepetition(CONST, headerRxLLR);
     hScrambledRx = LDPCDecoder(CONST, hRxLLR, 0, 0, true);
     hGenRx = headerScrambler(CONST, hScrambledRx);
@@ -74,12 +81,14 @@ end
         return
     end
 
-    payloadRxLLR = ofdmDemodulate(CONST, payloadRx, payloadBitsPerSubcarrierRx, payloadCyclicPrefixLenRx, payloadScramblerInit, true, channelEst);
+    payloadRxLLR = ofdmDemodulate(CONST, payloadRx, ...
+        payloadBitsPerSubcarrierRx, payloadCyclicPrefixLenRx, ...
+        CONST.payloadScramblerInit, true, channelEst);
     pRxLLR = removeToneMapping(CONST, payloadRxLLR, psduSizeRx);
 
     % Knowing the full size of the signal, reshape it to fit in the LDPC
     % decoder
-    pRxLLR = reshape(pRxLLR, payloadBitsPerFec, []);
+    pRxLLR = reshape(pRxLLR, CONST.payloadBitsPerFec, []);
     payloadLenInFecBlocks = width(pRxLLR);
     
     pBitsRx = false(CONST.payloadBitsPerBlock0, payloadLenInFecBlocks);

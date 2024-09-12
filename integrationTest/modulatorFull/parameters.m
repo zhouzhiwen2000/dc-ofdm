@@ -10,20 +10,20 @@ simLarge = false;
 % Define payload length
 if (simNormal == true)
     payloadLenInFecBlocks = 2;
-    payloadLenInBits = payloadLenInFecBlocks*payloadBitsPerBlock0;
-    payloadLenInWords = payloadLenInBits/axiWidth;
+    payloadLenInBits = payloadLenInFecBlocks*CONST.payloadBitsPerBlock0;
+    payloadLenInWords = payloadLenInBits/CONST.axiWidth;
     disp("Running normal simulation");
 
 elseif (simLarge == true)
     % Define the payload length with the amount of words
     payloadLenInWords = 2^16;
-    payloadLenInBits = payloadLenInWords*axiWidth;
-    payloadLenInFecBlocks = ceil(payloadLenInBits/payloadBitsPerBlock0);
+    payloadLenInBits = payloadLenInWords*CONST.axiWidth;
+    payloadLenInFecBlocks = ceil(payloadLenInBits/CONST.payloadBitsPerBlock0);
     
     % The amount of bits and words should be a multiple of the fec block
     % size.
-    payloadLenInBits = payloadLenInFecBlocks*payloadBitsPerBlock0;
-    payloadLenInWords = payloadLenInBits/axiWidth;
+    payloadLenInBits = payloadLenInFecBlocks*CONST.payloadBitsPerBlock0;
+    payloadLenInWords = payloadLenInBits/CONST.axiWidth;
     disp("Running large frame simulation");
 else
     error("No simulation type selected");
@@ -74,4 +74,4 @@ explicitMimoPilotSymbolNumber = logical([0 0 0]);
 
 %% Calculated parameters for the payload
 payloadBitsPerSubcarrier = binl2dec(batId);
-payloadCyclicPrefixLen = binl2dec(cyclicPrefixId) * N / 32;
+payloadCyclicPrefixLen = binl2dec(cyclicPrefixId) * CONST.N / 32;

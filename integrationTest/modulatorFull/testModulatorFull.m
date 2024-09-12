@@ -13,34 +13,41 @@ constants;
 parameters;
 
 %% Transmitter pre-processing
-h = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
+h = headerGenerate(CONST, psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
     fecConcatenationFactor, scramblerInitialization, batId, cyclicPrefixId, ...
     explicitMimoPilotSymbolCombSpacing, explicitMimoPilotSymbolNumber);
-h = headerScrambler(h);
-h = LDPCEncoder(h, 0, 0, true);
-headerOFDMSymbols = headerRepetitionEncoder(h);
+h = headerScrambler(CONST, h);
+h = LDPCEncoder(CONST, h, 0, 0, true);
+headerOFDMSymbols = headerRepetitionEncoder(CONST, h);
 
 dataBitsLsb = logical(randi([0 1], payloadLenInBits, 1));
 for i=1:payloadLenInFecBlocks
-    p = payloadScrambler(scramblerInitialization, dataBitsLsb(1+(i-1)*payloadBitsPerBlock0:payloadBitsPerBlock0*i));
-    p = LDPCEncoder(p, binl2dec(fecRate), binl2dec(blockSize), false);
-    p = puncturing(p, binl2dec(fecRate), binl2dec(blockSize));
-    p = payloadRepetitionEncoder(p, 1);
+    p = payloadScrambler(CONST, scramblerInitialization, ...
+        dataBitsLsb(1+(i-1)*CONST.payloadBitsPerBlock0 : CONST.payloadBitsPerBlock0*i));
+    p = LDPCEncoder(CONST, p, binl2dec(fecRate), binl2dec(blockSize), false);
     payloadTotal(:, i) = p;
 end
-payloadOFDMSymbols = toneMapping(payloadTotal(:), binl2dec(batId));
+payloadOFDMSymbols = toneMapping(CONST, payloadTotal(:), binl2dec(batId));
 
 
 %% Expected Output
-preambleTx = ofdmModulate(preambleOFDMSymbols, preambleBitsPerSubcarrier, preambleCyclicPrefixLen, nullIdx, preambleScramblerInit);
-channelTx = ofdmModulate(channelOFDMSymbols, channelBitsPerSubcarrier, channelCyclicPrefixLen, nullIdx, channelScramblerInit);
-headerTx = ofdmModulate(headerOFDMSymbols, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit);
-payloadTx = ofdmModulate(payloadOFDMSymbols, payloadBitsPerSubcarrier, payloadCyclicPrefixLen, nullIdx, payloadScramblerInit);
+preambleTx = ofdmModulate(CONST, CONST.preambleOFDMSymbols, ...
+    CONST.preambleBitsPerSubcarrier, CONST.preambleCyclicPrefixLen, ...
+    CONST.preambleScramblerInit);
+channelTx = ofdmModulate(CONST, CONST.channelOFDMSymbols, ...
+    CONST.channelBitsPerSubcarrier, CONST.channelCyclicPrefixLen, ...
+    CONST.channelScramblerInit);
+headerTx = ofdmModulate(CONST, headerOFDMSymbols, ...
+    CONST.headerBitsPerSubcarrier, CONST.headerCyclicPrefixLen, ...
+    CONST.headerScramblerInit);
+payloadTx = ofdmModulate(CONST, payloadOFDMSymbols, ...
+    payloadBitsPerSubcarrier, payloadCyclicPrefixLen, ...
+    CONST.payloadScramblerInit);
 
 OFDMSignal = [preambleTx; channelTx; headerTx; payloadTx;];
-OFDMSignal = txInterpolator(OFDMSignal);
-OFDMSignal = txDecimator(OFDMSignal);
-expectedOut = upshifter(OFDMSignal);
+OFDMSignal = txInterpolator(CONST, OFDMSignal);
+OFDMSignal = txDecimator(CONST, OFDMSignal);
+expectedOut = upshifter(CONST, OFDMSignal);
 
 %% Inputs
 % The same symbol will be sent "numberOfRepetitions" times.
@@ -49,9 +56,9 @@ delayLen = 1000;
 
 % Raw bits to words for the header
 hx = headerOFDMSymbols(:);
-h = zeros(length(hx)/headerBitsPerSubcarrier, 1);
-for i=1:headerBitsPerSubcarrier:length(hx)-1
-    h(floor(i/headerBitsPerSubcarrier)+1) = binl2dec(hx(i:i+headerBitsPerSubcarrier-1));
+h = zeros(length(hx)/CONST.headerBitsPerSubcarrier, 1);
+for i=1:CONST.headerBitsPerSubcarrier:length(hx)-1
+    h(floor(i/CONST.headerBitsPerSubcarrier)+1) = binl2dec(hx(i:i+CONST.headerBitsPerSubcarrier-1));
 end
 
 % Raw bits to words for the payload
@@ -62,32 +69,32 @@ for i=1:payloadBitsPerSubcarrier:length(px)-1
 end
 
 dataSymbols = [
-    preambleOFDMSymbols(:);
-    channelOFDMSymbols(:);
+    CONST.preambleOFDMSymbols(:);
+    CONST.channelOFDMSymbols(:);
     h(:);
     p(:);
 ];
 
 bitsPerSubcarrier = [
-    repmat(preambleBitsPerSubcarrier, length(preambleOFDMSymbols(:)), 1);
-    repmat(channelBitsPerSubcarrier, length(channelOFDMSymbols(:)), 1);
-    repmat(headerBitsPerSubcarrier, length(headerOFDMSymbols(:))/headerBitsPerSubcarrier, 1);
+    repmat(CONST.preambleBitsPerSubcarrier, length(CONST.preambleOFDMSymbols(:)), 1);
+    repmat(CONST.channelBitsPerSubcarrier, length(CONST.channelOFDMSymbols(:)), 1);
+    repmat(CONST.headerBitsPerSubcarrier, length(headerOFDMSymbols(:))/CONST.headerBitsPerSubcarrier, 1);
     repmat(payloadBitsPerSubcarrier, length(payloadOFDMSymbols(:))/payloadBitsPerSubcarrier, 1);
     zeros(delayLen, 1);
 ];
 
 init = [
-    repmat(preambleScramblerInit, length(preambleOFDMSymbols(:)), 1);
-    repmat(channelScramblerInit, length(channelOFDMSymbols(:)), 1);
-    repmat(headerScramblerInit, length(headerOFDMSymbols(:))/headerBitsPerSubcarrier, 1);
-    repmat(payloadScramblerInit, length(payloadOFDMSymbols(:))/payloadBitsPerSubcarrier, 1);
+    repmat(CONST.preambleScramblerInit, length(CONST.preambleOFDMSymbols(:)), 1);
+    repmat(CONST.channelScramblerInit, length(CONST.channelOFDMSymbols(:)), 1);
+    repmat(CONST.headerScramblerInit, length(headerOFDMSymbols(:))/CONST.headerBitsPerSubcarrier, 1);
+    repmat(CONST.payloadScramblerInit, length(payloadOFDMSymbols(:))/payloadBitsPerSubcarrier, 1);
     zeros(delayLen, 13);
 ];
 
 cpLen = [
-    repmat(preambleCyclicPrefixLen, length(preambleOFDMSymbols(:)), 1);
-    repmat(channelCyclicPrefixLen, length(channelOFDMSymbols(:)), 1);
-    repmat(headerCyclicPrefixLen, length(headerOFDMSymbols(:))/headerBitsPerSubcarrier, 1);
+    repmat(CONST.preambleCyclicPrefixLen, length(CONST.preambleOFDMSymbols(:)), 1);
+    repmat(CONST.channelCyclicPrefixLen, length(CONST.channelOFDMSymbols(:)), 1);
+    repmat(CONST.headerCyclicPrefixLen, length(headerOFDMSymbols(:))/CONST.headerBitsPerSubcarrier, 1);
     repmat(payloadCyclicPrefixLen, length(payloadOFDMSymbols(:))/payloadBitsPerSubcarrier, 1);
     zeros(delayLen, 1);
 ];
@@ -98,8 +105,8 @@ validIn = [
 ];
 
 %% Simulation Time
-latency = 1000000/fs;         % Algorithm latency. Delay between input and output
-stopTime = (length(validIn)-1)/fs + latency;
+latency = 1000000/CONST.fs;         % Algorithm latency. Delay between input and output
+stopTime = (length(validIn)-1)/CONST.fs + latency;
 
 %% Run the simulation
 model_name = "HDLModulatorFull";
@@ -129,7 +136,7 @@ end
 
 %% Plotting
 if (all([simNormal == true, simLarge == false]))
-    t = (0:1/fDAC:length(expectedOut)/fDAC-1/fDAC)';
+    t = (0:1/CONST.fDAC:length(expectedOut)/CONST.fDAC-1/CONST.fDAC)';
 
     figure();
     subplot(2,1,1)
@@ -147,8 +154,8 @@ if (all([simNormal == true, simLarge == false]))
     grid on;
 
     figure();
-    resampledOut = resample(out, 2, 1);
-    [psd, fVector] = pwelch(resampledOut, rectwin(length(resampledOut)), [], 2^16, 2*fDAC, "centered");
+    resampledOut = resample(out, CONST.txM/CONST.txM, 1);
+    [psd, fVector] = pwelch(resampledOut, rectwin(length(resampledOut)), [], 2^16, 2*CONST.fDAC, "centered");
     plot(fVector/1e6, 10*log10(psd));
     title("PSD of the transmitted signal")
     xlabel("Freq. [MHz]");

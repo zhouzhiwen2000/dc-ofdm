@@ -5,6 +5,7 @@ clc; clear; close all;
 addpath("../../src");
 addpath("../../inc");
 addpath("../../src/rx");
+constants;
 
 %% Parameters
 parametersFile = "sampleParametersFile.m";
@@ -15,17 +16,17 @@ frequencyOffsetIn = 5e3;
 
 %% Message transmission
 pBits = str2binl(msg);
-OFDMSignal = fullTx(parametersFile, pBits);
+OFDMSignal = fullTx(CONST, parametersFile, pBits);
 
 OFDMRx = channelSimulation(OFDMSignal, delayIn, SNR);
 
-[pBitsRx, err, delayOut, frequencyOffsetOut] = fullRx(OFDMRx, frequencyOffsetIn);
+[pBitsRx, err, delayOut, frequencyOffsetOut] = fullRx(CONST, OFDMRx, frequencyOffsetIn);
 
 %% Tests
 msgRx = binl2str(pBitsRx);
 assert(err==0, "The header should have been received without errors");
 assert(isequal(msg, msgRx), "Message should be equal");
-assert(iskindaequal(delayOut, delayIn/2, 1), "Delays should match");
+assert(iskindaequal(delayOut, delayIn/(CONST.rxM/CONST.rxL), 1), "Delays should match");
 assert(iskindaequal(frequencyOffsetIn, -frequencyOffsetOut, 50), ...
     "Frequency offset should be less than 50Hz");
 

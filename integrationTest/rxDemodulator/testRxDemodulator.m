@@ -20,7 +20,6 @@ parametersFile = "sampleParametersFile";
 delayIn = 5000;
 SNR = 60;
 
-% This works
 pBitsIn{1} = logical(randi([0,1], 5000, 1));
 pBitsIn{2} = logical(randi([0,1], 80, 1));
 pBitsIn{3} = logical(randi([0,1], 5000, 1));
@@ -29,7 +28,7 @@ pBitsIn{5} = logical(randi([0,1], 80, 1));
 pBitsIn{6} = logical(randi([0,1], 5000, 1));
 msgQtty = length(pBitsIn);
 
-psduSizeLSB = zeros(24, 1, msgQtty);
+psduSizeLSB = zeros(24, 1, msgQtty+1);
 payloadBitsPerSubcarrierIn = zeros(msgQtty, 1);
 payloadCyclicPrefixLenIn = zeros(msgQtty, 1);
 simPayloadNumOFDMSymbols = zeros(msgQtty, 1); % Used only for testing
@@ -37,7 +36,7 @@ dataIn = [];
 OFDMRx = cell(msgQtty, 1);
 for i=1:1:msgQtty
     pBits = pBitsIn{i};
-    OFDMSignal = fullTx(parametersFile, pBits, 0, false);
+    OFDMSignal = fullTx(CONST, parametersFile, pBits, 0, false);
     OFDMRx{i} = channelSimulation(OFDMSignal, delayIn, SNR);
     
     % Get parameters from header
@@ -58,30 +57,33 @@ expectedHeaderOut = cell(msgQtty, 1);
 counterExpectedOut = 0;
 expectedPayloadOut = cell(totalOFDMSymbols, 1);
 for i=1:1:msgQtty
-    OFDMRx{i} = downshifter(OFDMRx{i});
-    OFDMRx{i} = rxDecimator(OFDMRx{i});
-    OFDMRx{i} = ofdmSymbolSync(OFDMRx{i});
-    [OFDMRx{i}, channelEst] = ofdmChannelEstimation(OFDMRx{i});
+    OFDMRx{i} = downshifter(CONST, OFDMRx{i});
+    OFDMRx{i} = rxInterpolator(CONST, OFDMRx{i});
+    OFDMRx{i} = rxDecimator(CONST, OFDMRx{i});
+    OFDMRx{i} = ofdmSymbolSync(CONST, OFDMRx{i});
+    [OFDMRx{i}, channelEst] = ofdmChannelEstimation(CONST, OFDMRx{i});
 
-    headerRx = OFDMRx{i}(1:headerOFDMSamples);
-    headerRxLLR = ofdmDemodulate(headerRx, headerBitsPerSubcarrier, ...
-        headerCyclicPrefixLen, nullIdx, headerScramblerInit, true, channelEst);
+    headerRx = OFDMRx{i}(1:CONST.headerOFDMSamples);
+    headerRxLLR = ofdmDemodulate(CONST, headerRx, ...
+        CONST.headerBitsPerSubcarrier, CONST.headerCyclicPrefixLen, ...
+        CONST.headerScramblerInit, true, channelEst);
     expectedHeaderOut{i} = headerRxLLR;
 
-    payloadRx = OFDMRx{i}(1+headerOFDMSamples:end);
-    payloadRxLLR = ofdmDemodulate(payloadRx, payloadBitsPerSubcarrier, ...
-        payloadCyclicPrefixLen, nullIdx, payloadScramblerInit, true, channelEst);
+    payloadRx = OFDMRx{i}(1+CONST.headerOFDMSamples:end);
+    payloadRxLLR = ofdmDemodulate(CONST, payloadRx, ...
+        payloadBitsPerSubcarrierIn(i), payloadCyclicPrefixLen, ...
+        CONST.payloadScramblerInit, true, channelEst);
 
     for j=counterExpectedOut+1:1:counterExpectedOut + simPayloadNumOFDMSymbols(i, 1)
-        expectedPayloadOut{j} = payloadRxLLR(1+numDataCarriers*payloadBitsPerSubcarrier*(j-1-counterExpectedOut): ...
-            numDataCarriers*payloadBitsPerSubcarrier*(j-counterExpectedOut));
+        expectedPayloadOut{j} = payloadRxLLR(1+CONST.numDataCarriers*payloadBitsPerSubcarrier*(j-1-counterExpectedOut): ...
+            CONST.numDataCarriers*payloadBitsPerSubcarrier*(j-counterExpectedOut));
     end
     counterExpectedOut = j;
 end
 
 %% Simulation Time
-latency = 500000/fs;         % Algorithm latency. Delay between input and output
-stopTime = (length(dataIn)-1)/fs + latency;
+latency = 500000/CONST.fs;         % Algorithm latency. Delay between input and output
+stopTime = (length(dataIn)-1)/CONST.fs + latency;
 
 %% Run the simulation
 model_name = "HDLRxDemodulator";
@@ -110,7 +112,7 @@ assert(isequal(length(startIdx), msgQtty), ...
     "Amount of headers should be equal at the amount of messages.")
 
 for i=1:1:msgQtty
-    out = dataOut(startIdx(i):endIdx(i), end-headerBitsPerSubcarrier+1:end);
+    out = dataOut(startIdx(i):endIdx(i), end-CONST.headerBitsPerSubcarrier+1:end);
     out = out.';
     headerOut = out(:);
     assert(iskindaequal(expectedHeaderOut{i}, headerOut, 0.8), "Header mismatch");
@@ -129,11 +131,11 @@ for i=1:1:totalOFDMSymbols
     out = dataOut(startIdx1(i):endIdx1(i), end-payloadBitsPerSubcarrier+1:end);
     out = out.';
     out = out(:);
-    assert(iskindaequal(expectedPayloadOut{i}, out, 0.8), "Payload mismatch");
+    assert(iskindaequal(expectedPayloadOut{i}, out, 1), "Payload mismatch");
 end
 
 %% Plotting
-t = (0:1/fs:length(expectedHeaderOut{1})/fs-1/fs)';
+t = (0:1/CONST.fs:length(expectedHeaderOut{1})/CONST.fs-1/CONST.fs)';
 
 figure();
 subplot(2,1,1)

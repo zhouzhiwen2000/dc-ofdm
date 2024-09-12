@@ -9,7 +9,7 @@ constants;
 paramFile = "sampleParametersFile";
 
 % The inputs from Simulink are read in a special manner:
-% Because of the "remove tone mapping", and extra "ready" signal is sent,
+% Because of the "remove tone mapping", an extra "ready" signal is sent,
 % but no new payload data is sent to the LDPC block. Therefore, if you
 % store serially all the data for the payload, you should consider this
 % "extra" symbols.
@@ -48,12 +48,17 @@ for i=1:1:msgQtty
     blockSizeLSB(:, 1, i) = flip(blockSize);
     batIdLSB(:, 1, i) = flip(batId);
     psduSizeLSB(:, 1, i) = flip(psduSize);
-    simPayloadLenInFecBlocks(i, 1) = length(pBits)/payloadBitsPerBlock0;
+    simPayloadLenInFecBlocks(i, 1) = length(pBits)/CONST.payloadBitsPerBlock0;
     
-    [~, simPayloadExtraWords(i, 1), payloadOFDMSymbols] = fullTx(paramFile, pBits, 0, false);
+    [~, simPayloadExtraWords(i, 1), payloadOFDMSymbols] = ...
+        fullTx(CONST, paramFile, pBits, 0, false);
     
-    payloadTx = ofdmModulate(payloadOFDMSymbols, payloadBitsPerSubcarrier, payloadCyclicPrefixLen, nullIdx, payloadScramblerInit);
-    payloadRxLLR{i} = ofdmDemodulate(payloadTx, payloadBitsPerSubcarrier, payloadCyclicPrefixLen, nullIdx, payloadScramblerInit, true);
+    payloadTx = ofdmModulate(CONST, payloadOFDMSymbols, ...
+        payloadBitsPerSubcarrier, payloadCyclicPrefixLen, ...
+        CONST.payloadScramblerInit);
+    payloadRxLLR{i} = ofdmDemodulate(CONST, payloadTx, ...
+        payloadBitsPerSubcarrier, payloadCyclicPrefixLen, ...
+        CONST.payloadScramblerInit, true);
     
     validIn{i} = true(size(payloadRxLLR{i}));
     newFrame = [newFrame; true; false(length(payloadRxLLR{i})-1, 1); false(50000, 1)];
@@ -61,8 +66,8 @@ end
 
 
 %% Simulation Time
-latency = 1000000/fPHY;         % Algorithm latency. Delay between input and output
-stopTime = (length(payloadRxLLR)-1)/(fPHY) + latency;
+latency = 1000000/CONST.fPHY;         % Algorithm latency. Delay between input and output
+stopTime = (length(payloadRxLLR)-1)/CONST.fPHY + latency;
 totalPayloadFecBlocks = sum(simPayloadLenInFecBlocks);    % Used to end the simulation
 
 %% Run the simulation

@@ -1,9 +1,11 @@
 %% Test Sim RF
 % Test the process of:
-%   - Interpolating
+%   - Tx Interpolation
+%   - Tx Decimation
 %   - Frequency upshifting
 %   - Frequency downshifting
-%   - Decimating
+%   - Rx Interpolation
+%   - Rx Decimation
 clc; clear; close all;
 addpath("../../src");
 addpath("../../inc");
@@ -12,40 +14,47 @@ constants;
 
 %% Inputs
 % OFDM output is a senoidal function
-t = (0:1/fPHY:(N+headerCyclicPrefixLen)/fPHY-1/fPHY)';      % Time vector is equal to "N" ofdm samples
-fc = 20e6;                           % Carrier frequency for sinusoidal function
-OFDMSignal = cos(2*pi*fc*t);
+% t = (0:1/CONST.fPHY : (CONST.N+CONST.headerCyclicPrefixLen)/CONST.fPHY - 1/CONST.fPHY)';      % Time vector is equal to "N" ofdm samples
+% fc = 20e6;                           % Carrier frequency for sinusoidal function
+% OFDMSignal = cos(2*pi*fc*t);
 
 %% OFDM output is an actual OFDM symbol
-% pBits = [];
-% run("sampleParametersFile.m");
-% 
-% % Header
-% hGen = headerGenerate(psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
-%     fecConcatenationFactor, scramblerInitialization, batId, cyclicPrefixId, ...
-%     explicitMimoPilotSymbolCombSpacing, explicitMimoPilotSymbolNumber);
-% hScrambled = headerScrambler(hGen);
-% hLDPC = LDPCEncoder(hScrambled, 0, 0, true);
-% headerOFDMSymbols = headerRepetitionEncoder(hLDPC);
-% 
-% 
-% % Transmiter
-% preambleTx = ofdmModulate(preambleOFDMSymbols, preambleBitsPerSubcarrier, preambleCyclicPrefixLen, nullIdx, preambleScramblerInit);
-% channelTx = ofdmModulate(channelOFDMSymbols, channelBitsPerSubcarrier, channelCyclicPrefixLen, nullIdx, channelScramblerInit);
-% headerTx = ofdmModulate(headerOFDMSymbols, headerBitsPerSubcarrier, headerCyclicPrefixLen, nullIdx, headerScramblerInit);
-% 
-% OFDMSignal = [preambleTx; channelTx; headerTx];
+pBits = [];
+run("sampleParametersFile.m");
+
+% Header
+hGen = headerGenerate(CONST, psduSize, messageDuration, blockSize, fecRate, repetitionNumber, ...
+    fecConcatenationFactor, scramblerInitialization, batId, cyclicPrefixId, ...
+    explicitMimoPilotSymbolCombSpacing, explicitMimoPilotSymbolNumber);
+hScrambled = headerScrambler(CONST, hGen);
+hLDPC = LDPCEncoder(CONST, hScrambled, 0, 0, true);
+headerOFDMSymbols = headerRepetitionEncoder(CONST, hLDPC);
+
+
+% Transmiter
+preambleTx = ofdmModulate(CONST, CONST.preambleOFDMSymbols, ...
+    CONST.preambleBitsPerSubcarrier, CONST.preambleCyclicPrefixLen, ...
+    CONST.preambleScramblerInit);
+channelTx = ofdmModulate(CONST, CONST.channelOFDMSymbols, ...
+    CONST.channelBitsPerSubcarrier, CONST.channelCyclicPrefixLen, ...
+    CONST.channelScramblerInit);
+headerTx = ofdmModulate(CONST, headerOFDMSymbols, CONST.headerBitsPerSubcarrier, ...
+    CONST.headerCyclicPrefixLen, CONST.headerScramblerInit);
+
+OFDMSignal = [preambleTx; channelTx; headerTx];
 
 %% ExpectedOut
-expectedOut = txInterpolator(OFDMSignal);
-expectedOut = upshifter(expectedOut);
-expectedOut = downshifter(expectedOut);
-expectedOut = rxDecimator(expectedOut);
+expectedOut = txInterpolator(CONST, OFDMSignal);
+expectedOut = txDecimator(CONST, expectedOut);
+expectedOut = upshifter(CONST, expectedOut);
+expectedOut = downshifter(CONST, expectedOut);
+expectedOut = rxInterpolator(CONST, expectedOut);
+expectedOut = rxDecimator(CONST, expectedOut);
 
-assert(iskindaequal(expectedOut, OFDMSignal, 0.5), "Input and Output should be similar");
+assert(iskindaequal(expectedOut, OFDMSignal, 1), "Input and Output should be similar");
 
 %% Plot signals
-t = (0:1:length(expectedOut)-1)/fs;
+t = (0:1:length(expectedOut)-1)/CONST.fADC;
 
 figure();
 subplot(2,1,1)

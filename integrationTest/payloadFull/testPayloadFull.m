@@ -24,7 +24,7 @@ validIn = [];
 lastIn = [];
 for i=1:1:length(msgIn)
     pBitsRaw{i} = str2binl(msgIn{i});
-    pBitsRaw{i} = getPayloadParamsFromBits(pBitsRaw{i});
+    pBitsRaw{i} = getPayloadParamsFromBits(CONST, pBitsRaw{i});
     pWords = [pWords binl2str(pBitsRaw{i})];
     len = length(binl2str(pBitsRaw{i}));
     validIn = [validIn; true(len, 1);];
@@ -53,21 +53,21 @@ for j=1:1:length(msgIn)
     psduSizeLSB(:,1, j) = flip(psduSize);
     repNumberLSB(:,1, j) = flip(repetitionNumber);
 
-    pBits = reshape(pBits, payloadBitsPerBlock0, payloadLenInFecBlocks);
-    pLDPC = false(payloadBitsPerFec, payloadLenInFecBlocks);
+    pBits = reshape(pBits, CONST.payloadBitsPerBlock0, payloadLenInFecBlocks);
+    pLDPC = false(CONST.payloadBitsPerFec, payloadLenInFecBlocks);
     for i=1:1:payloadLenInFecBlocks
-        pScrambled = payloadScrambler(scramblerInitialization, pBits(:,i));
-        pLDPC(:,i) = LDPCEncoder(pScrambled, binl2dec(fecRate), binl2dec(blockSize), false);
+        pScrambled = payloadScrambler(CONST, scramblerInitialization, pBits(:,i));
+        pLDPC(:,i) = LDPCEncoder(CONST, pScrambled, binl2dec(fecRate), binl2dec(blockSize), false);
     end
     pLDPC = pLDPC(:);
-    payloadOFDMSymbols = toneMapping(pLDPC, binl2dec(batId));
+    payloadOFDMSymbols = toneMapping(CONST, pLDPC, binl2dec(batId));
     expectedOut{j} = payloadOFDMSymbols(:);
 end
 
 
 %% Simulation Time
-latency = 100000/fs;             % Algorithm latency. Delay between input and output
-stopTime = (length(pWords)-1)/fs + latency;
+latency = 100000/CONST.fs;             % Algorithm latency. Delay between input and output
+stopTime = (length(pWords)-1)/CONST.fs + latency;
 
 %% Run the simulation
 model_name = "HDLPayloadFull";
