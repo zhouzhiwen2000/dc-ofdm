@@ -49,7 +49,7 @@ end
     
     OFDMSignal = [preambleTx; channelTx; headerTx; payloadTx;];
     OFDMSignal = txInterpolator(CONST, OFDMSignal);
-    OFDMSignal = txDecimator(CONST, OFDMSignal);
+    %OFDMSignal = txDecimator(CONST, OFDMSignal);
     OFDMSignal = upshifter(CONST, OFDMSignal, carrierFrequencyOffset);
     if (addTimeWindow == true)
         OFDMSignal = [OFDMSignal; zeros(CONST.simTimeWindowInSamples, 1)];

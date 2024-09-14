@@ -21,7 +21,7 @@ channelTx = ofdmModulate(CONST, CONST.channelOFDMSymbols, ...
 
 OFDMSignal = [preambleTx; channelTx];
 OFDMSignal = txInterpolator(CONST, OFDMSignal);
-OFDMSignal = txDecimator(CONST, OFDMSignal);
+%OFDMSignal = txDecimator(CONST, OFDMSignal);
 OFDMSignal = upshifter(CONST, OFDMSignal);
 
 OFDMRx = channelSimulation(OFDMSignal, delayIn, SNR);

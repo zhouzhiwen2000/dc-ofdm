@@ -46,7 +46,7 @@ payloadTx = ofdmModulate(CONST, payloadOFDMSymbols, ...
 
 OFDMSignal = [preambleTx; channelTx; headerTx; payloadTx;];
 OFDMSignal = txInterpolator(CONST, OFDMSignal);
-OFDMSignal = txDecimator(CONST, OFDMSignal);
+%OFDMSignal = txDecimator(CONST, OFDMSignal);
 expectedOut = upshifter(CONST, OFDMSignal);
 
 %% Inputs
@@ -154,7 +154,7 @@ if (all([simNormal == true, simLarge == false]))
     grid on;
 
     figure();
-    resampledOut = resample(out, CONST.txM/CONST.txM, 1);
+    resampledOut = resample(out, CONST.txM, 1);
     [psd, fVector] = pwelch(resampledOut, rectwin(length(resampledOut)), [], 2^16, 2*CONST.fDAC, "centered");
     plot(fVector/1e6, 10*log10(psd));
     title("PSD of the transmitted signal")

@@ -81,14 +81,14 @@ CONST.payloadScramblerPoly = [23 5 0];
 
 
 %% Modulator
-CONST.fPHY = 50e6;                    % [Hz] Fixed by standard
+CONST.fPHY = 62.5e6;                    % [Hz] Fixed by standard
 CONST.oversamplingFactor = 2;
 CONST.fs = CONST.fPHY*CONST.oversamplingFactor;   % [Hz] Sampling frequency, which will be the input of the DAC and ADC
 
 %% Tx Interpolator FIR filter
-CONST.txL = 5;                                  % Upsampling factor for interpolator.
-CONST.txInterpolatorFpass = 20e6;               % Passband frequency [Hz]
-CONST.txInterpolatorFstop = 29e6;               % Stopband frequency [Hz]
+CONST.txL = 2;                                  % Upsampling factor for interpolator.
+CONST.txInterpolatorFpass = 25e6;               % Passband frequency [Hz]
+CONST.txInterpolatorFstop = 40e6;               % Stopband frequency [Hz]
 CONST.txInterpolatorPassbandRippleDb = 0.1;     % Passband ripple [dB]
 CONST.txInterpolatorStopbandAttDb = 80;         % Stopband attenuation [dB]
 
@@ -135,12 +135,12 @@ end
 % Uncomment to plot filter response
 %fvtool(CONST.txDecimatorFilter,'Fs', CONST.fPHY*CONST.txL);
 
-CONST.fDAC = CONST.fPHY*CONST.txL/CONST.txM;
+CONST.fDAC = 125e6;
 CONST.fADC = CONST.fDAC;
 
 %% Upshifter NCO (Numerical Controlled Oscillator)
 % These equations were taking from the "help" section of the NCO block.
-CONST.ncoUpFrequencyResolution = 100;         % Frequency resolution for the NCO
+CONST.ncoUpFrequencyResolution = 10e3;         % Frequency resolution for the NCO
 CONST.ncoUpCarrierFrequency = CONST.fPHY/2;       % Carrier frequency of the NCO
 CONST.ncoUpSFDR = 80;                       % Spurious free dynamic range [dB]
 
@@ -187,12 +187,11 @@ end
 %fvtool(CONST.rxInterpolatorFilter,'Fs', CONST.fADC*CONST.rxL);
 
 %% Decimator LPF filter
-CONST.rxM = 5;
+CONST.rxM = 2;
 CONST.rxDecimatorFpass = 20e6;               % Passband frequency [Hz]
 CONST.rxDecimatorFstop = 25e6;               % Stopband frequency [Hz]
 CONST.rxDecimatorPassbandRippleDb = 0.1;     % Passband ripple [dB]
-CONST.rxDecimatorStopbandAttDb = 81;         % Stopband attenuation [dB]
-CONST.rxDecimatorStopbandAttDbForSim = 78;   % Used for simulation [dB]
+CONST.rxDecimatorStopbandAttDb = 78;         % Stopband attenuation [dB]
 
 CONST.rxDecimatorSpec = fdesign.decimator(CONST.rxM, 'lowpass', 'Fp,Fst,Ap,Ast', ...
     CONST.rxDecimatorFpass, ...
@@ -202,28 +201,13 @@ CONST.rxDecimatorSpec = fdesign.decimator(CONST.rxM, 'lowpass', 'Fp,Fst,Ap,Ast',
     CONST.fADC*CONST.rxL);
 CONST.rxDecimatorFilter = design(CONST.rxDecimatorSpec, 'equiripple', 'SystemObject',true);
 
-CONST.rxDecimatorSpecForSim = fdesign.decimator(CONST.rxM, 'lowpass', 'Fp,Fst,Ap,Ast', ...
-    CONST.rxDecimatorFpass, ...
-    CONST.rxDecimatorFstop, ...
-    CONST.rxDecimatorPassbandRippleDb, ...
-    CONST.rxDecimatorStopbandAttDbForSim, ...
-    CONST.fADC*CONST.rxL);
-CONST.rxDecimatorFilterForSim = design(CONST.rxDecimatorSpecForSim, 'equiripple', 'SystemObject',true);
-
 % Group delay of the filter should be even.
 CONST.rxDecimatorDelay = mean(grpdelay(CONST.rxDecimatorFilter));
-if (CONST.rxDecimatorDelay == round(CONST.rxDecimatorDelay))
-    error("rxDecimatorDelay should be fractional!");
-elseif (mod(round(CONST.rxDecimatorDelay), CONST.rxM) ~= 3)
-    error("rxDecimatorDelay should be mod(delay, rxM) == 1");
-end
-
-CONST.rxDecimatorDelayForSim = mean(grpdelay(CONST.rxDecimatorFilterForSim));
-if (CONST.rxDecimatorDelayForSim ~= round(CONST.rxDecimatorDelayForSim))
-    error("rxDecimatorDelayForSim should be an integer!");
-elseif (mod(CONST.rxDecimatorDelayForSim, CONST.rxM) ~= 0)
-    error("rxDecimatorDelayForSim should be multiple of rxM!");
-end
+% if (CONST.rxDecimatorDelay == round(CONST.rxDecimatorDelay))
+%     error("rxDecimatorDelay should be fractional!");
+% elseif (mod(round(CONST.rxDecimatorDelay), CONST.rxM) ~= 3)
+%     error("rxDecimatorDelay should be mod(delay, rxM) == 1");
+% end
 
 % Uncomment to plot filter response
 %fvtool(CONST.rxDecimatorFilter,'Fs', CONST.fADC);

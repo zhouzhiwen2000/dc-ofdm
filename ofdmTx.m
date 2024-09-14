@@ -48,5 +48,5 @@ payloadTx = ofdmModulate(CONST, payloadOFDMSymbols, ...
 
 OFDMSignal = [preambleTx; channelTx; headerTx; payloadTx;];
 OFDMSignal = txInterpolator(CONST, OFDMSignal);
-OFDMSignal = txDecimator(CONST, OFDMSignal);
+%OFDMSignal = txDecimator(CONST, OFDMSignal);
 OFDMSignal = upshifter(CONST, OFDMSignal);

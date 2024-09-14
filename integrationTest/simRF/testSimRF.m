@@ -45,7 +45,7 @@ OFDMSignal = [preambleTx; channelTx; headerTx];
 
 %% ExpectedOut
 expectedOut = txInterpolator(CONST, OFDMSignal);
-expectedOut = txDecimator(CONST, expectedOut);
+%expectedOut = txDecimator(CONST, expectedOut);
 expectedOut = upshifter(CONST, expectedOut);
 expectedOut = downshifter(CONST, expectedOut);
 expectedOut = rxInterpolator(CONST, expectedOut);
