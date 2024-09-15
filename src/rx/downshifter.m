@@ -8,7 +8,9 @@ end
 arguments(Output)
     s (:,1)
 end    
-    p = CONST.rxM / CONST.rxL;
+    %p = CONST.rxM / CONST.rxL;
+
+    p = CONST.rxM;
     n = (0:1:length(y)-1)';
 
     s_real = 2*y.*cos(pi*n/p + 2*pi*frequencyOffset/CONST.fADC*n);

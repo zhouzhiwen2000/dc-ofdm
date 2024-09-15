@@ -6,7 +6,7 @@ addpath("../../inc");
 constants;
 
 %% Inputs
-fIn = CONST.fADC*CONST.rxL;
+fIn = CONST.fADC;
 fOut = fIn/CONST.rxM;
 t = (0:1/fIn:(CONST.N+CONST.headerCyclicPrefixLen)/fOut-1/fIn)';            % Time vector is equal to "N" ofdm samples
 t_down = (0:1/fOut:(CONST.N+CONST.headerCyclicPrefixLen)/fOut-1/fOut)';     % Time vector for downsampled signal

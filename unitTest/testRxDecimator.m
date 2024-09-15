@@ -6,7 +6,7 @@ addpath("../inc");
 constants;
 
 %% Test cases
-fIn = CONST.fADC*CONST.rxM;
+fIn = CONST.fADC;
 fc = 5e6;
 symbolNumber = 10;
 

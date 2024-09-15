@@ -22,7 +22,7 @@ OFDMRx = channelSimulation(OFDMSignal, delayIn, SNR);
 %% Tests
 assert(err==0, "The header should have been received without errors");
 assert(isempty(pBitsRx), "Received message should be empty");
-assert(iskindaequal(delayOut, delayIn/(CONST.rxM/CONST.rxL), 1), "Delays should match");
+assert(iskindaequal(delayOut, delayIn/CONST.rxM, 1), "Delays should match");
 assert(iskindaequal(frequencyOffsetIn, -frequencyOffsetOut, 50), ...
     "Frequency offset should be less than 50Hz");
 

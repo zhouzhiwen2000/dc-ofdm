@@ -189,7 +189,7 @@ end
 %% Decimator LPF filter
 CONST.rxM = 2;
 CONST.rxDecimatorFpass = 20e6;               % Passband frequency [Hz]
-CONST.rxDecimatorFstop = 25e6;               % Stopband frequency [Hz]
+CONST.rxDecimatorFstop = 29e6;               % Stopband frequency [Hz]
 CONST.rxDecimatorPassbandRippleDb = 0.1;     % Passband ripple [dB]
 CONST.rxDecimatorStopbandAttDb = 78;         % Stopband attenuation [dB]
 
@@ -198,11 +198,16 @@ CONST.rxDecimatorSpec = fdesign.decimator(CONST.rxM, 'lowpass', 'Fp,Fst,Ap,Ast',
     CONST.rxDecimatorFstop, ...
     CONST.rxDecimatorPassbandRippleDb, ...
     CONST.rxDecimatorStopbandAttDb, ...
-    CONST.fADC*CONST.rxL);
+    CONST.fADC);
 CONST.rxDecimatorFilter = design(CONST.rxDecimatorSpec, 'equiripple', 'SystemObject',true);
 
 % Group delay of the filter should be even.
 CONST.rxDecimatorDelay = mean(grpdelay(CONST.rxDecimatorFilter));
+if (mod(CONST.rxDecimatorDelay, 2) ~= 0)
+    CONST.rxDecimatorDelay
+    error("decimatorDelay should be even!");
+end
+
 % if (CONST.rxDecimatorDelay == round(CONST.rxDecimatorDelay))
 %     error("rxDecimatorDelay should be fractional!");
 % elseif (mod(round(CONST.rxDecimatorDelay), CONST.rxM) ~= 3)
@@ -211,6 +216,8 @@ CONST.rxDecimatorDelay = mean(grpdelay(CONST.rxDecimatorFilter));
 
 % Uncomment to plot filter response
 %fvtool(CONST.rxDecimatorFilter,'Fs', CONST.fADC);
+
+
 
 %% QAM constellations
 CONST.qamTwoBits = [3, 2, 1, 0];

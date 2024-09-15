@@ -31,7 +31,7 @@ arguments(Output)
 end
     %% Prepare OFDM samples to be demodulated
     OFDMRxRaw = downshifter(CONST, OFDMSignal, carrierFrequencyOffset);
-    OFDMRxRaw = rxInterpolator(CONST, OFDMRxRaw);
+    %OFDMRxRaw = rxInterpolator(CONST, OFDMRxRaw);
     OFDMRxRaw = rxDecimator(CONST, OFDMRxRaw);
 
     [~, delay, ~, ~, frequencyOffset] = ofdmSymbolSync(CONST, OFDMRxRaw);
@@ -39,10 +39,10 @@ end
     %% Correct CFO
     % Demodulate the rest of the OFDM symbol, but knowing the frequency
     % offset
-    p = CONST.rxM/CONST.rxL;
+    p = CONST.rxM;
     OFDMRx = OFDMSignal(1 + round((delay + CONST.preambleOFDMSamples)*p):end);
     OFDMRx = downshifter(CONST, OFDMRx, carrierFrequencyOffset +frequencyOffset);
-    OFDMRx = rxInterpolator(CONST, OFDMRx);
+    %OFDMRx = rxInterpolator(CONST, OFDMRx);
     OFDMRx = rxDecimator(CONST, OFDMRx);
 
     %% Estimate channel

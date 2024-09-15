@@ -14,7 +14,7 @@ paramFile = "sampleParametersFile";
 pBits = [];
 OFDMTx = fullTx(CONST, paramFile, pBits, 0, false);
 OFDMRx = downshifter(CONST, OFDMTx);
-OFDMRx = rxInterpolator(CONST, OFDMRx);
+%OFDMRx = rxInterpolator(CONST, OFDMRx);
 OFDMRx = rxDecimator(CONST, OFDMRx);
 OFDMRx = OFDMRx(1+CONST.preambleOFDMSamples:end);
 

@@ -48,7 +48,7 @@ expectedOut = txInterpolator(CONST, OFDMSignal);
 %expectedOut = txDecimator(CONST, expectedOut);
 expectedOut = upshifter(CONST, expectedOut);
 expectedOut = downshifter(CONST, expectedOut);
-expectedOut = rxInterpolator(CONST, expectedOut);
+%expectedOut = rxInterpolator(CONST, expectedOut);
 expectedOut = rxDecimator(CONST, expectedOut);
 
 assert(iskindaequal(expectedOut, OFDMSignal, 1), "Input and Output should be similar");
