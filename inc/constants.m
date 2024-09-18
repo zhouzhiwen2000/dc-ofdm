@@ -5,8 +5,9 @@ ldpc;
 
 %% General
 CONST.N = 256;                                % Number of subcarriers.
-CONST.leftGuard = (1:25)';
-CONST.rightGuard = (220:256)';
+CONST.Guard = 25;
+CONST.leftGuard = (1:1+CONST.Guard)';
+CONST.rightGuard = (CONST.N+1-CONST.Guard:CONST.N)';
 CONST.nullIdx = [CONST.leftGuard; CONST.rightGuard];      % Carriers that are unused [1;nfft] == [-nfft/2*fsc; (nfft/2-1)*fsc] 
 CONST.numDataCarriers = CONST.N - length(CONST.nullIdx);  % Amount of subcarriers with actual data.
 if(CONST.numDataCarriers < 168)
@@ -88,8 +89,8 @@ CONST.fs = CONST.fPHY*CONST.oversamplingFactor;   % [Hz] Sampling frequency, whi
 %% Tx Interpolator FIR filter
 CONST.txL = 2;                                  % Upsampling factor for interpolator.
 CONST.txInterpolatorFpass = 25e6;               % Passband frequency [Hz]
-CONST.txInterpolatorFstop = 40e6;               % Stopband frequency [Hz]
-CONST.txInterpolatorPassbandRippleDb = 0.1;     % Passband ripple [dB]
+CONST.txInterpolatorFstop = 36e6;               % Stopband frequency [Hz]
+CONST.txInterpolatorPassbandRippleDb = 0.03;    % Passband ripple [dB]
 CONST.txInterpolatorStopbandAttDb = 80;         % Stopband attenuation [dB]
 
 CONST.txInterpolatorSpec = fdesign.interpolator(CONST.txL, ...
@@ -103,10 +104,23 @@ CONST.txInterpolatorFilter = design(CONST.txInterpolatorSpec,'SystemObject',true
 
 CONST.txInterpolatorDelay = mean(grpdelay(CONST.txInterpolatorFilter));
 if (CONST.txInterpolatorDelay ~= round(CONST.txInterpolatorDelay))
+    CONST.txInterpolatorDelay
     error("txInterpolatorDelay should be an integer!");
 end
 
+CONST.txInterpolatorMinFpass = (CONST.N/2 - CONST.Guard -1)*CONST.fPHY/CONST.N;
+CONST.txInterpolatorMaxFstop = (CONST.N/2 + CONST.Guard +1)*CONST.fPHY/CONST.N;
+
+if (CONST.txInterpolatorFpass < CONST.txInterpolatorMinFpass)
+    disp(CONST.txInterpolatorMinFpass);
+    error("Tx Interpolator minimum Fpass not met!");
+elseif (CONST.txInterpolatorFstop > CONST.txInterpolatorMaxFstop)
+    disp(CONST.txInterpolatorFstop);
+    error("Tx Interpolator maximum Fpass exceded!");
+end
+
 % Uncomment to plot filter response
+%CONST.txInterpolatorDelay
 %fvtool(CONST.txInterpolatorFilter,'Fs', CONST.fPHY*CONST.txL);
 
 %% Tx Decimator FIR filter
@@ -229,5 +243,16 @@ CONST.peakDetectorThreshold = 0.65;
 CONST.frequencyOffsetTimeWindow = CONST.preambleFirstPartOFDMSamples/CONST.fPHY;
 
 %% Simulink model constants
+CONST.DACDataType = fixdt(1, 14, 13);
+CONST.ADCDataType = fixdt(1, 14, 13);
+
 CONST.FIFOOFDMSize = 10000; % Previous value was 2100
 CONST.FIFORxPayloadSize = 40000;
+
+CONST.txQAMDataType = fixdt(1,16,14);
+
+CONST.txInterpolatorCoefficientsDataType = fixdt(1,20,16);
+CONST.txInterpolatorOutputDataType = fixdt(1,20,16);
+
+CONST.txNCOWordLength = 20;
+CONST.txNCOFractionLength = 16;

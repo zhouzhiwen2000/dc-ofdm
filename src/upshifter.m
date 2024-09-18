@@ -16,5 +16,9 @@ end
     n = (0:1:length(y)-1)';
     s = real(y).*cos(pi*n/p + 2*pi*frequencyOffset/CONST.fDAC*n) - ...
         imag(y).*sin(pi*n/p + 2*pi*frequencyOffset/CONST.fDAC*n);
+    
+    % The OFDM signal rarely goes over 0.5, to use the dinamic range of the
+    % DAC, multiply by two.
+    s = 2*s;
 end
 

@@ -6,8 +6,8 @@ constants;
 
 %% Inputs
 fTest = CONST.fDAC;
-input{1} = rand(500, 1) + 1i*rand(500, 1);
-input{2} = ones(100, 1)*(1 + 1i);
+input{1} = 0.4*rand(500, 1) + 0.4i*rand(500, 1);
+input{2} = ones(100, 1)*(0.4 + 0.4i);
 
 dataIn = [
     input{1};
@@ -51,7 +51,7 @@ out{2} = dataOut(length(input{1})+1:end);
 for i=1:length(startIdx)
     expectedOut = upshifter(CONST, input{i});
     
-    %assert(iskindaequal(expectedOut, out{i}, 10e-3), "Upshifter output is not the same");
+    assert(iskindaequal(expectedOut, out{i}, 1e-3), "Upshifter output is not the same");
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
 

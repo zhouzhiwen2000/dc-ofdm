@@ -6,12 +6,18 @@ addpath("../../inc");
 constants;
 
 %% Input
+createVivadoFile = true;
 paramFile = "sampleParametersFile";
 msgIn{1} = ['This is an example message used to test the transmitter. ' ...
     'It is made large on purpose to test for a large message being ' ...
     'transmitted'];
 msgIn{2} = 'This is a second message';
 msgIn{3} = 'This is a third message';
+
+if (createVivadoFile)
+    % Only one message
+    a = msgIn{1}; msgIn = cell(1,1); msgIn{1} = a;
+end
 
 pWords = [];
 validIn = [];
@@ -42,8 +48,8 @@ for i=1:1:length(msgIn)
 end
 
 %% Simulation Time
-latency = 10000000/CONST.fs;             % Algorithm latency. Delay between input and output
-stopTime = (length(validIn)-1)/CONST.fs + latency;
+latency = 100000/CONST.fDAC;             % Algorithm latency. Delay between input and output
+stopTime = (length(validIn)-1)/CONST.fDAC + latency;
 
 %% Run the simulation
 model_name = "HDLTx";
@@ -92,7 +98,7 @@ assert(isequal(length(startIdx), length(msgIn)), ...
 
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
-    assert(iskindaequal(expectedOut{i}, out, 0.01), "Outputs don't match");
+    assert(iskindaequal(expectedOut{i}, out, 1e-3), "Outputs don't match");
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
 
@@ -115,12 +121,31 @@ xlim([min(t), max(t)]*1e6);
 grid on;
 
 figure();
-resampledOut = resample(out, CONST.txL, CONST.txM);
+resampledOut = resample(out, CONST.txL, 1);
 [psd, fVector] = pwelch(resampledOut, rectwin(length(resampledOut)), [], 2^16, 2*CONST.fDAC, "centered");
 plot(fVector/1e6, 10*log10(psd));
 title("PSD of the transmitted signal")
 xlabel("Freq. [MHz]");
 ylabel("PSD [dB/Hz]");
 grid on;
+
+%% Create Vivado data file for VHDL testbench
+if (createVivadoFile)
+    % Generate input file
+    fileName = "data_in.mem";
+    input = {uint8(pWords');};
+    bitLen = 8;
+    header = "dataIn";
+    createVivadoDataFile(fileName, input, bitLen, header, ",");
+    
+    % Generate output file
+    fileName = "data_out.mem";
+    fileOut = out*2^13;
+    input = {fileOut;};
+    bitLen = 14;
+    header = "dataOut";
+    createVivadoDataFile(fileName, input, bitLen, header, ",");
+    disp("Vivado memory files generated!");
+end
 
 disp("Test successfull!");

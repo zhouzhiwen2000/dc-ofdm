@@ -10,7 +10,7 @@ t_up = (0:1/(CONST.fPHY*CONST.txL) : ...
     (CONST.N+CONST.headerCyclicPrefixLen)/CONST.fPHY - 1/(CONST.fPHY*CONST.txL))';       % Time vector for upsampled signal
 
 % OFDM output is a senoidal function
-fc = 5e6;                           % Carrier frequency for sinusoidal function
+fc = 25e6;                           % Carrier frequency for sinusoidal function
 dataSymbols = cos(2*pi*fc*t);
 validIn = true(length(t), 1);
 

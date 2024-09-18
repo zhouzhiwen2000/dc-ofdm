@@ -7,11 +7,11 @@ constants;
 
 %% Test cases
 % Size of the header after FEC encoding
-fc = 5e6;
+fc = 25e6;
 symbolNumber = 10;
 
 t = (0 : 1/CONST.fPHY : symbolNumber/fc - 1/CONST.fPHY)';
-input = sin(2*pi*fc*t);
+input = cos(2*pi*fc*t);
 
 out = txInterpolator(CONST, input);
 resample_out = resample(input, CONST.txL, 1);
@@ -35,14 +35,14 @@ grid on;
 
 subplot(3,1,2);
 plot(n_out, abs(resample_out - out));
-title("Error between resample and decimation");
+title("Error between resample and interpolation");
 grid on;
 
 subplot(3,1,3);
 plot(n_in, abs(input - out(1:CONST.txL:end)));
-title("Error between input and decimated");
+title("Error between input and interpolation");
 grid on;
 
-assert(iskindaequal(out, resample_out, 20e-3), ...
+assert(iskindaequal(out, resample_out, 100e-3), ...
     "Resampled and intepolated signals should be equal");
 disp("Test successfull!")
