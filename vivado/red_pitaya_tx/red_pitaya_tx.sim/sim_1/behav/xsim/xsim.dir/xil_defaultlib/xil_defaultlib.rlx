@@ -494,5 +494,5 @@ Oct 13 2023
 /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/vivado/red_pitaya_tx/red_pitaya_tx.ip_user_files/bd/tx_v10/ip/tx_v10_rst_clk_wiz_100M_0/sim/tx_v10_rst_clk_wiz_100M_0.vhd,1726629326,vhdl,,,,tx_v10_rst_clk_wiz_100m_0,,,,,,,,
 /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/vivado/red_pitaya_tx/red_pitaya_tx.ip_user_files/bd/tx_v10/sim/tx_v10.vhd,1726629325,vhdl,,,,tx_v10,,,,,,,,
 /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/vivado/red_pitaya_tx/red_pitaya_tx.sim/sim_1/behav/xsim/glbl.v,1697210495,verilog,,,,glbl,,,,,,,,
-/home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/vivado/red_pitaya_tx/red_pitaya_tx.srcs/sim_1/new/dut_tb.vhd,1726625211,vhdl,,,,dut_tb,,,,,,,,
-/home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/vivado/red_pitaya_tx/red_pitaya_tx.srcs/sim_1/new/tx_v10_tb.vhd,1726629887,vhdl,,,,tx_v10_tb,,,,,,,,
+/home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/vivado/red_pitaya_tx/red_pitaya_tx.srcs/sim_1/new/dut_tb.vhd,1726630819,vhdl,,,,dut_tb,,,,,,,,
+/home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/vivado/red_pitaya_tx/red_pitaya_tx.srcs/sim_1/new/tx_v10_tb.vhd,1726632235,vhdl,,,,tx_v10_tb,,,,,,,,

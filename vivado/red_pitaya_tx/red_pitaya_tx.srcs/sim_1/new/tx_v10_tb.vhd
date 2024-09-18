@@ -10,8 +10,18 @@ entity tx_v10_tb is
 end tx_v10_tb;
 
 architecture Behavioral of tx_v10_tb is
-    constant PATH_OUTPUT_FILE: string := "data_out.mem";
-    constant PATH_INPUT_FILE: string := "data_in.mem";
+    --constant PATH_OUTPUT_FILE: string := "data_out.mem";
+    --constant PATH_INPUT_FILE: string := "data_in.mem";
+    --constant REG0: std_logic_vector(31 downto 0) := "00000000000000000000000011110000";
+    
+    constant PATH_OUTPUT_FILE: string := "data_out_single_ofdm.mem";
+    constant PATH_INPUT_FILE: string := "data_in_single_ofdm.mem";
+    constant REG0: std_logic_vector(31 downto 0) := "00000000000000000000000001111000";
+    
+    constant REG1: std_logic_vector(31 downto 0) := "00000000000000000000000000000000";
+    constant REG2: std_logic_vector(31 downto 0) := "00000000000000010000000100000000";
+    constant REG3: std_logic_vector(31 downto 0) := "00000000000000010000001000001111";
+    
 	constant PERIOD : time := 8ns;
 	
 	-----------------------
@@ -126,10 +136,11 @@ begin
     -- Setting initialization values
     ---------------------------------
     wait until rising_edge(fifo_s_clk);
-    reg0_0 <= "00000000000000000000000011110000";
-    reg1_0 <= "00000000000000000000000000000000";
-    reg2_0 <= "00000000000000010000000100000000";
-    reg3_0 <= "00000000000000010000001000001111";
+    reg0_0 <= REG0;
+    reg1_0 <= REG1;
+    reg2_0 <= REG2;
+    reg3_0 <= REG3;
+    
     new_frame_in_0 <= '1';
     wait until rising_edge(fifo_s_clk);
     new_frame_in_0 <= '0';
