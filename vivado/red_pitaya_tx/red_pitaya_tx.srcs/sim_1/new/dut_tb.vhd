@@ -10,8 +10,8 @@ entity dut_tb is
 end dut_tb;
 
 architecture Behavioral of dut_tb is
-    constant PATH_OUTPUT_FILE: string := "data_out.mem";
-    constant PATH_INPUT_FILE: string := "data_in.mem";
+    constant PATH_OUTPUT_FILE: string := "data_out_dut_tb.mem";
+    constant PATH_INPUT_FILE: string := "data_in_dut_tb.mem";
 	constant PERIOD : time := 10ns;
 	
 	-- Component signals

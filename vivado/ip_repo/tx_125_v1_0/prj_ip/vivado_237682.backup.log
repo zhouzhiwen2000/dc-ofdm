@@ -1,0 +1,130 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Sat Sep 14 20:40:34 2024
+# Process ID: 237682
+# Current directory: /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/simulink/tx/hdl_prj/ipcore/tx_125_v1_0/prj_ip
+# Command line: vivado -mode batch -notrace -source vivado_ip_package.tcl
+# Log file: /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/simulink/tx/hdl_prj/ipcore/tx_125_v1_0/prj_ip/vivado.log
+# Journal file: /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/simulink/tx/hdl_prj/ipcore/tx_125_v1_0/prj_ip/vivado.jou
+# Running On: cotti-machine, OS: Linux, CPU Frequency: 3100.167 MHz, CPU Physical cores: 2, Host memory: 12314 MB
+#-----------------------------------------------------------
+source vivado_ip_package.tcl -notrace
+create_project: Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1305.152 ; gain = 38.836 ; free physical = 196 ; free virtual = 19786
+CRITICAL WARNING: [Vivado 12-3645] Please note that adding or importing multiple files, one at a time, can be performance intensive.  Both add_files and import_files commands accept multiple files as input, and passing a collection of multiple files to a single add_files or import_files commands can offer significant performance improvement.
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/simulink/tx/hdl_prj/ipcore'.
+WARNING: [IP_Flow 19-3656] If you move the project, the path for repository '/home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/simulink/tx/hdl_prj/ipcore' may become invalid. A better location for the repository would be in a path adjacent to the project. (Current project location is '/home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/simulink/tx/hdl_prj/ipcore/tx_125_v1_0/prj_ip'.)
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/home/cotti/Xilinx/Vivado/2023.2/data/ip'.
+INFO: [IP_Flow 19-5107] Inferred bus interface 'IPCORE_RESETN' of definition 'xilinx.com:signal:reset:1.0' (from Xilinx Repository).
+INFO: [IP_Flow 19-5107] Inferred bus interface 'IPCORE_CLK' of definition 'xilinx.com:signal:clock:1.0' (from Xilinx Repository).
+INFO: [IP_Flow 19-4728] Bus Interface 'IPCORE_RESETN': Added interface parameter 'POLARITY' with value 'ACTIVE_LOW'.
+INFO: [IP_Flow 19-4728] Bus Interface 'IPCORE_CLK': Added interface parameter 'ASSOCIATED_RESET' with value 'IPCORE_RESETN'.
+WARNING: [IP_Flow 19-5661] Bus Interface 'IPCORE_CLK' does not have any bus interfaces associated with it.
+WARNING: [IP_Flow 19-11770] Clock interface 'IPCORE_CLK' has no FREQ_HZ parameter.
+INFO: [IP_Flow 19-2181] Payment Required is not set for this core.
+INFO: [IP_Flow 19-2187] The Product Guide file is missing.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_full_tx_tc.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_full_tx_tc.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Sample_Control_Bus_Creator.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Sample_Control_Bus_Creator.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_valid_to_ctrl.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_valid_to_ctrl.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_channel_gen.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_channel_gen.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_clock_crossing.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_clock_crossing.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Sample_Control_Bus_Creator_block.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Sample_Control_Bus_Creator_block.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_CRCGenControl.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_CRCGenControl.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_CRCGenCompute.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_CRCGenCompute.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_General_CRC_Generator_HDL_Optimized.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_General_CRC_Generator_HDL_Optimized.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_h_crc.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_h_crc.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Sample_Control_Bus_Creator_block1.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Sample_Control_Bus_Creator_block1.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_valid_to_ctrl_block.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_valid_to_ctrl_block.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_h_gen.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_h_gen.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Sample_Control_Bus_Creator_block2.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Sample_Control_Bus_Creator_block2.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_SimpleDualPortRAM_singlebit.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_SimpleDualPortRAM_singlebit.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_h_repetition.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_h_repetition.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Sample_Control_Bus_Creator_block3.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Sample_Control_Bus_Creator_block3.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_h_scrambler.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_h_scrambler.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_SimpleDualPortRAM_singlebit_block.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_SimpleDualPortRAM_singlebit_block.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_BarrelRotator.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_BarrelRotator.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Calculate_Alpha.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Calculate_Alpha.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Calculate_Parity.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Calculate_Parity.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Final_Output.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Final_Output.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Hc_12H_B14.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Hc_12H_B14.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_header_fec.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_header_fec.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_header_full.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_header_full.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_new_frame_rate_conversion.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_new_frame_rate_conversion.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_new_frame_rate_conversion1.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_new_frame_rate_conversion1.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_batid_to_bits_per_subcarrier.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_batid_to_bits_per_subcarrier.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_payload_rep.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_payload_rep.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_psdu_size_to_payload_len.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_psdu_size_to_payload_len.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_puncturer.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_puncturer.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Sample_Control_Bus_Creator_block4.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Sample_Control_Bus_Creator_block4.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Compare_To_Constant.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Compare_To_Constant.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_tone_mapping.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_tone_mapping.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Sample_Control_Bus_Creator_block5.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Sample_Control_Bus_Creator_block5.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_valid_to_ctrl_block1.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_valid_to_ctrl_block1.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Sample_Control_Bus_Creator_block6.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Sample_Control_Bus_Creator_block6.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_p_scrambler.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_p_scrambler.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_BarrelRotator_block.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_BarrelRotator_block.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Calculate_Alpha_block.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Calculate_Alpha_block.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Calculate_Parity_block.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Calculate_Parity_block.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Final_Output_block.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Final_Output_block.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Hc_12S_B80.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Hc_12S_B80.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_reduced_ldpc.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_reduced_ldpc.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_rising_edge_detector.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_rising_edge_detector.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_next_frame_to_ready.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_next_frame_to_ready.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_payload_full.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_payload_full.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Sample_Control_Bus_Creator_block7.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_Sample_Control_Bus_Creator_block7.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_valid_to_ctrl_block2.v" already exists in file group "xilinx_anylanguagesynthesis", cannot add it again.
+WARNING: [IP_Flow 19-1971] File named "hdl/tx_125_src_valid_to_ctrl_block2.v" already exists in file group "xilinx_anylanguagebehavioralsimulation", cannot add it again.
+INFO: [Common 17-14] Message 'IP_Flow 19-1971' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Common 17-206] Exiting Vivado at Sat Sep 14 20:41:00 2024...

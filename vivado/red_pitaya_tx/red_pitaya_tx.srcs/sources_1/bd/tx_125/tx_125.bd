@@ -1,0 +1,238 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0x38D9DC8AC073817A",
+      "device": "xc7z010clg400-1",
+      "gen_directory": "../../../../red_pitaya_tx.gen/sources_1/bd/tx_125",
+      "name": "tx_125",
+      "rev_ctrl_bd_flag": "RevCtrlBdOff",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2023.2",
+      "validated": "true"
+    },
+    "design_tree": {
+      "clk_wiz": "",
+      "rst_clk_wiz_100M": "",
+      "tx_125_0": ""
+    },
+    "ports": {
+      "clk_100MHz": {
+        "type": "clk",
+        "direction": "I",
+        "parameters": {
+          "CLK_DOMAIN": {
+            "value": "tx_125_clk_100MHz",
+            "value_src": "default"
+          },
+          "FREQ_HZ": {
+            "value": "100000000"
+          },
+          "FREQ_TOLERANCE_HZ": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "PHASE": {
+            "value": "0.0",
+            "value_src": "default"
+          }
+        }
+      },
+      "reset_rtl": {
+        "type": "rst",
+        "direction": "I",
+        "parameters": {
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "POLARITY": {
+            "value": "ACTIVE_HIGH"
+          }
+        }
+      },
+      "data_in_0": {
+        "direction": "I",
+        "left": "7",
+        "right": "0"
+      },
+      "data_out_0": {
+        "direction": "O",
+        "left": "15",
+        "right": "0"
+      },
+      "last_frame_0": {
+        "direction": "I"
+      },
+      "new_frame_in_0": {
+        "direction": "I"
+      },
+      "ready_0": {
+        "direction": "O"
+      },
+      "reg0_0": {
+        "direction": "I",
+        "left": "31",
+        "right": "0"
+      },
+      "reg1_0": {
+        "direction": "I",
+        "left": "31",
+        "right": "0"
+      },
+      "reg2_0": {
+        "direction": "I",
+        "left": "31",
+        "right": "0"
+      },
+      "reg3_0": {
+        "direction": "I",
+        "left": "31",
+        "right": "0"
+      },
+      "valid_in_0": {
+        "direction": "I"
+      },
+      "valid_out_0": {
+        "direction": "O"
+      }
+    },
+    "components": {
+      "clk_wiz": {
+        "vlnv": "xilinx.com:ip:clk_wiz:6.0",
+        "ip_revision": "13",
+        "xci_name": "tx_125_clk_wiz_0",
+        "xci_path": "ip/tx_125_clk_wiz_0/tx_125_clk_wiz_0.xci",
+        "inst_hier_path": "clk_wiz",
+        "parameters": {
+          "CLKOUT1_JITTER": {
+            "value": "125.247"
+          },
+          "CLKOUT1_REQUESTED_OUT_FREQ": {
+            "value": "125.000"
+          },
+          "MMCM_CLKOUT0_DIVIDE_F": {
+            "value": "8.000"
+          }
+        }
+      },
+      "rst_clk_wiz_100M": {
+        "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
+        "ip_revision": "14",
+        "xci_name": "tx_125_rst_clk_wiz_100M_0",
+        "xci_path": "ip/tx_125_rst_clk_wiz_100M_0/tx_125_rst_clk_wiz_100M_0.xci",
+        "inst_hier_path": "rst_clk_wiz_100M"
+      },
+      "tx_125_0": {
+        "vlnv": "user.org:ip:tx_125:1.0",
+        "ip_revision": "1000000",
+        "xci_name": "tx_125_tx_125_0_1",
+        "xci_path": "ip/tx_125_tx_125_0_1/tx_125_tx_125_0_1.xci",
+        "inst_hier_path": "tx_125_0"
+      }
+    },
+    "nets": {
+      "clk_100MHz_1": {
+        "ports": [
+          "clk_100MHz",
+          "clk_wiz/clk_in1"
+        ]
+      },
+      "clk_wiz_clk_out1": {
+        "ports": [
+          "clk_wiz/clk_out1",
+          "rst_clk_wiz_100M/slowest_sync_clk",
+          "tx_125_0/IPCORE_CLK"
+        ]
+      },
+      "clk_wiz_locked": {
+        "ports": [
+          "clk_wiz/locked",
+          "rst_clk_wiz_100M/dcm_locked"
+        ]
+      },
+      "data_in_0_1": {
+        "ports": [
+          "data_in_0",
+          "tx_125_0/data_in"
+        ]
+      },
+      "last_frame_0_1": {
+        "ports": [
+          "last_frame_0",
+          "tx_125_0/last_frame"
+        ]
+      },
+      "new_frame_in_0_1": {
+        "ports": [
+          "new_frame_in_0",
+          "tx_125_0/new_frame_in"
+        ]
+      },
+      "reg0_0_1": {
+        "ports": [
+          "reg0_0",
+          "tx_125_0/reg0"
+        ]
+      },
+      "reg1_0_1": {
+        "ports": [
+          "reg1_0",
+          "tx_125_0/reg1"
+        ]
+      },
+      "reg2_0_1": {
+        "ports": [
+          "reg2_0",
+          "tx_125_0/reg2"
+        ]
+      },
+      "reg3_0_1": {
+        "ports": [
+          "reg3_0",
+          "tx_125_0/reg3"
+        ]
+      },
+      "reset_rtl_1": {
+        "ports": [
+          "reset_rtl",
+          "clk_wiz/reset",
+          "rst_clk_wiz_100M/ext_reset_in"
+        ]
+      },
+      "rst_clk_wiz_100M_peripheral_aresetn": {
+        "ports": [
+          "rst_clk_wiz_100M/peripheral_aresetn",
+          "tx_125_0/IPCORE_RESETN"
+        ]
+      },
+      "tx_125_0_data_out": {
+        "ports": [
+          "tx_125_0/data_out",
+          "data_out_0"
+        ]
+      },
+      "tx_125_0_ready": {
+        "ports": [
+          "tx_125_0/ready",
+          "ready_0"
+        ]
+      },
+      "tx_125_0_valid_out": {
+        "ports": [
+          "tx_125_0/valid_out",
+          "valid_out_0"
+        ]
+      },
+      "valid_in_0_1": {
+        "ports": [
+          "valid_in_0",
+          "tx_125_0/valid_in"
+        ]
+      }
+    }
+  }
+}

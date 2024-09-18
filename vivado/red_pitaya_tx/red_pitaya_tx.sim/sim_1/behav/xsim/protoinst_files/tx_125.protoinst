@@ -1,0 +1,9 @@
+{
+	"version": "1.0",
+	"modules": {
+		"tx_125": {
+			"proto_instances": {
+			}
+		}
+	}
+}

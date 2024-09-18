@@ -1,0 +1,47 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"0.932056",
+   "Default View_TopLeft":"-263,-467",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.5.8 2022-09-21 7111 VDI=41 GEI=38 GUI=JA:10.0 TLS
+#  -string -flagsOSRD
+preplace port port-id_clk_100MHz -pg 1 -lvl 0 -x -20 -y 140 -defaultsOSRD
+preplace port port-id_reset_rtl -pg 1 -lvl 0 -x -20 -y 10 -defaultsOSRD
+preplace port port-id_last_frame_0 -pg 1 -lvl 0 -x -20 -y -230 -defaultsOSRD
+preplace port port-id_new_frame_in_0 -pg 1 -lvl 0 -x -20 -y -370 -defaultsOSRD
+preplace port port-id_ready_0 -pg 1 -lvl 4 -x 880 -y -300 -defaultsOSRD
+preplace port port-id_valid_in_0 -pg 1 -lvl 0 -x -20 -y -250 -defaultsOSRD
+preplace port port-id_valid_out_0 -pg 1 -lvl 4 -x 880 -y -320 -defaultsOSRD
+preplace portBus data_in_0 -pg 1 -lvl 0 -x -20 -y -270 -defaultsOSRD
+preplace portBus data_out_0 -pg 1 -lvl 4 -x 880 -y -340 -defaultsOSRD
+preplace portBus reg0_0 -pg 1 -lvl 0 -x -20 -y -350 -defaultsOSRD
+preplace portBus reg1_0 -pg 1 -lvl 0 -x -20 -y -330 -defaultsOSRD
+preplace portBus reg2_0 -pg 1 -lvl 0 -x -20 -y -310 -defaultsOSRD
+preplace portBus reg3_0 -pg 1 -lvl 0 -x -20 -y -290 -defaultsOSRD
+preplace inst clk_wiz -pg 1 -lvl 2 -x 390 -y 130 -defaultsOSRD
+preplace inst rst_clk_wiz_100M -pg 1 -lvl 3 -x 680 -y -60 -defaultsOSRD
+preplace inst tx_125_0 -pg 1 -lvl 1 -x 150 -y -320 -defaultsOSRD
+preplace netloc clk_wiz_clk_out1 1 0 3 0 -100 N -100 490
+preplace netloc clk_wiz_locked 1 2 1 500 -20n
+preplace netloc clk_100MHz_1 1 0 2 NJ 140 N
+preplace netloc reset_rtl_1 1 0 3 N 10 290 -80 NJ
+preplace netloc rst_clk_wiz_100M_peripheral_aresetn 1 0 4 10 -160 NJ -160 NJ -160 860
+preplace netloc data_in_0_1 1 0 1 NJ -270
+preplace netloc tx_125_0_data_out 1 1 3 NJ -340 NJ -340 NJ
+preplace netloc last_frame_0_1 1 0 1 NJ -230
+preplace netloc new_frame_in_0_1 1 0 1 NJ -370
+preplace netloc tx_125_0_ready 1 1 3 NJ -300 NJ -300 NJ
+preplace netloc reg0_0_1 1 0 1 NJ -350
+preplace netloc reg1_0_1 1 0 1 NJ -330
+preplace netloc reg2_0_1 1 0 1 NJ -310
+preplace netloc reg3_0_1 1 0 1 NJ -290
+preplace netloc valid_in_0_1 1 0 1 NJ -250
+preplace netloc tx_125_0_valid_out 1 1 3 NJ -320 NJ -320 NJ
+levelinfo -pg 1 -20 150 390 680 880
+pagesize -pg 1 -db -bbox -sgen -190 -470 1060 300
+"
+}
+{
+   "da_board_cnt":"3",
+   "da_clkrst_cnt":"2"
+}
