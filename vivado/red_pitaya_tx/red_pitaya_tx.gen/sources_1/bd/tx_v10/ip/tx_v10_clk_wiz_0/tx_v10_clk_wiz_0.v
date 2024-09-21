@@ -53,14 +53,14 @@
 //  Output     Output      Phase    Duty Cycle   Pk-to-Pk     Phase
 //   Clock     Freq (MHz)  (degrees)    (%)     Jitter (ps)  Error (ps)
 //----------------------------------------------------------------------------
-// tx_clock__125.00000______0.000______50.0______125.247_____98.575
-// fifo_clock__15.62500______0.000______50.0______192.270_____98.575
-// fifo_s_clock__100.00000______0.000______50.0______130.958_____98.575
+// __clk_tx__125.00000______0.000______50.0______125.247_____98.575
+// clk_fifo_m__15.62500______0.000______50.0______192.270_____98.575
+// clk_fifo_s__100.00000______0.000______50.0______130.958_____98.575
 //
 //----------------------------------------------------------------------------
 // Input Clock   Freq (MHz)    Input Jitter (UI)
 //----------------------------------------------------------------------------
-// __primary__________100.00____________0.010
+// __primary_________100.000____________0.010
 
 `timescale 1ps/1ps
 
@@ -69,9 +69,9 @@
 module tx_v10_clk_wiz_0 
  (
   // Clock out ports
-  output        tx_clock,
-  output        fifo_clock,
-  output        fifo_s_clock,
+  output        clk_tx,
+  output        clk_fifo_m,
+  output        clk_fifo_s,
   // Status and control signals
   input         resetn,
   output        locked,
@@ -82,9 +82,9 @@ module tx_v10_clk_wiz_0
   tx_v10_clk_wiz_0_clk_wiz inst
   (
   // Clock out ports  
-  .tx_clock(tx_clock),
-  .fifo_clock(fifo_clock),
-  .fifo_s_clock(fifo_s_clock),
+  .clk_tx(clk_tx),
+  .clk_fifo_m(clk_fifo_m),
+  .clk_fifo_s(clk_fifo_s),
   // Status and control signals               
   .resetn(resetn), 
   .locked(locked),

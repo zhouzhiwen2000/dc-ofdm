@@ -54,6 +54,3 @@ set ofdm_ff [list \
     ]
 set_multicycle_path 2 -setup -from $ofdm_ff -to $ofdm_ff -quiet
 set_multicycle_path 1 -hold -from $ofdm_ff -to $ofdm_ff -quiet
-
-set_multicycle_path 2 -setup -from $ofdm_ff_two -to $ofdm_ff_two -quiet
-set_multicycle_path 1 -hold -from $ofdm_ff_two -to $ofdm_ff_two -quiet

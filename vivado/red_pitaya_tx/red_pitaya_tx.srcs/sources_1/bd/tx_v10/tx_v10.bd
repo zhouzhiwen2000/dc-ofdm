@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x353A2558E45E2E3D",
+      "boundary_crc": "0x28AF8E977EE1D80D",
       "device": "xc7z010clg400-1",
       "gen_directory": "../../../../red_pitaya_tx.gen/sources_1/bd/tx_v10",
       "name": "tx_v10",
@@ -13,11 +13,12 @@
     "design_tree": {
       "IEEE_8021513_TX_0": "",
       "clk_wiz": "",
-      "rst_clk_wiz_100M": "",
-      "axis_data_fifo_0": ""
+      "rst_tx": "",
+      "axis_data_fifo_0": "",
+      "rst_fifo": ""
     },
     "ports": {
-      "ext_clk": {
+      "clk_ext": {
         "type": "clk",
         "direction": "I",
         "parameters": {
@@ -86,7 +87,7 @@
       "valid_out_0": {
         "direction": "O"
       },
-      "tx_clock": {
+      "clk_tx": {
         "direction": "O",
         "parameters": {
           "CLK_DOMAIN": {
@@ -103,7 +104,7 @@
           }
         }
       },
-      "fifo_s_clk": {
+      "clk_fifo_s": {
         "direction": "O",
         "parameters": {
           "CLK_DOMAIN": {
@@ -111,7 +112,7 @@
             "value_src": "ip_prop"
           },
           "FREQ_HZ": {
-            "value": "15625000",
+            "value": "100000000",
             "value_src": "ip_prop"
           },
           "PHASE": {
@@ -134,7 +135,7 @@
         "left": "7",
         "right": "0"
       },
-      "fifo_m_clk": {
+      "clk_fifo_m": {
         "direction": "O",
         "parameters": {
           "CLK_DOMAIN": {
@@ -142,7 +143,7 @@
             "value_src": "ip_prop"
           },
           "FREQ_HZ": {
-            "value": "100000000",
+            "value": "15625000",
             "value_src": "ip_prop"
           },
           "PHASE": {
@@ -207,13 +208,13 @@
             "value": "true"
           },
           "CLK_OUT1_PORT": {
-            "value": "tx_clock"
+            "value": "clk_tx"
           },
           "CLK_OUT2_PORT": {
-            "value": "fifo_clock"
+            "value": "clk_fifo_m"
           },
           "CLK_OUT3_PORT": {
-            "value": "fifo_s_clock"
+            "value": "clk_fifo_s"
           },
           "MMCM_CLKFBOUT_MULT_F": {
             "value": "10.000"
@@ -236,9 +237,6 @@
           "NUM_OUT_CLKS": {
             "value": "3"
           },
-          "PRIM_IN_FREQ": {
-            "value": "100.00"
-          },
           "RESET_PORT": {
             "value": "resetn"
           },
@@ -247,12 +245,12 @@
           }
         }
       },
-      "rst_clk_wiz_100M": {
+      "rst_tx": {
         "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
         "ip_revision": "14",
         "xci_name": "tx_v10_rst_clk_wiz_100M_0",
         "xci_path": "ip/tx_v10_rst_clk_wiz_100M_0/tx_v10_rst_clk_wiz_100M_0.xci",
-        "inst_hier_path": "rst_clk_wiz_100M",
+        "inst_hier_path": "rst_tx",
         "parameters": {
           "C_AUX_RST_WIDTH": {
             "value": "4"
@@ -274,6 +272,18 @@
           },
           "IS_ACLK_ASYNC": {
             "value": "1"
+          }
+        }
+      },
+      "rst_fifo": {
+        "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
+        "ip_revision": "14",
+        "xci_name": "tx_v10_rst_tx_0",
+        "xci_path": "ip/tx_v10_rst_tx_0/tx_v10_rst_tx_0.xci",
+        "inst_hier_path": "rst_fifo",
+        "parameters": {
+          "C_AUX_RST_WIDTH": {
+            "value": "4"
           }
         }
       }
@@ -323,36 +333,38 @@
       },
       "clk_100MHz_1": {
         "ports": [
-          "ext_clk",
+          "clk_ext",
           "clk_wiz/clk_in1"
+        ]
+      },
+      "clk_wiz_clk_fifo_m": {
+        "ports": [
+          "clk_wiz/clk_fifo_m",
+          "axis_data_fifo_0/m_axis_aclk",
+          "clk_fifo_m"
+        ]
+      },
+      "clk_wiz_clk_fifo_s": {
+        "ports": [
+          "clk_wiz/clk_fifo_s",
+          "axis_data_fifo_0/s_axis_aclk",
+          "clk_fifo_s",
+          "rst_fifo/slowest_sync_clk"
         ]
       },
       "clk_wiz_clk_out1": {
         "ports": [
-          "clk_wiz/tx_clock",
+          "clk_wiz/clk_tx",
           "IEEE_8021513_TX_0/IPCORE_CLK",
-          "tx_clock"
-        ]
-      },
-      "clk_wiz_fifo_clock": {
-        "ports": [
-          "clk_wiz/fifo_clock",
-          "fifo_s_clk",
-          "rst_clk_wiz_100M/slowest_sync_clk",
-          "axis_data_fifo_0/m_axis_aclk"
-        ]
-      },
-      "clk_wiz_fifo_s_clock": {
-        "ports": [
-          "clk_wiz/fifo_s_clock",
-          "axis_data_fifo_0/s_axis_aclk",
-          "fifo_m_clk"
+          "clk_tx",
+          "rst_tx/slowest_sync_clk"
         ]
       },
       "clk_wiz_locked": {
         "ports": [
           "clk_wiz/locked",
-          "rst_clk_wiz_100M/dcm_locked"
+          "rst_tx/dcm_locked",
+          "rst_fifo/dcm_locked"
         ]
       },
       "new_frame_in_0_1": {
@@ -388,14 +400,20 @@
       "reset_rtl_1": {
         "ports": [
           "rst",
-          "rst_clk_wiz_100M/ext_reset_in",
-          "clk_wiz/resetn"
+          "clk_wiz/resetn",
+          "rst_tx/ext_reset_in",
+          "rst_fifo/ext_reset_in"
         ]
       },
       "rst_clk_wiz_100M_peripheral_aresetn": {
         "ports": [
-          "rst_clk_wiz_100M/peripheral_aresetn",
-          "IEEE_8021513_TX_0/IPCORE_RESETN",
+          "rst_tx/peripheral_aresetn",
+          "IEEE_8021513_TX_0/IPCORE_RESETN"
+        ]
+      },
+      "rst_fifo_peripheral_aresetn": {
+        "ports": [
+          "rst_fifo/peripheral_aresetn",
           "axis_data_fifo_0/s_axis_aresetn"
         ]
       },
