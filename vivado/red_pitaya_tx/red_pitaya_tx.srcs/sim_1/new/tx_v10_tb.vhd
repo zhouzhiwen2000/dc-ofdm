@@ -10,19 +10,19 @@ entity tx_v10_tb is
 end tx_v10_tb;
 
 architecture Behavioral of tx_v10_tb is
-    --constant PATH_OUTPUT_FILE: string := "data_out.mem";
-    --constant PATH_INPUT_FILE: string := "data_in.mem";
-    --constant REG0: std_logic_vector(31 downto 0) := "00000000000000000000000011110000";
+    constant PATH_OUTPUT_FILE: string := "data_out.mem";
+    constant PATH_INPUT_FILE: string := "data_in.mem";
+    constant REG0: std_logic_vector(31 downto 0) := "00000000000000000000000011110000";
     
-    constant PATH_OUTPUT_FILE: string := "data_out_single_ofdm.mem";
-    constant PATH_INPUT_FILE: string := "data_in_single_ofdm.mem";
-    constant REG0: std_logic_vector(31 downto 0) := "00000000000000000000000001111000";
+    --constant PATH_OUTPUT_FILE: string := "data_out_single_ofdm.mem";
+    --constant PATH_INPUT_FILE: string := "data_in_single_ofdm.mem";
+    --constant REG0: std_logic_vector(31 downto 0) := "00000000000000000000000001111000";
     
     constant REG1: std_logic_vector(31 downto 0) := "00000000000000000000000000000000";
     constant REG2: std_logic_vector(31 downto 0) := "00000000000000010000000100000000";
     constant REG3: std_logic_vector(31 downto 0) := "00000000000000010000001000001111";
     
-	constant PERIOD : time := 8ns;
+	constant PERIOD : time := 10ns;
 	
 	-----------------------
 	-- Component signals
@@ -48,6 +48,7 @@ architecture Behavioral of tx_v10_tb is
     signal ext_clk : STD_LOGIC := '0';
     signal fifo_s_clk : STD_LOGIC;
     signal tx_clock : STD_LOGIC;
+    signal fifo_m_clk : STD_LOGIC;
     
     signal rst : STD_LOGIC := '1'; 
 begin
@@ -68,7 +69,8 @@ PORT MAP (
       s_axis_tready_0 => s_axis_tready_0,
       s_axis_tvalid_0 => s_axis_tvalid_0,
       tx_clock => tx_clock,
-      valid_out_0 => valid_out_0
+      valid_out_0 => valid_out_0,
+      fifo_m_clk => fifo_m_clk
     );
 
 clock: process begin
@@ -98,7 +100,7 @@ begin
     file_open (file_status, file_handler, PATH_INPUT_FILE);
     assert (file_status = OPEN_OK) report ">>> Could not open input file" severity failure;
     readLine (file_handler, buffer_line); -- Discard header
-    wait until falling_edge(fifo_s_clk);
+    wait until rising_edge(fifo_m_clk);
     
     file_input_loop: while (not endfile(file_handler) ) loop
     
@@ -122,7 +124,7 @@ begin
             s_axis_tlast_0 <= '1';
         end if;
         
-        wait until rising_edge(fifo_s_clk);
+        wait until rising_edge(fifo_m_clk);
         file_rows := file_rows + 1;
             
     end loop file_input_loop;
@@ -157,7 +159,7 @@ begin
 	   
         if (valid_out_0 = '0') then
             wait until rising_edge(valid_out_0);
-            wait until falling_edge(tx_clock);
+            wait until rising_edge(tx_clock);
         end if;
         
     	readLine (file_handler, buffer_line);
@@ -168,7 +170,7 @@ begin
        report ">>> Output mismatch on line: " & INTEGER'image(file_rows)
        severity failure;
 
-        wait until falling_edge(tx_clock);
+        wait until rising_edge(tx_clock);
     	file_rows := file_rows + 1;
    	 
 	end loop file_reading_loop;

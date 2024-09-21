@@ -1,52 +1,54 @@
 {
    "ActiveEmotionalView":"Default View",
    "Default View_ScaleFactor":"0.717936",
-   "Default View_TopLeft":"-320,13",
+   "Default View_TopLeft":"13,-45",
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.5.8 2022-09-21 7111 VDI=41 GEI=38 GUI=JA:10.0 TLS
 #  -string -flagsOSRD
 preplace port port-id_ext_clk -pg 1 -lvl 0 -x -60 -y 410 -defaultsOSRD
 preplace port port-id_rst -pg 1 -lvl 0 -x -60 -y 450 -defaultsOSRD
 preplace port port-id_new_frame_in_0 -pg 1 -lvl 0 -x -60 -y 210 -defaultsOSRD
-preplace port port-id_valid_out_0 -pg 1 -lvl 3 -x 1140 -y 260 -defaultsOSRD
-preplace port port-id_tx_clock -pg 1 -lvl 3 -x 1140 -y 420 -defaultsOSRD
-preplace port port-id_fifo_s_clk -pg 1 -lvl 3 -x 1140 -y 440 -defaultsOSRD
+preplace port port-id_valid_out_0 -pg 1 -lvl 3 -x 1230 -y 260 -defaultsOSRD
+preplace port port-id_tx_clock -pg 1 -lvl 3 -x 1230 -y 420 -defaultsOSRD
+preplace port port-id_fifo_s_clk -pg 1 -lvl 3 -x 1230 -y 440 -defaultsOSRD
 preplace port port-id_s_axis_tvalid_0 -pg 1 -lvl 0 -x -60 -y 140 -defaultsOSRD
-preplace port port-id_s_axis_tready_0 -pg 1 -lvl 3 -x 1140 -y -20 -defaultsOSRD
+preplace port port-id_s_axis_tready_0 -pg 1 -lvl 3 -x 1230 -y -20 -defaultsOSRD
 preplace port port-id_s_axis_tlast_0 -pg 1 -lvl 0 -x -60 -y 100 -defaultsOSRD
-preplace portBus data_out_0 -pg 1 -lvl 3 -x 1140 -y 240 -defaultsOSRD
+preplace port port-id_fifo_m_clk -pg 1 -lvl 3 -x 1230 -y 500 -defaultsOSRD
+preplace portBus data_out_0 -pg 1 -lvl 3 -x 1230 -y 240 -defaultsOSRD
 preplace portBus reg0_0 -pg 1 -lvl 0 -x -60 -y 230 -defaultsOSRD
 preplace portBus reg1_0 -pg 1 -lvl 0 -x -60 -y 250 -defaultsOSRD
 preplace portBus reg2_0 -pg 1 -lvl 0 -x -60 -y 270 -defaultsOSRD
 preplace portBus reg3_0 -pg 1 -lvl 0 -x -60 -y 290 -defaultsOSRD
 preplace portBus s_axis_tdata_0 -pg 1 -lvl 0 -x -60 -y 80 -defaultsOSRD
-preplace inst IEEE_8021513_TX_0 -pg 1 -lvl 2 -x 980 -y 260 -defaultsOSRD
-preplace inst clk_wiz -pg 1 -lvl 1 -x 550 -y 460 -defaultsOSRD
-preplace inst rst_clk_wiz_100M -pg 1 -lvl 1 -x 550 -y 650 -defaultsOSRD
-preplace inst axis_data_fifo_0 -pg 1 -lvl 1 -x 550 -y 130 -defaultsOSRD
+preplace inst IEEE_8021513_TX_0 -pg 1 -lvl 2 -x 1030 -y 260 -defaultsOSRD
+preplace inst clk_wiz -pg 1 -lvl 1 -x 610 -y 460 -defaultsOSRD
+preplace inst rst_clk_wiz_100M -pg 1 -lvl 1 -x 610 -y 650 -defaultsOSRD
+preplace inst axis_data_fifo_0 -pg 1 -lvl 1 -x 610 -y 130 -defaultsOSRD
 preplace netloc IEEE_8021513_TX_0_data_out 1 2 1 NJ 240
+preplace netloc IEEE_8021513_TX_0_ready 1 1 2 820J 110 1170
 preplace netloc IEEE_8021513_TX_0_valid_out 1 2 1 NJ 260
-preplace netloc axis_data_fifo_0_m_axis_tdata 1 1 1 760 110n
-preplace netloc axis_data_fifo_0_m_axis_tlast 1 1 1 780 130n
-preplace netloc axis_data_fifo_0_m_axis_tvalid 1 1 1 740 170n
-preplace netloc axis_data_fifo_0_s_axis_tready 1 0 3 360 -20 NJ -20 NJ
+preplace netloc axis_data_fifo_0_m_axis_tdata 1 1 1 790 110n
+preplace netloc axis_data_fifo_0_m_axis_tlast 1 1 1 830 130n
+preplace netloc axis_data_fifo_0_m_axis_tvalid 1 1 1 820 170n
+preplace netloc axis_data_fifo_0_s_axis_tready 1 0 3 430 -30 NJ -30 1170J
 preplace netloc clk_100MHz_1 1 0 1 -40J 410n
-preplace netloc clk_wiz_clk_out1 1 0 3 350 370 750 420 NJ
-preplace netloc clk_wiz_fifo_clock 1 0 3 360 300 770 440 NJ
-preplace netloc clk_wiz_locked 1 0 2 370 380 730
-preplace netloc new_frame_in_0_1 1 0 2 -10J 250 730J
-preplace netloc reg0_0_1 1 0 2 -20J 260 790J
-preplace netloc reg1_0_1 1 0 2 -30J 270 810J
-preplace netloc reg2_0_1 1 0 2 -40J 280 820J
+preplace netloc clk_wiz_clk_out1 1 1 2 860 420 NJ
+preplace netloc clk_wiz_fifo_clock 1 0 3 420 360 800 440 NJ
+preplace netloc clk_wiz_locked 1 0 2 430 370 790
+preplace netloc new_frame_in_0_1 1 0 2 -30J 260 870J
+preplace netloc reg0_0_1 1 0 2 -40J -20 890J
+preplace netloc reg1_0_1 1 0 2 -20J -10 880J
+preplace netloc reg2_0_1 1 0 2 NJ 270 NJ
 preplace netloc reg3_0_1 1 0 2 NJ 290 NJ
-preplace netloc reset_rtl_1 1 0 1 330 450n
-preplace netloc rst_clk_wiz_100M_peripheral_aresetn 1 0 2 370 10 800
-preplace netloc s_axis_tdata_0_1 1 0 1 -30 80n
-preplace netloc s_axis_tlast_0_1 1 0 1 -30 100n
-preplace netloc s_axis_tvalid_0_1 1 0 1 -30 140n
-preplace netloc IEEE_8021513_TX_0_ready 1 1 2 770J 110 1120
-levelinfo -pg 1 -60 550 980 1140
-pagesize -pg 1 -db -bbox -sgen -250 -180 1380 750
+preplace netloc reset_rtl_1 1 0 1 400 450n
+preplace netloc rst_clk_wiz_100M_peripheral_aresetn 1 0 2 420 0 840
+preplace netloc s_axis_tdata_0_1 1 0 1 N 80
+preplace netloc s_axis_tlast_0_1 1 0 1 N 100
+preplace netloc s_axis_tvalid_0_1 1 0 1 N 140
+preplace netloc clk_wiz_fifo_s_clock 1 0 3 430 280 810 500 N
+levelinfo -pg 1 -60 610 1030 1230
+pagesize -pg 1 -db -bbox -sgen -250 -220 1410 750
 "
 }
 {

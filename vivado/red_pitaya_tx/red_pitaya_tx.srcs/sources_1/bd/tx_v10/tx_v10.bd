@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x26D3C3D58ACFC193",
+      "boundary_crc": "0x353A2558E45E2E3D",
       "device": "xc7z010clg400-1",
       "gen_directory": "../../../../red_pitaya_tx.gen/sources_1/bd/tx_v10",
       "name": "tx_v10",
@@ -26,7 +26,7 @@
             "value_src": "default"
           },
           "FREQ_HZ": {
-            "value": "125000000"
+            "value": "100000000"
           },
           "FREQ_TOLERANCE_HZ": {
             "value": "0",
@@ -115,7 +115,7 @@
             "value_src": "ip_prop"
           },
           "PHASE": {
-            "value": "225.0",
+            "value": "0.0",
             "value_src": "ip_prop"
           }
         }
@@ -133,6 +133,23 @@
         "direction": "I",
         "left": "7",
         "right": "0"
+      },
+      "fifo_m_clk": {
+        "direction": "O",
+        "parameters": {
+          "CLK_DOMAIN": {
+            "value": "/clk_wiz_clk_out1",
+            "value_src": "ip_prop"
+          },
+          "FREQ_HZ": {
+            "value": "100000000",
+            "value_src": "ip_prop"
+          },
+          "PHASE": {
+            "value": "0.0",
+            "value_src": "ip_prop"
+          }
+        }
       }
     },
     "components": {
@@ -151,43 +168,43 @@
         "inst_hier_path": "clk_wiz",
         "parameters": {
           "CLKIN1_JITTER_PS": {
-            "value": "80.0"
+            "value": "100.0"
           },
           "CLKOUT1_JITTER": {
-            "value": "119.348"
+            "value": "125.247"
           },
           "CLKOUT1_PHASE_ERROR": {
-            "value": "96.948"
+            "value": "98.575"
           },
           "CLKOUT1_REQUESTED_OUT_FREQ": {
             "value": "125.000"
           },
           "CLKOUT2_JITTER": {
-            "value": "181.313"
+            "value": "192.270"
           },
           "CLKOUT2_PHASE_ERROR": {
-            "value": "96.948"
+            "value": "98.575"
           },
           "CLKOUT2_REQUESTED_OUT_FREQ": {
             "value": "15.625"
           },
           "CLKOUT2_REQUESTED_PHASE": {
-            "value": "225.000"
+            "value": "0.000"
           },
           "CLKOUT2_USED": {
             "value": "true"
           },
           "CLKOUT3_JITTER": {
-            "value": "119.348"
+            "value": "130.958"
           },
           "CLKOUT3_PHASE_ERROR": {
-            "value": "96.948"
+            "value": "98.575"
           },
           "CLKOUT3_REQUESTED_OUT_FREQ": {
-            "value": "125.000"
+            "value": "100.000"
           },
           "CLKOUT3_USED": {
-            "value": "false"
+            "value": "true"
           },
           "CLK_OUT1_PORT": {
             "value": "tx_clock"
@@ -196,13 +213,13 @@
             "value": "fifo_clock"
           },
           "CLK_OUT3_PORT": {
-            "value": "system_clock"
+            "value": "fifo_s_clock"
           },
           "MMCM_CLKFBOUT_MULT_F": {
-            "value": "8.000"
+            "value": "10.000"
           },
           "MMCM_CLKIN1_PERIOD": {
-            "value": "8.000"
+            "value": "10.000"
           },
           "MMCM_CLKOUT0_DIVIDE_F": {
             "value": "8.000"
@@ -211,16 +228,16 @@
             "value": "64"
           },
           "MMCM_CLKOUT1_PHASE": {
-            "value": "225.000"
+            "value": "0.000"
           },
           "MMCM_CLKOUT2_DIVIDE": {
-            "value": "1"
+            "value": "10"
           },
           "NUM_OUT_CLKS": {
-            "value": "2"
+            "value": "3"
           },
           "PRIM_IN_FREQ": {
-            "value": "125.000"
+            "value": "100.00"
           },
           "RESET_PORT": {
             "value": "resetn"
@@ -256,7 +273,7 @@
             "value": "1"
           },
           "IS_ACLK_ASYNC": {
-            "value": "0"
+            "value": "1"
           }
         }
       }
@@ -314,15 +331,22 @@
         "ports": [
           "clk_wiz/tx_clock",
           "IEEE_8021513_TX_0/IPCORE_CLK",
-          "tx_clock",
-          "rst_clk_wiz_100M/slowest_sync_clk"
+          "tx_clock"
         ]
       },
       "clk_wiz_fifo_clock": {
         "ports": [
           "clk_wiz/fifo_clock",
           "fifo_s_clk",
-          "axis_data_fifo_0/s_axis_aclk"
+          "rst_clk_wiz_100M/slowest_sync_clk",
+          "axis_data_fifo_0/m_axis_aclk"
+        ]
+      },
+      "clk_wiz_fifo_s_clock": {
+        "ports": [
+          "clk_wiz/fifo_s_clock",
+          "axis_data_fifo_0/s_axis_aclk",
+          "fifo_m_clk"
         ]
       },
       "clk_wiz_locked": {

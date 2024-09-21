@@ -2,7 +2,7 @@
 --Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
---Date        : Wed Sep 18 00:15:25 2024
+--Date        : Sat Sep 21 17:18:22 2024
 --Host        : cotti-machine running 64-bit Ubuntu 22.04.3 LTS
 --Command     : generate_target tx_v10.bd
 --Design      : tx_v10
@@ -16,6 +16,7 @@ entity tx_v10 is
   port (
     data_out_0 : out STD_LOGIC_VECTOR ( 13 downto 0 );
     ext_clk : in STD_LOGIC;
+    fifo_m_clk : out STD_LOGIC;
     fifo_s_clk : out STD_LOGIC;
     new_frame_in_0 : in STD_LOGIC;
     reg0_0 : in STD_LOGIC_VECTOR ( 31 downto 0 );
@@ -60,7 +61,8 @@ architecture STRUCTURE of tx_v10 is
     clk_in1 : in STD_LOGIC;
     tx_clock : out STD_LOGIC;
     fifo_clock : out STD_LOGIC;
-    locked : out STD_LOGIC
+    locked : out STD_LOGIC;
+    fifo_s_clock : out STD_LOGIC
   );
   end component tx_v10_clk_wiz_0;
   component tx_v10_rst_clk_wiz_100M_0 is
@@ -85,6 +87,7 @@ architecture STRUCTURE of tx_v10 is
     s_axis_tready : out STD_LOGIC;
     s_axis_tdata : in STD_LOGIC_VECTOR ( 7 downto 0 );
     s_axis_tlast : in STD_LOGIC;
+    m_axis_aclk : in STD_LOGIC;
     m_axis_tvalid : out STD_LOGIC;
     m_axis_tready : in STD_LOGIC;
     m_axis_tdata : out STD_LOGIC_VECTOR ( 7 downto 0 );
@@ -101,6 +104,7 @@ architecture STRUCTURE of tx_v10 is
   signal clk_100MHz_1 : STD_LOGIC;
   signal clk_wiz_clk_out1 : STD_LOGIC;
   signal clk_wiz_fifo_clock : STD_LOGIC;
+  signal clk_wiz_fifo_s_clock : STD_LOGIC;
   signal clk_wiz_locked : STD_LOGIC;
   signal new_frame_in_0_1 : STD_LOGIC;
   signal reg0_0_1 : STD_LOGIC_VECTOR ( 31 downto 0 );
@@ -119,12 +123,13 @@ architecture STRUCTURE of tx_v10 is
   attribute X_INTERFACE_INFO : string;
   attribute X_INTERFACE_INFO of ext_clk : signal is "xilinx.com:signal:clock:1.0 CLK.EXT_CLK CLK";
   attribute X_INTERFACE_PARAMETER : string;
-  attribute X_INTERFACE_PARAMETER of ext_clk : signal is "XIL_INTERFACENAME CLK.EXT_CLK, CLK_DOMAIN tx_v10_clk_100MHz, FREQ_HZ 125000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
+  attribute X_INTERFACE_PARAMETER of ext_clk : signal is "XIL_INTERFACENAME CLK.EXT_CLK, CLK_DOMAIN tx_v10_clk_100MHz, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0";
   attribute X_INTERFACE_INFO of rst : signal is "xilinx.com:signal:reset:1.0 RST.RST RST";
   attribute X_INTERFACE_PARAMETER of rst : signal is "XIL_INTERFACENAME RST.RST, INSERT_VIP 0, POLARITY ACTIVE_LOW";
 begin
   clk_100MHz_1 <= ext_clk;
   data_out_0(13 downto 0) <= IEEE_8021513_TX_0_data_out(13 downto 0);
+  fifo_m_clk <= clk_wiz_fifo_s_clock;
   fifo_s_clk <= clk_wiz_fifo_clock;
   new_frame_in_0_1 <= new_frame_in_0;
   reg0_0_1(31 downto 0) <= reg0_0(31 downto 0);
@@ -156,11 +161,12 @@ IEEE_8021513_TX_0: component tx_v10_IEEE_8021513_TX_0_0
     );
 axis_data_fifo_0: component tx_v10_axis_data_fifo_0_0
      port map (
+      m_axis_aclk => clk_wiz_fifo_clock,
       m_axis_tdata(7 downto 0) => axis_data_fifo_0_m_axis_tdata(7 downto 0),
       m_axis_tlast => axis_data_fifo_0_m_axis_tlast,
       m_axis_tready => IEEE_8021513_TX_0_ready,
       m_axis_tvalid => axis_data_fifo_0_m_axis_tvalid,
-      s_axis_aclk => clk_wiz_fifo_clock,
+      s_axis_aclk => clk_wiz_fifo_s_clock,
       s_axis_aresetn => rst_clk_wiz_100M_peripheral_aresetn(0),
       s_axis_tdata(7 downto 0) => s_axis_tdata_0_1(7 downto 0),
       s_axis_tlast => s_axis_tlast_0_1,
@@ -171,6 +177,7 @@ clk_wiz: component tx_v10_clk_wiz_0
      port map (
       clk_in1 => clk_100MHz_1,
       fifo_clock => clk_wiz_fifo_clock,
+      fifo_s_clock => clk_wiz_fifo_s_clock,
       locked => clk_wiz_locked,
       resetn => reset_rtl_1,
       tx_clock => clk_wiz_clk_out1
@@ -186,6 +193,6 @@ rst_clk_wiz_100M: component tx_v10_rst_clk_wiz_100M_0
       mb_reset => NLW_rst_clk_wiz_100M_mb_reset_UNCONNECTED,
       peripheral_aresetn(0) => rst_clk_wiz_100M_peripheral_aresetn(0),
       peripheral_reset(0) => NLW_rst_clk_wiz_100M_peripheral_reset_UNCONNECTED(0),
-      slowest_sync_clk => clk_wiz_clk_out1
+      slowest_sync_clk => clk_wiz_fifo_clock
     );
 end STRUCTURE;

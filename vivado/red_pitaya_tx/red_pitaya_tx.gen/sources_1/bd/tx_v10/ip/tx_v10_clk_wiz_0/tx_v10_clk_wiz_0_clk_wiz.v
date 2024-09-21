@@ -53,13 +53,14 @@
 //  Output     Output      Phase    Duty Cycle   Pk-to-Pk     Phase
 //   Clock     Freq (MHz)  (degrees)    (%)     Jitter (ps)  Error (ps)
 //----------------------------------------------------------------------------
-// tx_clock__125.00000______0.000______50.0______119.348_____96.948
-// fifo_clock__15.62500____225.000______50.0______181.313_____96.948
+// tx_clock__125.00000______0.000______50.0______125.247_____98.575
+// fifo_clock__15.62500______0.000______50.0______192.270_____98.575
+// fifo_s_clock__100.00000______0.000______50.0______130.958_____98.575
 //
 //----------------------------------------------------------------------------
 // Input Clock   Freq (MHz)    Input Jitter (UI)
 //----------------------------------------------------------------------------
-// __primary_________125.000____________0.010
+// __primary__________100.00____________0.010
 
 `timescale 1ps/1ps
 
@@ -69,6 +70,7 @@ module tx_v10_clk_wiz_0_clk_wiz
   // Clock out ports
   output        tx_clock,
   output        fifo_clock,
+  output        fifo_s_clock,
   // Status and control signals
   input         resetn,
   output        locked,
@@ -94,7 +96,7 @@ wire clk_in2_tx_v10_clk_wiz_0;
 
   wire        tx_clock_tx_v10_clk_wiz_0;
   wire        fifo_clock_tx_v10_clk_wiz_0;
-  wire        system_clock_tx_v10_clk_wiz_0;
+  wire        fifo_s_clock_tx_v10_clk_wiz_0;
   wire        clk_out4_tx_v10_clk_wiz_0;
   wire        clk_out5_tx_v10_clk_wiz_0;
   wire        clk_out6_tx_v10_clk_wiz_0;
@@ -109,7 +111,6 @@ wire clk_in2_tx_v10_clk_wiz_0;
   wire        clkfboutb_unused;
     wire clkout0b_unused;
    wire clkout1b_unused;
-   wire clkout2_unused;
    wire clkout2b_unused;
    wire clkout3_unused;
    wire clkout3b_unused;
@@ -126,7 +127,7 @@ wire clk_in2_tx_v10_clk_wiz_0;
     .COMPENSATION         ("ZHOLD"),
     .STARTUP_WAIT         ("FALSE"),
     .DIVCLK_DIVIDE        (1),
-    .CLKFBOUT_MULT_F      (8.000),
+    .CLKFBOUT_MULT_F      (10.000),
     .CLKFBOUT_PHASE       (0.000),
     .CLKFBOUT_USE_FINE_PS ("FALSE"),
     .CLKOUT0_DIVIDE_F     (8.000),
@@ -134,10 +135,14 @@ wire clk_in2_tx_v10_clk_wiz_0;
     .CLKOUT0_DUTY_CYCLE   (0.500),
     .CLKOUT0_USE_FINE_PS  ("FALSE"),
     .CLKOUT1_DIVIDE       (64),
-    .CLKOUT1_PHASE        (225.000),
+    .CLKOUT1_PHASE        (0.000),
     .CLKOUT1_DUTY_CYCLE   (0.500),
     .CLKOUT1_USE_FINE_PS  ("FALSE"),
-    .CLKIN1_PERIOD        (8.000))
+    .CLKOUT2_DIVIDE       (10),
+    .CLKOUT2_PHASE        (0.000),
+    .CLKOUT2_DUTY_CYCLE   (0.500),
+    .CLKOUT2_USE_FINE_PS  ("FALSE"),
+    .CLKIN1_PERIOD        (10.000))
   mmcm_adv_inst
     // Output clocks
    (
@@ -147,7 +152,7 @@ wire clk_in2_tx_v10_clk_wiz_0;
     .CLKOUT0B            (clkout0b_unused),
     .CLKOUT1             (fifo_clock_tx_v10_clk_wiz_0),
     .CLKOUT1B            (clkout1b_unused),
-    .CLKOUT2             (clkout2_unused),
+    .CLKOUT2             (fifo_s_clock_tx_v10_clk_wiz_0),
     .CLKOUT2B            (clkout2b_unused),
     .CLKOUT3             (clkout3_unused),
     .CLKOUT3B            (clkout3b_unused),
@@ -204,6 +209,10 @@ wire clk_in2_tx_v10_clk_wiz_0;
   BUFG clkout2_buf
    (.O   (fifo_clock),
     .I   (fifo_clock_tx_v10_clk_wiz_0));
+
+  BUFG clkout3_buf
+   (.O   (fifo_s_clock),
+    .I   (fifo_s_clock_tx_v10_clk_wiz_0));
 
 
 

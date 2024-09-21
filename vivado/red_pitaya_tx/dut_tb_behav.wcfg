@@ -13,18 +13,18 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
-      <ZoomEndTime time="772.658537 us"></ZoomEndTime>
-      <Cursor1Time time="79.410000 us"></Cursor1Time>
+      <ZoomStartTime time="138,486.709 ns"></ZoomStartTime>
+      <ZoomEndTime time="138,522.238 ns"></ZoomEndTime>
+      <Cursor1Time time="94,213.483 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="225"></NameColumnWidth>
-      <ValueColumnWidth column_width="89"></ValueColumnWidth>
+      <ValueColumnWidth column_width="81"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="8" />
-   <wvobject type="logic" fp_name="/tx_v10_tb/sys_clk">
-      <obj_property name="ElementShortName">sys_clk</obj_property>
-      <obj_property name="ObjectShortName">sys_clk</obj_property>
+   <WVObjectSize size="10" />
+   <wvobject type="logic" fp_name="/tx_v10_tb/ext_clk">
+      <obj_property name="ElementShortName">ext_clk</obj_property>
+      <obj_property name="ObjectShortName">ext_clk</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/tx_v10_tb/tx_clock">
       <obj_property name="ElementShortName">tx_clock</obj_property>
@@ -33,6 +33,10 @@
    <wvobject type="logic" fp_name="/tx_v10_tb/fifo_s_clk">
       <obj_property name="ElementShortName">fifo_s_clk</obj_property>
       <obj_property name="ObjectShortName">fifo_s_clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tx_v10_tb/dut_instance/fifo_m_clk">
+      <obj_property name="ElementShortName">fifo_m_clk</obj_property>
+      <obj_property name="ObjectShortName">fifo_m_clk</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/tx_v10_tb/data_out_0">
       <obj_property name="ElementShortName">data_out_0[13:0]</obj_property>
@@ -53,5 +57,9 @@
    <wvobject type="logic" fp_name="/tx_v10_tb/dut_instance/tx_v10_i/IEEE_8021513_TX_0/ready">
       <obj_property name="ElementShortName">ready</obj_property>
       <obj_property name="ObjectShortName">ready</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tx_v10_tb/dut_instance/rst">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
    </wvobject>
 </wave_config>
