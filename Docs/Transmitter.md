@@ -45,7 +45,13 @@ Al recibir la señal "new_frame_in", se van a leer los registros de 32bits (reg0
 
 * **p[23:0]**: *psduSize*. Tamaño en bytes del mensaje a transmitir.
 
-* **m[15:0]**: *messageDuration*. En vez de usarse para indicar el tiempo que demora la transmisión, este parámetro se usa para indicar la cantidad de bytes "extra" agregados en la transmisión, para que sea múltiplo de "payloadBitsPerBlock0".
+* **m[15:0]**: *messageDuration*. En vez de usarse para indicar el tiempo que demora la transmisión, este parámetro se usa para indicar la cantidad de bytes "extra" agregados en la transmisión, para que sea múltiplo de "payloadBitsPerBlock0 = 120".
+
+    Por ejemplo: si su mensaje es de 100 bytes, entonces (psduSize = 100; messageDuration = 20).
+
+    Si su mensaje es de 300 bytes, entonces (psduSize = 300; messageDuration = 60).
+
+    Si bien el mensaje "real" tiene un tamaño fijo, el mensaje escrito en la FIFO de entrada debe ser un múltiplo de 120 bytes.
 
 * **block[1:0]**: *blockSize*. Siempre "00".
 
@@ -75,19 +81,21 @@ Al recibir la señal "new_frame_in", se van a leer los registros de 32bits (reg0
 
 ## Modo de uso
 
-1. Setear los registros reg0, reg1, re2 y reg3.
+1. Escribir en la FIFO el mensaje a transmitir. Si bien el mensaje puede ser de "x" bytes (incluyendo 0 bytes), tenga en cuenta que lo que se escriba en la FIFO debe ser un múltiplo de 120 bytes (completar con '0' de ser necesario).
 
-2. Levantar la señal `new_frame_in` duante un ciclo de clock de "clk_fifo_s". A partir de este punto, los registros pueden ser modificados sin problemas.
+2. Setear los registros reg0, reg1, re2 y reg3.
 
-3. Esperar mientras se procesan el preambulo y encabezado.
+3. Levantar la señal `new_frame_in` duante un ciclo de clock de "clk_fifo_s". A partir de este punto, los registros pueden ser modificados sin problemas.
 
-4. Se va a levantar la señal de `ready` y va a empezar a leer la FIFO la cantidad de bytes indicada por los registros.
+4. Esperar mientras se procesan el preambulo y encabezado.
 
-5. Esperar mientras se forma el símbolo OFDM.
+5. Se va a levantar la señal de `ready` y va a empezar a leer la FIFO la cantidad de bytes indicada por los registros.
 
-6. Se envía a la salida una señal continua de 125MHz lista para conectarse al DAC. Se indica su validez con la señal `valid_out`.
+6. Esperar mientras se forma el símbolo OFDM.
 
-7. No se puede levantar otra señal de `new_frame_in` hasta el falling_edge de la señal `valid_out`.
+7. Se envía a la salida una señal continua de 125MHz lista para conectarse al DAC. Se indica su validez con la señal `valid_out`.
+
+8. No se puede levantar otra señal de `new_frame_in` hasta el falling_edge de la señal `valid_out`.
 
 ## Block Design
 
@@ -120,6 +128,10 @@ Para el timing, no cumple el tiempo de hold de la FIFO. Esto debería revisarse 
 Error: ""
 
 ## Historial de versiones
+
+### v1.1
+
+Se agrega especificación del tamaño de "120 bytes" múltiplo del mensaje.
 
 ### v1.0
 
