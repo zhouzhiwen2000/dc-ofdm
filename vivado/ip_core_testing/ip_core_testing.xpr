@@ -123,9 +123,6 @@
         <CompFileExtendedInfo CompFileName="full_tx_raw.bd" FileRelPathName="ip/full_tx_raw_clk_wiz_0/full_tx_raw_clk_wiz_0.xci">
           <Proxy FileSetName="full_tx_raw_clk_wiz_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="full_tx_raw.bd" FileRelPathName="ip/full_tx_raw_full_tx_raw_0_0/full_tx_raw_full_tx_raw_0_0.xci">
-          <Proxy FileSetName="full_tx_raw_full_tx_raw_0_0"/>
-        </CompFileExtendedInfo>
       </File>
       <File Path="$PGENDIR/sources_1/bd/full_tx_raw/hdl/full_tx_raw_wrapper.vhd">
         <FileInfo>
@@ -258,12 +255,6 @@
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
-    <FileSet Name="full_tx_raw_full_tx_raw_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/full_tx_raw_full_tx_raw_0_0" RelGenDir="$PGENDIR/full_tx_raw_full_tx_raw_0_0">
-      <Config>
-        <Option Name="TopModule" Val="full_tx_raw_full_tx_raw_0_0"/>
-        <Option Name="UseBlackboxStub" Val="1"/>
-      </Config>
-    </FileSet>
     <FileSet Name="full_tx_raw_clk_wiz_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/full_tx_raw_clk_wiz_0" RelGenDir="$PGENDIR/full_tx_raw_clk_wiz_0">
       <Config>
         <Option Name="TopModule" Val="full_tx_raw_clk_wiz_0"/>
@@ -365,16 +356,6 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="full_tx_raw_full_tx_raw_0_0_synth_1" Type="Ft3:Synth" SrcSet="full_tx_raw_full_tx_raw_0_0" Part="xc7z010clg400-1" ConstrsSet="full_tx_raw_full_tx_raw_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/full_tx_raw_full_tx_raw_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/full_tx_raw_full_tx_raw_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/full_tx_raw_full_tx_raw_0_0_synth_1">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
-        <Step Id="synth_design"/>
-      </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
-      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
     <Run Id="full_tx_raw_clk_wiz_0_synth_1" Type="Ft3:Synth" SrcSet="full_tx_raw_clk_wiz_0" Part="xc7z010clg400-1" ConstrsSet="full_tx_raw_clk_wiz_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/full_tx_raw_clk_wiz_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/full_tx_raw_clk_wiz_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/full_tx_raw_clk_wiz_0_synth_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
@@ -397,9 +378,7 @@
     </Run>
     <Run Id="modulator_full_ofdm_modulator_0_0_synth_1" Type="Ft3:Synth" SrcSet="modulator_full_ofdm_modulator_0_0" Part="xc7z010clg400-1" ConstrsSet="modulator_full_ofdm_modulator_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/modulator_full_ofdm_modulator_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/modulator_full_ofdm_modulator_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/modulator_full_ofdm_modulator_0_0_synth_1">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -510,23 +489,6 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="full_tx_raw_full_tx_raw_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z010clg400-1" ConstrsSet="full_tx_raw_full_tx_raw_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="full_tx_raw_full_tx_raw_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/full_tx_raw_full_tx_raw_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/full_tx_raw_full_tx_raw_0_0_impl_1">
-      <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
-        <Step Id="init_design"/>
-        <Step Id="opt_design"/>
-        <Step Id="power_opt_design"/>
-        <Step Id="place_design"/>
-        <Step Id="post_place_power_opt_design"/>
-        <Step Id="phys_opt_design"/>
-        <Step Id="route_design"/>
-        <Step Id="post_route_phys_opt_design"/>
-        <Step Id="write_bitstream"/>
-      </Strategy>
-      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
-      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
-      <RQSFiles/>
-    </Run>
     <Run Id="full_tx_raw_clk_wiz_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z010clg400-1" ConstrsSet="full_tx_raw_clk_wiz_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="full_tx_raw_clk_wiz_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/full_tx_raw_clk_wiz_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/full_tx_raw_clk_wiz_0_impl_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
@@ -563,9 +525,7 @@
     </Run>
     <Run Id="modulator_full_ofdm_modulator_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z010clg400-1" ConstrsSet="modulator_full_ofdm_modulator_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="modulator_full_ofdm_modulator_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/modulator_full_ofdm_modulator_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/modulator_full_ofdm_modulator_0_0_impl_1">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
