@@ -115,6 +115,8 @@ Critical warnings: 0.
 
 ## Sintesis
 
+Importante: agregar el archivo de constraints al proyecto de Vivado, el cual se encuentra dentro del Ip Core bajo la carpeta `constraint/ieee_constraints.xdc`.
+
 Critical warnings: 0.
 
 ![Tx sintesis utilization](images/tx_sintesis_utilization.png)
@@ -128,6 +130,10 @@ Para el timing, no cumple el tiempo de hold de la FIFO. Esto debería revisarse 
 Error: ""
 
 ## Historial de versiones
+
+### v1.2
+
+Se agrega mención al archivo de constraints.
 
 ### v1.1
 

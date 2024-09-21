@@ -42,3 +42,15 @@ set_multicycle_path 7 -hold -from $reglist4 -to $reglist3 -quiet
 set_multicycle_path 9 -setup -from $reglist3 -to $reglist4 -quiet
 set_multicycle_path 7 -hold -from $reglist3 -to $reglist4 -quiet
 
+# Multycycle constraints for flip-flops in the OFDM modulator.
+set ofdm_ff [list \
+    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} tx_v10_i/IEEE_8021513_TX_0/U0/u_IEEE_8021513_TX_dut_inst/u_IEEE_8021513_TX_src_full_tx/u_full_ofdm_modulator/u_ofdm_modulator/* \
+    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} tx_v10_i/IEEE_8021513_TX_0/U0/u_IEEE_8021513_TX_dut_inst/u_IEEE_8021513_TX_src_full_tx/u_full_ofdm_modulator/u_ofdm_modulator/*/* \
+    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} tx_v10_i/IEEE_8021513_TX_0/U0/u_IEEE_8021513_TX_dut_inst/u_IEEE_8021513_TX_src_full_tx/u_full_ofdm_modulator/u_ofdm_modulator/*/*/* \
+    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} tx_v10_i/IEEE_8021513_TX_0/U0/u_IEEE_8021513_TX_dut_inst/u_IEEE_8021513_TX_src_full_tx/u_full_ofdm_modulator/u_ofdm_modulator/*/*/*/* \
+    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} tx_v10_i/IEEE_8021513_TX_0/U0/u_IEEE_8021513_TX_dut_inst/u_IEEE_8021513_TX_src_full_tx/u_full_ofdm_modulator/u_ofdm_modulator/*/*/*/*/* \
+    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} tx_v10_i/IEEE_8021513_TX_0/U0/u_IEEE_8021513_TX_dut_inst/u_IEEE_8021513_TX_src_full_tx/u_full_ofdm_modulator/u_ofdm_modulator/*/*/*/*/*/* \
+    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} tx_v10_i/IEEE_8021513_TX_0/U0/u_IEEE_8021513_TX_dut_inst/u_IEEE_8021513_TX_src_full_tx/u_full_ofdm_modulator/u_ofdm_modulator/*/*/*/*/*/*/* \
+    ]
+set_multicycle_path 2 -setup -from $ofdm_ff -to $ofdm_ff -quiet
+set_multicycle_path 1 -hold -from $ofdm_ff -to $ofdm_ff -quiet
