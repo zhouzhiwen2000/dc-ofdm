@@ -44,3 +44,35 @@ Actualmente la resolución de ese multiplicador es fixdt(1, 32, 24). La bajo a f
 
 En conclusión, la resolución máxima queda limitada por el timing. El problema es que al bajarle la resolución, deja de coincidir con la referencia dorada. Hay que hacer un análisis más profundo de cómo funcionan el transmisor y receptor en conjunto con el ADC y DAC.
 
+
+## Sintesis
+
+Utilización con:
+
+```m
+CONST.ADCDataType = fixdt(1, 14, 13);
+
+CONST.FIFOOFDMSize = 1200;
+
+CONST.rxNCOWordLength = 16;
+CONST.rxNCOFractionLength = 14; 
+
+CONST.rxDecimatorCoefficientsDataType = fixdt(1,16);
+CONST.rxDecimatorOutputDataType = fixdt(1,16,14);
+
+CONST.rxMDataType = fixdt(1,16,14);
+CONST.rxRDataType = fixdt(1,32,24);
+CONST.rxPDataType = fixdt(1,16,12);
+
+CONST.rxOFDMDemodDataType = fixdt(1,16,14);
+
+CONST.rxChannelEstReferenceWordLength = 16;
+CONST.rxChannelEstReferenceFractionLength = 14;
+
+CONST.rxQAMDemodDataType = fixdt(1,16,10);
+```
+
+![Alt text](images/dd.png)
+
+Vamos a tratar de reducir la utilización de DSP, analizando bloque por bloque.
+
