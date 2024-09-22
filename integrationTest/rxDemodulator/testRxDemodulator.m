@@ -58,7 +58,6 @@ counterExpectedOut = 0;
 expectedPayloadOut = cell(totalOFDMSymbols, 1);
 for i=1:1:msgQtty
     OFDMRx{i} = downshifter(CONST, OFDMRx{i});
-    %OFDMRx{i} = rxInterpolator(CONST, OFDMRx{i});
     OFDMRx{i} = rxDecimator(CONST, OFDMRx{i});
     OFDMRx{i} = ofdmSymbolSync(CONST, OFDMRx{i});
     [OFDMRx{i}, channelEst] = ofdmChannelEstimation(CONST, OFDMRx{i});
@@ -115,7 +114,7 @@ for i=1:1:msgQtty
     out = dataOut(startIdx(i):endIdx(i), end-CONST.headerBitsPerSubcarrier+1:end);
     out = out.';
     headerOut = out(:);
-    assert(iskindaequal(expectedHeaderOut{i}, headerOut, 2), "Header mismatch");
+    assert(iskindaequal(expectedHeaderOut{i}, headerOut, 0.2), "Header mismatch");
 end
 disp("Header was received correctly!");
 
@@ -131,7 +130,7 @@ for i=1:1:totalOFDMSymbols
     out = dataOut(startIdx1(i):endIdx1(i), end-payloadBitsPerSubcarrier+1:end);
     out = out.';
     out = out(:);
-    assert(iskindaequal(expectedPayloadOut{i}, out, 2.5), "Payload mismatch");
+    assert(iskindaequal(expectedPayloadOut{i}, out, 0.2), "Payload mismatch");
 end
 
 %% Plotting

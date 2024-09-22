@@ -21,7 +21,6 @@ frequencyOffsetDownshifter = 1e3;
 OFDMTx = fullTx(CONST, parametersFile, pBits, frequencyOffsetUpshifter);
 OFDMRx = channelSimulation(OFDMTx, delayIn, SNR);
 OFDMRx = downshifter(CONST, OFDMRx, frequencyOffsetDownshifter);
-%OFDMRx = rxInterpolator(CONST, OFDMRx);
 OFDMRx = rxDecimator(CONST, OFDMRx);
 
 %% Synchronize
@@ -32,7 +31,7 @@ delayOut
 peaks
 frequencyOffset
 
-assert(isequal(delayOut, delayIn/(CONST.rxM/CONST.rxL)), "Delays should match");
+assert(isequal(delayOut, delayIn/CONST.rxM), "Delays should match");
 assert(isscalar(peaks), "Only one peak should be detected");
 assert(isequal(ofdmOut, OFDMRx(1+delayOut+CONST.preambleOFDMSamples:end)), ...
     "OFDM output signal should remove the delay and preamble signal");

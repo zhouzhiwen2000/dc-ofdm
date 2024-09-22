@@ -12,7 +12,7 @@ t = (0:1/fIn:(CONST.N+CONST.headerCyclicPrefixLen)/fOut-1/fIn)';            % Ti
 t_down = (0:1/fOut:(CONST.N+CONST.headerCyclicPrefixLen)/fOut-1/fOut)';     % Time vector for downsampled signal
 
 % OFDM output is a senoidal function
-fc = 1e6;                           % Carrier frequency for sinusoidal function
+fc = 25e6;                           % Carrier frequency for sinusoidal function
 input = cos(2*pi*fc*t);
 dataIn = [
     input;
@@ -53,7 +53,7 @@ assert(~isempty(startIdx), "No start signal");
 
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
-    assert(iskindaequal(expectedOut, out, 100e-3));
+    assert(iskindaequal(expectedOut, out, 1e-3));
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
 

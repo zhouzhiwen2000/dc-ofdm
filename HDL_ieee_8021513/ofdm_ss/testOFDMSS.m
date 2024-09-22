@@ -21,12 +21,10 @@ channelTx = ofdmModulate(CONST, CONST.channelOFDMSymbols, ...
 
 OFDMSignal = [preambleTx; channelTx];
 OFDMSignal = txInterpolator(CONST, OFDMSignal);
-%OFDMSignal = txDecimator(CONST, OFDMSignal);
 OFDMSignal = upshifter(CONST, OFDMSignal);
 
 OFDMRx = channelSimulation(OFDMSignal, delayIn, SNR);
 OFDMRx = downshifter(CONST, OFDMRx, frequencyOffsetIn);
-%OFDMRx = rxInterpolator(CONST, OFDMRx);
 dataIn = rxDecimator(CONST, OFDMRx);
 
 validIn = true(length(dataIn)-CONST.preambleFirstPartOFDMSamples, 1);
@@ -63,7 +61,7 @@ assert(isequal(length(startIdx), length(endIdx)), ...
 
 for i=1:length(startIdx)
     mOutSim = mOut(startIdx(i):endIdx(i));
-    assert(iskindaequal(expectedMOut, mOutSim, 10e-3));
+    assert(iskindaequal(expectedMOut, mOutSim, 1e-3));
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
 

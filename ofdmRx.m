@@ -11,13 +11,12 @@ ofdmTx; % Data is in OFDMSignal
 
 %% Simulate Channel
 delayIn = 400;  % Delay in OFDM Samples
-OFDMRx = [zeros(delayIn*CONST.rxM/CONST.rxL, 1); OFDMSignal];
+OFDMRx = [zeros(delayIn*CONST.rxM, 1); OFDMSignal];
 
 %% Separate Preamble, Channel and Header
 % Payload can't be processed until the header was obtained (I need to know
 % the cyclic prefix used for the payload)
 OFDMRx = downshifter(CONST, OFDMRx);
-%OFDMRx = rxInterpolator(CONST, OFDMRx);
 OFDMRx = rxDecimator(CONST, OFDMRx);
 
 [OFDMRx, delayOut] = ofdmSymbolSync(CONST, OFDMRx);

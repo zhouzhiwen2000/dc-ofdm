@@ -194,6 +194,7 @@ CONST.rxInterpolatorFilter = design(CONST.rxInterpolatorSpec,'SystemObject',true
 
 CONST.rxInterpolatorDelay = mean(grpdelay(CONST.rxInterpolatorFilter));
 if (CONST.rxInterpolatorDelay ~= round(CONST.rxInterpolatorDelay))
+    CONST.rxInterpolatorDelay
     error("rxInterpolatorDelay should be an integer!");
 end
 
@@ -202,10 +203,10 @@ end
 
 %% Decimator LPF filter
 CONST.rxM = 2;
-CONST.rxDecimatorFpass = 20e6;               % Passband frequency [Hz]
-CONST.rxDecimatorFstop = 29e6;               % Stopband frequency [Hz]
-CONST.rxDecimatorPassbandRippleDb = 0.1;     % Passband ripple [dB]
-CONST.rxDecimatorStopbandAttDb = 78;         % Stopband attenuation [dB]
+CONST.rxDecimatorFpass = 25e6;               % Passband frequency [Hz]
+CONST.rxDecimatorFstop = 36e6;               % Stopband frequency [Hz]
+CONST.rxDecimatorPassbandRippleDb = 0.01;     % Passband ripple [dB]
+CONST.rxDecimatorStopbandAttDb = 80;         % Stopband attenuation [dB]
 
 CONST.rxDecimatorSpec = fdesign.decimator(CONST.rxM, 'lowpass', 'Fp,Fst,Ap,Ast', ...
     CONST.rxDecimatorFpass, ...
@@ -218,20 +219,12 @@ CONST.rxDecimatorFilter = design(CONST.rxDecimatorSpec, 'equiripple', 'SystemObj
 % Group delay of the filter should be even.
 CONST.rxDecimatorDelay = mean(grpdelay(CONST.rxDecimatorFilter));
 if (mod(CONST.rxDecimatorDelay, 2) ~= 0)
-    CONST.rxDecimatorDelay
+    disp(CONST.rxDecimatorDelay);
     error("decimatorDelay should be even!");
 end
 
-% if (CONST.rxDecimatorDelay == round(CONST.rxDecimatorDelay))
-%     error("rxDecimatorDelay should be fractional!");
-% elseif (mod(round(CONST.rxDecimatorDelay), CONST.rxM) ~= 3)
-%     error("rxDecimatorDelay should be mod(delay, rxM) == 1");
-% end
-
 % Uncomment to plot filter response
 %fvtool(CONST.rxDecimatorFilter,'Fs', CONST.fADC);
-
-
 
 %% QAM constellations
 CONST.qamTwoBits = [3, 2, 1, 0];
@@ -246,8 +239,13 @@ CONST.frequencyOffsetTimeWindow = CONST.preambleFirstPartOFDMSamples/CONST.fPHY;
 CONST.DACDataType = fixdt(1, 14, 13);
 CONST.ADCDataType = fixdt(1, 14, 13);
 
-CONST.FIFOOFDMSize = 10000; % Previous value was 2100
-CONST.FIFORxPayloadSize = 40000;
+% Values for up to 4096 of payload message
+CONST.FIFOOFDMSize = 1200;
+CONST.FIFORxPayloadSize = 16000;
+
+% Amount of cycles to wait before starting to read the FIFO (this is made
+% so that there are enough values for the LDPC decoder in one go.
+CONST.rxDelayBeforeReadingFIFOPayload = 600; % Number tested, don't change.
 
 CONST.txQAMDataType = fixdt(1,16,14);
 
@@ -256,3 +254,21 @@ CONST.txInterpolatorOutputDataType = fixdt(1,20,16);
 
 CONST.txNCOWordLength = 20;
 CONST.txNCOFractionLength = 16;
+
+CONST.rxNCOWordLength = 16;
+CONST.rxNCOFractionLength = 14; 
+
+CONST.rxDecimatorCoefficientsDataType = fixdt(1,16);
+CONST.rxDecimatorOutputDataType = fixdt(1,16,14);
+
+CONST.rxMDataType = fixdt(1,16,14);
+CONST.rxRDataType = fixdt(1,32,24);
+CONST.rxPDataType = fixdt(1,16,12);
+
+CONST.rxOFDMDemodDataType = fixdt(1,16,14);
+
+CONST.rxChannelEstReferenceWordLength = 16;
+CONST.rxChannelEstReferenceFractionLength = 14;
+
+CONST.rxQAMDemodDataType = fixdt(1,16,10);
+

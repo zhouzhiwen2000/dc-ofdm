@@ -12,7 +12,7 @@ SNR = 60;
 msgIn{1} = 'This is a test of the RX for the UTN VLC Project!';
 msgIn{2} = 'Second message';
 msgIn{3} = 'Third message';
-%msgIn = randomStr(4096);
+%msgIn{1} = randomStr(4096);
 
 % Preallocation
 dataIn = [];
