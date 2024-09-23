@@ -83,3 +83,13 @@ Hay un delay importante en el multiplicador que calcula la frecuencia de offset.
 ![Alt text](images/ee.png)
 
 Se cambia la lógica para reducir el tamaño del multiplicador, y también se saca un multiplicador del "ofdm_ss".
+
+Luego de reducir el multilpicador, vemos que el slack de setup del camino crítico se redujo
+
+![Alt text](images/ff.png)
+
+La síntesis en Vivado da la siguiente utilización de recursos y timing:
+
+![Alt text](images/gg.png)
+
+![Alt text](images/hh.png)
