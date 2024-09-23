@@ -167,7 +167,7 @@ CONST.ncoUpActualFreq = ...
 
 %% Downshifter NCO
 % These equations were taking from the "help" section of the NCO block.
-CONST.ncoFrequencyResolution = 5;        % Frequency resolution for the NCO
+CONST.ncoFrequencyResolution = 10;        % Frequency resolution for the NCO
 CONST.ncoCarrierFrequency = CONST.fPHY/2;       % Carrier frequency of the NCO
 CONST.ncoSFDR = 80;                       % Spurious free dynamic range [dB]
 
@@ -256,14 +256,18 @@ CONST.txNCOWordLength = 20;
 CONST.txNCOFractionLength = 16;
 
 CONST.rxNCOWordLength = 16;
-CONST.rxNCOFractionLength = 14; 
+CONST.rxNCOFractionLength = 14;
+
+% Number is = 2^(CONST.ncoWordLength-1)/CONST.preambleFirstPartOFDMSamples
+CONST.rxFreqOffsetWordLength = 20; CONST.rxFreqOffsetFractionLength = 8;
+CONST.rxPhaseDataType = fixdt(1,16,15);
 
 CONST.rxDecimatorCoefficientsDataType = fixdt(1,16);
 CONST.rxDecimatorOutputDataType = fixdt(1,16,14);
 
 CONST.rxMDataType = fixdt(1,16,14);
 CONST.rxRDataType = fixdt(1,32,24);
-CONST.rxPDataType = fixdt(1,16,12);
+CONST.rxPDataType = fixdt(1,13,9);
 
 CONST.rxOFDMDemodDataType = fixdt(1,16,14);
 

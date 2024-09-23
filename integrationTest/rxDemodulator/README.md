@@ -76,3 +76,10 @@ CONST.rxQAMDemodDataType = fixdt(1,16,10);
 
 Vamos a tratar de reducir la utilización de DSP, analizando bloque por bloque.
 
+## Downshifter
+
+Hay un delay importante en el multiplicador que calcula la frecuencia de offset.
+
+![Alt text](images/ee.png)
+
+Se cambia la lógica para reducir el tamaño del multiplicador, y también se saca un multiplicador del "ofdm_ss".

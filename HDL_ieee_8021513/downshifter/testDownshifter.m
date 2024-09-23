@@ -10,12 +10,12 @@ nSym = 10;
 input{1} = 0.5*rand(nSym*CONST.N*CONST.oversamplingFactor, 1);
 input{2} = 0.5*rand(nSym*CONST.N*CONST.oversamplingFactor, 1);
 input{3} = 0.5*rand(nSym*CONST.N*CONST.oversamplingFactor, 1);
-input{4} = 0.5*rand(nSym*CONST.N*CONST.oversamplingFactor, 1);
+input{4} = 0.5*rand(nSym*CONST.N*CONST.oversamplingFactor*100, 1);
 
 frequencyOffsetIn{1} = 5;
 frequencyOffsetIn{2} = -5;
-frequencyOffsetIn{3} = -14e3;
-frequencyOffsetIn{4} = +15e3;
+frequencyOffsetIn{3} = -14444;
+frequencyOffsetIn{4} = +15133;
 
 dataIn = [
     input{1};
@@ -73,7 +73,7 @@ for i=1:length(startIdx)
     n = (0:1:length(input{i})-1)';
     out = dataOut(startIdx(i):endIdx(i));
     expectedOut = downshifter(CONST, input{i}, frequencyOffsetIn{i});
-    assert(iskindaequal(expectedOut, out, 1e-3), "Downshifter output is not the same");
+    assert(iskindaequal(expectedOut, out, 0.2), "Downshifter output is not the same");
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
 
