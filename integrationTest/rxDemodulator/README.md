@@ -111,3 +111,85 @@ Luego de modificar un poco el decimator y hacerlo menos estricto, se logro reduc
 ![Alt text](images/ll.png)
 
 Nota: reducir el tamaño de palabra de 16 bits a 12 bits no redujo la cantidad de multiplicadores usados por Vivado.
+
+## OFDM Symbol Sync
+
+La utilización de recursos da multiplicadores, pero son de 32 bits, ojo:
+
+![Alt text](images/mm.png)
+
+TODO: volver a este bloque por problemas de timing, ahora estoy con utilizacion.
+
+## OFDM Demod
+
+Con respecto al timing, esto se puede solucionar con multiple cycle paths:
+
+![Alt text](images/nn.png)
+
+Respecto a la utilización de recursos, 12 multiplicadores.
+
+![Alt text](images/oo.png)
+
+## OFDM Equalizer
+
+El timing da bien, pero va a haber que usar multiple cycle path constraints.
+
+![Alt text](images/pp.png)
+
+La utilización de registros dio un poco alta, por lo que se cambiaron algunos delays por block rams. 20 multiplicadores.
+
+![Alt text](images/qq.png)
+
+## QAM DEMOD
+
+Encontré el bloque que consumía muchos recursos:
+
+![Alt text](images/rr.png)
+
+Actualmente, está instanciada la demodulación para 16QAM, pero solamente se usa hasta 4QAM, así que saco los bloques para 2QAM y 16QAM, y simplifico un poco la lógica.
+
+![Alt text](images/ss.png)
+
+## Generación de Demodulador completo luego de los cambios de arriba
+
+Como podemos ver, todavía estamos arriba de los 80 DSP que tiene la Red Pitaya. 
+
+![Alt text](images/tt.png)
+
+La utilización de recursos actual está en 92 multiplicadores, de los cuales:
+
+* 12 del OFDM Demodulator.
+* 3 para calcular R.
+* 2 para calcular P.
+* 4*2 de los multiplicadores complejos.
+* 30 del decimador.
+* 1 del downshifter.
+* 2 del digital_carrier_receiver
+* 1 del ofdm_separator.
+* 1 del psdu_size_to_payload_len
+* 12 del OFDM Channel Estimator.
+* 8 del OFDM Equalizer
+* 12 del 4QAM_demod
+
+Además, recordar que hay 2*2 DSP usados por los LDPC decoders.
+
+Vemos que el decimador, que debería consumir 15 multiplicadores, terminó consumiendo 30.
+
+Luego de investigar, se descubrió que los datos de entrada y salida eran del tipo complejo. Al ser complejos, se explica que se duplique la utilización de recursos.
+
+Entonces, hay que seguir reduciendo DSPS, un total de 16 como mínimo (para usar los 80 de la red pitaya).
+
+## Optimización fina
+
+Bloques fijos de matlab hay muchos que no se pueden modificar.
+
+Se hicieron las siguientes optimizaciones:
+
+* 2DSP: Se reemplazo el complex multiplier de 4 DSP por la implementación optimizada de 3 DSP.
+
+* 12DSPs: Se reemplazo el bloque OFDM Channel Estimator por una implementanción manual que no usa DSPs.
+
+Luego de las optimizaciones finales, el bloque del demodulador quedo así:
+
+![Alt text](images/uu.png)
+

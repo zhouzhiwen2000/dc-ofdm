@@ -10,14 +10,10 @@ delay = zeros(100,1);
 SNR = 20;
 dataSize = 200;
 
-M = [1 2 4];
+M = 2;
 
 bitsPerSubcarrier = [
     ones(dataSize, 1)*M(1);
-    delay;
-    ones(dataSize,1)*M(2);
-    delay;
-    ones(dataSize,1)*M(3);
 ];
 
 validIn = logical(bitsPerSubcarrier);
@@ -49,10 +45,6 @@ end
 
 dataSymbols = [
   dataSymbols(:, 1);
-  delay;
-  dataSymbols(:, 2);
-  delay;
-  dataSymbols(:, 3);
 ];
 
 %% Simulation Time

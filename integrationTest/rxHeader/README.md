@@ -2,7 +2,7 @@
 
 Camino crítico antes de optimizar.
 
-![Alt text](images/critical_path_pre_opt.png.png)
+![Alt text](images/critical_path_pre_opt.png)
 
 El camino crítico se debe a la falta de delays a la entrada y salida del LDPC decocer. Se le agregan delays
 
@@ -12,6 +12,7 @@ El camino crítico final queda determinado por un contador, es decir, no se pued
 
 ![Alt text](images/critical_path_final.png)
 
+![Alt text](images/utilization.png)
 
 ## Reduciendo la latency del LDPC decoder
 
