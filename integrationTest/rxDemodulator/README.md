@@ -193,3 +193,12 @@ Luego de las optimizaciones finales, el bloque del demodulador quedo así:
 
 ![Alt text](images/uu.png)
 
+Luego de la síntesis en Vivado, la utilización superó los 80 DSPs. Eso significa que hay alguno de los bloques que usa más DSPs que multiplicadores publicita.
+
+![Alt text](images/vv.png)
+
+El siguiente paso es ver qué bloque está consumiendo más DSPs de los que debería, y como solucionarlo. Se sospecha que las multiplicaciones de más de 24bits pueden ser el problema, y esta imagen es la confirmación. Interesantemente, bloques como el QAM demod que ocupaba 12 multiplicadores usa 8 DSPs. Pero bueno, el siguiente paso es reducir el tamaño de ofdm symbol sync.
+
+![Alt text](images/ww.png)
+
+
