@@ -1,0 +1,167 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0xEC9078E62A0D05E9",
+      "device": "xc7z010clg400-1",
+      "gen_directory": "../../../../ip_core_testing.gen/sources_1/bd/decimator",
+      "name": "decimator",
+      "rev_ctrl_bd_flag": "RevCtrlBdOff",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2023.2",
+      "validated": "true"
+    },
+    "design_tree": {
+      "decimator_ip_0": "",
+      "clk_wiz": "",
+      "rst_clk_wiz_100M": ""
+    },
+    "ports": {
+      "clk_100MHz": {
+        "type": "clk",
+        "direction": "I",
+        "parameters": {
+          "CLK_DOMAIN": {
+            "value": "decimator_clk_100MHz",
+            "value_src": "default"
+          },
+          "FREQ_HZ": {
+            "value": "100000000"
+          },
+          "FREQ_TOLERANCE_HZ": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "PHASE": {
+            "value": "0.0",
+            "value_src": "default"
+          }
+        }
+      },
+      "reset_rtl": {
+        "type": "rst",
+        "direction": "I",
+        "parameters": {
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "POLARITY": {
+            "value": "ACTIVE_HIGH"
+          }
+        }
+      },
+      "data_in_0": {
+        "direction": "I",
+        "left": "15",
+        "right": "0"
+      },
+      "data_out_0": {
+        "direction": "O",
+        "left": "11",
+        "right": "0"
+      },
+      "valid_in_0": {
+        "direction": "I"
+      },
+      "valid_out_0": {
+        "direction": "O"
+      }
+    },
+    "components": {
+      "decimator_ip_0": {
+        "vlnv": "user.org:ip:decimator_ip:1.0",
+        "ip_revision": "1000000",
+        "xci_name": "decimator_decimator_ip_0_0",
+        "xci_path": "ip/decimator_decimator_ip_0_0/decimator_decimator_ip_0_0.xci",
+        "inst_hier_path": "decimator_ip_0"
+      },
+      "clk_wiz": {
+        "vlnv": "xilinx.com:ip:clk_wiz:6.0",
+        "ip_revision": "13",
+        "xci_name": "decimator_clk_wiz_0",
+        "xci_path": "ip/decimator_clk_wiz_0/decimator_clk_wiz_0.xci",
+        "inst_hier_path": "clk_wiz",
+        "parameters": {
+          "CLKOUT1_JITTER": {
+            "value": "125.247"
+          },
+          "CLKOUT1_REQUESTED_OUT_FREQ": {
+            "value": "125.000"
+          },
+          "MMCM_CLKOUT0_DIVIDE_F": {
+            "value": "8.000"
+          }
+        }
+      },
+      "rst_clk_wiz_100M": {
+        "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
+        "ip_revision": "14",
+        "xci_name": "decimator_rst_clk_wiz_100M_0",
+        "xci_path": "ip/decimator_rst_clk_wiz_100M_0/decimator_rst_clk_wiz_100M_0.xci",
+        "inst_hier_path": "rst_clk_wiz_100M"
+      }
+    },
+    "nets": {
+      "clk_100MHz_1": {
+        "ports": [
+          "clk_100MHz",
+          "clk_wiz/clk_in1"
+        ]
+      },
+      "clk_wiz_clk_out1": {
+        "ports": [
+          "clk_wiz/clk_out1",
+          "rst_clk_wiz_100M/slowest_sync_clk",
+          "decimator_ip_0/IPCORE_CLK"
+        ]
+      },
+      "clk_wiz_locked": {
+        "ports": [
+          "clk_wiz/locked",
+          "rst_clk_wiz_100M/dcm_locked"
+        ]
+      },
+      "data_in_0_1": {
+        "ports": [
+          "data_in_0",
+          "decimator_ip_0/data_in"
+        ]
+      },
+      "decimator_ip_0_data_out": {
+        "ports": [
+          "decimator_ip_0/data_out",
+          "data_out_0"
+        ]
+      },
+      "decimator_ip_0_valid_out": {
+        "ports": [
+          "decimator_ip_0/valid_out",
+          "valid_out_0"
+        ]
+      },
+      "reset_rtl_1": {
+        "ports": [
+          "reset_rtl",
+          "clk_wiz/reset",
+          "rst_clk_wiz_100M/ext_reset_in"
+        ]
+      },
+      "rst_clk_wiz_100M_peripheral_aresetn": {
+        "ports": [
+          "rst_clk_wiz_100M/peripheral_aresetn",
+          "decimator_ip_0/IPCORE_RESETN"
+        ]
+      },
+      "valid_in_0_1": {
+        "ports": [
+          "valid_in_0",
+          "decimator_ip_0/valid_in"
+        ]
+      }
+    }
+  }
+}

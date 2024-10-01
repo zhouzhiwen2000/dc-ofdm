@@ -1,10 +1,10 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-| Date         : Mon Sep 23 00:16:14 2024
+| Date         : Tue Oct  1 07:58:29 2024
 | Host         : cotti-machine running 64-bit Ubuntu 22.04.3 LTS
-| Command      : report_utilization -file downshifter_wrapper_utilization_synth.rpt -pb downshifter_wrapper_utilization_synth.pb
-| Design       : downshifter_wrapper
+| Command      : report_utilization -file decimator_wrapper_utilization_synth.rpt -pb decimator_wrapper_utilization_synth.pb
+| Design       : decimator_wrapper
 | Device       : xc7z010clg400-1
 | Speed File   : -1
 | Design State : Synthesized
@@ -92,7 +92,7 @@ Warning! LUT value is adjusted to account for LUT combining.
 +-----------------------------+------+-------+------------+-----------+-------+
 |          Site Type          | Used | Fixed | Prohibited | Available | Util% |
 +-----------------------------+------+-------+------------+-----------+-------+
-| Bonded IOB                  |   65 |     0 |          0 |       100 | 65.00 |
+| Bonded IOB                  |   27 |     0 |          0 |       100 | 27.00 |
 | Bonded IPADs                |    0 |     0 |          0 |         2 |  0.00 |
 | Bonded IOPADs               |    0 |     0 |          0 |       130 |  0.00 |
 | PHY_CONTROL                 |    0 |     0 |          0 |         2 |  0.00 |
@@ -148,21 +148,21 @@ Warning! LUT value is adjusted to account for LUT combining.
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| OBUF     |   33 |                  IO |
-| IBUF     |   32 |                  IO |
+| IBUF     |   14 |                  IO |
+| OBUF     |   13 |                  IO |
 +----------+------+---------------------+
 
 
 8. Black Boxes
 --------------
 
-+--------------------------------+------+
-|            Ref Name            | Used |
-+--------------------------------+------+
-| downshifter_rst_clk_wiz_100M_0 |    1 |
-| downshifter_downshift_ip_0_1   |    1 |
-| downshifter_clk_wiz_0          |    1 |
-+--------------------------------+------+
++------------------------------+------+
+|           Ref Name           | Used |
++------------------------------+------+
+| decimator_rst_clk_wiz_100M_0 |    1 |
+| decimator_decimator_ip_0_0   |    1 |
+| decimator_clk_wiz_0          |    1 |
++------------------------------+------+
 
 
 9. Instantiated Netlists

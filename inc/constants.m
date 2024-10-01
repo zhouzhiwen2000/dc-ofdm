@@ -204,9 +204,9 @@ end
 %% Decimator LPF filter
 CONST.rxM = 2;
 CONST.rxDecimatorFpass = 25e6;               % Passband frequency [Hz]
-CONST.rxDecimatorFstop = 36e6;               % Stopband frequency [Hz]
-CONST.rxDecimatorPassbandRippleDb = 0.01;     % Passband ripple [dB]
-CONST.rxDecimatorStopbandAttDb = 80;         % Stopband attenuation [dB]
+CONST.rxDecimatorFstop = 37e6;               % Stopband frequency [Hz]
+CONST.rxDecimatorPassbandRippleDb = 0.1;     % Passband ripple [dB]
+CONST.rxDecimatorStopbandAttDb = 60;         % Stopband attenuation [dB]
 
 CONST.rxDecimatorSpec = fdesign.decimator(CONST.rxM, 'lowpass', 'Fp,Fst,Ap,Ast', ...
     CONST.rxDecimatorFpass, ...

@@ -93,3 +93,21 @@ La síntesis en Vivado da la siguiente utilización de recursos y timing:
 ![Alt text](images/gg.png)
 
 ![Alt text](images/hh.png)
+
+## Decimator
+
+No hay problemas con el timing, pero si veo que Matlab me informa que se usan muchos multiplicadores. Actualmente, el decimador tiene 49 coeficientes, y un delay de 24.
+
+![Alt text](images/ii.png)
+
+![Alt text](images/jj.png)
+
+Matlab decía 25 multiplicadores, Vivado dice 25 DSP.
+
+![Alt text](images/kk.png)
+
+Luego de modificar un poco el decimator y hacerlo menos estricto, se logro reducir la cantidad de multiplicadores a 15:
+
+![Alt text](images/ll.png)
+
+Nota: reducir el tamaño de palabra de 16 bits a 12 bits no redujo la cantidad de multiplicadores usados por Vivado.
