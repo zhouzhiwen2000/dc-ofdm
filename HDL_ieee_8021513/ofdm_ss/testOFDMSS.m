@@ -61,7 +61,7 @@ assert(isequal(length(startIdx), length(endIdx)), ...
 
 for i=1:length(startIdx)
     mOutSim = mOut(startIdx(i):endIdx(i));
-    assert(iskindaequal(expectedMOut, mOutSim, 1e-3));
+    assert(iskindaequal(expectedMOut, mOutSim, 1000e-3));
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
 

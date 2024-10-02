@@ -1,0 +1,41 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"1.0",
+   "Default View_TopLeft":"-221,-292",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.5.8 2022-09-21 7111 VDI=41 GEI=38 GUI=JA:10.0 TLS
+#  -string -flagsOSRD
+preplace port port-id_clk_100MHz -pg 1 -lvl 0 -x -20 -y 80 -defaultsOSRD
+preplace port port-id_reset_rtl -pg 1 -lvl 0 -x -20 -y 60 -defaultsOSRD
+preplace port port-id_dont_use_equalizer_0 -pg 1 -lvl 0 -x -20 -y -40 -defaultsOSRD
+preplace port port-id_valid_channel_0 -pg 1 -lvl 0 -x -20 -y -60 -defaultsOSRD
+preplace port port-id_valid_data_0 -pg 1 -lvl 0 -x -20 -y -80 -defaultsOSRD
+preplace port port-id_valid_out_0 -pg 1 -lvl 3 -x 790 -y -80 -defaultsOSRD
+preplace portBus data_in_i_0 -pg 1 -lvl 0 -x -20 -y -100 -defaultsOSRD
+preplace portBus data_in_r_0 -pg 1 -lvl 0 -x -20 -y -120 -defaultsOSRD
+preplace portBus data_out_i_0 -pg 1 -lvl 3 -x 790 -y -100 -defaultsOSRD
+preplace portBus data_out_r_0 -pg 1 -lvl 3 -x 790 -y -120 -defaultsOSRD
+preplace inst channel_est_ip_0 -pg 1 -lvl 1 -x 180 -y -100 -defaultsOSRD
+preplace inst clk_wiz -pg 1 -lvl 1 -x 180 -y 70 -defaultsOSRD
+preplace inst rst_clk_wiz_100M -pg 1 -lvl 2 -x 570 -y -60 -defaultsOSRD
+preplace netloc clk_wiz_clk_out1 1 0 2 20 140 370
+preplace netloc clk_wiz_locked 1 1 1 380 -20n
+preplace netloc rst_clk_wiz_100M_peripheral_aresetn 1 0 3 10 160 NJ 160 750
+preplace netloc clk_100MHz_1 1 0 1 NJ 80
+preplace netloc reset_rtl_1 1 0 2 0 150 390J
+preplace netloc data_in_i_0_1 1 0 1 NJ -100
+preplace netloc data_in_r_0_1 1 0 1 NJ -120
+preplace netloc channel_est_ip_0_data_out_i 1 1 2 360J -160 750J
+preplace netloc channel_est_ip_0_data_out_r 1 1 2 340J -180 770J
+preplace netloc dont_use_equalizer_0_1 1 0 1 NJ -40
+preplace netloc valid_channel_0_1 1 0 1 NJ -60
+preplace netloc valid_data_0_1 1 0 1 NJ -80
+preplace netloc channel_est_ip_0_valid_out 1 1 2 350J -170 760J
+levelinfo -pg 1 -20 180 570 790
+pagesize -pg 1 -db -bbox -sgen -230 -220 980 240
+"
+}
+{
+   "da_board_cnt":"3",
+   "da_clkrst_cnt":"1"
+}

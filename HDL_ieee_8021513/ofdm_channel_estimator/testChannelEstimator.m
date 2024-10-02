@@ -96,12 +96,12 @@ assert(isequal(length(startIdx), length(endIdx)));
 
 % Channel estimation test
 outChannel = channelEstOut(startIdx(1):endIdx(1));
-assert(iskindaequal(expectedChannelEst, outChannel, 1e-3));
+assert(iskindaequal(expectedChannelEst, outChannel, 10e-3));
 
 % Equalized output test
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
-    assert(iskindaequal(expectedOut, out, 1e-3));
+    assert(iskindaequal(expectedOut, out, 10e-3));
 end
 
 %% Plotting

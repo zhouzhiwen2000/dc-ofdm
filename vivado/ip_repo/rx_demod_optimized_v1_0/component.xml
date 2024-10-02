@@ -64,7 +64,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>42c16985</spirit:value>
+            <spirit:value>b9330964</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -80,7 +80,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>42c16985</spirit:value>
+            <spirit:value>b9330964</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -791,7 +791,7 @@
       <spirit:file>
         <spirit:name>hdl/rx_demod_optimized.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_963b48fb</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_7286295e</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -1501,12 +1501,12 @@
       <xilinx:displayName>rx_demod_optimized</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
       <xilinx:coreRevision>1000000</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2024-10-01T21:33:43Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2024-10-02T12:50:59Z</xilinx:coreCreationDateTime>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2023.2</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="935bed94"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="888f2f20"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="60caeec7"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="b8c74b82"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="a2578a7c"/>
     </xilinx:packagingInfo>

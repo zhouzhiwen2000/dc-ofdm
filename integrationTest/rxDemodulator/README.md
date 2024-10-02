@@ -201,4 +201,48 @@ El siguiente paso es ver qué bloque está consumiendo más DSPs de los que debe
 
 ![Alt text](images/ww.png)
 
+## Optimizando OFDM SS
 
+Primero, quiero chequear si es un problema de las optimizaciones, o el tamaño de las words.
+
+Según la documentación del DSP48, este tiene un multiplicador de "25*18" bits. Yo actualmente estoy haciendo multiplicaciones de 32 bits, así que eso explicaría el por qué de la utilización.
+
+Este primer ejemplo viene sin optimizaciones (no adaptative o redistributed pipelining). Todos los multiplicadores son de 32x32 bits. Según Matlab, usa 11 multipliers, pero según Vivado usamos 44 (el cuádruple).
+
+![Alt text](images/xx.png)
+
+Este segundo respeta la arquitectura del DSP48, es decir, un multiplicador de 25*18. El resultado final utiliza 11 DSP, como es de esperarse.
+
+![Alt text](images/yy.png)
+
+Con respecto a la utilización de LUTs, si es necesario, se debería de reducir el tamaño de palabra del divisor:
+
+![Alt text](images/zz.png)
+
+Luego de compilar, se observa que el equalizer usar un multiplicador muy grande, y por eso usa DSPs de más.
+
+![Alt text](images/11.png)
+
+La sintesis en Vivado da los recursos, pero seguimos con sobre-uso de DSPs
+
+![Alt text](images/22.png)
+
+El objetivo ahora es bajar el tamaño de esos multiplicadores en el equalizer.
+
+## Reduciendo el equalizer
+
+Equalizer con data de 16 bits y canal de 12 bits
+
+![Alt text](images/33.png)
+
+Equalizer con data de 12 bits y canal de 16 bits
+
+![Alt text](images/44.png)
+
+Equalizer con datos y canal en 12 bits:
+
+![Alt text](images/55.png)
+
+Sintetizando esta última version (la cual idealmente reduce uno de los operandos por debajo de 25bits), se tiene esta utilización de recursos:
+
+![Alt text](images/66.png)

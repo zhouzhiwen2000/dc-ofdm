@@ -1,0 +1,41 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"0.922697",
+   "Default View_TopLeft":"-195,-300",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.5.8 2022-09-21 7111 VDI=41 GEI=38 GUI=JA:10.0 TLS
+#  -string -flagsOSRD
+preplace port port-id_clk_100MHz -pg 1 -lvl 0 -x -20 -y 80 -defaultsOSRD
+preplace port port-id_reset_rtl -pg 1 -lvl 0 -x -20 -y 60 -defaultsOSRD
+preplace port port-id_peak_out_0 -pg 1 -lvl 3 -x 820 -y -100 -defaultsOSRD
+preplace port port-id_reset_ofdm_0 -pg 1 -lvl 3 -x 820 -y -40 -defaultsOSRD
+preplace portBus M_d_0 -pg 1 -lvl 3 -x 820 -y -60 -defaultsOSRD
+preplace portBus data_in_i_0 -pg 1 -lvl 0 -x -20 -y -60 -defaultsOSRD
+preplace portBus data_in_r_0 -pg 1 -lvl 0 -x -20 -y -80 -defaultsOSRD
+preplace portBus data_out_i_0 -pg 1 -lvl 3 -x 820 -y -120 -defaultsOSRD
+preplace portBus data_out_r_0 -pg 1 -lvl 3 -x 820 -y -140 -defaultsOSRD
+preplace portBus phase_offset_0 -pg 1 -lvl 3 -x 820 -y -80 -defaultsOSRD
+preplace inst ofdm_ss_ip_0 -pg 1 -lvl 1 -x 170 -y -90 -defaultsOSRD
+preplace inst clk_wiz -pg 1 -lvl 1 -x 170 -y 70 -defaultsOSRD
+preplace inst rst_clk_wiz_100M -pg 1 -lvl 2 -x 580 -y -20 -defaultsOSRD
+preplace netloc clk_wiz_clk_out1 1 0 2 10 -200 370
+preplace netloc clk_wiz_locked 1 1 1 400 20n
+preplace netloc rst_clk_wiz_100M_peripheral_aresetn 1 0 3 10 150 NJ 150 760
+preplace netloc clk_100MHz_1 1 0 1 NJ 80
+preplace netloc reset_rtl_1 1 0 2 0 140 390J
+preplace netloc ofdm_ss_ip_0_M_d 1 1 2 340J -130 770J
+preplace netloc data_in_i_0_1 1 0 1 NJ -60
+preplace netloc data_in_r_0_1 1 0 1 NJ -80
+preplace netloc ofdm_ss_ip_0_data_out_i 1 1 2 350J -150 790J
+preplace netloc ofdm_ss_ip_0_data_out_r 1 1 2 NJ -140 NJ
+preplace netloc ofdm_ss_ip_0_peak_out 1 1 2 330J -170 800J
+preplace netloc ofdm_ss_ip_0_phase_offset 1 1 2 360J -160 780J
+preplace netloc ofdm_ss_ip_0_reset_ofdm 1 1 2 380J -120 760J
+levelinfo -pg 1 -20 170 580 820
+pagesize -pg 1 -db -bbox -sgen -200 -210 1020 220
+"
+}
+{
+   "da_board_cnt":"3",
+   "da_clkrst_cnt":"1"
+}
