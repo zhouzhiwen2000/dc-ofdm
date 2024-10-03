@@ -267,7 +267,6 @@ CONST.rxDecimatorOutputDataType = fixdt(1,16,14);
 
 CONST.rxMDataType = fixdt(1,16,14);
 CONST.rxRDataType = fixdt(1,32,24);
-%CONST.rxRDataType = fixdt(1,32,18);
 CONST.rxPDataType = fixdt(1,13,9);
 
 CONST.rxOFDMDemodDataType = fixdt(1,12,10);
@@ -275,5 +274,4 @@ CONST.rxOFDMDemodDataType = fixdt(1,12,10);
 CONST.rxChannelEstReferenceWordLength = 12;
 CONST.rxChannelEstReferenceFractionLength = 10;
 
-CONST.rxQAMDemodDataType = fixdt(1,16,10);
-
+CONST.rxQAMDemodDataType = fixdt(1,4,1);

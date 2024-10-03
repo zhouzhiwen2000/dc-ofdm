@@ -1,0 +1,55 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"0.93053",
+   "Default View_TopLeft":"-211,-179",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.5.8 2022-09-21 7111 VDI=41 GEI=38 GUI=JA:10.0 TLS
+#  -string -flagsOSRD
+preplace port port-id_clk_100MHz -pg 1 -lvl 0 -x -10 -y -30 -defaultsOSRD
+preplace port port-id_reset_rtl -pg 1 -lvl 0 -x -10 -y -120 -defaultsOSRD
+preplace port port-id_end_rsvd_0 -pg 1 -lvl 3 -x 740 -y 290 -defaultsOSRD
+preplace port port-id_err_0 -pg 1 -lvl 3 -x 740 -y 310 -defaultsOSRD
+preplace port port-id_start_in_0 -pg 1 -lvl 0 -x -10 -y 220 -defaultsOSRD
+preplace portBus bat_id_0 -pg 1 -lvl 3 -x 740 -y 210 -defaultsOSRD
+preplace portBus block_size_0 -pg 1 -lvl 3 -x 740 -y 110 -defaultsOSRD
+preplace portBus concat_factor_0 -pg 1 -lvl 3 -x 740 -y 170 -defaultsOSRD
+preplace portBus cp_id_0 -pg 1 -lvl 3 -x 740 -y 230 -defaultsOSRD
+preplace portBus data_in_0 -pg 1 -lvl 0 -x -10 -y 200 -defaultsOSRD
+preplace portBus fec_rate_0 -pg 1 -lvl 3 -x 740 -y 130 -defaultsOSRD
+preplace portBus mimo_number_0 -pg 1 -lvl 3 -x 740 -y 270 -defaultsOSRD
+preplace portBus mimo_spacing_0 -pg 1 -lvl 3 -x 740 -y 250 -defaultsOSRD
+preplace portBus msg_duration_0 -pg 1 -lvl 3 -x 740 -y 90 -defaultsOSRD
+preplace portBus psdu_size_0 -pg 1 -lvl 3 -x 740 -y 70 -defaultsOSRD
+preplace portBus rep_number_0 -pg 1 -lvl 3 -x 740 -y 150 -defaultsOSRD
+preplace portBus scrambler_init_0 -pg 1 -lvl 3 -x 740 -y 190 -defaultsOSRD
+preplace inst header_rx_full_ip_0 -pg 1 -lvl 1 -x 190 -y 190 -defaultsOSRD
+preplace inst clk_wiz -pg 1 -lvl 1 -x 190 -y -40 -defaultsOSRD
+preplace inst rst_clk_wiz_100M -pg 1 -lvl 2 -x 540 -y -70 -defaultsOSRD
+preplace netloc clk_wiz_clk_out1 1 0 2 30 -110 360
+preplace netloc clk_wiz_locked 1 1 1 N -30
+preplace netloc rst_clk_wiz_100M_peripheral_aresetn 1 0 3 20 -170 N -170 720
+preplace netloc clk_100MHz_1 1 0 1 NJ -30
+preplace netloc reset_rtl_1 1 0 2 10 -120 350J
+preplace netloc header_rx_full_ip_0_bat_id 1 1 2 NJ 210 NJ
+preplace netloc header_rx_full_ip_0_block_size 1 1 2 NJ 110 NJ
+preplace netloc header_rx_full_ip_0_concat_factor 1 1 2 NJ 170 NJ
+preplace netloc header_rx_full_ip_0_cp_id 1 1 2 NJ 230 NJ
+preplace netloc data_in_0_1 1 0 1 NJ 200
+preplace netloc header_rx_full_ip_0_end_rsvd 1 1 2 NJ 290 NJ
+preplace netloc header_rx_full_ip_0_err 1 1 2 NJ 310 NJ
+preplace netloc header_rx_full_ip_0_fec_rate 1 1 2 NJ 130 NJ
+preplace netloc header_rx_full_ip_0_mimo_number 1 1 2 NJ 270 NJ
+preplace netloc header_rx_full_ip_0_mimo_spacing 1 1 2 NJ 250 NJ
+preplace netloc header_rx_full_ip_0_msg_duration 1 1 2 NJ 90 NJ
+preplace netloc header_rx_full_ip_0_psdu_size 1 1 2 NJ 70 NJ
+preplace netloc header_rx_full_ip_0_rep_number 1 1 2 NJ 150 NJ
+preplace netloc header_rx_full_ip_0_scrambler_init 1 1 2 NJ 190 NJ
+preplace netloc start_in_0_1 1 0 1 NJ 220
+levelinfo -pg 1 -10 190 540 740
+pagesize -pg 1 -db -bbox -sgen -180 -200 950 510
+"
+}
+{
+   "da_board_cnt":"3",
+   "da_clkrst_cnt":"1"
+}

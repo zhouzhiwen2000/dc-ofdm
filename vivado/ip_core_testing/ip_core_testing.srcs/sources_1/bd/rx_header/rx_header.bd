@@ -1,0 +1,301 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0xC182B83A1EBCD2DD",
+      "device": "xc7z010clg400-1",
+      "gen_directory": "../../../../ip_core_testing.gen/sources_1/bd/rx_header",
+      "name": "rx_header",
+      "rev_ctrl_bd_flag": "RevCtrlBdOff",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2023.2",
+      "validated": "true"
+    },
+    "design_tree": {
+      "header_rx_full_ip_0": "",
+      "clk_wiz": "",
+      "rst_clk_wiz_100M": ""
+    },
+    "ports": {
+      "clk_100MHz": {
+        "type": "clk",
+        "direction": "I",
+        "parameters": {
+          "CLK_DOMAIN": {
+            "value": "rx_header_clk_100MHz",
+            "value_src": "default"
+          },
+          "FREQ_HZ": {
+            "value": "125000000"
+          },
+          "FREQ_TOLERANCE_HZ": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "PHASE": {
+            "value": "0.0",
+            "value_src": "default"
+          }
+        }
+      },
+      "reset_rtl": {
+        "type": "rst",
+        "direction": "I",
+        "parameters": {
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "POLARITY": {
+            "value": "ACTIVE_HIGH"
+          }
+        }
+      },
+      "bat_id_0": {
+        "direction": "O",
+        "left": "4",
+        "right": "0"
+      },
+      "block_size_0": {
+        "direction": "O",
+        "left": "1",
+        "right": "0"
+      },
+      "concat_factor_0": {
+        "direction": "O",
+        "left": "2",
+        "right": "0"
+      },
+      "cp_id_0": {
+        "direction": "O",
+        "left": "2",
+        "right": "0"
+      },
+      "data_in_0": {
+        "direction": "I",
+        "left": "3",
+        "right": "0"
+      },
+      "end_rsvd_0": {
+        "direction": "O"
+      },
+      "err_0": {
+        "direction": "O"
+      },
+      "fec_rate_0": {
+        "direction": "O",
+        "left": "2",
+        "right": "0"
+      },
+      "mimo_number_0": {
+        "direction": "O",
+        "left": "2",
+        "right": "0"
+      },
+      "mimo_spacing_0": {
+        "direction": "O",
+        "left": "2",
+        "right": "0"
+      },
+      "msg_duration_0": {
+        "direction": "O",
+        "left": "15",
+        "right": "0"
+      },
+      "psdu_size_0": {
+        "direction": "O",
+        "left": "23",
+        "right": "0"
+      },
+      "rep_number_0": {
+        "direction": "O",
+        "left": "2",
+        "right": "0"
+      },
+      "scrambler_init_0": {
+        "direction": "O",
+        "left": "3",
+        "right": "0"
+      },
+      "start_in_0": {
+        "direction": "I"
+      }
+    },
+    "components": {
+      "header_rx_full_ip_0": {
+        "vlnv": "user.org:ip:header_rx_full_ip:1.0",
+        "ip_revision": "1000000",
+        "xci_name": "rx_header_header_rx_full_ip_0_0",
+        "xci_path": "ip/rx_header_header_rx_full_ip_0_0/rx_header_header_rx_full_ip_0_0.xci",
+        "inst_hier_path": "header_rx_full_ip_0"
+      },
+      "clk_wiz": {
+        "vlnv": "xilinx.com:ip:clk_wiz:6.0",
+        "ip_revision": "13",
+        "xci_name": "rx_header_clk_wiz_0",
+        "xci_path": "ip/rx_header_clk_wiz_0/rx_header_clk_wiz_0.xci",
+        "inst_hier_path": "clk_wiz",
+        "parameters": {
+          "CLKIN1_JITTER_PS": {
+            "value": "80.0"
+          },
+          "CLKOUT1_JITTER": {
+            "value": "119.348"
+          },
+          "CLKOUT1_PHASE_ERROR": {
+            "value": "96.948"
+          },
+          "CLKOUT1_REQUESTED_OUT_FREQ": {
+            "value": "125.000"
+          },
+          "MMCM_CLKFBOUT_MULT_F": {
+            "value": "8.000"
+          },
+          "MMCM_CLKIN1_PERIOD": {
+            "value": "8.000"
+          },
+          "MMCM_CLKOUT0_DIVIDE_F": {
+            "value": "8.000"
+          },
+          "PRIM_IN_FREQ": {
+            "value": "125.000"
+          }
+        }
+      },
+      "rst_clk_wiz_100M": {
+        "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
+        "ip_revision": "14",
+        "xci_name": "rx_header_rst_clk_wiz_100M_0",
+        "xci_path": "ip/rx_header_rst_clk_wiz_100M_0/rx_header_rst_clk_wiz_100M_0.xci",
+        "inst_hier_path": "rst_clk_wiz_100M"
+      }
+    },
+    "nets": {
+      "clk_100MHz_1": {
+        "ports": [
+          "clk_100MHz",
+          "clk_wiz/clk_in1"
+        ]
+      },
+      "clk_wiz_clk_out1": {
+        "ports": [
+          "clk_wiz/clk_out1",
+          "rst_clk_wiz_100M/slowest_sync_clk",
+          "header_rx_full_ip_0/IPCORE_CLK"
+        ]
+      },
+      "clk_wiz_locked": {
+        "ports": [
+          "clk_wiz/locked",
+          "rst_clk_wiz_100M/dcm_locked"
+        ]
+      },
+      "data_in_0_1": {
+        "ports": [
+          "data_in_0",
+          "header_rx_full_ip_0/data_in"
+        ]
+      },
+      "header_rx_full_ip_0_bat_id": {
+        "ports": [
+          "header_rx_full_ip_0/bat_id",
+          "bat_id_0"
+        ]
+      },
+      "header_rx_full_ip_0_block_size": {
+        "ports": [
+          "header_rx_full_ip_0/block_size",
+          "block_size_0"
+        ]
+      },
+      "header_rx_full_ip_0_concat_factor": {
+        "ports": [
+          "header_rx_full_ip_0/concat_factor",
+          "concat_factor_0"
+        ]
+      },
+      "header_rx_full_ip_0_cp_id": {
+        "ports": [
+          "header_rx_full_ip_0/cp_id",
+          "cp_id_0"
+        ]
+      },
+      "header_rx_full_ip_0_end_rsvd": {
+        "ports": [
+          "header_rx_full_ip_0/end_rsvd",
+          "end_rsvd_0"
+        ]
+      },
+      "header_rx_full_ip_0_err": {
+        "ports": [
+          "header_rx_full_ip_0/err",
+          "err_0"
+        ]
+      },
+      "header_rx_full_ip_0_fec_rate": {
+        "ports": [
+          "header_rx_full_ip_0/fec_rate",
+          "fec_rate_0"
+        ]
+      },
+      "header_rx_full_ip_0_mimo_number": {
+        "ports": [
+          "header_rx_full_ip_0/mimo_number",
+          "mimo_number_0"
+        ]
+      },
+      "header_rx_full_ip_0_mimo_spacing": {
+        "ports": [
+          "header_rx_full_ip_0/mimo_spacing",
+          "mimo_spacing_0"
+        ]
+      },
+      "header_rx_full_ip_0_msg_duration": {
+        "ports": [
+          "header_rx_full_ip_0/msg_duration",
+          "msg_duration_0"
+        ]
+      },
+      "header_rx_full_ip_0_psdu_size": {
+        "ports": [
+          "header_rx_full_ip_0/psdu_size",
+          "psdu_size_0"
+        ]
+      },
+      "header_rx_full_ip_0_rep_number": {
+        "ports": [
+          "header_rx_full_ip_0/rep_number",
+          "rep_number_0"
+        ]
+      },
+      "header_rx_full_ip_0_scrambler_init": {
+        "ports": [
+          "header_rx_full_ip_0/scrambler_init",
+          "scrambler_init_0"
+        ]
+      },
+      "reset_rtl_1": {
+        "ports": [
+          "reset_rtl",
+          "clk_wiz/reset",
+          "rst_clk_wiz_100M/ext_reset_in"
+        ]
+      },
+      "rst_clk_wiz_100M_peripheral_aresetn": {
+        "ports": [
+          "rst_clk_wiz_100M/peripheral_aresetn",
+          "header_rx_full_ip_0/IPCORE_RESETN"
+        ]
+      },
+      "start_in_0_1": {
+        "ports": [
+          "start_in_0",
+          "header_rx_full_ip_0/start_in"
+        ]
+      }
+    }
+  }
+}

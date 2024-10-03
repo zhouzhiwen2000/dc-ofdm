@@ -70,13 +70,13 @@
     <Option Name="WTVcsLaunchSim" Val="0"/>
     <Option Name="WTRivieraLaunchSim" Val="0"/>
     <Option Name="WTActivehdlLaunchSim" Val="0"/>
-    <Option Name="WTXSimExportSim" Val="9"/>
-    <Option Name="WTModelSimExportSim" Val="9"/>
-    <Option Name="WTQuestaExportSim" Val="9"/>
+    <Option Name="WTXSimExportSim" Val="11"/>
+    <Option Name="WTModelSimExportSim" Val="11"/>
+    <Option Name="WTQuestaExportSim" Val="11"/>
     <Option Name="WTIesExportSim" Val="0"/>
-    <Option Name="WTVcsExportSim" Val="9"/>
-    <Option Name="WTRivieraExportSim" Val="9"/>
-    <Option Name="WTActivehdlExportSim" Val="9"/>
+    <Option Name="WTVcsExportSim" Val="11"/>
+    <Option Name="WTRivieraExportSim" Val="11"/>
+    <Option Name="WTActivehdlExportSim" Val="11"/>
     <Option Name="GenerateIPUpgradeLog" Val="TRUE"/>
     <Option Name="XSimRadix" Val="hex"/>
     <Option Name="XSimTimeUnit" Val="ns"/>
@@ -94,8 +94,28 @@
   <FileSets Version="1" Minor="32">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
       <Filter Type="Srcs"/>
+      <File Path="$PSRCDIR/sources_1/bd/rx_header/rx_header.bd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+        <CompFileExtendedInfo CompFileName="rx_header.bd" FileRelPathName="ip/rx_header_clk_wiz_0/rx_header_clk_wiz_0.xci">
+          <Proxy FileSetName="rx_header_clk_wiz_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="rx_header.bd" FileRelPathName="ip/rx_header_header_rx_full_ip_0_0/rx_header_header_rx_full_ip_0_0.xci">
+          <Proxy FileSetName="rx_header_header_rx_full_ip_0_0"/>
+        </CompFileExtendedInfo>
+      </File>
+      <File Path="$PGENDIR/sources_1/bd/rx_header/hdl/rx_header_wrapper.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PSRCDIR/sources_1/bd/ofdm_channel_est/ofdm_channel_est.bd">
         <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -109,6 +129,7 @@
       </File>
       <File Path="$PGENDIR/sources_1/bd/ofdm_channel_est/hdl/ofdm_channel_est_wrapper.vhd">
         <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -307,7 +328,7 @@
       </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
-        <Option Name="TopModule" Val="ofdm_channel_est_wrapper"/>
+        <Option Name="TopModule" Val="rx_header_wrapper"/>
       </Config>
     </FileSet>
     <FileSet Name="constrs_1" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">
@@ -477,6 +498,18 @@
     <FileSet Name="ofdm_channel_est_clk_wiz_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/ofdm_channel_est_clk_wiz_0" RelGenDir="$PGENDIR/ofdm_channel_est_clk_wiz_0">
       <Config>
         <Option Name="TopModule" Val="ofdm_channel_est_clk_wiz_0"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="rx_header_clk_wiz_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/rx_header_clk_wiz_0" RelGenDir="$PGENDIR/rx_header_clk_wiz_0">
+      <Config>
+        <Option Name="TopModule" Val="rx_header_clk_wiz_0"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="rx_header_header_rx_full_ip_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/rx_header_header_rx_full_ip_0_0" RelGenDir="$PGENDIR/rx_header_header_rx_full_ip_0_0">
+      <Config>
+        <Option Name="TopModule" Val="rx_header_header_rx_full_ip_0_0"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
@@ -695,9 +728,7 @@
     </Run>
     <Run Id="ofdm_demod_opt_rx_demod_optimized_0_0_synth_1" Type="Ft3:Synth" SrcSet="ofdm_demod_opt_rx_demod_optimized_0_0" Part="xc7z010clg400-1" ConstrsSet="ofdm_demod_opt_rx_demod_optimized_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/ofdm_demod_opt_rx_demod_optimized_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/ofdm_demod_opt_rx_demod_optimized_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/ofdm_demod_opt_rx_demod_optimized_0_0_synth_1">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -706,6 +737,26 @@
       <RQSFiles/>
     </Run>
     <Run Id="ofdm_channel_est_channel_est_ip_0_0_synth_1" Type="Ft3:Synth" SrcSet="ofdm_channel_est_channel_est_ip_0_0" Part="xc7z010clg400-1" ConstrsSet="ofdm_channel_est_channel_est_ip_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/ofdm_channel_est_channel_est_ip_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/ofdm_channel_est_channel_est_ip_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/ofdm_channel_est_channel_est_ip_0_0_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="ofdm_channel_est_clk_wiz_0_synth_1" Type="Ft3:Synth" SrcSet="ofdm_channel_est_clk_wiz_0" Part="xc7z010clg400-1" ConstrsSet="ofdm_channel_est_clk_wiz_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/ofdm_channel_est_clk_wiz_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/ofdm_channel_est_clk_wiz_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/ofdm_channel_est_clk_wiz_0_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="rx_header_clk_wiz_0_synth_1" Type="Ft3:Synth" SrcSet="rx_header_clk_wiz_0" Part="xc7z010clg400-1" ConstrsSet="rx_header_clk_wiz_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/rx_header_clk_wiz_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/rx_header_clk_wiz_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/rx_header_clk_wiz_0_synth_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023">
           <Desc>Vivado Synthesis Defaults</Desc>
@@ -717,7 +768,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="ofdm_channel_est_clk_wiz_0_synth_1" Type="Ft3:Synth" SrcSet="ofdm_channel_est_clk_wiz_0" Part="xc7z010clg400-1" ConstrsSet="ofdm_channel_est_clk_wiz_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/ofdm_channel_est_clk_wiz_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/ofdm_channel_est_clk_wiz_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/ofdm_channel_est_clk_wiz_0_synth_1">
+    <Run Id="rx_header_header_rx_full_ip_0_0_synth_1" Type="Ft3:Synth" SrcSet="rx_header_header_rx_full_ip_0_0" Part="xc7z010clg400-1" ConstrsSet="rx_header_header_rx_full_ip_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/rx_header_header_rx_full_ip_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/rx_header_header_rx_full_ip_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/rx_header_header_rx_full_ip_0_0_synth_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023">
           <Desc>Vivado Synthesis Defaults</Desc>
@@ -1054,9 +1105,7 @@
     </Run>
     <Run Id="ofdm_demod_opt_rx_demod_optimized_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z010clg400-1" ConstrsSet="ofdm_demod_opt_rx_demod_optimized_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="ofdm_demod_opt_rx_demod_optimized_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/ofdm_demod_opt_rx_demod_optimized_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/ofdm_demod_opt_rx_demod_optimized_0_0_impl_1">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -1072,6 +1121,40 @@
       <RQSFiles/>
     </Run>
     <Run Id="ofdm_channel_est_channel_est_ip_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z010clg400-1" ConstrsSet="ofdm_channel_est_channel_est_ip_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="ofdm_channel_est_channel_est_ip_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/ofdm_channel_est_channel_est_ip_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/ofdm_channel_est_channel_est_ip_0_0_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="ofdm_channel_est_clk_wiz_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z010clg400-1" ConstrsSet="ofdm_channel_est_clk_wiz_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="ofdm_channel_est_clk_wiz_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/ofdm_channel_est_clk_wiz_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/ofdm_channel_est_clk_wiz_0_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="rx_header_clk_wiz_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z010clg400-1" ConstrsSet="rx_header_clk_wiz_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="rx_header_clk_wiz_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/rx_header_clk_wiz_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/rx_header_clk_wiz_0_impl_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023">
           <Desc>Default settings for Implementation.</Desc>
@@ -1090,7 +1173,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="ofdm_channel_est_clk_wiz_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z010clg400-1" ConstrsSet="ofdm_channel_est_clk_wiz_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="ofdm_channel_est_clk_wiz_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/ofdm_channel_est_clk_wiz_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/ofdm_channel_est_clk_wiz_0_impl_1">
+    <Run Id="rx_header_header_rx_full_ip_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z010clg400-1" ConstrsSet="rx_header_header_rx_full_ip_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="rx_header_header_rx_full_ip_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/rx_header_header_rx_full_ip_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/rx_header_header_rx_full_ip_0_0_impl_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023">
           <Desc>Default settings for Implementation.</Desc>

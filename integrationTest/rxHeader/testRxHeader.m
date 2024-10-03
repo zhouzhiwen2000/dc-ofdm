@@ -32,6 +32,7 @@ for i =1:1:length(paramFile)
     
     startIn = [startIn; true; false(length(llr)-1, 1); false(5000, 1);];
     dataLLR = [dataLLR; llr; zeros(5000, 1);];
+    dataLLR = awgn(dataLLR, 20);
 end
 
 %% Simulation Time
