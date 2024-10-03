@@ -1,6 +1,6 @@
 # Optimización del receptor
 
-Empezamos con esta tabla de utilización, que viene después de todos los pasos descriptos en el test de integración del :
+Empezamos con esta tabla de utilización, que viene después de todos los pasos descriptos en el test de integración del Demodulator:
 
 ![Alt text](images/aa.png)
 
@@ -8,4 +8,6 @@ Lo que se quiere lograr es reducir la utilización de recursos del header y del 
 
 Algo que llama la atención es que el Demodulador sólo entró en recursos, pero ahora el demodulador con otras cosas no entra. Hay que revisar bien por qué es esto.
 
-Ir al README del rxHeader para ver la optimización del LDPC.
+Ir al README del rxHeader para ver la optimización del LDPC. Ir al README del rxPayload para ver la optimización del LDPC.
+
+
