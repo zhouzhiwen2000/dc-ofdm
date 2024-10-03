@@ -246,3 +246,26 @@ Equalizer con datos y canal en 12 bits:
 Sintetizando esta última version (la cual idealmente reduce uno de los operandos por debajo de 25bits), se tiene esta utilización de recursos:
 
 ![Alt text](images/66.png)
+
+## Reduciendo utilizacion de Luts
+
+Venimos a esta sección luego de haber sintetizado el header y el payload, y ver que la utilización de Luts está por encima de lo que nos gustaría ver.
+
+Actualmente, puedo estimar que la utilización está en:
+
+* Payload: 8500
+* Header: 2500
+* Total disponible: 17000
+
+Por lo tanto, el demodulator tiene que ocupar 6000 LUTs como máximo, y dejando algo de margen por acá y allá.
+
+Primero, veamos como está la utilización actual, y que bloques necesitan ser corregidos:
+
+![Alt text](images/77.png)
+
+Extrañamente, aparece que los DSPs están por encima de 100%, y eso que ya habíamos corregido el tema. De todas formas, la utilización de LUTs está muy alta. Procedo a reducir el tamaño de palabra de los principales offenders:
+
+* Offender A
+
+* Offender B
+

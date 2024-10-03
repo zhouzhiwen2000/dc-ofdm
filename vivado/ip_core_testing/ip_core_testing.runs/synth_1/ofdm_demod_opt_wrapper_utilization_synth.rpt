@@ -1,10 +1,10 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-| Date         : Thu Oct  3 15:42:05 2024
+| Date         : Thu Oct  3 16:38:08 2024
 | Host         : cotti-machine running 64-bit Ubuntu 22.04.3 LTS
-| Command      : report_utilization -file ldpc_decoder_wrapper_utilization_synth.rpt -pb ldpc_decoder_wrapper_utilization_synth.pb
-| Design       : ldpc_decoder_wrapper
+| Command      : report_utilization -file ofdm_demod_opt_wrapper_utilization_synth.rpt -pb ofdm_demod_opt_wrapper_utilization_synth.pb
+| Design       : ofdm_demod_opt_wrapper
 | Device       : xc7z010clg400-1
 | Speed File   : -1
 | Design State : Synthesized
@@ -92,7 +92,7 @@ Warning! LUT value is adjusted to account for LUT combining.
 +-----------------------------+------+-------+------------+-----------+-------+
 |          Site Type          | Used | Fixed | Prohibited | Available | Util% |
 +-----------------------------+------+-------+------------+-----------+-------+
-| Bonded IOB                  |    8 |     0 |          0 |       100 |  8.00 |
+| Bonded IOB                  |   91 |     0 |          0 |       100 | 91.00 |
 | Bonded IPADs                |    0 |     0 |          0 |         2 |  0.00 |
 | Bonded IOPADs               |    0 |     0 |          0 |       130 |  0.00 |
 | PHY_CONTROL                 |    0 |     0 |          0 |         2 |  0.00 |
@@ -148,21 +148,21 @@ Warning! LUT value is adjusted to account for LUT combining.
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| IBUF     |    6 |                  IO |
-| OBUF     |    2 |                  IO |
+| IBUF     |   56 |                  IO |
+| OBUF     |   35 |                  IO |
 +----------+------+---------------------+
 
 
 8. Black Boxes
 --------------
 
-+----------------------------------+------+
-|             Ref Name             | Used |
-+----------------------------------+------+
-| ldpc_decoder_rst_clk_wiz_100M_0  |    1 |
-| ldpc_decoder_ldpc_deco_23_ip_0_0 |    1 |
-| ldpc_decoder_clk_wiz_0           |    1 |
-+----------------------------------+------+
++---------------------------------------+------+
+|                Ref Name               | Used |
++---------------------------------------+------+
+| ofdm_demod_opt_rx_demod_optimized_0_0 |    1 |
+| ofdm_demod_opt_rst_clk_wiz_100M_0     |    1 |
+| ofdm_demod_opt_clk_wiz_0              |    1 |
++---------------------------------------+------+
 
 
 9. Instantiated Netlists
