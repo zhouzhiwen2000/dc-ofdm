@@ -49,3 +49,21 @@ Pruebo también coon LDPC de 120 bytes y fec rate 5/6:
 ![Alt text](images/jj.png)
 
 ![Alt text](images/kk.png)
+
+## Optimizando desde Vivado
+
+En esta sección, vamos a intentar de optimizar el LDPC decoder desde Vivado, para reducir la utilización de área y recursos.
+
+El diseño empieza con esta síntesis, correspondiente el LDPC con 120 bytes y fec rate 5/6:
+
+![Alt text](images/ll.png)
+
+Voy a Tools -> Settings -> Project Settings -> Synthesis y cambio el valor de "strategy".
+
+Resultado usando "Flow_AreaOptimized_high":
+
+NO CAMBIO NADA. DECEPCIÓN.
+
+Resultado usando "alternative routability":
+
+NO CAMBIO NADA. DECEPCIÓN X2.

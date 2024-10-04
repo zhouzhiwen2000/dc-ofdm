@@ -98,15 +98,15 @@
       "full_rx_ip_0": {
         "vlnv": "user.org:ip:full_rx_ip:1.0",
         "ip_revision": "1000000",
-        "xci_name": "full_rx_full_rx_ip_0_0",
-        "xci_path": "ip/full_rx_full_rx_ip_0_0/full_rx_full_rx_ip_0_0.xci",
+        "xci_name": "full_rx_full_rx_ip_0_1",
+        "xci_path": "ip/full_rx_full_rx_ip_0_1/full_rx_full_rx_ip_0_1.xci",
         "inst_hier_path": "full_rx_ip_0"
       },
       "clk_wiz": {
         "vlnv": "xilinx.com:ip:clk_wiz:6.0",
         "ip_revision": "13",
-        "xci_name": "full_rx_clk_wiz_0",
-        "xci_path": "ip/full_rx_clk_wiz_0/full_rx_clk_wiz_0.xci",
+        "xci_name": "full_rx_clk_wiz_1",
+        "xci_path": "ip/full_rx_clk_wiz_1/full_rx_clk_wiz_1.xci",
         "inst_hier_path": "clk_wiz",
         "parameters": {
           "CLKIN1_JITTER_PS": {
@@ -138,8 +138,8 @@
       "rst_clk_wiz_100M": {
         "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
         "ip_revision": "14",
-        "xci_name": "full_rx_rst_clk_wiz_100M_0",
-        "xci_path": "ip/full_rx_rst_clk_wiz_100M_0/full_rx_rst_clk_wiz_100M_0.xci",
+        "xci_name": "full_rx_rst_clk_wiz_100M_1",
+        "xci_path": "ip/full_rx_rst_clk_wiz_100M_1/full_rx_rst_clk_wiz_100M_1.xci",
         "inst_hier_path": "rst_clk_wiz_100M"
       }
     },

@@ -1,14 +1,14 @@
 {
   "schema": "xilinx.com:schema:json_instance:1.0",
   "ip_inst": {
-    "xci_name": "full_rx_full_rx_ip_0_0",
+    "xci_name": "full_rx_full_rx_ip_0_1",
     "cell_name": "full_rx_ip_0",
     "component_reference": "user.org:ip:full_rx_ip:1.0",
     "ip_revision": "1000000",
-    "gen_directory": "../../../../../../red_pitaya_rx.gen/sources_1/bd/full_rx/ip/full_rx_full_rx_ip_0_0",
+    "gen_directory": "../../../../../../red_pitaya_rx.gen/sources_1/bd/full_rx/ip/full_rx_full_rx_ip_0_1",
     "parameters": {
       "component_parameters": {
-        "Component_Name": [ { "value": "full_rx_full_rx_ip_0_0", "resolve_type": "user", "usage": "all" } ]
+        "Component_Name": [ { "value": "full_rx_full_rx_ip_0_1", "resolve_type": "user", "usage": "all" } ]
       },
       "project_parameters": {
         "ARCHITECTURE": [ { "value": "zynq" } ],
@@ -27,7 +27,7 @@
         "IPCONTEXT": [ { "value": "IP_Integrator" } ],
         "IPREVISION": [ { "value": "1000000" } ],
         "MANAGED": [ { "value": "TRUE" } ],
-        "OUTPUTDIR": [ { "value": "../../../../../../red_pitaya_rx.gen/sources_1/bd/full_rx/ip/full_rx_full_rx_ip_0_0" } ],
+        "OUTPUTDIR": [ { "value": "../../../../../../red_pitaya_rx.gen/sources_1/bd/full_rx/ip/full_rx_full_rx_ip_0_1" } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
         "SHAREDDIR": [ { "value": "../../ipshared" } ],
         "SWVERSION": [ { "value": "2023.2" } ],
