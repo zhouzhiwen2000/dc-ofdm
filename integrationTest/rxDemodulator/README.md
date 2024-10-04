@@ -265,7 +265,10 @@ Primero, veamos como está la utilización actual, y que bloques necesitan ser c
 
 Extrañamente, aparece que los DSPs están por encima de 100%, y eso que ya habíamos corregido el tema. De todas formas, la utilización de LUTs está muy alta. Procedo a reducir el tamaño de palabra de los principales offenders:
 
-* Offender A
+* Channel equalization: Reemplazo el bloque por la operación matemática. No tiene sentido que ocupe 6000 LUTs si son solamente unas multiplicaciones y una division.
 
 * Offender B
 
+A continuación, la utilización de recursos del divisor real y complejo, al variar el tamaño de entrada y salida. Podemos ver que variar la salida no afecta tanto la utilización como disminuir el tamaño de la salida. En conclusión, conviene usar el divisor real, y disminuir al máximo posible el tamaño de entrada.
+
+![Alt text](images/88.png)

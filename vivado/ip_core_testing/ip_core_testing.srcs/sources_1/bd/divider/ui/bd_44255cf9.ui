@@ -1,0 +1,45 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"1.0",
+   "Default View_TopLeft":"-160,-280",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.5.8 2022-09-21 7111 VDI=41 GEI=38 GUI=JA:10.0 TLS
+#  -string -flagsOSRD
+preplace port port-id_clk_100MHz -pg 1 -lvl 0 -x -10 -y 120 -defaultsOSRD
+preplace port port-id_reset_rtl -pg 1 -lvl 0 -x -10 -y 100 -defaultsOSRD
+preplace port port-id_validOut_0 -pg 1 -lvl 3 -x 820 -y -120 -defaultsOSRD
+preplace port port-id_validOut1_0 -pg 1 -lvl 3 -x 820 -y -80 -defaultsOSRD
+preplace port port-id_validOut2_0 -pg 1 -lvl 3 -x 820 -y -40 -defaultsOSRD
+preplace port port-id_validOut3_0 -pg 1 -lvl 3 -x 820 -y 0 -defaultsOSRD
+preplace portBus den_0 -pg 1 -lvl 0 -x -10 -y -40 -defaultsOSRD
+preplace portBus num_0 -pg 1 -lvl 0 -x -10 -y -60 -defaultsOSRD
+preplace portBus y_0 -pg 1 -lvl 3 -x 820 -y -140 -defaultsOSRD
+preplace portBus y1_0 -pg 1 -lvl 3 -x 820 -y -100 -defaultsOSRD
+preplace portBus y2_0 -pg 1 -lvl 3 -x 820 -y -60 -defaultsOSRD
+preplace portBus y3_0 -pg 1 -lvl 3 -x 820 -y -20 -defaultsOSRD
+preplace inst divider_ip_0 -pg 1 -lvl 1 -x 160 -y -70 -defaultsOSRD
+preplace inst clk_wiz -pg 1 -lvl 1 -x 160 -y 110 -defaultsOSRD
+preplace inst rst_clk_wiz_100M -pg 1 -lvl 2 -x 550 -y 0 -defaultsOSRD
+preplace netloc clk_wiz_clk_out1 1 0 2 30 -210 320
+preplace netloc clk_wiz_locked 1 1 1 370 40n
+preplace netloc rst_clk_wiz_100M_peripheral_aresetn 1 0 3 20 -220 NJ -220 730
+preplace netloc clk_100MHz_1 1 0 1 NJ 120
+preplace netloc reset_rtl_1 1 0 2 10 -200 360J
+preplace netloc den_0_1 1 0 1 NJ -40
+preplace netloc num_0_1 1 0 1 NJ -60
+preplace netloc divider_ip_0_validOut 1 1 2 NJ -120 NJ
+preplace netloc divider_ip_0_validOut1 1 1 2 370J -110 760J
+preplace netloc divider_ip_0_validOut2 1 1 2 310J -100 740J
+preplace netloc divider_ip_0_validOut3 1 1 2 340J -170 780J
+preplace netloc divider_ip_0_y 1 1 2 290J -160 800J
+preplace netloc divider_ip_0_y1 1 1 2 300J -150 790J
+preplace netloc divider_ip_0_y2 1 1 2 350J -140 770J
+preplace netloc divider_ip_0_y3 1 1 2 330J -130 750J
+levelinfo -pg 1 -10 160 550 820
+pagesize -pg 1 -db -bbox -sgen -160 -250 960 260
+"
+}
+{
+   "da_board_cnt":"3",
+   "da_clkrst_cnt":"1"
+}
