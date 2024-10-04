@@ -255,6 +255,8 @@ CONST.txInterpolatorOutputDataType = fixdt(1,20,16);
 CONST.txNCOWordLength = 20;
 CONST.txNCOFractionLength = 16;
 
+CONST.rxDemodInputDataType = fixdt(1,14,13);
+
 CONST.rxNCOWordLength = 16;
 CONST.rxNCOFractionLength = 14;
 
@@ -262,11 +264,16 @@ CONST.rxNCOFractionLength = 14;
 CONST.rxFreqOffsetWordLength = 20; CONST.rxFreqOffsetFractionLength = 8;
 CONST.rxPhaseDataType = fixdt(1,16,15);
 
-CONST.rxDecimatorCoefficientsDataType = fixdt(1,16);
-CONST.rxDecimatorOutputDataType = fixdt(1,16,14);
+CONST.rxDecimatorCoefficientsDataType = fixdt(1,14);
+CONST.rxDecimatorOutputDataType = fixdt(1,14,12);
 
 CONST.rxMDataType = fixdt(1,16,14);
-CONST.rxRDataType = fixdt(1,32,24);
+
+CONST.rxRWordLength = 16;
+CONST.rxRFractionLength = 10;
+
+CONST.rxRDividerDelay = 11 + CONST.rxRWordLength + nextpow2(CONST.rxRWordLength+1);
+
 CONST.rxPDataType = fixdt(1,13,9);
 
 CONST.rxOFDMDemodDataType = fixdt(1,12,10);

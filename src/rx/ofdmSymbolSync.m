@@ -50,7 +50,7 @@ end
     if (~isempty(peaks))
         delay = peaks(1);
     else
-        delay = 0;
+        delay = 1;
     end
 
     % Calculate frequency offset
