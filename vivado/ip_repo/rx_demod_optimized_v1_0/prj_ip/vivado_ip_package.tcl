@@ -7,12 +7,48 @@ add_files -norecurse {../hdl/rx_demod_optimized_src_rx_demodulator_full_tc.vhd}
 add_files -norecurse {../hdl/rx_demod_optimized_src_symDemodQPSKVector.vhd}
 add_files -norecurse {../hdl/rx_demod_optimized_src_Symbol_Demodulator1.vhd}
 add_files -norecurse {../hdl/rx_demod_optimized_src_4QAM_demod.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_OFDM_Equalizer.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Reshape_to_original_size.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Verify_divide_sizes.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Variable_Right_Shift.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Variable_Left_Shift.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Cast_to_Union_of_Types.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_positiveRealNormalizer.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Normalize_numerator.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_positiveRealNormalizer_block.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Normalize_denominator.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_normalizedCORDICDivide.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Compare_To_Zero.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Divide_by_zero_handler.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Upcast_Wordlength.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_MATLAB_Function.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_ForEach_Real_Divide.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Reshape_to_original_size_block.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Verify_divide_sizes_block.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_y_u_1.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Variable_Right_Shift_block.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Variable_Left_Shift_block.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Cast_to_Union_of_Types_block.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type_block.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_positiveRealNormalizer_block1.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Normalize_numerator_block.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_positiveRealNormalizer_block2.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Normalize_denominator_block.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_normalizedCORDICDivide_block.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator_block.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Compare_To_Zero_block.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Divide_by_zero_handler_block.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Upcast_Wordlength_block.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_MATLAB_Function_block.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_ForEach_Real_Divide_block.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized1.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_complex_multiplier.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_equalizer.vhd}
 add_files -norecurse {../hdl/rx_demod_optimized_src_rising_edge_detector.vhd}
 add_files -norecurse {../hdl/rx_demod_optimized_src_rising_edge_detector1.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block1.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic.vhd}
 add_files -norecurse {../hdl/rx_demod_optimized_src_Channel_Equalization.vhd}
 add_files -norecurse {../hdl/rx_demod_optimized_src_rising_edge_detector_block.vhd}
 add_files -norecurse {../hdl/rx_demod_optimized_src_HDL_FIFO.vhd}
@@ -56,27 +92,28 @@ add_files -norecurse {../hdl/rx_demod_optimized_src_FIRDecimInteg.vhd}
 add_files -norecurse {../hdl/rx_demod_optimized_src_FIR_Decimator.vhd}
 add_files -norecurse {../hdl/rx_demod_optimized_src_decimator.vhd}
 add_files -norecurse {../hdl/rx_demod_optimized_src_Compare_To_Constant_block.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block.vhd}
 add_files -norecurse {../hdl/rx_demod_optimized_src_find_peak.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_Compare_To_Zero.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_Reshape_to_original_size.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_Verify_divide_sizes.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_Variable_Right_Shift.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_Variable_Left_Shift.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_Cast_to_Union_of_Types.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_positiveRealNormalizer.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_Normalize_numerator.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_positiveRealNormalizer_block.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_Normalize_denominator.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_normalizedCORDICDivide.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_Compare_To_Zero_block.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_Divide_by_zero_handler.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_Upcast_Wordlength.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_MATLAB_Function.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_ForEach_Real_Divide.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized.vhd}
-add_files -norecurse {../hdl/rx_demod_optimized_src_complex_multiplier.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Compare_To_Constant_block1.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Reshape_to_original_size_block1.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Verify_divide_sizes_block1.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Variable_Right_Shift_block1.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Variable_Left_Shift_block1.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Cast_to_Union_of_Types_block1.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type_block1.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_positiveRealNormalizer_block3.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Normalize_numerator_block1.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_positiveRealNormalizer_block4.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Normalize_denominator_block1.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_normalizedCORDICDivide_block1.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator_block1.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Compare_To_Zero_block1.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Divide_by_zero_handler_block1.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Upcast_Wordlength_block1.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_MATLAB_Function_block1.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_ForEach_Real_Divide_block1.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized_block.vhd}
+add_files -norecurse {../hdl/rx_demod_optimized_src_complex_multiplier_block.vhd}
 add_files -norecurse {../hdl/rx_demod_optimized_src_complex_multiplier1.vhd}
 add_files -norecurse {../hdl/rx_demod_optimized_src_calculate_P.vhd}
 add_files -norecurse {../hdl/rx_demod_optimized_src_calculate_R.vhd}
@@ -173,14 +210,162 @@ ipx::add_file {hdl/rx_demod_optimized_src_4QAM_demod.vhd} [ipx::get_file_groups 
 set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_4QAM_demod.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/rx_demod_optimized_src_4QAM_demod.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_4QAM_demod.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_OFDM_Equalizer.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_OFDM_Equalizer.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_OFDM_Equalizer.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_OFDM_Equalizer.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Reshape_to_original_size.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Reshape_to_original_size.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Reshape_to_original_size.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Reshape_to_original_size.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Verify_divide_sizes.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Verify_divide_sizes.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Verify_divide_sizes.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Verify_divide_sizes.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Variable_Right_Shift.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Variable_Right_Shift.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Variable_Right_Shift.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Variable_Right_Shift.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Variable_Left_Shift.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Variable_Left_Shift.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Variable_Left_Shift.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Variable_Left_Shift.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Cast_to_Union_of_Types.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Cast_to_Union_of_Types.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Cast_to_Union_of_Types.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Cast_to_Union_of_Types.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_positiveRealNormalizer.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_positiveRealNormalizer.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_positiveRealNormalizer.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_positiveRealNormalizer.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Normalize_numerator.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Normalize_numerator.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Normalize_numerator.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Normalize_numerator.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_positiveRealNormalizer_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_positiveRealNormalizer_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_positiveRealNormalizer_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_positiveRealNormalizer_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Normalize_denominator.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Normalize_denominator.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Normalize_denominator.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Normalize_denominator.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_normalizedCORDICDivide.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_normalizedCORDICDivide.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_normalizedCORDICDivide.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_normalizedCORDICDivide.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Compare_To_Zero.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Compare_To_Zero.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Compare_To_Zero.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Compare_To_Zero.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Divide_by_zero_handler.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Divide_by_zero_handler.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Divide_by_zero_handler.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Divide_by_zero_handler.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Upcast_Wordlength.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Upcast_Wordlength.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Upcast_Wordlength.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Upcast_Wordlength.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_MATLAB_Function.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_MATLAB_Function.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_MATLAB_Function.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_MATLAB_Function.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_ForEach_Real_Divide.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_ForEach_Real_Divide.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_ForEach_Real_Divide.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_ForEach_Real_Divide.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Reshape_to_original_size_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Reshape_to_original_size_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Reshape_to_original_size_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Reshape_to_original_size_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Verify_divide_sizes_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Verify_divide_sizes_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Verify_divide_sizes_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Verify_divide_sizes_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_y_u_1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_y_u_1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_y_u_1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_y_u_1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Variable_Right_Shift_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Variable_Right_Shift_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Variable_Right_Shift_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Variable_Right_Shift_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Variable_Left_Shift_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Variable_Left_Shift_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Variable_Left_Shift_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Variable_Left_Shift_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Cast_to_Union_of_Types_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Cast_to_Union_of_Types_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Cast_to_Union_of_Types_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Cast_to_Union_of_Types_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_positiveRealNormalizer_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_positiveRealNormalizer_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_positiveRealNormalizer_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_positiveRealNormalizer_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Normalize_numerator_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Normalize_numerator_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Normalize_numerator_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Normalize_numerator_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_positiveRealNormalizer_block2.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_positiveRealNormalizer_block2.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_positiveRealNormalizer_block2.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_positiveRealNormalizer_block2.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Normalize_denominator_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Normalize_denominator_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Normalize_denominator_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Normalize_denominator_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_normalizedCORDICDivide_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_normalizedCORDICDivide_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_normalizedCORDICDivide_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_normalizedCORDICDivide_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Compare_To_Zero_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Compare_To_Zero_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Compare_To_Zero_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Compare_To_Zero_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Divide_by_zero_handler_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Divide_by_zero_handler_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Divide_by_zero_handler_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Divide_by_zero_handler_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Upcast_Wordlength_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Upcast_Wordlength_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Upcast_Wordlength_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Upcast_Wordlength_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_MATLAB_Function_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_MATLAB_Function_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_MATLAB_Function_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_MATLAB_Function_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_ForEach_Real_Divide_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_ForEach_Real_Divide_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_ForEach_Real_Divide_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_ForEach_Real_Divide_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_complex_multiplier.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_complex_multiplier.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_complex_multiplier.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_complex_multiplier.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_equalizer.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_equalizer.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_equalizer.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_equalizer.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/rx_demod_optimized_src_rising_edge_detector.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_rising_edge_detector.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/rx_demod_optimized_src_rising_edge_detector.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
@@ -189,14 +374,10 @@ ipx::add_file {hdl/rx_demod_optimized_src_rising_edge_detector1.vhd} [ipx::get_f
 set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_rising_edge_detector1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/rx_demod_optimized_src_rising_edge_detector1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_rising_edge_detector1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/rx_demod_optimized_src_Channel_Equalization.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Channel_Equalization.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/rx_demod_optimized_src_Channel_Equalization.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
@@ -369,90 +550,94 @@ ipx::add_file {hdl/rx_demod_optimized_src_Compare_To_Constant_block.vhd} [ipx::g
 set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Compare_To_Constant_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/rx_demod_optimized_src_Compare_To_Constant_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Compare_To_Constant_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/rx_demod_optimized_src_find_peak.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_find_peak.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/rx_demod_optimized_src_find_peak.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_find_peak.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Compare_To_Zero.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Compare_To_Zero.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Compare_To_Zero.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Compare_To_Zero.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Reshape_to_original_size.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Reshape_to_original_size.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Reshape_to_original_size.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Reshape_to_original_size.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Verify_divide_sizes.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Verify_divide_sizes.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Verify_divide_sizes.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Verify_divide_sizes.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Variable_Right_Shift.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Variable_Right_Shift.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Variable_Right_Shift.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Variable_Right_Shift.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Variable_Left_Shift.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Variable_Left_Shift.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Variable_Left_Shift.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Variable_Left_Shift.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Cast_to_Union_of_Types.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Cast_to_Union_of_Types.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Cast_to_Union_of_Types.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Cast_to_Union_of_Types.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_positiveRealNormalizer.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_positiveRealNormalizer.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_positiveRealNormalizer.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_positiveRealNormalizer.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Normalize_numerator.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Normalize_numerator.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Normalize_numerator.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Normalize_numerator.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_positiveRealNormalizer_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_positiveRealNormalizer_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_positiveRealNormalizer_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_positiveRealNormalizer_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Normalize_denominator.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Normalize_denominator.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Normalize_denominator.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Normalize_denominator.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_normalizedCORDICDivide.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_normalizedCORDICDivide.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_normalizedCORDICDivide.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_normalizedCORDICDivide.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Compare_To_Zero_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Compare_To_Zero_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Compare_To_Zero_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Compare_To_Zero_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Divide_by_zero_handler.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Divide_by_zero_handler.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Divide_by_zero_handler.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Divide_by_zero_handler.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Upcast_Wordlength.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Upcast_Wordlength.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Upcast_Wordlength.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Upcast_Wordlength.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_MATLAB_Function.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_MATLAB_Function.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_MATLAB_Function.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_MATLAB_Function.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_ForEach_Real_Divide.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_ForEach_Real_Divide.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_ForEach_Real_Divide.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_ForEach_Real_Divide.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_complex_multiplier.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_complex_multiplier.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/rx_demod_optimized_src_complex_multiplier.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_complex_multiplier.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Compare_To_Constant_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Compare_To_Constant_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Compare_To_Constant_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Compare_To_Constant_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Reshape_to_original_size_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Reshape_to_original_size_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Reshape_to_original_size_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Reshape_to_original_size_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Verify_divide_sizes_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Verify_divide_sizes_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Verify_divide_sizes_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Verify_divide_sizes_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Variable_Right_Shift_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Variable_Right_Shift_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Variable_Right_Shift_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Variable_Right_Shift_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Variable_Left_Shift_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Variable_Left_Shift_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Variable_Left_Shift_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Variable_Left_Shift_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Cast_to_Union_of_Types_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Cast_to_Union_of_Types_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Cast_to_Union_of_Types_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Cast_to_Union_of_Types_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_positiveRealNormalizer_block3.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_positiveRealNormalizer_block3.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_positiveRealNormalizer_block3.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_positiveRealNormalizer_block3.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Normalize_numerator_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Normalize_numerator_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Normalize_numerator_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Normalize_numerator_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_positiveRealNormalizer_block4.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_positiveRealNormalizer_block4.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_positiveRealNormalizer_block4.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_positiveRealNormalizer_block4.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Normalize_denominator_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Normalize_denominator_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Normalize_denominator_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Normalize_denominator_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_normalizedCORDICDivide_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_normalizedCORDICDivide_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_normalizedCORDICDivide_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_normalizedCORDICDivide_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Compare_To_Zero_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Compare_To_Zero_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Compare_To_Zero_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Compare_To_Zero_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Divide_by_zero_handler_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Divide_by_zero_handler_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Divide_by_zero_handler_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Divide_by_zero_handler_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Upcast_Wordlength_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Upcast_Wordlength_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Upcast_Wordlength_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Upcast_Wordlength_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_MATLAB_Function_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_MATLAB_Function_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_MATLAB_Function_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_MATLAB_Function_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_ForEach_Real_Divide_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_ForEach_Real_Divide_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_ForEach_Real_Divide_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_ForEach_Real_Divide_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_complex_multiplier_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_complex_multiplier_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/rx_demod_optimized_src_complex_multiplier_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_complex_multiplier_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/rx_demod_optimized_src_complex_multiplier1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/rx_demod_optimized_src_complex_multiplier1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/rx_demod_optimized_src_complex_multiplier1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]

@@ -64,7 +64,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>50ec1d92</spirit:value>
+            <spirit:value>8ce89263</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -80,7 +80,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>50ec1d92</spirit:value>
+            <spirit:value>8ce89263</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -349,11 +349,11 @@
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block1.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_complex_multiplier.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_complex_multiplier_block.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
@@ -369,79 +369,79 @@
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Compare_To_Zero.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Compare_To_Constant_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Verify_divide_sizes.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Verify_divide_sizes_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Upcast_Wordlength.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Upcast_Wordlength_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_positiveRealNormalizer.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_positiveRealNormalizer_block3.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Normalize_numerator.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Normalize_numerator_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_MATLAB_Function.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_MATLAB_Function_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_positiveRealNormalizer_block.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_positiveRealNormalizer_block4.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Normalize_denominator.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Normalize_denominator_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_normalizedCORDICDivide.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_normalizedCORDICDivide_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Cast_to_Union_of_Types.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Cast_to_Union_of_Types_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Variable_Right_Shift.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Variable_Right_Shift_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Variable_Left_Shift.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Variable_Left_Shift_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Compare_To_Zero_block.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Compare_To_Zero_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Divide_by_zero_handler.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Divide_by_zero_handler_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_ForEach_Real_Divide.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_ForEach_Real_Divide_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Reshape_to_original_size.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Reshape_to_original_size_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized_block.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
@@ -509,7 +509,7 @@
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
@@ -753,11 +753,159 @@
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_complex_multiplier.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_OFDM_Equalizer.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Verify_divide_sizes.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Upcast_Wordlength.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_positiveRealNormalizer.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Normalize_numerator.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_MATLAB_Function.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_positiveRealNormalizer_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Normalize_denominator.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_normalizedCORDICDivide.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Cast_to_Union_of_Types.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Variable_Right_Shift.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Variable_Left_Shift.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Compare_To_Zero.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Divide_by_zero_handler.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_ForEach_Real_Divide.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Reshape_to_original_size.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Verify_divide_sizes_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Upcast_Wordlength_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_positiveRealNormalizer_block1.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Normalize_numerator_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_MATLAB_Function_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_positiveRealNormalizer_block2.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Normalize_denominator_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_normalizedCORDICDivide_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Cast_to_Union_of_Types_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Variable_Right_Shift_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Variable_Left_Shift_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Compare_To_Zero_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Divide_by_zero_handler_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_ForEach_Real_Divide_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Reshape_to_original_size_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_y_u_1.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized1.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_equalizer.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
@@ -791,7 +939,7 @@
       <spirit:file>
         <spirit:name>hdl/rx_demod_optimized.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_6a9644d7</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_dfff6df2</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -887,12 +1035,12 @@
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block1.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_complex_multiplier.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_complex_multiplier_block.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
@@ -912,97 +1060,97 @@
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Compare_To_Zero.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Compare_To_Constant_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Verify_divide_sizes.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Verify_divide_sizes_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Upcast_Wordlength.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Upcast_Wordlength_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_positiveRealNormalizer.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_positiveRealNormalizer_block3.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Normalize_numerator.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Normalize_numerator_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_MATLAB_Function.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_MATLAB_Function_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_positiveRealNormalizer_block.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_positiveRealNormalizer_block4.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Normalize_denominator.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Normalize_denominator_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_normalizedCORDICDivide.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_normalizedCORDICDivide_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Cast_to_Union_of_Types.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Cast_to_Union_of_Types_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Variable_Right_Shift.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Variable_Right_Shift_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Variable_Left_Shift.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Variable_Left_Shift_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Compare_To_Zero_block.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Compare_To_Zero_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Divide_by_zero_handler.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Divide_by_zero_handler_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_ForEach_Real_Divide.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_ForEach_Real_Divide_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Reshape_to_original_size.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Reshape_to_original_size_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized_block.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
@@ -1087,7 +1235,7 @@
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
@@ -1392,12 +1540,197 @@
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_complex_multiplier.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/rx_demod_optimized_src_OFDM_Equalizer.vhd</spirit:name>
+        <spirit:name>hdl/rx_demod_optimized_src_Verify_divide_sizes.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Upcast_Wordlength.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_positiveRealNormalizer.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Normalize_numerator.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_MATLAB_Function.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_positiveRealNormalizer_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Normalize_denominator.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_normalizedCORDICDivide.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Cast_to_Union_of_Types.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Variable_Right_Shift.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Variable_Left_Shift.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Compare_To_Zero.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Divide_by_zero_handler.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_ForEach_Real_Divide.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Reshape_to_original_size.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Verify_divide_sizes_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Upcast_Wordlength_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_positiveRealNormalizer_block1.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Normalize_numerator_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_MATLAB_Function_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_positiveRealNormalizer_block2.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Normalize_denominator_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_normalizedCORDICDivide_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Cast_to_Union_of_Types_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Variable_Right_Shift_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Variable_Left_Shift_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Compare_To_Zero_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Divide_by_zero_handler_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_ForEach_Real_Divide_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Reshape_to_original_size_block.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_y_u_1.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized1.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/rx_demod_optimized_src_equalizer.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
@@ -1501,12 +1834,12 @@
       <xilinx:displayName>rx_demod_optimized</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
       <xilinx:coreRevision>1000000</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2024-10-03T19:25:52Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2024-10-04T13:53:37Z</xilinx:coreCreationDateTime>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2023.2</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="935bed94"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="e6e7fa2b"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="c298d4cf"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="b8c74b82"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="a2578a7c"/>
     </xilinx:packagingInfo>

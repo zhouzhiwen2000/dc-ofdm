@@ -1,10 +1,10 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-| Date         : Thu Oct  3 19:44:02 2024
+| Date         : Fri Oct  4 11:04:39 2024
 | Host         : cotti-machine running 64-bit Ubuntu 22.04.3 LTS
-| Command      : report_utilization -file divider_wrapper_utilization_synth.rpt -pb divider_wrapper_utilization_synth.pb
-| Design       : divider_wrapper
+| Command      : report_utilization -file ofdm_demod_opt_wrapper_utilization_synth.rpt -pb ofdm_demod_opt_wrapper_utilization_synth.pb
+| Design       : ofdm_demod_opt_wrapper
 | Device       : xc7z010clg400-1
 | Speed File   : -1
 | Design State : Synthesized
@@ -89,24 +89,24 @@ Warning! LUT value is adjusted to account for LUT combining.
 4. IO and GT Specific
 ---------------------
 
-+-----------------------------+------+-------+------------+-----------+--------+
-|          Site Type          | Used | Fixed | Prohibited | Available |  Util% |
-+-----------------------------+------+-------+------------+-----------+--------+
-| Bonded IOB                  |  107 |     0 |          0 |       100 | 107.00 |
-| Bonded IPADs                |    0 |     0 |          0 |         2 |   0.00 |
-| Bonded IOPADs               |    0 |     0 |          0 |       130 |   0.00 |
-| PHY_CONTROL                 |    0 |     0 |          0 |         2 |   0.00 |
-| PHASER_REF                  |    0 |     0 |          0 |         2 |   0.00 |
-| OUT_FIFO                    |    0 |     0 |          0 |         8 |   0.00 |
-| IN_FIFO                     |    0 |     0 |          0 |         8 |   0.00 |
-| IDELAYCTRL                  |    0 |     0 |          0 |         2 |   0.00 |
-| IBUFDS                      |    0 |     0 |          0 |        96 |   0.00 |
-| PHASER_OUT/PHASER_OUT_PHY   |    0 |     0 |          0 |         8 |   0.00 |
-| PHASER_IN/PHASER_IN_PHY     |    0 |     0 |          0 |         8 |   0.00 |
-| IDELAYE2/IDELAYE2_FINEDELAY |    0 |     0 |          0 |       100 |   0.00 |
-| ILOGIC                      |    0 |     0 |          0 |       100 |   0.00 |
-| OLOGIC                      |    0 |     0 |          0 |       100 |   0.00 |
-+-----------------------------+------+-------+------------+-----------+--------+
++-----------------------------+------+-------+------------+-----------+-------+
+|          Site Type          | Used | Fixed | Prohibited | Available | Util% |
++-----------------------------+------+-------+------------+-----------+-------+
+| Bonded IOB                  |   91 |     0 |          0 |       100 | 91.00 |
+| Bonded IPADs                |    0 |     0 |          0 |         2 |  0.00 |
+| Bonded IOPADs               |    0 |     0 |          0 |       130 |  0.00 |
+| PHY_CONTROL                 |    0 |     0 |          0 |         2 |  0.00 |
+| PHASER_REF                  |    0 |     0 |          0 |         2 |  0.00 |
+| OUT_FIFO                    |    0 |     0 |          0 |         8 |  0.00 |
+| IN_FIFO                     |    0 |     0 |          0 |         8 |  0.00 |
+| IDELAYCTRL                  |    0 |     0 |          0 |         2 |  0.00 |
+| IBUFDS                      |    0 |     0 |          0 |        96 |  0.00 |
+| PHASER_OUT/PHASER_OUT_PHY   |    0 |     0 |          0 |         8 |  0.00 |
+| PHASER_IN/PHASER_IN_PHY     |    0 |     0 |          0 |         8 |  0.00 |
+| IDELAYE2/IDELAYE2_FINEDELAY |    0 |     0 |          0 |       100 |  0.00 |
+| ILOGIC                      |    0 |     0 |          0 |       100 |  0.00 |
+| OLOGIC                      |    0 |     0 |          0 |       100 |  0.00 |
++-----------------------------+------+-------+------------+-----------+-------+
 
 
 5. Clocking
@@ -148,21 +148,21 @@ Warning! LUT value is adjusted to account for LUT combining.
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| OBUF     |   74 |                  IO |
-| IBUF     |   33 |                  IO |
+| IBUF     |   56 |                  IO |
+| OBUF     |   35 |                  IO |
 +----------+------+---------------------+
 
 
 8. Black Boxes
 --------------
 
-+----------------------------+------+
-|          Ref Name          | Used |
-+----------------------------+------+
-| divider_rst_clk_wiz_100M_0 |    1 |
-| divider_divider_ip_0_0     |    1 |
-| divider_clk_wiz_0          |    1 |
-+----------------------------+------+
++---------------------------------------+------+
+|                Ref Name               | Used |
++---------------------------------------+------+
+| ofdm_demod_opt_rx_demod_optimized_0_0 |    1 |
+| ofdm_demod_opt_rst_clk_wiz_100M_0     |    1 |
+| ofdm_demod_opt_clk_wiz_0              |    1 |
++---------------------------------------+------+
 
 
 9. Instantiated Netlists

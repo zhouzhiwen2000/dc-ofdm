@@ -7,7 +7,7 @@
 <Project Product="Vivado" Version="7" Minor="65" Path="/home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/integrationTest/rxDemodulator/hdl_prj/ipcore/rx_demod_optimized_v1_0/prj_ip/prj_ip.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
-    <Option Name="Id" Val="0ca41af4b9384fb8ac3458f12e97ac30"/>
+    <Option Name="Id" Val="9ccc268ce9754a699c07a98967ac141c"/>
     <Option Name="Part" Val="xc7z010clg400-1"/>
     <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
     <Option Name="CompiledLibDirXSim" Val=""/>
@@ -199,13 +199,13 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block1.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_complex_multiplier.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_complex_multiplier_block.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -229,115 +229,115 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Compare_To_Zero.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Compare_To_Constant_block1.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Verify_divide_sizes.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Verify_divide_sizes_block1.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Upcast_Wordlength.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Upcast_Wordlength_block1.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_positiveRealNormalizer.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_positiveRealNormalizer_block3.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Normalize_numerator.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Normalize_numerator_block1.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_MATLAB_Function.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_MATLAB_Function_block1.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_positiveRealNormalizer_block.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_positiveRealNormalizer_block4.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Normalize_denominator.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Normalize_denominator_block1.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_normalizedCORDICDivide.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_normalizedCORDICDivide_block1.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator_block1.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Cast_to_Union_of_Types.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Cast_to_Union_of_Types_block1.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Variable_Right_Shift.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Variable_Right_Shift_block1.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Variable_Left_Shift.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Variable_Left_Shift_block1.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type_block1.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Compare_To_Zero_block.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Compare_To_Zero_block1.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Divide_by_zero_handler.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Divide_by_zero_handler_block1.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_ForEach_Real_Divide.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_ForEach_Real_Divide_block1.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Reshape_to_original_size.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Reshape_to_original_size_block1.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized_block.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -439,7 +439,7 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic_block.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -805,13 +805,235 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_SimpleDualPortRAM_generic.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_complex_multiplier.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_OFDM_Equalizer.vhd">
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Verify_divide_sizes.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Upcast_Wordlength.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_positiveRealNormalizer.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Normalize_numerator.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_MATLAB_Function.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_positiveRealNormalizer_block.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Normalize_denominator.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_normalizedCORDICDivide.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Cast_to_Union_of_Types.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Variable_Right_Shift.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Variable_Left_Shift.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Compare_To_Zero.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Divide_by_zero_handler.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_ForEach_Real_Divide.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Reshape_to_original_size.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Verify_divide_sizes_block.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Upcast_Wordlength_block.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_positiveRealNormalizer_block1.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Normalize_numerator_block.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_MATLAB_Function_block.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_positiveRealNormalizer_block2.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Normalize_denominator_block.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_normalizedCORDICDivide_block.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Divide_real_numerator_by_denominator_block.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Cast_to_Union_of_Types_block.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Variable_Right_Shift_block.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Variable_Left_Shift_block.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Shift_and_cast_to_output_type_block.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Compare_To_Zero_block.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Divide_by_zero_handler_block.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_ForEach_Real_Divide_block.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Reshape_to_original_size_block.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_y_u_1.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_Real_Divide_HDL_Optimized1.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/rx_demod_optimized_src_equalizer.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>

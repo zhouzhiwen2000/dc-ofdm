@@ -267,8 +267,17 @@ Extrañamente, aparece que los DSPs están por encima de 100%, y eso que ya hab�
 
 * Channel equalization: Reemplazo el bloque por la operación matemática. No tiene sentido que ocupe 6000 LUTs si son solamente unas multiplicaciones y una division.
 
-* Offender B
+* Divisor de OFDM SS: reduzco el tamaño de palabra de entrada de 32 bits a 16 bits.
 
 A continuación, la utilización de recursos del divisor real y complejo, al variar el tamaño de entrada y salida. Podemos ver que variar la salida no afecta tanto la utilización como disminuir el tamaño de la salida. En conclusión, conviene usar el divisor real, y disminuir al máximo posible el tamaño de entrada.
 
 ![Alt text](images/88.png)
+
+Luego de las optimizaciones, Matlab y Vivado devuelven esta utilización de recursos para el demodulador:
+
+![Alt text](images/99.png)
+
+![Alt text](images/aaaa.png)
+
+No está mal la utilización, pero necesito bajar la utilización de LUTs abajo del 80% para que el timing después sea viable, y sumando header, payload y demodulador no va a andar. Viendo los recursos de la FPGA, aparece una variable que no se tuvo en cuenta. Que pasa con la utilización de F7 y F8 Muxes? Si puedo lograr que la sintesis de Vivado infiera más muxes en vez de LUTs, se solucionarían todos los problemas.
+
