@@ -30,13 +30,13 @@ for i =1:1:length(paramFile)
     llr = ofdmDemodulate(CONST, h, CONST.headerBitsPerSubcarrier, ...
         CONST.headerCyclicPrefixLen, CONST.headerScramblerInit, true);
     
-    startIn = [startIn; true; false(length(llr)-1, 1); false(5000, 1);];
-    dataLLR = [dataLLR; llr; zeros(5000, 1);];
+    startIn = [startIn; true; false(length(llr)-1, 1); false(10000, 1);];
+    dataLLR = [dataLLR; llr; zeros(10000, 1);];
     dataLLR = awgn(dataLLR, 20);
 end
 
 %% Simulation Time
-latency = 10000/CONST.fPHY;         % Algorithm latency. Delay between input and output
+latency = 20000/CONST.fPHY;         % Algorithm latency. Delay between input and output
 stopTime = (length(dataLLR)-1)/CONST.fs + latency;
 
 %% Run the simulation

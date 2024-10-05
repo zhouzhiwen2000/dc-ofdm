@@ -15,10 +15,10 @@ paramFile = "sampleParametersFile";
 % "extra" symbols.
 % The solution is to create different inputs in Simulink, that are called
 % for each individual message.
-msgIn{1} = ['Sample message to test the payload, made large to have more' ...
+msgIn{1} = ['Sample message to test the payload, made large to have more ' ...
     'than one fec block in bits as size. Something more to say? Well, ' ...
-    'this project has taken a lot of time, and Im tired. I hope that, at' ...
-    'the end, the odyssey had a purpose (puts a cigarrete on his mouth and' ...
+    'this project has taken a lot of time, and Im tired. I hope that, at ' ...
+    'the end, the odyssey had a purpose (puts a cigarrete on his mouth and ' ...
     'epic music starts fading in from the background'];
 msgIn{2} = 'Next message';
 msgIn{3} = 'Third is a charm!';
@@ -30,6 +30,7 @@ fecRateLSB = false(3,1,msgQtty+1);
 blockSizeLSB = false(2,1,msgQtty+1);
 batIdLSB = false(5,1, msgQtty+1);
 psduSizeLSB = false(24,1,msgQtty+1);
+msgDurationLSB = false(16,1,msgQtty+1);
 simPayloadExtraWords = zeros(msgQtty, 1);
 simPayloadLenInFecBlocks = zeros(msgQtty, 1);
 payloadRxLLR = cell(msgQtty);
@@ -48,7 +49,7 @@ for i=1:1:msgQtty
     blockSizeLSB(:, 1, i) = flip(blockSize);
     batIdLSB(:, 1, i) = flip(batId);
     psduSizeLSB(:, 1, i) = flip(psduSize);
-    simPayloadLenInFecBlocks(i, 1) = length(pBits)/CONST.payloadBitsPerBlock0;
+    msgDurationLSB(:, 1, i) = flip(messageDuration);
     
     [~, simPayloadExtraWords(i, 1), payloadOFDMSymbols] = ...
         fullTx(CONST, paramFile, pBits, 0, false);
@@ -66,9 +67,8 @@ end
 
 
 %% Simulation Time
-latency = 1000000/CONST.fPHY;         % Algorithm latency. Delay between input and output
+latency = 500000/CONST.fPHY;         % Algorithm latency. Delay between input and output
 stopTime = (length(payloadRxLLR)-1)/CONST.fPHY + latency;
-totalPayloadFecBlocks = sum(simPayloadLenInFecBlocks);    % Used to end the simulation
 
 %% Run the simulation
 model_name = "HDLRxPayload";
@@ -89,22 +89,17 @@ assert(~isempty(startIdx), ...
     "StartIdx shouldn't be empty");
 assert(isequal(length(startIdx), length(endIdx)), ...
     "Start and end should be of the same size");
-assert(isequal(length(startIdx), totalPayloadFecBlocks), ...
+assert(isequal(length(startIdx), msgQtty), ...
     "Amount of received fec blocks should be the same as sent");
 
-lastIndex = 1;
-for j=1:1:length(msgIn)
-    msgOut = '';
-    for i=lastIndex:1:lastIndex -1 + simPayloadLenInFecBlocks(j,1)
-        out = dataOut(startIdx(i):endIdx(i));
-        if (i == lastIndex -1 + simPayloadLenInFecBlocks(j,1))
-            out = out(1:end-simPayloadExtraWords(j,1));
-        end
-        msgOut = strcat(msgOut, char(out)');
-        assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
-    end
-    lastIndex = i + 1;
-    assert(isequal(msgOut, msgIn{j}), "Sent and received message should be the same!");
+for i=1:1:msgQtty
+    out = dataOut(startIdx(i):endIdx(i));
+    valid = validOut(startIdx(i):endIdx(i));
+    out = out(valid == 1);
+    msgOut = char(out)';
+    assert(isequal(msgOut, msgIn{i}), "Sent and received message should be the same!");
 end
 
 disp("Test successfull!");
+
+

@@ -245,7 +245,7 @@ CONST.FIFORxPayloadSize = 16000;
 
 % Amount of cycles to wait before starting to read the FIFO (this is made
 % so that there are enough values for the LDPC decoder in one go.
-CONST.rxDelayBeforeReadingFIFOPayload = 600; % Number tested, don't change.
+CONST.rxDelayBeforeReadingFIFOPayload = 5000; % 600 Number tested, don't change.
 
 CONST.txQAMDataType = fixdt(1,16,14);
 
