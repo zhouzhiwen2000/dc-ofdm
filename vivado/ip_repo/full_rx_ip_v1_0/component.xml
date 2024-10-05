@@ -64,7 +64,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>a75c8032</spirit:value>
+            <spirit:value>b80bdf03</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -80,7 +80,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>df025400</spirit:value>
+            <spirit:value>988081fd</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1231,7 +1231,7 @@
       <spirit:file>
         <spirit:name>hdl/full_rx_ip.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_8ac15217</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_c7e7d4ae</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -2481,12 +2481,12 @@
       <xilinx:displayName>full_rx_ip</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
       <xilinx:coreRevision>1000000</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2024-10-04T18:21:16Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2024-10-04T19:58:33Z</xilinx:coreCreationDateTime>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2023.2</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="935bed94"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="c2c78c51"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="1f732875"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="803ee7f5"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="2506c2a3"/>
     </xilinx:packagingInfo>

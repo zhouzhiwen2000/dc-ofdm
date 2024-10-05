@@ -1,7 +1,7 @@
 {
    "ActiveEmotionalView":"Default View",
    "Default View_ScaleFactor":"0.988546",
-   "Default View_TopLeft":"-175,-266",
+   "Default View_TopLeft":"-175,-268",
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.5.8 2022-09-21 7111 VDI=41 GEI=38 GUI=JA:10.0 TLS
 #  -string -flagsOSRD
@@ -19,11 +19,9 @@ preplace portBus reg3_0 -pg 1 -lvl 3 -x 840 -y -40 -defaultsOSRD
 preplace inst full_rx_ip_0 -pg 1 -lvl 1 -x 150 -y -70 -defaultsOSRD
 preplace inst clk_wiz -pg 1 -lvl 1 -x 150 -y 110 -defaultsOSRD
 preplace inst rst_clk_wiz_100M -pg 1 -lvl 2 -x 570 -y 10 -defaultsOSRD
+preplace netloc clk_100MHz_1 1 0 1 NJ 120
 preplace netloc clk_wiz_clk_out1 1 0 2 10 -200 330
 preplace netloc clk_wiz_locked 1 1 1 390 50n
-preplace netloc rst_clk_wiz_100M_peripheral_aresetn 1 0 3 10 190 NJ 190 750
-preplace netloc clk_100MHz_1 1 0 1 NJ 120
-preplace netloc reset_rtl_1 1 0 2 0 180 380J
 preplace netloc data_in_0_1 1 0 1 N -50
 preplace netloc full_rx_ip_0_data_out 1 1 2 290J -150 820J
 preplace netloc full_rx_ip_0_end_rsvd 1 1 2 360J -100 760J
@@ -33,6 +31,8 @@ preplace netloc full_rx_ip_0_reg1 1 1 2 320J -130 790J
 preplace netloc full_rx_ip_0_reg2 1 1 2 350J -120 770J
 preplace netloc full_rx_ip_0_reg3 1 1 2 310J -160 800J
 preplace netloc full_rx_ip_0_valid_out 1 1 2 340J -110 780J
+preplace netloc reset_rtl_1 1 0 2 0 180 380J
+preplace netloc rst_clk_wiz_100M_peripheral_aresetn 1 0 3 10 190 NJ 190 750
 levelinfo -pg 1 -20 150 570 840
 pagesize -pg 1 -db -bbox -sgen -190 -220 1010 260
 "

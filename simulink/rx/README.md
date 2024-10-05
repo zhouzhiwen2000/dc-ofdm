@@ -31,3 +31,13 @@ La suma de las utilizaciones individuales no se condice con la utilización tota
 Pequeño detalle que habíamos dejado pasar: el payload ocupa 40 de 60 BRAMs. El header 7/60. El Demodulador 19/60. Entonces, no solo estamos pasados de LUTs, también estamos pasados de RAM.
 
 En conclusión, lo único que se puede hacer es eliminar el LDPC del payload, y reutilizar el del header tanto para el encabezado como para el payload.
+
+## Corrigiendo el bug del QAM
+
+Los resultados anteriores fueron usando 16 bits para el LDPC, había un error en el código. Los siguientes resultados son con 4 bits para el LDPC:
+
+![Alt text](images/ee.png)
+
+![Alt text](images/ff.png)
+
+![Alt text](images/gg.png)

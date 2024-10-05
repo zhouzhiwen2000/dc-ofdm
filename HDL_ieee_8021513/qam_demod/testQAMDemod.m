@@ -8,7 +8,7 @@ constants;
 %% Inputs
 delay = zeros(100,1);
 SNR = 20;
-dataSize = 200;
+dataSize = 1000;
 
 M = 2;
 
@@ -73,7 +73,7 @@ for i=1:1:length(M)
     out = dataOut(startIdx(i):endIdx(i), end-M(i)+1:end);
     out = out.';
     out = out(:);
-    assert(iskindaequal(expectedOut{i}, out, 5e-3));
+    assert(iskindaequal(expectedOut{i}, out, 0.5));
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
 
@@ -82,7 +82,7 @@ n = 1:1:length(out);
 
 figure();
 subplot(2,1,1)
-plot(n, abs(out), n, abs(expectedOut{end}));
+plot(n, out, n, expectedOut{end});
 legend("Out", "ExpectedOut");
 xlabel("n [samples]");
 xlim([n(1), n(end)]);
