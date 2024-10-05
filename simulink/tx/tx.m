@@ -28,7 +28,6 @@ for i=1:1:length(msgIn)
     pWords = [pWords binl2str(pBitsRaw{i})];
     len = length(binl2str(pBitsRaw{i}));
     validIn = [validIn; true(len, 1);];
-    lastIn = [lastIn; false(len-1, 1); true;];
 end
 
 newFrame = true;

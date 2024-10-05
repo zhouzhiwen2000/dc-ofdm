@@ -63,12 +63,12 @@ CONST.headerScramblerPoly = [23 5 0];
 CONST.headerBitScramblerInit = [0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0];
 
 %% Payload
-CONST.payloadBitsPerBlock0 = 960;
+CONST.payloadBitsPerBlock0 = 168; % Same as header
 CONST.payloadBitsPerBlock1 = 4320;
 CONST.axiWidth = 8;
 CONST.payloadWordsPerBlock0 = CONST.payloadBitsPerBlock0/CONST.axiWidth;
 CONST.payloadWordsPerBlock1 = CONST.payloadBitsPerBlock1/CONST.axiWidth;
-CONST.payloadBitsPerFec = 1920;   % TODO: only valid if fec_rate = 1/2
+CONST.payloadBitsPerFec = 336;   % Same as header 
 CONST.payloadScramblerInit = uint8([1 1 1 1 1 1 1 1 1 1 1 1 1]); % 0x1FFF
 
 % Matlab implementation is mirrored, so the polinomial is:

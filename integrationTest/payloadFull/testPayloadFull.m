@@ -21,14 +21,12 @@ msgIn{3} = 'This is a third message';
 
 pWords = [];
 validIn = [];
-lastIn = [];
 for i=1:1:length(msgIn)
     pBitsRaw{i} = str2binl(msgIn{i});
     pBitsRaw{i} = getPayloadParamsFromBits(CONST, pBitsRaw{i});
     pWords = [pWords binl2str(pBitsRaw{i})];
     len = length(binl2str(pBitsRaw{i}));
     validIn = [validIn; true(len, 1);];
-    lastIn = [lastIn; false(len-1, 1); true;];
 end
 
 newFrame = true;

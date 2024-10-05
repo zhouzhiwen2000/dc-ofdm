@@ -24,8 +24,11 @@ end
             case 1
                 if (blockSize == 0)
                     % 1/2, 960
-                    h = CONST.Hc_12S;
-                    B = 80;
+                    %h = CONST.Hc_12S;
+                    %B = 80;
+                    % Replaced with header LDPC matrix
+                    h = CONST.Hc_12H;
+                    B = 14;
                 else
                     % 1/2, 4320
                     h = CONST.Hc_12L;
