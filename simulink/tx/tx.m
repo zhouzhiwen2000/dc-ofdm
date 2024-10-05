@@ -8,11 +8,12 @@ constants;
 %% Input
 createVivadoFile = true;
 paramFile = "sampleParametersFile";
-msgIn{1} = ['This is an example message used to test the transmitter. ' ...
-    'It is made large on purpose to test for a large message being ' ...
-    'transmitted'];
-msgIn{2} = 'This is a second message';
-msgIn{3} = 'This is a third message';
+% msgIn{1} = ['This is an example message used to test the transmitter. ' ...
+%    'It is made large on purpose to test for a large message being ' ...
+%    'transmitted'];
+% msgIn{2} = 'This is a second message';
+% msgIn{3} = 'This is a third message';
+msgIn{1} = randomStr(4096);
 
 if (createVivadoFile)
     % Only one message
@@ -47,7 +48,7 @@ for i=1:1:length(msgIn)
 end
 
 %% Simulation Time
-latency = 100000/CONST.fDAC;             % Algorithm latency. Delay between input and output
+latency = 1000000/CONST.fDAC;             % Algorithm latency. Delay between input and output
 stopTime = (length(validIn)-1)/CONST.fDAC + latency;
 
 %% Run the simulation
@@ -97,6 +98,7 @@ assert(isequal(length(startIdx), length(msgIn)), ...
 
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
+    expectedOut{i} = expectedOut{i}*2; % Add DAC correction factor
     assert(iskindaequal(expectedOut{i}, out, 1e-3), "Outputs don't match");
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
@@ -139,9 +141,9 @@ if (createVivadoFile)
     
     % Generate output file
     fileName = "data_out.mem";
-    fileOut = out*2^13;
+    fileOut = out*2^15;
     input = {fileOut;};
-    bitLen = 14;
+    bitLen = 16;
     header = "dataOut";
     createVivadoDataFile(fileName, input, bitLen, header, ",");
     disp("Vivado memory files generated!");
