@@ -12,7 +12,7 @@ constants;
 delayBetweenOFDMSymbols = false(100, 1);
 paramFile = "sampleParametersFile";
 pBits = [];
-OFDMTx = fullTx(CONST, paramFile, pBits, 0, false);
+OFDMTx = 3.5*fullTx(CONST, paramFile, pBits, 0, false);
 OFDMRx = downshifter(CONST, OFDMTx);
 OFDMRx = rxDecimator(CONST, OFDMRx);
 OFDMRx = OFDMRx(1+CONST.preambleOFDMSamples:end);

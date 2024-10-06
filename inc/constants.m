@@ -244,12 +244,12 @@ CONST.ipCoreDataType = fixdt(1, 16, 15);
 CONST.txRAMAddressBitWidth = 16;
 
 % Values for up to 4096 of payload message
-CONST.FIFOOFDMSize = 1200;
-CONST.FIFORxPayloadSize = 16000;
+CONST.FIFOOFDMSize = 1200;   % Maximum value = 1091
+CONST.FIFORxPayloadSize = 32768;
 
 % Amount of cycles to wait before starting to read the FIFO (this is made
 % so that there are enough values for the LDPC decoder in one go.
-CONST.rxDelayBeforeReadingFIFOPayload = 5000; % 600 Number tested, don't change.
+CONST.rxDelayBeforeReadingFIFOPayload = 600; % 600 Number tested, don't change.
 
 CONST.txQAMDataType = fixdt(1,16,14);
 
@@ -268,21 +268,31 @@ CONST.rxNCOFractionLength = 14;
 CONST.rxFreqOffsetWordLength = 20; CONST.rxFreqOffsetFractionLength = 8;
 CONST.rxPhaseDataType = fixdt(1,16,15);
 
-CONST.rxDecimatorCoefficientsDataType = fixdt(1,14);
-CONST.rxDecimatorOutputDataType = fixdt(1,14,12);
+CONST.rxDecimatorCoefficientsDataType = fixdt(1,16);
+CONST.rxDecimatorOutputDataType = fixdt(1,16,14);
 
-CONST.rxMDataType = fixdt(1,16,14);
+% Data type for the input of the OFDM_SS
+CONST.rxOFDMSSInputDataType = fixdt(1,16,10);
 
-CONST.rxRWordLength = 16;
+% Data type for DSP48 25*18 in R and P of the OFDM_SS
+CONST.dsp48A = fixdt(1,25,15);
+CONST.dsp48B = fixdt(1,18,8);
+
+% This data type is the one used as input for the divider in the OFDM_SS
+CONST.rxRWordLength = 24;
 CONST.rxRFractionLength = 10;
-
 CONST.rxRDividerDelay = 11 + CONST.rxRWordLength + nextpow2(CONST.rxRWordLength+1);
 
-CONST.rxPDataType = fixdt(1,13,9);
+% Output data type of the divider
+CONST.rxMDataType = fixdt(1,16,14);
 
-CONST.rxOFDMDemodDataType = fixdt(1,12,10);
+% This data type is the one used as input for the phase calculation
+CONST.rxPDataType = fixdt(1,20,10);
 
-CONST.rxChannelEstReferenceWordLength = 12;
-CONST.rxChannelEstReferenceFractionLength = 10;
+CONST.rxOFDMDemodDataType = fixdt(1,18,12);
+
+CONST.rxChannelEstReferenceWordLength = 18;
+CONST.rxChannelEstReferenceFractionLength = 12;
+CONST.rxChannelEstDividerDelay = 10 + CONST.rxChannelEstReferenceWordLength + nextpow2(CONST.rxChannelEstReferenceWordLength);
 
 CONST.rxQAMDemodDataType = fixdt(1,4,1);

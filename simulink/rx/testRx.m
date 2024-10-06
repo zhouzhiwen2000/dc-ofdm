@@ -7,12 +7,13 @@ constants;
 
 %% Inputs
 parametersFile = "sampleParametersFile";
+%delayIn = 100000; % Delay for 4096 input
 delayIn = 10000;
 SNR = 60;
+%msgIn{1} = randomStr(4096);
 msgIn{1} = 'This is a test of the RX for the UTN VLC Project!';
 msgIn{2} = 'Second message';
 msgIn{3} = 'Third message';
-%msgIn{1} = randomStr(4096);
 msgQtty = length(msgIn);
 
 % Preallocation
@@ -28,7 +29,7 @@ for i=1:1:msgQtty
     pBits = str2binl(msgIn{i});
     pBits = binl2tx(pBits);    % Input to the Rx should be LSB first.
     [OFDMSignal, payloadExtraWords(i, 1)] = fullTx(CONST, parametersFile, pBits);
-    OFDMRx = channelSimulation(OFDMSignal, delayIn, SNR);
+    OFDMRx = 3.5*channelSimulation(OFDMSignal, delayIn, SNR);
     dataIn = [dataIn; OFDMRx;];
 
     % Get registers for output

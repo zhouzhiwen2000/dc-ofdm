@@ -23,7 +23,9 @@ OFDMSignal = [preambleTx; channelTx];
 OFDMSignal = txInterpolator(CONST, OFDMSignal);
 OFDMSignal = upshifter(CONST, OFDMSignal);
 
-OFDMRx = channelSimulation(OFDMSignal, delayIn, SNR);
+% Important: i'm multipling by four so that the input goes from -1 to 1,
+% forcing the maximum possible values here.
+OFDMRx = 4*channelSimulation(OFDMSignal, delayIn, SNR);
 OFDMRx = downshifter(CONST, OFDMRx, frequencyOffsetIn);
 dataIn = rxDecimator(CONST, OFDMRx);
 
@@ -61,7 +63,7 @@ assert(isequal(length(startIdx), length(endIdx)), ...
 
 for i=1:length(startIdx)
     mOutSim = mOut(startIdx(i):endIdx(i));
-    assert(iskindaequal(expectedMOut, mOutSim, 1000e-3));
+    assert(iskindaequal(expectedMOut, mOutSim, 10e-3));
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
 

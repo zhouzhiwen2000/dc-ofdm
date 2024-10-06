@@ -7,10 +7,10 @@ constants;
 
 %% Inputs
 nSym = 10;
-input{1} = 0.5*rand(nSym*CONST.N*CONST.oversamplingFactor, 1);
-input{2} = 0.5*rand(nSym*CONST.N*CONST.oversamplingFactor, 1);
-input{3} = 0.5*rand(nSym*CONST.N*CONST.oversamplingFactor, 1);
-input{4} = 0.5*rand(nSym*CONST.N*CONST.oversamplingFactor*100, 1);
+input{1} = rand(nSym*CONST.N*CONST.oversamplingFactor, 1);
+input{2} = rand(nSym*CONST.N*CONST.oversamplingFactor, 1);
+input{3} = rand(nSym*CONST.N*CONST.oversamplingFactor, 1);
+input{4} = rand(nSym*CONST.N*CONST.oversamplingFactor*100, 1);
 
 frequencyOffsetIn{1} = 5;
 frequencyOffsetIn{2} = -5;
