@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-| Date         : Sat Sep 21 19:45:13 2024
+| Date         : Sun Oct  6 21:06:59 2024
 | Host         : cotti-machine running 64-bit Ubuntu 22.04.3 LTS
 | Command      : report_utilization -file tx_v10_wrapper_utilization_synth.rpt -pb tx_v10_wrapper_utilization_synth.pb
 | Design       : tx_v10_wrapper
@@ -89,24 +89,24 @@ Warning! LUT value is adjusted to account for LUT combining.
 4. IO and GT Specific
 ---------------------
 
-+-----------------------------+------+-------+------------+-----------+--------+
-|          Site Type          | Used | Fixed | Prohibited | Available |  Util% |
-+-----------------------------+------+-------+------------+-----------+--------+
-| Bonded IOB                  |  159 |     0 |          0 |       100 | 159.00 |
-| Bonded IPADs                |    0 |     0 |          0 |         2 |   0.00 |
-| Bonded IOPADs               |    0 |     0 |          0 |       130 |   0.00 |
-| PHY_CONTROL                 |    0 |     0 |          0 |         2 |   0.00 |
-| PHASER_REF                  |    0 |     0 |          0 |         2 |   0.00 |
-| OUT_FIFO                    |    0 |     0 |          0 |         8 |   0.00 |
-| IN_FIFO                     |    0 |     0 |          0 |         8 |   0.00 |
-| IDELAYCTRL                  |    0 |     0 |          0 |         2 |   0.00 |
-| IBUFDS                      |    0 |     0 |          0 |        96 |   0.00 |
-| PHASER_OUT/PHASER_OUT_PHY   |    0 |     0 |          0 |         8 |   0.00 |
-| PHASER_IN/PHASER_IN_PHY     |    0 |     0 |          0 |         8 |   0.00 |
-| IDELAYE2/IDELAYE2_FINEDELAY |    0 |     0 |          0 |       100 |   0.00 |
-| ILOGIC                      |    0 |     0 |          0 |       100 |   0.00 |
-| OLOGIC                      |    0 |     0 |          0 |       100 |   0.00 |
-+-----------------------------+------+-------+------------+-----------+--------+
++-----------------------------+------+-------+------------+-----------+-------+
+|          Site Type          | Used | Fixed | Prohibited | Available | Util% |
++-----------------------------+------+-------+------------+-----------+-------+
+| Bonded IOB                  |   31 |     0 |          0 |       100 | 31.00 |
+| Bonded IPADs                |    0 |     0 |          0 |         2 |  0.00 |
+| Bonded IOPADs               |    0 |     0 |          0 |       130 |  0.00 |
+| PHY_CONTROL                 |    0 |     0 |          0 |         2 |  0.00 |
+| PHASER_REF                  |    0 |     0 |          0 |         2 |  0.00 |
+| OUT_FIFO                    |    0 |     0 |          0 |         8 |  0.00 |
+| IN_FIFO                     |    0 |     0 |          0 |         8 |  0.00 |
+| IDELAYCTRL                  |    0 |     0 |          0 |         2 |  0.00 |
+| IBUFDS                      |    0 |     0 |          0 |        96 |  0.00 |
+| PHASER_OUT/PHASER_OUT_PHY   |    0 |     0 |          0 |         8 |  0.00 |
+| PHASER_IN/PHASER_IN_PHY     |    0 |     0 |          0 |         8 |  0.00 |
+| IDELAYE2/IDELAYE2_FINEDELAY |    0 |     0 |          0 |       100 |  0.00 |
+| ILOGIC                      |    0 |     0 |          0 |       100 |  0.00 |
+| OLOGIC                      |    0 |     0 |          0 |       100 |  0.00 |
++-----------------------------+------+-------+------------+-----------+-------+
 
 
 5. Clocking
@@ -148,8 +148,8 @@ Warning! LUT value is adjusted to account for LUT combining.
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| IBUF     |  140 |                  IO |
-| OBUF     |   19 |                  IO |
+| OBUF     |   20 |                  IO |
+| IBUF     |   11 |                  IO |
 +----------+------+---------------------+
 
 
@@ -159,7 +159,6 @@ Warning! LUT value is adjusted to account for LUT combining.
 +----------------------------+------+
 |          Ref Name          | Used |
 +----------------------------+------+
-| tx_v10_rst_tx_0            |    1 |
 | tx_v10_rst_clk_wiz_100M_0  |    1 |
 | tx_v10_clk_wiz_0           |    1 |
 | tx_v10_axis_data_fifo_0_0  |    1 |

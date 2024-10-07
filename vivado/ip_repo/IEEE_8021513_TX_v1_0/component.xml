@@ -64,7 +64,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>47534e55</spirit:value>
+            <spirit:value>f0579ed7</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -80,7 +80,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>1c9a81cc</spirit:value>
+            <spirit:value>f055d9de</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -259,24 +259,11 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
-        <spirit:name>last_frame</spirit:name>
-        <spirit:wire>
-          <spirit:direction>in</spirit:direction>
-          <spirit:wireTypeDefs>
-            <spirit:wireTypeDef>
-              <spirit:typeName>std_logic</spirit:typeName>
-              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
-              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
-            </spirit:wireTypeDef>
-          </spirit:wireTypeDefs>
-        </spirit:wire>
-      </spirit:port>
-      <spirit:port>
         <spirit:name>data_out</spirit:name>
         <spirit:wire>
           <spirit:direction>out</spirit:direction>
           <spirit:vector>
-            <spirit:left spirit:format="long">13</spirit:left>
+            <spirit:left spirit:format="long">15</spirit:left>
             <spirit:right spirit:format="long">0</spirit:right>
           </spirit:vector>
           <spirit:wireTypeDefs>
@@ -452,6 +439,14 @@
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
+        <spirit:name>hdl/IEEE_8021513_TX_src_batid_to_bits_per_subcarrier.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/IEEE_8021513_TX_src_psdu_size_to_payload_len.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
         <spirit:name>hdl/IEEE_8021513_TX_src_Sample_Control_Bus_Creator_block5.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
@@ -461,6 +456,10 @@
       </spirit:file>
       <spirit:file>
         <spirit:name>hdl/IEEE_8021513_TX_src_rising_edge_detector.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/IEEE_8021513_TX_src_rising_edge_detector_block.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
@@ -505,14 +504,6 @@
       </spirit:file>
       <spirit:file>
         <spirit:name>hdl/IEEE_8021513_TX_src_payload_rep.vhd</spirit:name>
-        <spirit:fileType>vhdlSource</spirit:fileType>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>hdl/IEEE_8021513_TX_src_batid_to_bits_per_subcarrier.vhd</spirit:name>
-        <spirit:fileType>vhdlSource</spirit:fileType>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>hdl/IEEE_8021513_TX_src_psdu_size_to_payload_len.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
@@ -904,7 +895,7 @@
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/IEEE_8021513_TX_src_rising_edge_detector_block.vhd</spirit:name>
+        <spirit:name>hdl/IEEE_8021513_TX_src_rising_edge_detector_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
@@ -950,7 +941,7 @@
       <spirit:file>
         <spirit:name>hdl/IEEE_8021513_TX.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_06695aba</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_839a3816</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -1121,6 +1112,16 @@
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
+        <spirit:name>hdl/IEEE_8021513_TX_src_batid_to_bits_per_subcarrier.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/IEEE_8021513_TX_src_psdu_size_to_payload_len.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
         <spirit:name>hdl/IEEE_8021513_TX_src_Sample_Control_Bus_Creator_block5.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
@@ -1132,6 +1133,11 @@
       </spirit:file>
       <spirit:file>
         <spirit:name>hdl/IEEE_8021513_TX_src_rising_edge_detector.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/IEEE_8021513_TX_src_rising_edge_detector_block.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
@@ -1187,16 +1193,6 @@
       </spirit:file>
       <spirit:file>
         <spirit:name>hdl/IEEE_8021513_TX_src_payload_rep.vhd</spirit:name>
-        <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>hdl/IEEE_8021513_TX_src_batid_to_bits_per_subcarrier.vhd</spirit:name>
-        <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>hdl/IEEE_8021513_TX_src_psdu_size_to_payload_len.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
@@ -1686,7 +1682,7 @@
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/IEEE_8021513_TX_src_rising_edge_detector_block.vhd</spirit:name>
+        <spirit:name>hdl/IEEE_8021513_TX_src_rising_edge_detector_block1.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
@@ -1819,13 +1815,13 @@
       <xilinx:displayName>IEEE_8021513_TX</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
       <xilinx:coreRevision>1000000</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2024-09-16T00:04:16Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2024-10-06T16:52:21Z</xilinx:coreCreationDateTime>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2023.2</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="935bed94"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="0269c12f"/>
-      <xilinx:checksum xilinx:scope="ports" xilinx:value="6e05b524"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="d93d8625"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="1dac1fd2"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="27376119"/>
     </xilinx:packagingInfo>
   </spirit:vendorExtensions>

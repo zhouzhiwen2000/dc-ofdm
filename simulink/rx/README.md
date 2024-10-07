@@ -41,3 +41,15 @@ Los resultados anteriores fueron usando 16 bits para el LDPC, había un error en
 ![Alt text](images/ff.png)
 
 ![Alt text](images/gg.png)
+
+## Habiendo eliminado el LDPC del payload
+
+Habiendo eliminado el LDPC del payload, la utilización de recursos en Matlab y en Simulink queda como sigue:
+
+![Alt text](images/hh.png)
+
+![Alt text](images/ii.png)
+
+![Alt text](images/kk.png)
+
+![Alt text](images/jj.png)

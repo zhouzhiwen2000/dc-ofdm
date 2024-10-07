@@ -4,28 +4,9 @@ set_property ip_repo_paths {../../} [current_fileset]
 # Add HDL source files to project
 add_files -norecurse {../hdl/full_rx_ip_src_full_rx_pac.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_full_rx_tc.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_batid_to_bits_per_subcarrier.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_cpid_to_cplen.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_Sample_Control_Bus_Creator.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_CRCGenControl.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_CRCGenCompute.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_CRCGenerator.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_CRCCompare.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_General_CRC_Syndrome_Detector_HDL_Optimized.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_h_crc_rx.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_h_remove_repetition.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block1.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_h_scrambler.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_Compare_To_Constant.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_Compare_To_Constant1.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_Compare_To_Constant2.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_Compare_To_Constant3.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_Compare_To_Constant4.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_Compare_To_Constant5.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_Compare_To_Constant6.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_rising_edge_detector.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_h_separate.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_Sample_Control_Bus_Creator1.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_Sample_Control_Bus_Creator2.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_CodeParameters.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_SimpleDualPortRAM_generic.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_BarrelRotator.vhd}
@@ -42,13 +23,35 @@ add_files -norecurse {../hdl/full_rx_ip_src_SimpleDualPortRAM_generic_block1.vhd
 add_files -norecurse {../hdl/full_rx_ip_src_CheckNodeRAM.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_FinalDecision.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_DecoderCore.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_LDPC_Deco_Hc_12H.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_LDPC_Decoder.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_LDPC_shared.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_batid_to_bits_per_subcarrier.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_cpid_to_cplen.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_CRCGenControl.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_CRCGenCompute.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_CRCGenerator.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_CRCCompare.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_General_CRC_Syndrome_Detector_HDL_Optimized.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_h_crc_rx.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block1.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_h_remove_repetition.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block2.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_h_scrambler.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_Compare_To_Constant.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_Compare_To_Constant1.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_Compare_To_Constant2.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_Compare_To_Constant3.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_Compare_To_Constant4.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_Compare_To_Constant5.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_Compare_To_Constant6.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_rising_edge_detector.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_h_separate.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_h_rx_full.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_rising_edge_detector_block.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_header_clock_x2.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_falling_edge_detector1.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_payload_clock_x2.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_rising_edge_detector1.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_HDL_FIFO.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_prepare_payload_data.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_symDemodQPSKVector.vhd}
@@ -94,7 +97,7 @@ add_files -norecurse {../hdl/full_rx_ip_src_Real_Divide_HDL_Optimized1.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_complex_multiplier.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_equalizer.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_rising_edge_detector_block1.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_rising_edge_detector1_block.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_rising_edge_detector1.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_SimpleDualPortRAM_generic_block2.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_Channel_Equalization.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_rising_edge_detector_block2.vhd}
@@ -165,7 +168,7 @@ add_files -norecurse {../hdl/full_rx_ip_src_dsphdl_FFT.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_OFDM_Demodulator.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_ofdm_demod.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_falling_edge_detector1_block.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_rising_edge_detector1_block1.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_rising_edge_detector1_block.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_ofdm_rx_counter.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_Compare_To_Constant_block.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_Compare_To_Constant1_block.vhd}
@@ -173,7 +176,7 @@ add_files -norecurse {../hdl/full_rx_ip_src_falling_edge_detector.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_psdu_size_to_payload_len.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_rising_edge_detector_block6.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_rising_edge_detector_block7.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_rising_edge_detector1_block2.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_rising_edge_detector1_block1.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_HDL_FIFO_block1.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_wait_for_header.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_ofdm_separator.vhd}
@@ -211,28 +214,17 @@ add_files -norecurse {../hdl/full_rx_ip_src_phase_offset_calculator.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_SimpleDualPortRAM_singlebit.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_ofdm_symbol_sync.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_rx_demodulator_full.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_Compare_To_Constant_block3.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_Compare_To_Zero_block2.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_data_words_in_payload.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_rising_edge_detector_block8.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_next_frame_to_ready_rx.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block2.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_p_scrambler.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_CodeParameters_block.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_BarrelRotator_block.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_BetaCalculation_1_block.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_BetaDecompress_1_block.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_VariableNodeUnit_block.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_CheckNodeUnit_block.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_BetaCalculation_2_block.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_BetaDecompress_2_block.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_AposterioriUnit_block.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_FunctionalUnit_block.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_CheckNodeRAM_block.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_FinalDecision_block.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_DecoderCore_block.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_Hc_12S_B80.vhd}
-add_files -norecurse {../hdl/full_rx_ip_src_reduced_ldpc_rx.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block3.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_p_scrambler.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block4.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_valid_to_ctrl.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_remove_tone_mapping.vhd}
+add_files -norecurse {../hdl/full_rx_ip_src_rising_edge_detector_block9.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_rx_payload_full.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_variable_to_reg.vhd}
 add_files -norecurse {../hdl/full_rx_ip_src_full_rx.vhd}
@@ -272,94 +264,18 @@ ipx::add_file {hdl/full_rx_ip_src_full_rx_tc.vhd} [ipx::get_file_groups xilinx_a
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_full_rx_tc.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_full_rx_tc.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_full_rx_tc.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_batid_to_bits_per_subcarrier.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_batid_to_bits_per_subcarrier.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_batid_to_bits_per_subcarrier.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_batid_to_bits_per_subcarrier.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_cpid_to_cplen.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_cpid_to_cplen.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_cpid_to_cplen.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_cpid_to_cplen.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_CRCGenControl.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CRCGenControl.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_CRCGenControl.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CRCGenControl.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_CRCGenCompute.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CRCGenCompute.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_CRCGenCompute.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CRCGenCompute.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_CRCGenerator.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CRCGenerator.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_CRCGenerator.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CRCGenerator.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_CRCCompare.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CRCCompare.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_CRCCompare.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CRCCompare.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_General_CRC_Syndrome_Detector_HDL_Optimized.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_General_CRC_Syndrome_Detector_HDL_Optimized.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_General_CRC_Syndrome_Detector_HDL_Optimized.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_General_CRC_Syndrome_Detector_HDL_Optimized.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_h_crc_rx.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_h_crc_rx.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_h_crc_rx.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_h_crc_rx.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_h_remove_repetition.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_h_remove_repetition.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_h_remove_repetition.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_h_remove_repetition.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_h_scrambler.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_h_scrambler.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_h_scrambler.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_h_scrambler.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant2.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant2.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant2.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant2.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant3.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant3.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant3.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant3.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant4.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant4.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant4.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant4.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant5.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant5.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant5.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant5.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant6.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant6.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant6.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant6.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_h_separate.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_h_separate.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_h_separate.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_h_separate.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator2.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator2.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator2.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator2.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_CodeParameters.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CodeParameters.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_CodeParameters.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
@@ -424,10 +340,102 @@ ipx::add_file {hdl/full_rx_ip_src_DecoderCore.vhd} [ipx::get_file_groups xilinx_
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_DecoderCore.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_DecoderCore.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_DecoderCore.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_LDPC_Deco_Hc_12H.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_LDPC_Deco_Hc_12H.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_LDPC_Deco_Hc_12H.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_LDPC_Deco_Hc_12H.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_LDPC_Decoder.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_LDPC_Decoder.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_LDPC_Decoder.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_LDPC_Decoder.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_LDPC_shared.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_LDPC_shared.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_LDPC_shared.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_LDPC_shared.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_batid_to_bits_per_subcarrier.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_batid_to_bits_per_subcarrier.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_batid_to_bits_per_subcarrier.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_batid_to_bits_per_subcarrier.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_cpid_to_cplen.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_cpid_to_cplen.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_cpid_to_cplen.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_cpid_to_cplen.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_CRCGenControl.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CRCGenControl.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_CRCGenControl.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CRCGenControl.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_CRCGenCompute.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CRCGenCompute.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_CRCGenCompute.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CRCGenCompute.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_CRCGenerator.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CRCGenerator.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_CRCGenerator.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CRCGenerator.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_CRCCompare.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CRCCompare.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_CRCCompare.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CRCCompare.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_General_CRC_Syndrome_Detector_HDL_Optimized.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_General_CRC_Syndrome_Detector_HDL_Optimized.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_General_CRC_Syndrome_Detector_HDL_Optimized.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_General_CRC_Syndrome_Detector_HDL_Optimized.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_h_crc_rx.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_h_crc_rx.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_h_crc_rx.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_h_crc_rx.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_h_remove_repetition.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_h_remove_repetition.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_h_remove_repetition.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_h_remove_repetition.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block2.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block2.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block2.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block2.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_h_scrambler.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_h_scrambler.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_h_scrambler.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_h_scrambler.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant2.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant2.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant2.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant2.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant3.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant3.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant3.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant3.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant4.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant4.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant4.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant4.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant5.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant5.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant5.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant5.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant6.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant6.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant6.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant6.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_h_separate.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_h_separate.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_h_separate.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_h_separate.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_h_rx_full.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_h_rx_full.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_h_rx_full.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
@@ -448,10 +456,6 @@ ipx::add_file {hdl/full_rx_ip_src_payload_clock_x2.vhd} [ipx::get_file_groups xi
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_payload_clock_x2.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_payload_clock_x2.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_payload_clock_x2.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_HDL_FIFO.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_HDL_FIFO.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_HDL_FIFO.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
@@ -632,10 +636,10 @@ ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector_block1.vhd} [ipx::get_fil
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector1_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector1_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector1_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector1_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_SimpleDualPortRAM_generic_block2.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_SimpleDualPortRAM_generic_block2.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_SimpleDualPortRAM_generic_block2.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
@@ -916,10 +920,10 @@ ipx::add_file {hdl/full_rx_ip_src_falling_edge_detector1_block.vhd} [ipx::get_fi
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_falling_edge_detector1_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_falling_edge_detector1_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_falling_edge_detector1_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector1_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector1_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector1_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector1_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector1_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector1_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector1_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector1_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_ofdm_rx_counter.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_ofdm_rx_counter.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_ofdm_rx_counter.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
@@ -948,10 +952,10 @@ ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector_block7.vhd} [ipx::get_fil
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector_block7.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector_block7.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector_block7.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector1_block2.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector1_block2.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector1_block2.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector1_block2.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector1_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector1_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector1_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector1_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_HDL_FIFO_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_HDL_FIFO_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_HDL_FIFO_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
@@ -1100,6 +1104,18 @@ ipx::add_file {hdl/full_rx_ip_src_rx_demodulator_full.vhd} [ipx::get_file_groups
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rx_demodulator_full.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_rx_demodulator_full.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rx_demodulator_full.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant_block3.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant_block3.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Compare_To_Constant_block3.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Constant_block3.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Compare_To_Zero_block2.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Zero_block2.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Compare_To_Zero_block2.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Compare_To_Zero_block2.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_data_words_in_payload.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_data_words_in_payload.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_data_words_in_payload.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_data_words_in_payload.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector_block8.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector_block8.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector_block8.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
@@ -1108,78 +1124,18 @@ ipx::add_file {hdl/full_rx_ip_src_next_frame_to_ready_rx.vhd} [ipx::get_file_gro
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_next_frame_to_ready_rx.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_next_frame_to_ready_rx.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_next_frame_to_ready_rx.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block2.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block2.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block2.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block2.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_p_scrambler.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_p_scrambler.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_p_scrambler.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_p_scrambler.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_CodeParameters_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CodeParameters_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_CodeParameters_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CodeParameters_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_BarrelRotator_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_BarrelRotator_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_BarrelRotator_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_BarrelRotator_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_BetaCalculation_1_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_BetaCalculation_1_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_BetaCalculation_1_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_BetaCalculation_1_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_BetaDecompress_1_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_BetaDecompress_1_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_BetaDecompress_1_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_BetaDecompress_1_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_VariableNodeUnit_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_VariableNodeUnit_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_VariableNodeUnit_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_VariableNodeUnit_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_CheckNodeUnit_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CheckNodeUnit_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_CheckNodeUnit_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CheckNodeUnit_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_BetaCalculation_2_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_BetaCalculation_2_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_BetaCalculation_2_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_BetaCalculation_2_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_BetaDecompress_2_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_BetaDecompress_2_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_BetaDecompress_2_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_BetaDecompress_2_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_AposterioriUnit_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_AposterioriUnit_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_AposterioriUnit_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_AposterioriUnit_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_FunctionalUnit_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_FunctionalUnit_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_FunctionalUnit_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_FunctionalUnit_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_CheckNodeRAM_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CheckNodeRAM_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_CheckNodeRAM_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_CheckNodeRAM_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_FinalDecision_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_FinalDecision_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_FinalDecision_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_FinalDecision_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_DecoderCore_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_DecoderCore_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_DecoderCore_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_DecoderCore_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Hc_12S_B80.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Hc_12S_B80.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_Hc_12S_B80.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Hc_12S_B80.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_reduced_ldpc_rx.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_reduced_ldpc_rx.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/full_rx_ip_src_reduced_ldpc_rx.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_reduced_ldpc_rx.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block3.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block3.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block3.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block3.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_p_scrambler.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_p_scrambler.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_p_scrambler.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_p_scrambler.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block4.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block4.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block4.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block4.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_valid_to_ctrl.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_valid_to_ctrl.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_valid_to_ctrl.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
@@ -1188,6 +1144,10 @@ ipx::add_file {hdl/full_rx_ip_src_remove_tone_mapping.vhd} [ipx::get_file_groups
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_remove_tone_mapping.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_remove_tone_mapping.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_remove_tone_mapping.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector_block9.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector_block9.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/full_rx_ip_src_rising_edge_detector_block9.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rising_edge_detector_block9.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_rx_payload_full.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/full_rx_ip_src_rx_payload_full.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/full_rx_ip_src_rx_payload_full.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]

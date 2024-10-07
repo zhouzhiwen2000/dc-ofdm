@@ -6,6 +6,7 @@ addpath("../../src/rx");
 constants;
 
 %% Inputs
+createVivadoFile = true;
 parametersFile = "sampleParametersFile";
 %delayIn = 100000; % Delay for 4096 input
 delayIn = 10000;
@@ -14,6 +15,12 @@ SNR = 60;
 msgIn{1} = 'This is a test of the RX for the UTN VLC Project!';
 msgIn{2} = 'Second message';
 msgIn{3} = 'Third message';
+
+if (createVivadoFile)
+    % Only one message
+    a = msgIn{1}; msgIn = cell(1,1); msgIn{1} = a;
+end
+
 msgQtty = length(msgIn);
 
 % Preallocation
@@ -92,6 +99,25 @@ for i=1:1:msgQtty
     out = out(valid == 1);
     msgOut = char(out)';
     assert(isequal(msgOut, msgIn{i}), "Sent and received message should be the same!");
+end
+
+%% Create Vivado data file for VHDL testbench
+if (createVivadoFile)
+    % Generate input file
+    fileName = "data_in.mem";
+    input = dataIn*2^15;
+    input = {input;};
+    bitLen = 16;
+    header = "dataIn";
+    createVivadoDataFile(fileName, input, bitLen, header, ",");
+    
+    % Generate output file
+    fileName = "data_out.mem";
+    fileOut = {uint8(msgOut');};
+    bitLen = 8;
+    header = "dataOut";
+    createVivadoDataFile(fileName, fileOut, bitLen, header, ",");
+    disp("Vivado memory files generated!");
 end
 
 disp("Test successfull!");

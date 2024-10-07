@@ -7,7 +7,7 @@
 <Project Product="Vivado" Version="7" Minor="65" Path="/home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/simulink/tx/hdl_prj/ipcore/IEEE_8021513_TX_v1_0/prj_ip/prj_ip.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
-    <Option Name="Id" Val="11fad1038b5845e8b940915ea8a925c1"/>
+    <Option Name="Id" Val="43e69f8779404024b8e6a3d79c6c3a02"/>
     <Option Name="Part" Val="xc7z010clg400-1"/>
     <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
     <Option Name="CompiledLibDirXSim" Val=""/>
@@ -289,6 +289,18 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PPRDIR/../hdl/IEEE_8021513_TX_src_batid_to_bits_per_subcarrier.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/IEEE_8021513_TX_src_psdu_size_to_payload_len.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PPRDIR/../hdl/IEEE_8021513_TX_src_Sample_Control_Bus_Creator_block5.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -302,6 +314,12 @@
         </FileInfo>
       </File>
       <File Path="$PPRDIR/../hdl/IEEE_8021513_TX_src_rising_edge_detector.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../hdl/IEEE_8021513_TX_src_rising_edge_detector_block.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -368,18 +386,6 @@
         </FileInfo>
       </File>
       <File Path="$PPRDIR/../hdl/IEEE_8021513_TX_src_payload_rep.vhd">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PPRDIR/../hdl/IEEE_8021513_TX_src_batid_to_bits_per_subcarrier.vhd">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PPRDIR/../hdl/IEEE_8021513_TX_src_psdu_size_to_payload_len.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -967,7 +973,7 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../hdl/IEEE_8021513_TX_src_rising_edge_detector_block.vhd">
+      <File Path="$PPRDIR/../hdl/IEEE_8021513_TX_src_rising_edge_detector_block1.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>

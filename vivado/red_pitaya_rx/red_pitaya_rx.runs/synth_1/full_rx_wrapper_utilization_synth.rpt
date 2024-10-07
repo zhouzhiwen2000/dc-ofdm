@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
-| Date         : Fri Oct  4 18:21:35 2024
+| Date         : Sun Oct  6 20:52:49 2024
 | Host         : cotti-machine running 64-bit Ubuntu 22.04.3 LTS
 | Command      : report_utilization -file full_rx_wrapper_utilization_synth.rpt -pb full_rx_wrapper_utilization_synth.pb
 | Design       : full_rx_wrapper
@@ -89,24 +89,24 @@ Warning! LUT value is adjusted to account for LUT combining.
 4. IO and GT Specific
 ---------------------
 
-+-----------------------------+------+-------+------------+-----------+--------+
-|          Site Type          | Used | Fixed | Prohibited | Available |  Util% |
-+-----------------------------+------+-------+------------+-----------+--------+
-| Bonded IOB                  |  154 |     0 |          0 |       100 | 154.00 |
-| Bonded IPADs                |    0 |     0 |          0 |         2 |   0.00 |
-| Bonded IOPADs               |    0 |     0 |          0 |       130 |   0.00 |
-| PHY_CONTROL                 |    0 |     0 |          0 |         2 |   0.00 |
-| PHASER_REF                  |    0 |     0 |          0 |         2 |   0.00 |
-| OUT_FIFO                    |    0 |     0 |          0 |         8 |   0.00 |
-| IN_FIFO                     |    0 |     0 |          0 |         8 |   0.00 |
-| IDELAYCTRL                  |    0 |     0 |          0 |         2 |   0.00 |
-| IBUFDS                      |    0 |     0 |          0 |        96 |   0.00 |
-| PHASER_OUT/PHASER_OUT_PHY   |    0 |     0 |          0 |         8 |   0.00 |
-| PHASER_IN/PHASER_IN_PHY     |    0 |     0 |          0 |         8 |   0.00 |
-| IDELAYE2/IDELAYE2_FINEDELAY |    0 |     0 |          0 |       100 |   0.00 |
-| ILOGIC                      |    0 |     0 |          0 |       100 |   0.00 |
-| OLOGIC                      |    0 |     0 |          0 |       100 |   0.00 |
-+-----------------------------+------+-------+------------+-----------+--------+
++-----------------------------+------+-------+------------+-----------+-------+
+|          Site Type          | Used | Fixed | Prohibited | Available | Util% |
++-----------------------------+------+-------+------------+-----------+-------+
+| Bonded IOB                  |   30 |     0 |          0 |       100 | 30.00 |
+| Bonded IPADs                |    0 |     0 |          0 |         2 |  0.00 |
+| Bonded IOPADs               |    0 |     0 |          0 |       130 |  0.00 |
+| PHY_CONTROL                 |    0 |     0 |          0 |         2 |  0.00 |
+| PHASER_REF                  |    0 |     0 |          0 |         2 |  0.00 |
+| OUT_FIFO                    |    0 |     0 |          0 |         8 |  0.00 |
+| IN_FIFO                     |    0 |     0 |          0 |         8 |  0.00 |
+| IDELAYCTRL                  |    0 |     0 |          0 |         2 |  0.00 |
+| IBUFDS                      |    0 |     0 |          0 |        96 |  0.00 |
+| PHASER_OUT/PHASER_OUT_PHY   |    0 |     0 |          0 |         8 |  0.00 |
+| PHASER_IN/PHASER_IN_PHY     |    0 |     0 |          0 |         8 |  0.00 |
+| IDELAYE2/IDELAYE2_FINEDELAY |    0 |     0 |          0 |       100 |  0.00 |
+| ILOGIC                      |    0 |     0 |          0 |       100 |  0.00 |
+| OLOGIC                      |    0 |     0 |          0 |       100 |  0.00 |
++-----------------------------+------+-------+------------+-----------+-------+
 
 
 5. Clocking
@@ -148,21 +148,22 @@ Warning! LUT value is adjusted to account for LUT combining.
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| OBUF     |  139 |                  IO |
-| IBUF     |   15 |                  IO |
+| IBUF     |   18 |                  IO |
+| OBUF     |   12 |                  IO |
 +----------+------+---------------------+
 
 
 8. Black Boxes
 --------------
 
-+----------------------------+------+
-|          Ref Name          | Used |
-+----------------------------+------+
-| full_rx_rst_clk_wiz_100M_1 |    1 |
-| full_rx_full_rx_ip_0_1     |    1 |
-| full_rx_clk_wiz_1          |    1 |
-+----------------------------+------+
++-----------------------------+------+
+|           Ref Name          | Used |
++-----------------------------+------+
+| full_rx_rst_clk_wiz_100M_2  |    1 |
+| full_rx_clk_wiz_2           |    1 |
+| full_rx_axis_data_fifo_0_0  |    1 |
+| full_rx_IEEE_8021513_RX_0_0 |    1 |
++-----------------------------+------+
 
 
 9. Instantiated Netlists

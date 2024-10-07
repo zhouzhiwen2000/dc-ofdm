@@ -100,7 +100,7 @@ thead.reportTableHeader {
 <tr>
 <td class="distinctCellColor">Model version
 </td>
-<td class="summaryTableSndColOddRow">1.104
+<td class="summaryTableSndColOddRow">1.125
 </td>
 </tr>
 <tr>
@@ -151,7 +151,7 @@ Target platform interface table:
 </td>
 <td>Inport
 </td>
-<td>sfix14_En13
+<td>sfix16_En15
 </td>
 <td>External Port
 </td>
@@ -176,6 +176,34 @@ Target platform interface table:
 </tr>
 <tr>
 <td><a class="code2model" id="code2model" href="matlab:Simulink.ID.hilite('HDLRx:1:2792')">valid_out</a>
+</td>
+<td>Outport
+</td>
+<td>boolean
+</td>
+<td>External Port
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td class="distinctCellColor"><a class="code2model" id="code2model" href="matlab:Simulink.ID.hilite('HDLRx:1:7150')">start_out</a>
+</td>
+<td class="distinctCellColor">Outport
+</td>
+<td class="distinctCellColor">boolean
+</td>
+<td class="distinctCellColor">External Port
+</td>
+<td class="distinctCellColor">
+</td>
+<td class="distinctCellColor">
+</td>
+</tr>
+<tr>
+<td><a class="code2model" id="code2model" href="matlab:Simulink.ID.hilite('HDLRx:1:7151')">end_out</a>
 </td>
 <td>Outport
 </td>
@@ -329,49 +357,11 @@ Following files are generated under this folder:
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_full_rx_tc.vhd')">hdl/full_rx_ip_src_full_rx_tc.vhd</a>
 <br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_batid_to_bits_per_subcarrier.vhd')">hdl/full_rx_ip_src_batid_to_bits_per_subcarrier.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_cpid_to_cplen.vhd')">hdl/full_rx_ip_src_cpid_to_cplen.vhd</a>
-<br/>
 <a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Sample_Control_Bus_Creator.vhd')">hdl/full_rx_ip_src_Sample_Control_Bus_Creator.vhd</a>
 <br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_CRCGenControl.vhd')">hdl/full_rx_ip_src_CRCGenControl.vhd</a>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Sample_Control_Bus_Creator1.vhd')">hdl/full_rx_ip_src_Sample_Control_Bus_Creator1.vhd</a>
 <br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_CRCGenCompute.vhd')">hdl/full_rx_ip_src_CRCGenCompute.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_CRCGenerator.vhd')">hdl/full_rx_ip_src_CRCGenerator.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_CRCCompare.vhd')">hdl/full_rx_ip_src_CRCCompare.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_General_CRC_Syndrome_Detector_HDL_Optimized.vhd')">hdl/full_rx_ip_src_General_CRC_Syndrome_Detector_HDL_Optimized.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_h_crc_rx.vhd')">hdl/full_rx_ip_src_h_crc_rx.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block.vhd')">hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_h_remove_repetition.vhd')">hdl/full_rx_ip_src_h_remove_repetition.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block1.vhd')">hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block1.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_h_scrambler.vhd')">hdl/full_rx_ip_src_h_scrambler.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Compare_To_Constant.vhd')">hdl/full_rx_ip_src_Compare_To_Constant.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Compare_To_Constant1.vhd')">hdl/full_rx_ip_src_Compare_To_Constant1.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Compare_To_Constant2.vhd')">hdl/full_rx_ip_src_Compare_To_Constant2.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Compare_To_Constant3.vhd')">hdl/full_rx_ip_src_Compare_To_Constant3.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Compare_To_Constant4.vhd')">hdl/full_rx_ip_src_Compare_To_Constant4.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Compare_To_Constant5.vhd')">hdl/full_rx_ip_src_Compare_To_Constant5.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Compare_To_Constant6.vhd')">hdl/full_rx_ip_src_Compare_To_Constant6.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_rising_edge_detector.vhd')">hdl/full_rx_ip_src_rising_edge_detector.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_h_separate.vhd')">hdl/full_rx_ip_src_h_separate.vhd</a>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Sample_Control_Bus_Creator2.vhd')">hdl/full_rx_ip_src_Sample_Control_Bus_Creator2.vhd</a>
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_CodeParameters.vhd')">hdl/full_rx_ip_src_CodeParameters.vhd</a>
 <br/>
@@ -405,7 +395,53 @@ Following files are generated under this folder:
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_DecoderCore.vhd')">hdl/full_rx_ip_src_DecoderCore.vhd</a>
 <br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_LDPC_Deco_Hc_12H.vhd')">hdl/full_rx_ip_src_LDPC_Deco_Hc_12H.vhd</a>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_LDPC_Decoder.vhd')">hdl/full_rx_ip_src_LDPC_Decoder.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_LDPC_shared.vhd')">hdl/full_rx_ip_src_LDPC_shared.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_batid_to_bits_per_subcarrier.vhd')">hdl/full_rx_ip_src_batid_to_bits_per_subcarrier.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_cpid_to_cplen.vhd')">hdl/full_rx_ip_src_cpid_to_cplen.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block.vhd')">hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_CRCGenControl.vhd')">hdl/full_rx_ip_src_CRCGenControl.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_CRCGenCompute.vhd')">hdl/full_rx_ip_src_CRCGenCompute.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_CRCGenerator.vhd')">hdl/full_rx_ip_src_CRCGenerator.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_CRCCompare.vhd')">hdl/full_rx_ip_src_CRCCompare.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_General_CRC_Syndrome_Detector_HDL_Optimized.vhd')">hdl/full_rx_ip_src_General_CRC_Syndrome_Detector_HDL_Optimized.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_h_crc_rx.vhd')">hdl/full_rx_ip_src_h_crc_rx.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block1.vhd')">hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block1.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_h_remove_repetition.vhd')">hdl/full_rx_ip_src_h_remove_repetition.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block2.vhd')">hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block2.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_h_scrambler.vhd')">hdl/full_rx_ip_src_h_scrambler.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Compare_To_Constant.vhd')">hdl/full_rx_ip_src_Compare_To_Constant.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Compare_To_Constant1.vhd')">hdl/full_rx_ip_src_Compare_To_Constant1.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Compare_To_Constant2.vhd')">hdl/full_rx_ip_src_Compare_To_Constant2.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Compare_To_Constant3.vhd')">hdl/full_rx_ip_src_Compare_To_Constant3.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Compare_To_Constant4.vhd')">hdl/full_rx_ip_src_Compare_To_Constant4.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Compare_To_Constant5.vhd')">hdl/full_rx_ip_src_Compare_To_Constant5.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Compare_To_Constant6.vhd')">hdl/full_rx_ip_src_Compare_To_Constant6.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_rising_edge_detector.vhd')">hdl/full_rx_ip_src_rising_edge_detector.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_h_separate.vhd')">hdl/full_rx_ip_src_h_separate.vhd</a>
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_h_rx_full.vhd')">hdl/full_rx_ip_src_h_rx_full.vhd</a>
 <br/>
@@ -416,8 +452,6 @@ Following files are generated under this folder:
 <a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_falling_edge_detector1.vhd')">hdl/full_rx_ip_src_falling_edge_detector1.vhd</a>
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_payload_clock_x2.vhd')">hdl/full_rx_ip_src_payload_clock_x2.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_rising_edge_detector1.vhd')">hdl/full_rx_ip_src_rising_edge_detector1.vhd</a>
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_HDL_FIFO.vhd')">hdl/full_rx_ip_src_HDL_FIFO.vhd</a>
 <br/>
@@ -509,7 +543,7 @@ Following files are generated under this folder:
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_rising_edge_detector_block1.vhd')">hdl/full_rx_ip_src_rising_edge_detector_block1.vhd</a>
 <br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_rising_edge_detector1_block.vhd')">hdl/full_rx_ip_src_rising_edge_detector1_block.vhd</a>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_rising_edge_detector1.vhd')">hdl/full_rx_ip_src_rising_edge_detector1.vhd</a>
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_SimpleDualPortRAM_generic_block2.vhd')">hdl/full_rx_ip_src_SimpleDualPortRAM_generic_block2.vhd</a>
 <br/>
@@ -651,7 +685,7 @@ Following files are generated under this folder:
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_falling_edge_detector1_block.vhd')">hdl/full_rx_ip_src_falling_edge_detector1_block.vhd</a>
 <br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_rising_edge_detector1_block1.vhd')">hdl/full_rx_ip_src_rising_edge_detector1_block1.vhd</a>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_rising_edge_detector1_block.vhd')">hdl/full_rx_ip_src_rising_edge_detector1_block.vhd</a>
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_ofdm_rx_counter.vhd')">hdl/full_rx_ip_src_ofdm_rx_counter.vhd</a>
 <br/>
@@ -667,7 +701,7 @@ Following files are generated under this folder:
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_rising_edge_detector_block7.vhd')">hdl/full_rx_ip_src_rising_edge_detector_block7.vhd</a>
 <br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_rising_edge_detector1_block2.vhd')">hdl/full_rx_ip_src_rising_edge_detector1_block2.vhd</a>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_rising_edge_detector1_block1.vhd')">hdl/full_rx_ip_src_rising_edge_detector1_block1.vhd</a>
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_HDL_FIFO_block1.vhd')">hdl/full_rx_ip_src_HDL_FIFO_block1.vhd</a>
 <br/>
@@ -743,49 +777,27 @@ Following files are generated under this folder:
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_rx_demodulator_full.vhd')">hdl/full_rx_ip_src_rx_demodulator_full.vhd</a>
 <br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Compare_To_Constant_block3.vhd')">hdl/full_rx_ip_src_Compare_To_Constant_block3.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Compare_To_Zero_block2.vhd')">hdl/full_rx_ip_src_Compare_To_Zero_block2.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_data_words_in_payload.vhd')">hdl/full_rx_ip_src_data_words_in_payload.vhd</a>
+<br/>
 <a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_rising_edge_detector_block8.vhd')">hdl/full_rx_ip_src_rising_edge_detector_block8.vhd</a>
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_next_frame_to_ready_rx.vhd')">hdl/full_rx_ip_src_next_frame_to_ready_rx.vhd</a>
 <br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block2.vhd')">hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block2.vhd</a>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block3.vhd')">hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block3.vhd</a>
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_p_scrambler.vhd')">hdl/full_rx_ip_src_p_scrambler.vhd</a>
 <br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_CodeParameters_block.vhd')">hdl/full_rx_ip_src_CodeParameters_block.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_BarrelRotator_block.vhd')">hdl/full_rx_ip_src_BarrelRotator_block.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_BetaCalculation_1_block.vhd')">hdl/full_rx_ip_src_BetaCalculation_1_block.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_BetaDecompress_1_block.vhd')">hdl/full_rx_ip_src_BetaDecompress_1_block.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_VariableNodeUnit_block.vhd')">hdl/full_rx_ip_src_VariableNodeUnit_block.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_CheckNodeUnit_block.vhd')">hdl/full_rx_ip_src_CheckNodeUnit_block.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_BetaCalculation_2_block.vhd')">hdl/full_rx_ip_src_BetaCalculation_2_block.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_BetaDecompress_2_block.vhd')">hdl/full_rx_ip_src_BetaDecompress_2_block.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_AposterioriUnit_block.vhd')">hdl/full_rx_ip_src_AposterioriUnit_block.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_FunctionalUnit_block.vhd')">hdl/full_rx_ip_src_FunctionalUnit_block.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_CheckNodeRAM_block.vhd')">hdl/full_rx_ip_src_CheckNodeRAM_block.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_FinalDecision_block.vhd')">hdl/full_rx_ip_src_FinalDecision_block.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_DecoderCore_block.vhd')">hdl/full_rx_ip_src_DecoderCore_block.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Hc_12S_B80.vhd')">hdl/full_rx_ip_src_Hc_12S_B80.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_reduced_ldpc_rx.vhd')">hdl/full_rx_ip_src_reduced_ldpc_rx.vhd</a>
-<br/>
-<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block3.vhd')">hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block3.vhd</a>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block4.vhd')">hdl/full_rx_ip_src_Sample_Control_Bus_Creator_block4.vhd</a>
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_valid_to_ctrl.vhd')">hdl/full_rx_ip_src_valid_to_ctrl.vhd</a>
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_remove_tone_mapping.vhd')">hdl/full_rx_ip_src_remove_tone_mapping.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_rising_edge_detector_block9.vhd')">hdl/full_rx_ip_src_rising_edge_detector_block9.vhd</a>
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/full_rx_ip_v1_0/hdl/full_rx_ip_src_rx_payload_full.vhd')">hdl/full_rx_ip_src_rx_payload_full.vhd</a>
 <br/>

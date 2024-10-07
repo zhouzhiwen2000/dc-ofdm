@@ -53,25 +53,23 @@
 //  Output     Output      Phase    Duty Cycle   Pk-to-Pk     Phase
 //   Clock     Freq (MHz)  (degrees)    (%)     Jitter (ps)  Error (ps)
 //----------------------------------------------------------------------------
-// __clk_tx__125.00000______0.000______50.0______125.247_____98.575
-// clk_fifo_m__15.62500______0.000______50.0______192.270_____98.575
-// clk_fifo_s__100.00000______0.000______50.0______130.958_____98.575
+// __clk_tx__125.00000______0.000______50.0______125.031____104.065
+// clk_fifo_m__15.62500______0.000______50.0______189.933____104.065
 //
 //----------------------------------------------------------------------------
 // Input Clock   Freq (MHz)    Input Jitter (UI)
 //----------------------------------------------------------------------------
-// __primary_________100.000____________0.010
+// __primary_________125.000____________0.010
 
 `timescale 1ps/1ps
 
-(* CORE_GENERATION_INFO = "tx_v10_clk_wiz_0,clk_wiz_v6_0_13_0_0,{component_name=tx_v10_clk_wiz_0,use_phase_alignment=true,use_min_o_jitter=false,use_max_i_jitter=false,use_dyn_phase_shift=false,use_inclk_switchover=false,use_dyn_reconfig=false,enable_axi=0,feedback_source=FDBK_AUTO,PRIMITIVE=MMCM,num_out_clk=3,clkin1_period=10.000,clkin2_period=10.000,use_power_down=false,use_reset=true,use_locked=true,use_inclk_stopped=false,feedback_type=SINGLE,CLOCK_MGR_TYPE=NA,manual_override=false}" *)
+(* CORE_GENERATION_INFO = "tx_v10_clk_wiz_0,clk_wiz_v6_0_13_0_0,{component_name=tx_v10_clk_wiz_0,use_phase_alignment=true,use_min_o_jitter=false,use_max_i_jitter=false,use_dyn_phase_shift=false,use_inclk_switchover=false,use_dyn_reconfig=false,enable_axi=0,feedback_source=FDBK_AUTO,PRIMITIVE=PLL,num_out_clk=2,clkin1_period=8.000,clkin2_period=10.0,use_power_down=false,use_reset=true,use_locked=true,use_inclk_stopped=false,feedback_type=SINGLE,CLOCK_MGR_TYPE=NA,manual_override=false}" *)
 
 module tx_v10_clk_wiz_0 
  (
   // Clock out ports
   output        clk_tx,
   output        clk_fifo_m,
-  output        clk_fifo_s,
   // Status and control signals
   input         resetn,
   output        locked,
@@ -84,7 +82,6 @@ module tx_v10_clk_wiz_0
   // Clock out ports  
   .clk_tx(clk_tx),
   .clk_fifo_m(clk_fifo_m),
-  .clk_fifo_s(clk_fifo_s),
   // Status and control signals               
   .resetn(resetn), 
   .locked(locked),

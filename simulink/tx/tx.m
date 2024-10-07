@@ -8,12 +8,12 @@ constants;
 %% Input
 createVivadoFile = true;
 paramFile = "sampleParametersFile";
-% msgIn{1} = ['This is an example message used to test the transmitter. ' ...
-%    'It is made large on purpose to test for a large message being ' ...
-%    'transmitted'];
-% msgIn{2} = 'This is a second message';
-% msgIn{3} = 'This is a third message';
-msgIn{1} = randomStr(4096);
+msgIn{1} = ['This is an example message used to test the transmitter. ' ...
+   'It is made large on purpose to test for a large message being ' ...
+   'transmitted'];
+msgIn{2} = 'This is a second message';
+msgIn{3} = 'This is a third message';
+% msgIn{1} = randomStr(4096);
 
 if (createVivadoFile)
     % Only one message
@@ -25,9 +25,9 @@ validIn = [];
 lastIn = [];
 for i=1:1:length(msgIn)
     pBitsRaw{i} = str2binl(msgIn{i});
-    pBitsRaw{i} = getPayloadParamsFromBits(CONST, pBitsRaw{i});
-    pWords = [pWords binl2str(pBitsRaw{i})];
-    len = length(binl2str(pBitsRaw{i}));
+    pBits{i} = getPayloadParamsFromBits(CONST, pBitsRaw{i});
+    pWords = [pWords binl2str(pBits{i})];
+    len = length(binl2str(pBits{i}));
     validIn = [validIn; true(len, 1);];
 end
 
