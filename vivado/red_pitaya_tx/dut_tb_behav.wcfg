@@ -14,17 +14,17 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0.000000 us"></ZoomStartTime>
-      <ZoomEndTime time="301.000000 us"></ZoomEndTime>
+      <ZoomEndTime time="301.000001 us"></ZoomEndTime>
       <Cursor1Time time="301.000000 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="225"></NameColumnWidth>
-      <ValueColumnWidth column_width="77"></ValueColumnWidth>
+      <ValueColumnWidth column_width="73"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="7" />
+   <WVObjectSize size="8" />
    <wvobject type="array" fp_name="/tx_v10_tb/data_out_0">
-      <obj_property name="ElementShortName">data_out_0[13:0]</obj_property>
-      <obj_property name="ObjectShortName">data_out_0[13:0]</obj_property>
+      <obj_property name="ElementShortName">data_out_0[15:0]</obj_property>
+      <obj_property name="ObjectShortName">data_out_0[15:0]</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/tx_v10_tb/valid_out_0">
       <obj_property name="ElementShortName">valid_out_0</obj_property>
@@ -49,5 +49,9 @@
    <wvobject type="logic" fp_name="/tx_v10_tb/dut_instance/new_frame_in_0">
       <obj_property name="ElementShortName">new_frame_in_0</obj_property>
       <obj_property name="ObjectShortName">new_frame_in_0</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tx_v10_tb/new_msg_ready_0">
+      <obj_property name="ElementShortName">new_msg_ready_0</obj_property>
+      <obj_property name="ObjectShortName">new_msg_ready_0</obj_property>
    </wvobject>
 </wave_config>

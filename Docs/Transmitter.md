@@ -26,7 +26,7 @@ El proyecto ejemplo de Vivado donde se corrió la simulación: [Ejemplo Tx](http
 
 * **IPCORE_RESETN**: [bool]. Señal de reset ACTIVE LOW ('0' para resetear).
 
-* **new_frame_in**: [bool]. Indica que hay un nuevo mensaje a transmitir.
+* **new_frame_in**: [bool]. Indica que hay un nuevo mensaje a transmitir. Lee solamente el flanco ascendente de la señal.
 
 * **[reg0, reg1, reg2, reg3]**: [uint32_t]. Registros de configuración.
 
@@ -51,7 +51,6 @@ Al recibir la señal "new_frame_in", se van a leer los registros de 32bits (reg0
 | 0x04     | m15 | m14 | m13 | m12  | m11  | m10   | m9    | m8    | m7 | m6 | m5 | m4 | m3  | m2  | m1     | m0     |
 | 0x08     | x   | x   | x   | x    | x    | rate2 | rate1 | rate0 | x  | x  | x  | x  | x   | x   | block1 | block0 |
 | 0x0c     | x   | x   | x   | bat4 | bat3 | bat2  | bat1  | bat0  | x  | x  | x  | x  | si3 | si2 | si1    | si0    |
-
 
 * **p[23:0]**: *psduSize*. Tamaño en bytes del mensaje a transmitir.
 
@@ -83,9 +82,14 @@ Al recibir la señal "new_frame_in", se van a leer los registros de 32bits (reg0
 
 ## Outputs
 
-* **data_out**: [fi(1,16,15)]. Valores de salida, para el DAC. Los dos bits LSB no se usan.
+* **data_out**: [int16]. Valores de salida, para el DAC. Los dos bits MSB no se usan, por lo que toma valores entre [-8192; 8191].
 
 * **valid_out**: [bool]. Indica que el valor de salida es válido.
+
+* **new_msg_ready**: [bool]. Indica que el bloque está preparado para recibir un nuevo mensaje. Esta salida responde al siguiente comportamiento:
+  * Luego del reset, empieza en "1".
+  * Al recibir en la entrada un `new_frame_in`, se pone en "0".
+  * Cuando se termine de enviar el símbolo OFDM actual, se pone en "1" nuevamente, indicando que está listo para recibir un nuevo símbolo.
 
 * **ready**: [bool]. Señal del AXI4-Stream. Indica que está listo para leer de la FIFO los datos del payload.
 
@@ -95,17 +99,19 @@ Al recibir la señal "new_frame_in", se van a leer los registros de 32bits (reg0
 
 2. Setear los registros reg0, reg1, re2 y reg3.
 
-3. Levantar la señal `new_frame_in` durante un ciclo de clock de "clk_fifo_s". A partir de este punto, los registros pueden ser modificados sin problemas.
+3. Leer la señal `new_msg_ready`, y esperar hasta que esté en "1".
 
-4. Esperar mientras se procesan el preámbulo y encabezado.
+4. Levantar la señal `new_frame_in` durante un ciclo de clock de "clk_fifo_s". A partir de este punto, los registros pueden ser modificados sin problemas.
 
-5. Se va a levantar la señal de `ready` y va a empezar a leer la FIFO la cantidad de bytes indicada por los registros.
+5. Esperar mientras se procesan el preámbulo y encabezado.
 
-6. Esperar mientras se forma el símbolo OFDM.
+6. Se va a levantar la señal de `ready` y va a empezar a leer la FIFO la cantidad de bytes indicada por los registros.
 
-7. Se envía a la salida una señal continua de 125MHz lista para conectarse al DAC. Se indica su validez con la señal `valid_out`.
+7. Esperar mientras se forma el símbolo OFDM.
 
-8. No se puede levantar otra señal de `new_frame_in` hasta el falling_edge de la señal `valid_out`.
+8. Se envía a la salida una señal continua de 125MHz lista para conectarse al DAC. Se indica su validez con la señal `valid_out`.
+
+9. No se puede levantar otra señal de `new_frame_in` hasta el falling_edge de la señal `valid_out`.
 
 ## Block Design
 
@@ -121,11 +127,21 @@ Resets separados para la FIFO y para el IP-Core.
 
 Critical warnings: 0.
 
+La simulación fue realizada utilizando archivos adjuntos `data_in.mem` y `data_out.mem`, y con los siguientes valores de registros:
+
+* msg = "This is an example message used to test the transmitter. It is made large on purpose to test for a large message being transmitted                 "
+* reg0 = 147
+* reg1 = 17
+* reg2 = 65792
+* reg3 = 66063
+
 ![Alt text](images/tx_sim.png)
+
+![Alt text](images/tx_plot.png)
 
 ## Sintesis
 
-Importante: agregar el archivo de constraints al proyecto de Vivado, el cual se encuentra dentro del Ip Core bajo la carpeta `constraint/ieee_constraints.xdc`.
+Importante: agregar el archivo de constraints al proyecto de Vivado, de nombre`ieee_constraints.xdc`.
 
 Critical warnings: 0.
 
@@ -146,6 +162,12 @@ Warnings: 4. Una dice que n se uso el ZYNQ. Y 3 hacen referencia a DSPs inferido
 ![Tx routing](images/tx_route.png)
 
 ## Historial de versiones
+
+### v3.0
+
+* Ahora solamente se lee el flanco ascendente de la señal `new_frame_in`.
+* La salida es ahora un int16, que toma valores entre [-8192; 8191].
+* Se agrega la nueva salida `new_msg_ready`, para sincronizar la recepción de nuevos símbolos desde el software.
 
 ### v2.0
 

@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x73BFA74892BD44A0",
+      "boundary_crc": "0x5E6234E607480333",
       "device": "xc7z010clg400-1",
       "gen_directory": "../../../../red_pitaya_tx.gen/sources_1/bd/tx_v10",
       "name": "tx_v10",
@@ -114,6 +114,9 @@
             "value_src": "ip_prop"
           }
         }
+      },
+      "new_msg_ready_0": {
+        "direction": "O"
       }
     },
     "components": {
@@ -339,6 +342,12 @@
           "data_out_0"
         ]
       },
+      "IEEE_8021513_TX_0_new_msg_ready": {
+        "ports": [
+          "IEEE_8021513_TX_0/new_msg_ready",
+          "new_msg_ready_0"
+        ]
+      },
       "IEEE_8021513_TX_0_ready": {
         "ports": [
           "IEEE_8021513_TX_0/ready",
@@ -387,8 +396,8 @@
         "ports": [
           "clk_wiz/clk_tx",
           "clk_tx",
-          "IEEE_8021513_TX_0/IPCORE_CLK",
-          "axis_data_fifo_0/s_axis_aclk"
+          "axis_data_fifo_0/s_axis_aclk",
+          "IEEE_8021513_TX_0/IPCORE_CLK"
         ]
       },
       "clk_wiz_locked": {
@@ -437,8 +446,8 @@
       "rst_clk_wiz_100M_peripheral_aresetn": {
         "ports": [
           "rst_tx/peripheral_aresetn",
-          "IEEE_8021513_TX_0/IPCORE_RESETN",
-          "axis_data_fifo_0/s_axis_aresetn"
+          "axis_data_fifo_0/s_axis_aresetn",
+          "IEEE_8021513_TX_0/IPCORE_RESETN"
         ]
       },
       "s_axis_tdata_0_1": {

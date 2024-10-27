@@ -100,7 +100,7 @@ thead.reportTableHeader {
 <tr>
 <td class="distinctCellColor">Model version
 </td>
-<td class="summaryTableSndColOddRow">4.149
+<td class="summaryTableSndColOddRow">4.169
 </td>
 </tr>
 <tr>
@@ -249,7 +249,7 @@ Target platform interface table:
 </td>
 <td class="distinctCellColor">Outport
 </td>
-<td class="distinctCellColor">sfix16_En15
+<td class="distinctCellColor">int16
 </td>
 <td class="distinctCellColor">External Port
 </td>
@@ -273,7 +273,7 @@ Target platform interface table:
 </td>
 </tr>
 <tr>
-<td class="distinctCellColor"><a class="code2model" id="code2model" href="matlab:Simulink.ID.hilite('HDLTx:1208:4565')">ready</a>
+<td class="distinctCellColor"><a class="code2model" id="code2model" href="matlab:Simulink.ID.hilite('HDLTx:1208:7294')">new_msg_ready</a>
 </td>
 <td class="distinctCellColor">Outport
 </td>
@@ -287,13 +287,13 @@ Target platform interface table:
 </td>
 </tr>
 <tr>
-<td><a class="code2model" id="code2model" href="matlab:Simulink.ID.hilite('HDLTx:1208:4566')">debug_payload</a>
+<td><a class="code2model" id="code2model" href="matlab:Simulink.ID.hilite('HDLTx:1208:4565')">ready</a>
 </td>
 <td>Outport
 </td>
 <td>boolean
 </td>
-<td>No Interface Specified
+<td>External Port
 </td>
 <td>
 </td>
@@ -301,17 +301,31 @@ Target platform interface table:
 </td>
 </tr>
 <tr>
-<td class="distinctCellColor"><a class="code2model" id="code2model" href="matlab:Simulink.ID.hilite('HDLTx:1208:4567')">debug_payload_ctrl</a>
+<td class="distinctCellColor"><a class="code2model" id="code2model" href="matlab:Simulink.ID.hilite('HDLTx:1208:4566')">debug_payload</a>
 </td>
 <td class="distinctCellColor">Outport
 </td>
-<td class="distinctCellColor">bus
+<td class="distinctCellColor">boolean
 </td>
 <td class="distinctCellColor">No Interface Specified
 </td>
 <td class="distinctCellColor">
 </td>
 <td class="distinctCellColor">
+</td>
+</tr>
+<tr>
+<td><a class="code2model" id="code2model" href="matlab:Simulink.ID.hilite('HDLTx:1208:4567')">debug_payload_ctrl</a>
+</td>
+<td>Outport
+</td>
+<td>bus
+</td>
+<td>No Interface Specified
+</td>
+<td>
+</td>
+<td>
 </td>
 </tr>
 </tbody>
@@ -378,6 +392,8 @@ Following files are generated under this folder:
 <a href="matlab:edit('hdl_prj/ipcore/IEEE_8021513_TX_v1_0/hdl/IEEE_8021513_TX_src_channel_gen.vhd')">hdl/IEEE_8021513_TX_src_channel_gen.vhd</a>
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/IEEE_8021513_TX_v1_0/hdl/IEEE_8021513_TX_src_clock_crossing.vhd')">hdl/IEEE_8021513_TX_src_clock_crossing.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/IEEE_8021513_TX_v1_0/hdl/IEEE_8021513_TX_src_falling_edge_detector.vhd')">hdl/IEEE_8021513_TX_src_falling_edge_detector.vhd</a>
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/IEEE_8021513_TX_v1_0/hdl/IEEE_8021513_TX_src_Sample_Control_Bus_Creator_block.vhd')">hdl/IEEE_8021513_TX_src_Sample_Control_Bus_Creator_block.vhd</a>
 <br/>
@@ -475,6 +491,12 @@ Following files are generated under this folder:
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/IEEE_8021513_TX_v1_0/hdl/IEEE_8021513_TX_src_reg_to_variable.vhd')">hdl/IEEE_8021513_TX_src_reg_to_variable.vhd</a>
 <br/>
+<a href="matlab:edit('hdl_prj/ipcore/IEEE_8021513_TX_v1_0/hdl/IEEE_8021513_TX_src_rising_edge_detector_block1.vhd')">hdl/IEEE_8021513_TX_src_rising_edge_detector_block1.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/IEEE_8021513_TX_v1_0/hdl/IEEE_8021513_TX_src_rising_edge_detector_block2.vhd')">hdl/IEEE_8021513_TX_src_rising_edge_detector_block2.vhd</a>
+<br/>
+<a href="matlab:edit('hdl_prj/ipcore/IEEE_8021513_TX_v1_0/hdl/IEEE_8021513_TX_src_signal_ack.vhd')">hdl/IEEE_8021513_TX_src_signal_ack.vhd</a>
+<br/>
 <a href="matlab:edit('hdl_prj/ipcore/IEEE_8021513_TX_v1_0/hdl/IEEE_8021513_TX_src_SimpleDualPortRAM_generic.vhd')">hdl/IEEE_8021513_TX_src_SimpleDualPortRAM_generic.vhd</a>
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/IEEE_8021513_TX_v1_0/hdl/IEEE_8021513_TX_src_RAM.vhd')">hdl/IEEE_8021513_TX_src_RAM.vhd</a>
@@ -535,7 +557,7 @@ Following files are generated under this folder:
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/IEEE_8021513_TX_v1_0/hdl/IEEE_8021513_TX_src_frequency_upshift.vhd')">hdl/IEEE_8021513_TX_src_frequency_upshift.vhd</a>
 <br/>
-<a href="matlab:edit('hdl_prj/ipcore/IEEE_8021513_TX_v1_0/hdl/IEEE_8021513_TX_src_falling_edge_detector.vhd')">hdl/IEEE_8021513_TX_src_falling_edge_detector.vhd</a>
+<a href="matlab:edit('hdl_prj/ipcore/IEEE_8021513_TX_v1_0/hdl/IEEE_8021513_TX_src_falling_edge_detector_block.vhd')">hdl/IEEE_8021513_TX_src_falling_edge_detector_block.vhd</a>
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/IEEE_8021513_TX_v1_0/hdl/IEEE_8021513_TX_src_FirRdyLogic.vhd')">hdl/IEEE_8021513_TX_src_FirRdyLogic.vhd</a>
 <br/>
@@ -577,7 +599,7 @@ Following files are generated under this folder:
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/IEEE_8021513_TX_v1_0/hdl/IEEE_8021513_TX_src_interpolator.vhd')">hdl/IEEE_8021513_TX_src_interpolator.vhd</a>
 <br/>
-<a href="matlab:edit('hdl_prj/ipcore/IEEE_8021513_TX_v1_0/hdl/IEEE_8021513_TX_src_rising_edge_detector_block1.vhd')">hdl/IEEE_8021513_TX_src_rising_edge_detector_block1.vhd</a>
+<a href="matlab:edit('hdl_prj/ipcore/IEEE_8021513_TX_v1_0/hdl/IEEE_8021513_TX_src_rising_edge_detector_block3.vhd')">hdl/IEEE_8021513_TX_src_rising_edge_detector_block3.vhd</a>
 <br/>
 <a href="matlab:edit('hdl_prj/ipcore/IEEE_8021513_TX_v1_0/hdl/IEEE_8021513_TX_src_rotate.vhd')">hdl/IEEE_8021513_TX_src_rotate.vhd</a>
 <br/>

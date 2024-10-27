@@ -2,7 +2,7 @@
 --Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
---Date        : Sun Oct  6 14:18:40 2024
+--Date        : Sun Oct 27 19:47:21 2024
 --Host        : cotti-machine running 64-bit Ubuntu 22.04.3 LTS
 --Command     : generate_target tx_v10.bd
 --Design      : tx_v10
@@ -19,6 +19,7 @@ entity tx_v10 is
     clk_tx : out STD_LOGIC;
     data_out_0 : out STD_LOGIC_VECTOR ( 15 downto 0 );
     new_frame_in_0 : in STD_LOGIC;
+    new_msg_ready_0 : out STD_LOGIC;
     rst : in STD_LOGIC;
     s_axis_tdata_0 : in STD_LOGIC_VECTOR ( 7 downto 0 );
     s_axis_tready_0 : out STD_LOGIC;
@@ -45,6 +46,7 @@ architecture STRUCTURE of tx_v10 is
     valid_in : in STD_LOGIC;
     data_out : out STD_LOGIC_VECTOR ( 15 downto 0 );
     valid_out : out STD_LOGIC;
+    new_msg_ready : out STD_LOGIC;
     ready : out STD_LOGIC
   );
   end component tx_v10_IEEE_8021513_TX_0_0;
@@ -107,6 +109,7 @@ architecture STRUCTURE of tx_v10 is
   );
   end component tx_v10_reg1_1;
   signal IEEE_8021513_TX_0_data_out : STD_LOGIC_VECTOR ( 15 downto 0 );
+  signal IEEE_8021513_TX_0_new_msg_ready : STD_LOGIC;
   signal IEEE_8021513_TX_0_ready : STD_LOGIC;
   signal IEEE_8021513_TX_0_valid_out : STD_LOGIC;
   signal axis_data_fifo_0_m_axis_tdata : STD_LOGIC_VECTOR ( 7 downto 0 );
@@ -142,6 +145,7 @@ begin
   clk_tx <= clk_wiz_clk_out1;
   data_out_0(15 downto 0) <= IEEE_8021513_TX_0_data_out(15 downto 0);
   new_frame_in_0_1 <= new_frame_in_0;
+  new_msg_ready_0 <= IEEE_8021513_TX_0_new_msg_ready;
   reset_rtl_1 <= rst;
   s_axis_tdata_0_1(7 downto 0) <= s_axis_tdata_0(7 downto 0);
   s_axis_tready_0 <= axis_data_fifo_0_s_axis_tready;
@@ -154,6 +158,7 @@ IEEE_8021513_TX_0: component tx_v10_IEEE_8021513_TX_0_0
       data_in(7 downto 0) => axis_data_fifo_0_m_axis_tdata(7 downto 0),
       data_out(15 downto 0) => IEEE_8021513_TX_0_data_out(15 downto 0),
       new_frame_in => new_frame_in_0_1,
+      new_msg_ready => IEEE_8021513_TX_0_new_msg_ready,
       ready => IEEE_8021513_TX_0_ready,
       reg0(31 downto 0) => reg0_dout(31 downto 0),
       reg1(31 downto 0) => reg1_dout(31 downto 0),

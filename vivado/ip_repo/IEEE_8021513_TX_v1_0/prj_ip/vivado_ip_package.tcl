@@ -8,6 +8,7 @@ add_files -norecurse {../hdl/IEEE_8021513_TX_src_Sample_Control_Bus_Creator.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_valid_to_ctrl.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_channel_gen.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_clock_crossing.vhd}
+add_files -norecurse {../hdl/IEEE_8021513_TX_src_falling_edge_detector.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_Sample_Control_Bus_Creator_block.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_CRCGenControl.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_CRCGenCompute.vhd}
@@ -56,6 +57,9 @@ add_files -norecurse {../hdl/IEEE_8021513_TX_src_Sample_Control_Bus_Creator_bloc
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_valid_to_ctrl_block2.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_preamble_gen.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_reg_to_variable.vhd}
+add_files -norecurse {../hdl/IEEE_8021513_TX_src_rising_edge_detector_block1.vhd}
+add_files -norecurse {../hdl/IEEE_8021513_TX_src_rising_edge_detector_block2.vhd}
+add_files -norecurse {../hdl/IEEE_8021513_TX_src_signal_ack.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_SimpleDualPortRAM_generic.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_RAM.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_Compare_To_Constant_block.vhd}
@@ -86,7 +90,7 @@ add_files -norecurse {../hdl/IEEE_8021513_TX_src_CosLookUpTableGen.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_WaveformGen.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_NCO.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_frequency_upshift.vhd}
-add_files -norecurse {../hdl/IEEE_8021513_TX_src_falling_edge_detector.vhd}
+add_files -norecurse {../hdl/IEEE_8021513_TX_src_falling_edge_detector_block.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_FirRdyLogic.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_Addressable_Delay_Line.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_Addressable_Delay_Line_block.vhd}
@@ -107,7 +111,7 @@ add_files -norecurse {../hdl/IEEE_8021513_TX_src_FilterTapSystolic_block.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_FIRFilter2.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_FIR_Interpolator.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_interpolator.vhd}
-add_files -norecurse {../hdl/IEEE_8021513_TX_src_rising_edge_detector_block1.vhd}
+add_files -norecurse {../hdl/IEEE_8021513_TX_src_rising_edge_detector_block3.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_rotate.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_constellation_scrambler.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_TX_src_BPSK_Modulator_Baseband.vhd}
@@ -209,6 +213,10 @@ ipx::add_file {hdl/IEEE_8021513_TX_src_clock_crossing.vhd} [ipx::get_file_groups
 set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_clock_crossing.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/IEEE_8021513_TX_src_clock_crossing.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_clock_crossing.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/IEEE_8021513_TX_src_falling_edge_detector.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_falling_edge_detector.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/IEEE_8021513_TX_src_falling_edge_detector.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_falling_edge_detector.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/IEEE_8021513_TX_src_Sample_Control_Bus_Creator_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_Sample_Control_Bus_Creator_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/IEEE_8021513_TX_src_Sample_Control_Bus_Creator_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
@@ -401,6 +409,18 @@ ipx::add_file {hdl/IEEE_8021513_TX_src_reg_to_variable.vhd} [ipx::get_file_group
 set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_reg_to_variable.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/IEEE_8021513_TX_src_reg_to_variable.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_reg_to_variable.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/IEEE_8021513_TX_src_rising_edge_detector_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_rising_edge_detector_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/IEEE_8021513_TX_src_rising_edge_detector_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_rising_edge_detector_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/IEEE_8021513_TX_src_rising_edge_detector_block2.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_rising_edge_detector_block2.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/IEEE_8021513_TX_src_rising_edge_detector_block2.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_rising_edge_detector_block2.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/IEEE_8021513_TX_src_signal_ack.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_signal_ack.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/IEEE_8021513_TX_src_signal_ack.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_signal_ack.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/IEEE_8021513_TX_src_SimpleDualPortRAM_generic.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_SimpleDualPortRAM_generic.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/IEEE_8021513_TX_src_SimpleDualPortRAM_generic.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
@@ -521,10 +541,10 @@ ipx::add_file {hdl/IEEE_8021513_TX_src_frequency_upshift.vhd} [ipx::get_file_gro
 set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_frequency_upshift.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/IEEE_8021513_TX_src_frequency_upshift.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_frequency_upshift.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/IEEE_8021513_TX_src_falling_edge_detector.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_falling_edge_detector.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/IEEE_8021513_TX_src_falling_edge_detector.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_falling_edge_detector.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/IEEE_8021513_TX_src_falling_edge_detector_block.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_falling_edge_detector_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/IEEE_8021513_TX_src_falling_edge_detector_block.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_falling_edge_detector_block.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/IEEE_8021513_TX_src_FirRdyLogic.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_FirRdyLogic.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/IEEE_8021513_TX_src_FirRdyLogic.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
@@ -605,10 +625,10 @@ ipx::add_file {hdl/IEEE_8021513_TX_src_interpolator.vhd} [ipx::get_file_groups x
 set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_interpolator.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/IEEE_8021513_TX_src_interpolator.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_interpolator.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/IEEE_8021513_TX_src_rising_edge_detector_block1.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_rising_edge_detector_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
-ipx::add_file {hdl/IEEE_8021513_TX_src_rising_edge_detector_block1.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
-set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_rising_edge_detector_block1.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/IEEE_8021513_TX_src_rising_edge_detector_block3.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_rising_edge_detector_block3.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/IEEE_8021513_TX_src_rising_edge_detector_block3.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_rising_edge_detector_block3.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/IEEE_8021513_TX_src_rotate.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_TX_src_rotate.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/IEEE_8021513_TX_src_rotate.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]

@@ -238,7 +238,7 @@ CONST.frequencyOffsetTimeWindow = CONST.preambleFirstPartOFDMSamples/CONST.fPHY;
 %% Simulink model constants
 CONST.DACDataType = fixdt(1, 14, 13);
 CONST.ADCDataType = fixdt(1, 14, 13);
-CONST.ipCoreDataType = fixdt(1, 16, 15);
+CONST.ipCoreDataType = fixdt(1, 14, 13);
 
 % Memory used from this ram will be: 2*2^CONST.txRAMAddressBitWidth
 CONST.txRAMAddressBitWidth = 16;

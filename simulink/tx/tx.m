@@ -6,7 +6,7 @@ addpath("../../inc");
 constants;
 
 %% Input
-createVivadoFile = true;
+createVivadoFile = false;
 paramFile = "sampleParametersFile";
 msgIn{1} = ['This is an example message used to test the transmitter. ' ...
    'It is made large on purpose to test for a large message being ' ...
@@ -98,7 +98,7 @@ assert(isequal(length(startIdx), length(msgIn)), ...
 
 for i=1:length(startIdx)
     out = dataOut(startIdx(i):endIdx(i));
-    expectedOut{i} = expectedOut{i}*2; % Add DAC correction factor
+    expectedOut{i} = expectedOut{i};
     assert(iskindaequal(expectedOut{i}, out, 1e-3), "Outputs don't match");
     assert(sum(validOut(startIdx(i):endIdx(i)) == 0) == 0);
 end
@@ -141,7 +141,10 @@ if (createVivadoFile)
     
     % Generate output file
     fileName = "data_out.mem";
-    fileOut = out*2^15;
+    % Si bien el tipo de dato es fixdt(1,14,13), el valor real para el DAC 
+    % esta multiplicado por 2, por eso la salida se multiplica por 2^14, en
+    % vez de 2^14.
+    fileOut = out*2^14;
     input = {fileOut;};
     bitLen = 16;
     header = "dataOut";

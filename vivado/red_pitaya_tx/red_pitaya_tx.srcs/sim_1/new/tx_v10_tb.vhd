@@ -13,6 +13,7 @@ architecture Behavioral of tx_v10_tb is
     -- Choose which file to use for the test
     constant PATH_OUTPUT_FILE: string := "data_out.mem";
     constant PATH_INPUT_FILE: string := "data_in.mem";
+    constant MAX_ITERATIONS: integer := 3; -- Amount of times that the message will be sent.
     
 	constant PERIOD : time := 8ns;    -- 125MHz DAC clock
 	
@@ -22,6 +23,7 @@ architecture Behavioral of tx_v10_tb is
 	-- Output of the tx
     signal data_out_0 : STD_LOGIC_VECTOR ( 15 downto 0 );
     signal valid_out_0 : STD_LOGIC;
+    signal new_msg_ready_0 : STD_LOGIC;
     
     -- Input of the tx
     signal new_frame_in_0 : STD_LOGIC := '0';
@@ -47,6 +49,7 @@ PORT MAP (
       clk_fifo_m => clk_fifo_m,
       clk_tx => clk_tx,
       new_frame_in_0 => new_frame_in_0,
+      new_msg_ready_0 => new_msg_ready_0,
       rst => rst,
       s_axis_tdata_0(7 downto 0) => s_axis_tdata_0(7 downto 0),
       s_axis_tready_0 => s_axis_tready_0,
@@ -65,15 +68,19 @@ fileIO : process
 	variable buffer_line:  line;               -- Holds a line from the file
 	variable spacer:       character;          -- Placeholder to discard the spacer between values
 	variable file_rows:    integer := 1;       -- Current row of the file. Starts at 1 because line zero is used as metadata
+	variable iterations:   integer := 0;       -- Tracks the amount of times that the message is sent.
 	
     -- These variables should be identical to the component signals, but with the "file_xx" prefix.
 	variable file_data_in:         std_logic_vector (7 downto 0);
 	variable file_data_out:        std_logic_vector (15 downto 0);
     
 begin
-    -- Reset IP Cores
-    rst <= '0'; wait for 200ns;
-    rst <= '1'; wait for 1000ns;
+
+    if (iterations = 0) then
+        -- Reset IP Cores
+        rst <= '0'; wait for 200ns;
+        rst <= '1'; wait for 1000ns;
+    end if;
     
     ----------------------------------
     -- Read input file and load FIFO
@@ -113,10 +120,15 @@ begin
     ---------------------------------
     wait until rising_edge(clk_fifo_m);
     
+    assert(new_msg_ready_0 = '1');
+    
     new_frame_in_0 <= '1';
     
     wait until rising_edge(clk_fifo_m);
     new_frame_in_0 <= '0';
+    
+    wait for 100ns;
+    assert(new_msg_ready_0 = '0');
 
     ---------------------------------
     -- Read values from output file
@@ -145,11 +157,17 @@ begin
     	file_rows := file_rows + 1;
    	 
 	end loop file_reading_loop;
-    
-    report ">>> Test Successful!" severity note;
-    
 	file_close (file_handler);
-	wait;
+	
+	wait for 100ns;
+	assert(new_msg_ready_0 = '1');
+
+    iterations := iterations + 1;
+	
+	if (iterations = MAX_ITERATIONS) then
+        report ">>> Test Successful!" severity note;
+        wait;
+	end if;
 end process;
 
 end Behavioral;
