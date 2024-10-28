@@ -176,4 +176,4 @@ Oct 13 2023
 /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/vivado/red_pitaya_tx/red_pitaya_tx.ip_user_files/bd/tx_v10/ip/tx_v10_xlconstant_0_0/sim/tx_v10_xlconstant_0_0.v,1728235122,verilog,,/home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/vivado/red_pitaya_tx/red_pitaya_tx.ip_user_files/bd/tx_v10/ip/tx_v10_reg0_0/sim/tx_v10_reg0_0.v,,tx_v10_xlconstant_0_0,,,../../../../red_pitaya_tx.gen/sources_1/bd/tx_v10/ipshared/434f/hdl;../../../../red_pitaya_tx.gen/sources_1/bd/tx_v10/ipshared/c2c6,,,,,
 /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/vivado/red_pitaya_tx/red_pitaya_tx.ip_user_files/bd/tx_v10/sim/tx_v10.vhd,1730069241,vhdl,,,,tx_v10,,,,,,,,
 /home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/vivado/red_pitaya_tx/red_pitaya_tx.sim/sim_1/behav/xsim/glbl.v,1697210495,verilog,,,,glbl,,,,,,,,
-/home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/vivado/red_pitaya_tx/red_pitaya_tx.srcs/sim_1/new/tx_v10_tb.vhd,1730070107,vhdl,,,,tx_v10_tb,,,,,,,,
+/home/cotti/Desktop/Proyecto_final/vlc_utn/dc-ofdm/vivado/red_pitaya_tx/red_pitaya_tx.srcs/sim_1/new/tx_v10_tb.vhd,1730088996,vhdl,,,,tx_v10_tb,,,,,,,,

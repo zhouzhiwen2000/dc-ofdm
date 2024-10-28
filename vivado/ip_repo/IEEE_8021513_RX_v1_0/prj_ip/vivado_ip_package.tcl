@@ -226,6 +226,8 @@ add_files -norecurse {../hdl/IEEE_8021513_RX_src_valid_to_ctrl.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_RX_src_remove_tone_mapping.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_RX_src_rising_edge_detector_block9.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_RX_src_rx_payload_full.vhd}
+add_files -norecurse {../hdl/IEEE_8021513_RX_src_rising_edge_detector_block10.vhd}
+add_files -norecurse {../hdl/IEEE_8021513_RX_src_signal_ack.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_RX_src_variable_to_reg.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_RX_src_full_rx.vhd}
 add_files -norecurse {../hdl/IEEE_8021513_RX_reset_sync.vhd}
@@ -1152,6 +1154,14 @@ ipx::add_file {hdl/IEEE_8021513_RX_src_rx_payload_full.vhd} [ipx::get_file_group
 set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_RX_src_rx_payload_full.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/IEEE_8021513_RX_src_rx_payload_full.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_RX_src_rx_payload_full.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/IEEE_8021513_RX_src_rising_edge_detector_block10.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_RX_src_rising_edge_detector_block10.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/IEEE_8021513_RX_src_rising_edge_detector_block10.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_RX_src_rising_edge_detector_block10.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/IEEE_8021513_RX_src_signal_ack.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_RX_src_signal_ack.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
+ipx::add_file {hdl/IEEE_8021513_RX_src_signal_ack.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]
+set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_RX_src_signal_ack.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/IEEE_8021513_RX_src_variable_to_reg.vhd} [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]
 set_property type {{vhdlSource}} [ipx::get_files {hdl/IEEE_8021513_RX_src_variable_to_reg.vhd} -of_objects [ipx::get_file_groups xilinx_anylanguagesynthesis -of_objects [ipx::current_core]]]
 ipx::add_file {hdl/IEEE_8021513_RX_src_variable_to_reg.vhd} [ipx::get_file_groups xilinx_anylanguagebehavioralsimulation -of_objects [ipx::current_core]]

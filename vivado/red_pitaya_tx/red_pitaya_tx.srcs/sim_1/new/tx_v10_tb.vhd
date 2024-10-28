@@ -120,7 +120,7 @@ begin
     ---------------------------------
     wait until rising_edge(clk_fifo_m);
     
-    assert(new_msg_ready_0 = '1');
+    assert(new_msg_ready_0 = '1') report ">>> Msg ready should be 1" severity failure;
     
     new_frame_in_0 <= '1';
     
@@ -128,7 +128,7 @@ begin
     new_frame_in_0 <= '0';
     
     wait for 100ns;
-    assert(new_msg_ready_0 = '0');
+    assert(new_msg_ready_0 = '0') report ">>> Msg ready should be 1" severity failure;
 
     ---------------------------------
     -- Read values from output file
@@ -160,7 +160,7 @@ begin
 	file_close (file_handler);
 	
 	wait for 100ns;
-	assert(new_msg_ready_0 = '1');
+	assert(new_msg_ready_0 = '1') report ">>> Msg ready should be 1" severity failure;
 
     iterations := iterations + 1;
 	

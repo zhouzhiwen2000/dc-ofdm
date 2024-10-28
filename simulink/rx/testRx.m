@@ -36,7 +36,7 @@ for i=1:1:msgQtty
     pBits = str2binl(msgIn{i});
     pBits = binl2tx(pBits);    % Input to the Rx should be LSB first.
     [OFDMSignal, payloadExtraWords(i, 1)] = fullTx(CONST, parametersFile, pBits);
-    OFDMRx = 3.5*channelSimulation(OFDMSignal, delayIn, SNR);
+    OFDMRx = 2*channelSimulation(OFDMSignal, delayIn, SNR); % Multiply by two, to mimic the DAC
     dataIn = [dataIn; OFDMRx;];
 
     % Get registers for output
@@ -105,7 +105,9 @@ end
 if (createVivadoFile)
     % Generate input file
     fileName = "data_in.mem";
-    input = dataIn*2^15;
+    % The signal already has a "*2" in it, so multiply by 2^13, because the
+    % input should be a fixdt(1, 14, 13)
+    input = dataIn*2^13;
     input = {input;};
     bitLen = 16;
     header = "dataIn";

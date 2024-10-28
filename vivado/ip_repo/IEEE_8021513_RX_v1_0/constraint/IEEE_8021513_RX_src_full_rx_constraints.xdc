@@ -42,31 +42,3 @@ set_multicycle_path 7 -hold -from $reglist4 -to $reglist3 -quiet
 set_multicycle_path 9 -setup -from $reglist3 -to $reglist4 -quiet
 set_multicycle_path 7 -hold -from $reglist3 -to $reglist4 -quiet
 
-# Multycycle constraints for flip-flops in the OFDM demodulator.
-set ofdm_ff [list \
-    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} full_rx_i/IEEE_8021513_RX_0/U0/u_IEEE_8021513_RX_dut_inst/u_IEEE_8021513_RX_src_full_rx/u_rx_demodulator_full/u_ofdm_separator/* \
-    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} full_rx_i/IEEE_8021513_RX_0/U0/u_IEEE_8021513_RX_dut_inst/u_IEEE_8021513_RX_src_full_rx/u_rx_demodulator_full/u_ofdm_separator/*/* \
-    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} full_rx_i/IEEE_8021513_RX_0/U0/u_IEEE_8021513_RX_dut_inst/u_IEEE_8021513_RX_src_full_rx/u_rx_demodulator_full/u_ofdm_separator/*/*/* \
-    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} full_rx_i/IEEE_8021513_RX_0/U0/u_IEEE_8021513_RX_dut_inst/u_IEEE_8021513_RX_src_full_rx/u_rx_demodulator_full/u_ofdm_demod/u_OFDM_Demodulator/* \
-    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} full_rx_i/IEEE_8021513_RX_0/U0/u_IEEE_8021513_RX_dut_inst/u_IEEE_8021513_RX_src_full_rx/u_rx_demodulator_full/u_ofdm_demod/u_OFDM_Demodulator/*/* \
-    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} full_rx_i/IEEE_8021513_RX_0/U0/u_IEEE_8021513_RX_dut_inst/u_IEEE_8021513_RX_src_full_rx/u_rx_demodulator_full/u_ofdm_demod/u_OFDM_Demodulator/*/*/* \
-    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} full_rx_i/IEEE_8021513_RX_0/U0/u_IEEE_8021513_RX_dut_inst/u_IEEE_8021513_RX_src_full_rx/u_rx_demodulator_full/u_ofdm_demod/u_OFDM_Demodulator/*/*/*/* \
-    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} full_rx_i/IEEE_8021513_RX_0/U0/u_IEEE_8021513_RX_dut_inst/u_IEEE_8021513_RX_src_full_rx/u_rx_demodulator_full/u_ofdm_symbol_sync/* \
-    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} full_rx_i/IEEE_8021513_RX_0/U0/u_IEEE_8021513_RX_dut_inst/u_IEEE_8021513_RX_src_full_rx/u_rx_demodulator_full/u_ofdm_symbol_sync/*/* \
-    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} full_rx_i/IEEE_8021513_RX_0/U0/u_IEEE_8021513_RX_dut_inst/u_IEEE_8021513_RX_src_full_rx/u_rx_demodulator_full/u_ofdm_symbol_sync/*/*/* \
-]
-    
-# MCP for flip-flops in the demodulator, that end in the demodulator
-set ofdm_demod_regs [list \
-    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} full_rx_i/IEEE_8021513_RX_0/U0/u_IEEE_8021513_RX_dut_inst/u_IEEE_8021513_RX_src_full_rx/u_rx_demodulator_full/* \
-    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} full_rx_i/IEEE_8021513_RX_0/U0/u_IEEE_8021513_RX_dut_inst/u_IEEE_8021513_RX_src_full_rx/u_rx_demodulator_full/*/* \
-    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} full_rx_i/IEEE_8021513_RX_0/U0/u_IEEE_8021513_RX_dut_inst/u_IEEE_8021513_RX_src_full_rx/u_rx_demodulator_full/u_ofdm_rx_counter/u_rising_edge_detector1/Delay2_out1_reg/* \
-    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} full_rx_i/IEEE_8021513_RX_0/U0/u_IEEE_8021513_RX_dut_inst/u_IEEE_8021513_RX_src_full_rx/* \
-    get_cells -filter {IS_PRIMITIVE && IS_SEQUENTIAL} full_rx_i/IEEE_8021513_RX_0/U0/u_IEEE_8021513_RX_dut_inst/u_IEEE_8021513_RX_src_full_rx/*/* \
-]
-    
-set_multicycle_path 2 -setup -from $ofdm_ff -to $ofdm_ff -quiet
-set_multicycle_path 1 -hold -from $ofdm_ff -to $ofdm_ff -quiet
-
-set_multicycle_path 2 -setup -from $ofdm_demod_regs -to $ofdm_ff -quiet
-set_multicycle_path 1 -hold -from $ofdm_demod_regs -to $ofdm_ff -quiet

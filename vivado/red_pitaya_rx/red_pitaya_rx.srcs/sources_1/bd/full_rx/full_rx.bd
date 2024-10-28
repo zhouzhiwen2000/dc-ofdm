@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0xB30E074660082973",
+      "boundary_crc": "0xA92EF5B6FFE0EA2C",
       "device": "xc7z010clg400-1",
       "gen_directory": "../../../../red_pitaya_rx.gen/sources_1/bd/full_rx",
       "name": "full_rx",
@@ -106,6 +106,12 @@
         }
       },
       "end_out_0": {
+        "direction": "O"
+      },
+      "header_ack_0": {
+        "direction": "I"
+      },
+      "header_ready_0": {
         "direction": "O"
       }
     },
@@ -255,6 +261,12 @@
           "end_out_0"
         ]
       },
+      "IEEE_8021513_RX_0_header_ready": {
+        "ports": [
+          "IEEE_8021513_RX_0/header_ready",
+          "header_ready_0"
+        ]
+      },
       "IEEE_8021513_RX_0_valid_out": {
         "ports": [
           "IEEE_8021513_RX_0/valid_out",
@@ -305,6 +317,12 @@
         "ports": [
           "data_in_0",
           "IEEE_8021513_RX_0/data_in"
+        ]
+      },
+      "header_ack_0_1": {
+        "ports": [
+          "header_ack_0",
+          "IEEE_8021513_RX_0/header_ack"
         ]
       },
       "m_axis_tready_0_1": {
