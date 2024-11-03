@@ -2,6 +2,7 @@
 clc; clear; close all;
 addpath("../../src");
 addpath("../../inc");
+addpath("../../HDL_ieee_8021513");
 constants;
 
 %% Input
